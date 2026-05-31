@@ -1,4 +1,6 @@
 (function () {
+  const IS_LOCAL = /^(localhost|127\.0\.0\.1)$/i.test(location.hostname);
+  const IS_NETLIFY = !IS_LOCAL;
   const API = "../api";
   let content = {};
   let section = "site";
@@ -6,6 +8,15 @@
 
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => [...(ctx || document).querySelectorAll(sel)];
+
+  function resolveUrl(path) {
+    if (!IS_NETLIFY) return API + path;
+    if (path.includes("auth.php?action=check")) return "/.netlify/functions/auth-check";
+    if (path.includes("auth.php?action=login")) return "/.netlify/functions/login";
+    if (path.includes("auth.php?action=logout")) return "/.netlify/functions/logout";
+    if (path === "/content.php") return "/.netlify/functions/content";
+    return API + path;
+  }
 
   const titles = {
     site: "Site & Tema",
@@ -18,7 +29,7 @@
   };
 
   async function api(path, opts = {}) {
-    const res = await fetch(API + path, {
+    const res = await fetch(resolveUrl(path), {
       credentials: "same-origin",
       ...opts,
       headers: { "Content-Type": "application/json", ...(opts.headers || {}) },
@@ -617,9 +628,15 @@
   }
 
   async function loadContent() {
-    const json = await api("/content.php");
-    if (!json.ok) throw new Error("Yüklenemedi");
-    content = json.data;
+    try {
+      const json = await api("/content.php");
+      if (json.ok && json.data) content = json.data;
+      else throw new Error("no php");
+    } catch {
+      const res = await fetch("../data/content.json");
+      if (!res.ok) throw new Error("Yüklenemedi");
+      content = await res.json();
+    }
     if (content.home?.featured?.paragraphs) {
       content.home.featured._paragraphs = content.home.featured.paragraphs.join("\n\n");
     }
@@ -642,6 +659,13 @@
   }
 
   async function save() {
+    if (IS_NETLIFY) {
+      toast(
+        "Netlify'da sunucuya kayıt yok. Yerelde WAMP admin ile kaydedin, git push ile yayınlayın.",
+        true
+      );
+      return;
+    }
     collectFromDom();
     const json = await api("/content.php", { method: "POST", body: JSON.stringify({ data: content }) });
     if (!json.ok) {
@@ -669,8 +693,12 @@
 
   $("#login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
+    const username = $("#username").value.trim();
     const password = $("#password").value;
-    const json = await api("/auth.php?action=login", { method: "POST", body: JSON.stringify({ password }) });
+    const json = await api("/auth.php?action=login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    });
     if (!json.ok) {
       $("#login-error").style.display = "block";
       $("#login-error").textContent = json.error || "Giriş başarısız";

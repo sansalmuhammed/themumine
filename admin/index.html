@@ -13,8 +13,12 @@
   <div id="login-screen" class="login-screen">
     <div class="login-box">
       <h1>The Mumine Admin</h1>
-      <p>Site içeriğini düzenlemek için giriş yapın. Varsayılan şifre: <strong>mumine2026</strong></p>
+      <p>Site içeriğini düzenlemek için kullanıcı adı ve şifre ile giriş yapın.</p>
       <form id="login-form">
+        <div class="field">
+          <label for="username">Kullanıcı adı</label>
+          <input type="text" id="username" name="username" required autocomplete="username" inputmode="email">
+        </div>
         <div class="field">
           <label for="password">Şifre</label>
           <input type="password" id="password" name="password" required autocomplete="current-password">

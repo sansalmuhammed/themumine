@@ -91,14 +91,24 @@ Admin’deki “Form action URL” alanı Netlify Forms ile birlikte kullanılma
 
 ---
 
-## Admin paneli canlıda?
+## Admin paneli canlıda (Netlify)
 
-| Ortam | Site | Admin |
-|--------|------|--------|
-| WAMP (yerel) | ✅ PHP + JSON | ✅ Kayıt / yükleme |
-| Netlify | ✅ JSON | ❌ (sadece yerel) |
+| Ortam | Site | Admin giriş | Admin kayıt |
+|--------|------|-------------|---------------|
+| WAMP (yerel) | ✅ | ✅ Kullanıcı adı + şifre | ✅ |
+| Netlify | ✅ | ✅ `/.netlify/functions/login` | ❌ Yerel kayıt + git push |
 
-Canlıda da tarayıcıdan admin istiyorsanız ileride Supabase, Firebase veya Netlify Functions ile API taşınması gerekir.
+Giriş: **kullanıcı adı** + **şifre** (tek alan şifre değil).
+
+Netlify ortam değişkenleri (isteğe bağlı, yoksa kod içi varsayılanlar kullanılır):
+
+| Değişken | Açıklama |
+|----------|----------|
+| `ADMIN_USER` | Giriş e-postası / kullanıcı adı |
+| `ADMIN_PASS` | Şifre |
+| `ADMIN_SESSION_SECRET` | Oturum imzası (üretimde değiştirin) |
+
+**Güvenlik:** Repo herkese açıksa şifreyi yalnızca Netlify env’de tutun; `netlify/functions/_auth.mjs` içindeki varsayılanları kaldırın.
 
 ---
 

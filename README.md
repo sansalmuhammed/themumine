@@ -6,7 +6,7 @@
 
 1. WAMP’ı başlatın (Apache + PHP).
 2. Site: **http://localhost/themumine/**
-3. Admin: **http://localhost/themumine/admin/** — varsayılan şifre: `mumine2026`
+3. Admin: **http://localhost/themumine/admin/** — kullanıcı adı + şifre ile giriş (ayarlar `api/config.php`)
 
 ### Admin’de düzenlenebilen alanlar
 
@@ -43,13 +43,15 @@ Form şu an demo modunda. Admin → Ana Sayfa → **Form action URL** alanına F
 - **Kendi hosting (PHP):** Tüm klasörü yükleyin; admin ve API çalışır.
 - **Not:** Netlify’da PHP yok; içerik `data/content.json` üzerinden sunulur, admin yerelde kalır.
 
-## Şifre değiştirme
+## Admin giriş bilgilerini değiştirme
 
-`api/config.php` içindeki `ADMIN_PASSWORD_HASH` değerini güncelleyin:
+`api/config.php` içinde `ADMIN_USERNAME` ve `ADMIN_PASSWORD_HASH` güncelleyin:
 
 ```bash
 php -r "echo password_hash('YENI_SIFRE', PASSWORD_DEFAULT);"
 ```
+
+Netlify için aynı bilgileri **Site settings → Environment variables** altında `ADMIN_USER` ve `ADMIN_PASS` olarak da tanımlayabilirsiniz (kodda varsayılanlar vardır).
 
 ## Özelleştirme
 
