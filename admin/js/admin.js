@@ -391,8 +391,16 @@
 
   function renderThinking() {
     const t = content.thinking || {};
-    return `<div class="panel">${field("Sayfa başlığı", "thinking.title", t.title)}</div>
-      <p class="hint">Makale kartları «Makaleler» bölümünden düzenlenir.</p>`;
+    return `
+      <div class="panel"><h3>Blog sayfası (What I'm Thinking)</h3>
+        ${field("Başlık satır 1 (beyaz)", "thinking.titleLine1", t.titleLine1)}
+        ${field("Başlık satır 2 (kırmızı)", "thinking.titleLine2", t.titleLine2)}
+        ${field("Alt metin", "thinking.lead", t.lead, "textarea")}
+        ${field("Kart link metni", "thinking.cardLinkText", t.cardLinkText, "text", "Örn: Review the blog →")}
+        ${field("Load more metni", "thinking.loadMoreText", t.loadMoreText)}
+        ${field("İlk görünen kart sayısı", "thinking.initialVisible", t.initialVisible ?? 4, "text", "Fazlası Load more ile açılır")}
+      </div>
+      <p class="hint">Makale kartları, görseller ve etiketler «Makaleler» bölümünden düzenlenir.</p>`;
   }
 
   function renderProjects() {
@@ -472,17 +480,18 @@
           a.cardTitle || a.slug,
           i,
           field("Slug (URL)", `articles.${i}.slug`, a.slug, "text", "SEO: article.html?slug=...") +
-            field("Kart başlığı", `articles.${i}.cardTitle`, a.cardTitle) +
-            field("Kart meta (tarih / tür)", `articles.${i}.meta`, a.meta) +
             imageField("Kart görseli", `articles.${i}.cardImage`, a.cardImage) +
-            field("Makale başlığı", `articles.${i}.title`, a.title) +
             field(
-              "Etiketler (SEO)",
+              "Etiketler (kart üstü, kırmızı kutu)",
               `articles.${i}._tags`,
               tagsText,
               "textarea",
-              "Her satır bir etiket. Özel URL için: Görsel Araştırma|visual-research"
+              "Her satır bir etiket. Özel URL: Görsel Araştırma|visual-research"
             ) +
+            field("Kart başlığı", `articles.${i}.cardTitle`, a.cardTitle) +
+            field("Kart özet (gri alt metin)", `articles.${i}.cardExcerpt`, a.cardExcerpt, "textarea") +
+            field("Kart meta (opsiyonel)", `articles.${i}.meta`, a.meta) +
+            field("Makale başlığı", `articles.${i}.title`, a.title) +
             field("SEO başlık (opsiyonel)", `articles.${i}.seo.title`, seo.title) +
             field("SEO açıklama", `articles.${i}.seo.description`, seo.description, "textarea") +
             blocksHtml +
@@ -694,6 +703,7 @@
       content.articles.push({
         slug: "yeni-yazi-" + Date.now(),
         cardTitle: "Yeni Yazı",
+        cardExcerpt: "",
         meta: "",
         cardImage: "",
         title: "Yeni Yazı",

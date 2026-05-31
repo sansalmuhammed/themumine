@@ -320,15 +320,56 @@
       </a>`;
   }
 
-  function articleCard(a) {
-    const tags = renderTagList(a.tags, { className: "tag-pill tag-pill--sm" });
+  function articleCardExcerpt(article) {
+    if (article.cardExcerpt) return article.cardExcerpt;
+    return articleExcerpt(article);
+  }
+
+  function renderBlogCardTags(tags) {
+    const list = normalizeTags(tags);
+    if (!list.length) return "";
+    const items = list
+      .map((t) => {
+        const href = `thinking.html?tag=${encodeURIComponent(t.slug)}`;
+        return `<li class="blog-tag"><a href="${href}" rel="tag">${esc(t.label)}</a></li>`;
+      })
+      .join("");
+    return `<ul class="blog-card__tags" aria-label="Etiketler">${items}</ul>`;
+  }
+
+  function articleCard(a, ctaText) {
+    const tags = renderBlogCardTags(a.tags);
+    const excerpt = articleCardExcerpt(a);
+    const cta = ctaText || "Review the blog →";
+    const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
     return `
-      <a href="article.html?slug=${esc(a.slug)}" class="card card--article">
-        <img class="card-image" src="${esc(a.cardImage)}" alt="" width="800" height="500">
-        <h2>${esc(a.cardTitle)}</h2>
-        ${tags}
-        <p class="meta">${esc(a.meta)}</p>
-      </a>`;
+      <article class="blog-card">
+        <a class="blog-card__media" href="${href}">
+          <img class="blog-card__image" src="${esc(a.cardImage)}" alt="" width="800" height="500">
+        </a>
+        <div class="blog-card__body">
+          ${tags}
+          <h2 class="blog-card__title"><a href="${href}">${esc(a.cardTitle)}</a></h2>
+          ${excerpt ? `<p class="blog-card__excerpt">${esc(excerpt)}</p>` : ""}
+          <a class="blog-card__cta" href="${href}">${esc(cta)}</a>
+        </div>
+      </article>`;
+  }
+
+  function thinkingTitleLines(t) {
+    if (t.titleLine1 || t.titleLine2) {
+      return { line1: t.titleLine1 || "", line2: t.titleLine2 || "" };
+    }
+    const full = String(t.title || "What I'm Thinking").trim();
+    const words = full.split(/\s+/);
+    if (words.length > 2) {
+      const mid = Math.ceil(words.length / 2);
+      return {
+        line1: words.slice(0, mid).join(" "),
+        line2: words.slice(mid).join(" "),
+      };
+    }
+    return { line1: full, line2: "" };
   }
 
   function renderWorks(w, projects) {
@@ -341,35 +382,60 @@
   function renderThinking(t, articles, allArticles) {
     const tagSlug = getTagFilter();
     let list = articles || [];
-    let heading = t.title || "What I'm Thinking";
-    let intro = "";
+    const ctaText = t.cardLinkText || "Review the blog →";
+    let heroHtml = "";
 
     if (tagSlug) {
       list = (allArticles || list).filter((a) => articleHasTag(a, tagSlug));
       let label = tagSlug.replace(/-/g, " ");
       (allArticles || []).forEach((a) => {
-        normalizeTags(a.tags).forEach((t) => {
-          if (t.slug === tagSlug) label = t.label;
+        normalizeTags(a.tags).forEach((tag) => {
+          if (tag.slug === tagSlug) label = tag.label;
         });
       });
-      heading = `Tag: ${label}`;
-      intro = `<p class="tag-filter-intro"><a href="thinking.html">← Tüm yazılar</a></p>`;
       applyThinkingSeo(tagSlug, label);
+      heroHtml = `
+        <section class="thinking-hero thinking-hero--filter">
+          <div class="container">
+            <p class="thinking-back"><a href="thinking.html">← Tüm yazılar</a></p>
+            <h1 class="thinking-hero__title thinking-hero__title--filter">${esc(label)}</h1>
+          </div>
+        </section>`;
+    } else {
+      const lines = thinkingTitleLines(t);
+      heroHtml = `
+        <section class="thinking-hero">
+          <div class="container">
+            <h1 class="thinking-hero__title">
+              <span class="thinking-hero__line thinking-hero__line--light">${esc(lines.line1)}</span>
+              <span class="thinking-hero__line thinking-hero__line--accent">${esc(lines.line2)}</span>
+            </h1>
+            ${t.lead ? `<p class="thinking-hero__lead">${esc(t.lead)}</p>` : ""}
+          </div>
+        </section>`;
     }
 
     const cards = list.length
-      ? list.map(articleCard).join("")
-      : `<p class="tag-empty">Bu etikette henüz yazı yok.</p>`;
+      ? list.map((a) => articleCard(a, ctaText)).join("")
+      : `<p class="blog-grid__empty">Bu etikette henüz yazı yok.</p>`;
 
-    const tagCloud = renderTagCloud(allArticles || list);
+    const initialVisible = Number(t.initialVisible) > 0 ? Number(t.initialVisible) : 4;
+    const loadMore =
+      !tagSlug && list.length > initialVisible
+        ? `<div class="container thinking-load-more">
+            <button type="button" class="btn-outline thinking-load-more__btn" data-load-more data-initial="${initialVisible}">
+              ${esc(t.loadMoreText || "Load more archive")}
+              <span class="thinking-load-more__icon" aria-hidden="true">↓</span>
+            </button>
+          </div>`
+        : "";
 
     return `
-      <div class="container page-hero page-hero--thinking">
-        <h1>${esc(heading)}</h1>
-        ${intro}
-        ${tagCloud}
-      </div>
-      <div class="container card-grid">${cards}</div>`;
+      ${heroHtml}
+      <section class="section thinking-archive">
+        <div class="container blog-grid">${cards}</div>
+        ${loadMore}
+      </section>`;
   }
 
   function renderTagCloud(articles) {
@@ -607,6 +673,22 @@
     }
 
     if (window.initSiteUI) window.initSiteUI();
+    if (page === "thinking") initThinkingLoadMore();
+  }
+
+  function initThinkingLoadMore() {
+    const grid = document.querySelector(".blog-grid");
+    const btn = document.querySelector("[data-load-more]");
+    if (!grid || !btn) return;
+    const initial = parseInt(btn.dataset.initial || "4", 10);
+    const cards = [...grid.querySelectorAll(".blog-card")];
+    cards.forEach((card, i) => {
+      if (i >= initial) card.classList.add("blog-card--hidden");
+    });
+    btn.addEventListener("click", () => {
+      cards.forEach((card) => card.classList.remove("blog-card--hidden"));
+      btn.parentElement?.remove();
+    });
   }
 
   document.addEventListener("DOMContentLoaded", init);

@@ -129,7 +129,12 @@
     "title": "Selected Works"
   },
   "thinking": {
-    "title": "What I'm Thinking"
+    "titleLine1": "What I'm",
+    "titleLine2": "Thinking",
+    "lead": "An evolving collection of thoughts, stories, and the things that inspire me.",
+    "cardLinkText": "Review the blog →",
+    "loadMoreText": "Load more archive",
+    "initialVisible": 4
   },
   "about": {
     "hero": {
@@ -305,6 +310,7 @@
     {
       "slug": "one-fire",
       "cardTitle": "One Fire in Different Chronologies",
+      "cardExcerpt": "The cosmologies of Medea & Cleopatra — a long-form essay on fire, memory, and visual research.",
       "meta": "Essay · May 2026",
       "cardImage": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
       "title": "One Fire in Different Chronologies",
@@ -370,6 +376,7 @@
     {
       "slug": "layers-of-witness",
       "cardTitle": "Layers of Witness",
+      "cardExcerpt": "Notes on the layers of testimony — place, voice, and what remains after the image fades.",
       "meta": "Notes · 2026",
       "cardImage": "https://images.unsplash.com/photo-1547981609-4c6a41e18677?w=800&q=80",
       "title": "Layers of Witness",
@@ -394,6 +401,7 @@
     {
       "slug": "on-memory",
       "cardTitle": "On Memory and Return",
+      "cardExcerpt": "Reflections on return journeys, recurring motifs, and the weight of unspoken sentences.",
       "meta": "Reflection",
       "cardImage": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
       "title": "On Memory and Return",
@@ -418,6 +426,7 @@
     {
       "slug": "maps-we-carry",
       "cardTitle": "Maps We Carry",
+      "cardExcerpt": "Travel writing on the maps we inherit — borders, cities, and silent witnesses.",
       "meta": "Travel · Writing",
       "cardImage": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
       "title": "Maps We Carry",
