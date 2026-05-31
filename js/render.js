@@ -59,8 +59,17 @@
   }
 
   function renderFooter(site) {
-    const year = new Date().getFullYear();
-    return `<div class="container">© ${year} ${esc(site.footer)}</div>`;
+    const logoSrc = site.logoImage || "assets/logo-wordmark.png";
+    const credit = site.footerDesignCredit || "";
+    const copy = site.footerCopyright || site.footer || "";
+    return `
+      <div class="container footer-inner">
+        <a href="index.html" class="footer-brand">
+          <img src="${esc(logoSrc)}" alt="${esc(site.logo || "The Mumine")}" width="160" height="40">
+        </a>
+        <p class="footer-credit">${esc(credit)}</p>
+        <p class="footer-copy">${esc(copy)}</p>
+      </div>`;
   }
 
   function renderHome(h, projects) {
@@ -242,30 +251,65 @@
   }
 
   function renderAbout(ab) {
-    const bio = (ab.bio || []).map((p) => `<p>${esc(p)}</p>`).join("");
-    const portraits = (ab.portraits || [])
-      .map((ph) => `<img src="${esc(ph.src)}" alt="${esc(ph.alt || "")}" width="400" height="533">`)
-      .join("");
-    const skills = (ab.skills || [])
+    const hero = ab.hero || {};
+    const story = ab.story || {};
+    const skills = ab.skills || {};
+    const heroParas = (hero.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join("");
+    const storyBlocks = (story.blocks || [])
       .map(
-        (col) => `
-        <div class="skills-col">
-          <h3>${esc(col.title)}</h3>
-          <ul>${(col.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
+        (b) => `
+        <article class="about-story-block">
+          <p class="about-story-label"><span class="about-story-num">${esc(b.num)}</span> / <span class="about-story-tag">${esc(b.label)}</span></p>
+          <blockquote class="about-story-quote">${esc(b.quote)}</blockquote>
+          <p class="about-story-text">${esc(b.text)}</p>
+        </article>`
+      )
+      .join("");
+    const skillCards = (skills.cards || [])
+      .map(
+        (c) => `
+        <div class="about-skill-card">
+          <span class="about-skill-card__num">${esc(c.num)}</span>
+          <h3 class="about-skill-card__title">${esc(c.title)}</h3>
+          <ul class="about-skill-card__list">
+            ${(c.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}
+          </ul>
         </div>`
       )
       .join("");
 
     return `
-      <div class="container about-header page-hero"><h1>${esc(ab.title)}</h1></div>
-      <div class="container about-grid">
-        <div class="bio">${bio}</div>
-        <div class="portraits">${portraits}</div>
-      </div>
-      <section class="section">
+      <section class="about-hero">
+        <div class="container about-hero__grid">
+          <div class="about-hero__text">
+            <h1 class="about-hero__title">
+              <span class="about-hero__name">${esc(hero.nameLine1)}</span>
+              <span class="about-hero__surname">${esc(hero.nameLine2)}</span>
+            </h1>
+            <div class="about-hero__bio">${heroParas}</div>
+          </div>
+          <div class="about-hero__media">
+            <img src="${esc(hero.image?.src)}" alt="${esc(hero.image?.alt || "")}" width="560" height="640">
+          </div>
+        </div>
+      </section>
+
+      <section class="about-story">
+        <div class="container about-story__grid">
+          <div class="about-story__media">
+            <img src="${esc(story.image?.src)}" alt="${esc(story.image?.alt || "")}" width="480" height="720">
+          </div>
+          <div class="about-story__content">${storyBlocks}</div>
+        </div>
+      </section>
+
+      <section class="about-skills">
         <div class="container">
-          <h2 class="section-title">${esc(ab.skillsTitle)}</h2>
-          <div class="skills-grid">${skills}</div>
+          <h2 class="about-skills__heading">
+            <span>${esc(skills.titlePart1)}</span>
+            <span class="about-skills__heading-accent">${esc(skills.titlePart2)}</span>
+          </h2>
+          <div class="about-skills__grid">${skillCards}</div>
         </div>
       </section>`;
   }

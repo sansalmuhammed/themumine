@@ -230,7 +230,9 @@
       <div class="panel"><h3>Genel</h3>
         ${field("Logo metni (alt)", "site.logo", s.logo)}
         ${imageField("Logo görseli", "site.logoImage", s.logoImage)}
-        ${field("Footer metni", "site.footer", s.footer)}
+        ${field("Footer metni (yedek)", "site.footer", s.footer)}
+        ${field("Footer tasarım", "site.footerDesignCredit", s.footerDesignCredit)}
+        ${field("Footer telif", "site.footerCopyright", s.footerCopyright)}
         ${field("Meta açıklama", "site.metaDescription", s.metaDescription, "textarea")}
       </div>
       <div class="panel"><h3>Menü (VISION, PROJECT…)</h3>${navHtml}
@@ -442,33 +444,60 @@
 
   function renderAbout() {
     const ab = content.about || {};
-    const bio = (ab.bio || []).join("\n\n");
-    let portraits = (ab.portraits || [])
-      .map(
-        (ph, i) =>
-          itemCard("Portre " + (i + 1), i, imageField("Görsel", `about.portraits.${i}.src`, ph.src) + field("Alt", `about.portraits.${i}.alt`, ph.alt), "port-" + i)
+    const hero = ab.hero || {};
+    const story = ab.story || {};
+    const skills = ab.skills || {};
+    const heroParas = (hero._paragraphs ?? (hero.paragraphs || []).join("\n\n"));
+
+    const storyBlocks = (story.blocks || [])
+      .map((b, i) =>
+        itemCard(
+          `${b.num} ${b.label}`,
+          i,
+          field("Numara", `about.story.blocks.${i}.num`, b.num) +
+            field("Etiket (ORIGINS…)", `about.story.blocks.${i}.label`, b.label) +
+            field("Alıntı", `about.story.blocks.${i}.quote`, b.quote, "textarea") +
+            field("Metin", `about.story.blocks.${i}.text`, b.text, "textarea"),
+          "story-" + i
+        )
       )
       .join("");
 
-    let skills = (ab.skills || [])
-      .map((col, i) => {
-        const items = (col.items || []).join("\n");
-        return itemCard(col.title || "Sütun", i, field("Sütun başlığı", `about.skills.${i}.title`, col.title) + field("Maddeler", `about.skills.${i}._items`, items, "textarea"), "skill-" + i);
+    const skillCards = (skills.cards || [])
+      .map((c, i) => {
+        const items = (c._items ?? (c.items || []).join("\n"));
+        return itemCard(
+          c.title || "Kart",
+          i,
+          field("Numara", `about.skills.cards.${i}.num`, c.num) +
+            field("Başlık", `about.skills.cards.${i}.title`, c.title) +
+            field("Maddeler (her satır bir madde)", `about.skills.cards.${i}._items`, items, "textarea"),
+          "skill-" + i
+        );
       })
       .join("");
 
     return `
-      <div class="panel">
-        ${field("Sayfa başlığı", "about.title", ab.title)}
-        ${field("Biyografi (paragrafları boş satırla ayırın)", "about._bio", bio, "textarea")}
+      <div class="panel"><h3>Hero (MUMINE SERAP / KIZILIRMAK)</h3>
+        ${field("İsim satırı 1", "about.hero.nameLine1", hero.nameLine1)}
+        ${field("İsim satırı 2 (kırmızı)", "about.hero.nameLine2", hero.nameLine2)}
+        ${field("Paragraflar", "about.hero._paragraphs", heroParas, "textarea")}
+        ${imageField("Sağ portre", "about.hero.image.src", hero.image?.src)}
+        ${field("Portre alt metni", "about.hero.image.alt", hero.image?.alt)}
       </div>
-      <div class="panel"><h3>Portreler</h3>${portraits}
-        <button type="button" class="btn btn-secondary btn-sm" id="add-portrait">+ Portre</button>
+      <div class="panel"><h3>Hikâye bölümü (sol görsel + 01/02/03)</h3>
+        ${imageField("Sol portre", "about.story.image.src", story.image?.src)}
+        ${field("Sol portre alt", "about.story.image.alt", story.image?.alt)}
+        ${storyBlocks}
+        <button type="button" class="btn btn-secondary btn-sm" id="add-story-block">+ Blok ekle</button>
       </div>
-      <div class="panel"><h3>Skills</h3>
-        ${field("Bölüm başlığı", "about.skillsTitle", ab.skillsTitle)}
-        ${skills}
-        <button type="button" class="btn btn-secondary btn-sm" id="add-skill-col">+ Sütun</button>
+      <div class="panel"><h3>Skill Set</h3>
+        <div class="field-row">
+          ${field("Başlık beyaz", "about.skills.titlePart1", skills.titlePart1)}
+          ${field("Başlık kırmızı", "about.skills.titlePart2", skills.titlePart2)}
+        </div>
+        ${skillCards}
+        <button type="button" class="btn btn-secondary btn-sm" id="add-skill-card">+ Kart ekle</button>
       </div>`;
   }
 
@@ -494,11 +523,14 @@
         }
       });
     });
-    if (content.about?._bio != null) {
-      content.about.bio = content.about._bio.split(/\n\n+/).map((s) => s.trim()).filter(Boolean);
-      delete content.about._bio;
+    if (content.about?.hero?._paragraphs != null) {
+      content.about.hero.paragraphs = content.about.hero._paragraphs
+        .split(/\n\n+/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      delete content.about.hero._paragraphs;
     }
-    (content.about?.skills || []).forEach((col) => {
+    (content.about?.skills?.cards || []).forEach((col) => {
       if (col._items != null) {
         col.items = col._items.split("\n").map((s) => s.trim()).filter(Boolean);
         delete col._items;
@@ -656,15 +688,24 @@
       });
     });
 
-    $("#add-portrait", root)?.addEventListener("click", () => {
-      content.about.portraits = content.about.portraits || [];
-      content.about.portraits.push({ src: "", alt: "" });
+    $("#add-story-block", root)?.addEventListener("click", () => {
+      collectFromDom();
+      content.about.story = content.about.story || { blocks: [] };
+      content.about.story.blocks = content.about.story.blocks || [];
+      content.about.story.blocks.push({
+        num: "04",
+        label: "NEW",
+        quote: "",
+        text: "",
+      });
       render();
     });
 
-    $("#add-skill-col", root)?.addEventListener("click", () => {
-      content.about.skills = content.about.skills || [];
-      content.about.skills.push({ title: "Yeni", items: [] });
+    $("#add-skill-card", root)?.addEventListener("click", () => {
+      collectFromDom();
+      content.about.skills = content.about.skills || { cards: [] };
+      content.about.skills.cards = content.about.skills.cards || [];
+      content.about.skills.cards.push({ num: "04", title: "NEW SKILL", items: [] });
       render();
     });
   }
@@ -689,8 +730,10 @@
         if (s.paragraphs) s._p = s.paragraphs.join("\n\n");
       });
     });
-    if (content.about?.bio) content.about._bio = content.about.bio.join("\n\n");
-    (content.about?.skills || []).forEach((c) => {
+    if (content.about?.hero?.paragraphs) {
+      content.about.hero._paragraphs = content.about.hero.paragraphs.join("\n\n");
+    }
+    (content.about?.skills?.cards || []).forEach((c) => {
       if (c.items) c._items = c.items.join("\n");
     });
     (content.articles || []).forEach((a) => {

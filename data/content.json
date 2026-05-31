@@ -3,6 +3,8 @@
     "logo": "The Mumine",
     "logoImage": "assets/uploads/1780256865434-Logo_The_Mumine.png",
     "footer": "The Mumine — Mümine Serap",
+    "footerDesignCredit": "Design by Muhammad Kizilirmak",
+    "footerCopyright": "© 2024 THE MUMINE",
     "metaDescription": "Mümine Serap — creative portfolio and heartfelt stories.",
     "nav": [
       {
@@ -46,7 +48,7 @@
       "home": "The Mumine — Heartfelt Stories",
       "works": "Selected Works — The Mumine",
       "thinking": "What I'm Thinking — The Mumine",
-      "about": "Mümine Serap — Hakkımda",
+      "about": "About Me — The Mumine",
       "project": "Proje — The Mumine",
       "article": "Yazı — The Mumine"
     }
@@ -128,51 +130,80 @@
     "title": "What I'm Thinking"
   },
   "about": {
-    "title": "Mümine Serap",
-    "bio": [
-      "Görsel anlatım, editoryal tasarım ve zamana tanıklık eden hikâyeler üzerine çalışıyorum.",
-      "Portfolyom The Mumine markası altında; projeler, yazılar ve kişisel araştırmalarımı bir araya getiriyor."
-    ],
-    "portraits": [
-      {
-        "src": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&grayscale",
-        "alt": "Portre 1"
-      },
-      {
-        "src": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&grayscale",
-        "alt": "Portre 2"
+    "hero": {
+      "nameLine1": "MUMINE SERAP",
+      "nameLine2": "KIZILIRMAK",
+      "paragraphs": [
+        "I am a 21st-century explorer and maker of meanings — working across animation, game narrative, theatre, and visual storytelling.",
+        "My practice moves between writing, concept development, and project leadership; I build worlds where emotion lives in timing and the smallest gesture.",
+        "From TEKNOFEST stages to Vancouver film kitchens, I gather influences and return them as stories that ask who gets to tell the tale."
+      ],
+      "image": {
+        "src": "assets/about-hero-portrait.jpg",
+        "alt": "Mümine Serap portrait"
       }
-    ],
-    "skillsTitle": "Skills",
-    "skills": [
-      {
-        "title": "Creative",
-        "items": [
-          "Art direction",
-          "Storyboarding",
-          "Editorial layout",
-          "Visual research"
-        ]
+    },
+    "story": {
+      "image": {
+        "src": "assets/about-story-portrait.jpg",
+        "alt": "Mümine Serap"
       },
-      {
-        "title": "Tools",
-        "items": [
-          "Figma",
-          "Adobe Creative Suite",
-          "Video editing",
-          "Prototyping"
-        ]
-      },
-      {
-        "title": "Focus",
-        "items": [
-          "Narrative design",
-          "Documentary tone",
-          "Brand storytelling",
-          "Multilingual content"
-        ]
-      }
-    ]
+      "blocks": [
+        {
+          "num": "01",
+          "label": "ORIGINS",
+          "quote": "Emotion lives in timing and the smallest gesture.",
+          "text": "Educated across engineering and the arts, I found my voice in competition halls and on stage — including TEKNOFEST, where discipline met imagination and narrative became a craft worth testing in public."
+        },
+        {
+          "num": "02",
+          "label": "EXPANSION",
+          "quote": "Vancouver was an international kitchen; everyone brought their own flavors.",
+          "text": "At Vancouver Film School I learned that collaboration is seasoning: each voice changes the recipe. I carried that openness into animation pipelines, writers' rooms, and cross-cultural projects."
+        },
+        {
+          "num": "03",
+          "label": "PHILOSOPHY",
+          "quote": "Until lions have their own historians, tales of hunting will always glorify the hunter.",
+          "text": "Theatre criticism taught me to read power in every frame. I aim to make work that widens who is seen and heard — stories that do not only glorify the hunt."
+        }
+      ]
+    },
+    "skills": {
+      "titlePart1": "SKILL",
+      "titlePart2": "SET",
+      "cards": [
+        {
+          "num": "01",
+          "title": "STORYTELLING & WRITING",
+          "items": [
+            "Animated TV Series",
+            "Game Narrative",
+            "Musical Lyrics",
+            "Screenplays in different genre especially in Fantasy & Comedy"
+          ]
+        },
+        {
+          "num": "02",
+          "title": "VISUAL & CREATIVE DEVELOPMENT",
+          "items": [
+            "Concept Design",
+            "3D Character Animation",
+            "Story Illustration"
+          ]
+        },
+        {
+          "num": "03",
+          "title": "PROJECT DEVELOPMENT",
+          "items": [
+            "Project Management",
+            "Product Ideation",
+            "Workshop Design & Facilitation",
+            "Interactive Educational Tools"
+          ]
+        }
+      ]
+    }
   },
   "projects": [
     {
