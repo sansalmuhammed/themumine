@@ -397,6 +397,10 @@
         {
           "label": "Witness",
           "slug": "witness"
+        },
+        {
+          "label": "Travel",
+          "slug": "travel"
         }
       ],
       "seo": {
@@ -429,6 +433,10 @@
         {
           "label": "Memory",
           "slug": "memory"
+        },
+        {
+          "label": "Travel",
+          "slug": "travel"
         }
       ],
       "seo": {
