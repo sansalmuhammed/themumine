@@ -27,19 +27,35 @@
   }
 
   function renderHeader(site, activePage) {
-    const navItems = (site.nav || [])
-      .map(function (item) {
-        const active = item.page === activePage ? " is-active" : "";
-        return `<a href="${esc(item.href)}" class="${active.trim()}" data-page="${esc(item.page)}">${esc(item.label)}</a>`;
-      })
-      .join("");
+    const nav = site.nav || [];
+    const contact = site.contactButton || { label: "CONTACT", href: "index.html#contact" };
+    const logoSrc = site.logoImage || "assets/logo-wordmark.png";
+    const logoAlt = site.logo || "The Mumine";
+
+    function navLink(item, className) {
+      const active = item.page === activePage ? " is-active" : "";
+      return `<a href="${esc(item.href)}" class="${className}${active}" data-page="${esc(item.page)}">${esc(item.label)}</a>`;
+    }
+
+    const desktopNav = nav.map((item) => navLink(item, "")).join("");
+    const mobileNav =
+      nav.map((item) => navLink(item, "")).join("") +
+      `<a href="${esc(contact.href)}" class="header-cta header-cta--mobile">${esc(contact.label)}</a>`;
+
+    const brand = logoSrc
+      ? `<a href="index.html" class="brand"><img class="brand__img" src="${esc(logoSrc)}" alt="${esc(logoAlt)}" width="240" height="58"></a>`
+      : `<a href="index.html" class="brand"><span class="brand__text"><span class="brand__text-the">the</span> Mumine</span></a>`;
 
     return `
-      <a href="index.html" class="logo">${esc(site.logo)}</a>
-      <button class="menu-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="site-nav" aria-label="Ana menü">${navItems}</nav>`;
+      <div class="header-inner">
+        ${brand}
+        <nav class="header-nav" aria-label="Ana menü">${desktopNav}</nav>
+        <a href="${esc(contact.href)}" class="header-cta">${esc(contact.label)}</a>
+        <button class="menu-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="site-nav" aria-label="Mobil menü">${mobileNav}</nav>`;
   }
 
   function renderFooter(site) {

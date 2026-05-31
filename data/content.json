@@ -1,15 +1,19 @@
 {
   "site": {
     "logo": "The Mumine",
+    "logoImage": "assets/logo-wordmark.png",
     "footer": "The Mumine — Mümine Serap",
     "metaDescription": "Mümine Serap — creative portfolio and heartfelt stories.",
     "nav": [
-      { "label": "Ana Sayfa", "href": "index.html", "page": "home" },
-      { "label": "Selected Works", "href": "works.html", "page": "works" },
-      { "label": "What I'm Thinking", "href": "thinking.html", "page": "thinking" },
-      { "label": "Hakkımda", "href": "about.html", "page": "about" },
-      { "label": "İletişim", "href": "index.html#contact", "page": "contact" }
+      { "label": "VISION", "href": "index.html", "page": "home" },
+      { "label": "PROJECT", "href": "works.html", "page": "works" },
+      { "label": "BLOG", "href": "thinking.html", "page": "thinking" },
+      { "label": "ABOUT ME", "href": "about.html", "page": "about" }
     ],
+    "contactButton": {
+      "label": "CONTACT",
+      "href": "index.html#contact"
+    },
     "theme": {
       "bg": "#000000",
       "text": "#ffffff",

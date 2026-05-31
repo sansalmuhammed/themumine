@@ -190,14 +190,22 @@
       )
       .join("");
 
+    const contact = s.contactButton || {};
+
     return `
       <div class="panel"><h3>Genel</h3>
-        ${field("Logo metni", "site.logo", s.logo)}
+        ${field("Logo metni (alt)", "site.logo", s.logo)}
+        ${imageField("Logo görseli", "site.logoImage", s.logoImage)}
         ${field("Footer metni", "site.footer", s.footer)}
         ${field("Meta açıklama", "site.metaDescription", s.metaDescription, "textarea")}
       </div>
-      <div class="panel"><h3>Menü</h3>${navHtml}
+      <div class="panel"><h3>Menü (VISION, PROJECT…)</h3>${navHtml}
         <button type="button" class="btn btn-secondary btn-sm" id="add-nav">+ Menü öğesi</button>
+        <p class="hint">Sayfa kodları: home, works, thinking, about</p>
+      </div>
+      <div class="panel"><h3>Contact butonu</h3>
+        ${field("Buton metni", "site.contactButton.label", contact.label)}
+        ${field("Buton linki", "site.contactButton.href", contact.href)}
       </div>
       <div class="panel"><h3>Tema renkleri</h3>
         <div class="field-row">
