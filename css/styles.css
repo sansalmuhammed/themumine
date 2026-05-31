@@ -1126,10 +1126,16 @@ main {
   margin-bottom: 0;
 }
 
+.about-hero__media {
+  min-width: 0;
+}
+
 .about-hero__media img {
+  display: block;
   width: 100%;
-  max-height: 640px;
-  object-fit: cover;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
   object-position: center top;
   filter: grayscale(100%);
 }
@@ -1153,10 +1159,16 @@ main {
   }
 }
 
+.about-story__media {
+  min-width: 0;
+}
+
 .about-story__media img {
+  display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
   filter: grayscale(100%);
 }
 

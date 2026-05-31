@@ -565,7 +565,7 @@
             <div class="about-hero__bio">${heroParas}</div>
           </div>
           <div class="about-hero__media">
-            <img src="${esc(hero.image?.src)}" alt="${esc(hero.image?.alt || "")}" width="560" height="640">
+            <img src="${esc(hero.image?.src)}" alt="${esc(hero.image?.alt || "")}" width="560">
           </div>
         </div>
       </section>
@@ -573,7 +573,7 @@
       <section class="about-story">
         <div class="container about-story__grid">
           <div class="about-story__media">
-            <img src="${esc(story.image?.src)}" alt="${esc(story.image?.alt || "")}" width="480" height="720">
+            <img src="${esc(story.image?.src)}" alt="${esc(story.image?.alt || "")}" width="480">
           </div>
           <div class="about-story__content">${storyBlocks}</div>
         </div>
