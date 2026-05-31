@@ -272,13 +272,13 @@
 
   async function loadContent() {
     try {
-      const res = await fetch("api/content.php");
+      const res = await fetch("/.netlify/functions/content");
       if (res.ok) {
         const json = await res.json();
         if (json.ok && json.data) return json.data;
       }
     } catch (e) {
-      /* WAMP dışında (Netlify vb.) PHP yok — JSON dosyasına düş */
+      /* yerel önizleme */
     }
     const res = await fetch("data/content.json");
     if (!res.ok) throw new Error("İçerik yüklenemedi");

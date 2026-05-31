@@ -1,7 +1,5 @@
 (function () {
-  const IS_LOCAL = /^(localhost|127\.0\.0\.1)$/i.test(location.hostname);
-  const IS_NETLIFY = !IS_LOCAL;
-  const API = "../api";
+  const FN = "/.netlify/functions";
   let content = {};
   let section = "site";
   let openCards = new Set();
@@ -9,13 +7,8 @@
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => [...(ctx || document).querySelectorAll(sel)];
 
-  function resolveUrl(path) {
-    if (!IS_NETLIFY) return API + path;
-    if (path.includes("auth.php?action=check")) return "/.netlify/functions/auth-check";
-    if (path.includes("auth.php?action=login")) return "/.netlify/functions/login";
-    if (path.includes("auth.php?action=logout")) return "/.netlify/functions/logout";
-    if (path === "/content.php") return "/.netlify/functions/content";
-    return API + path;
+  function fn(name) {
+    return `${FN}/${name}`;
   }
 
   const titles = {
@@ -28,11 +21,17 @@
     about: "Hakkımda",
   };
 
-  async function api(path, opts = {}) {
-    const res = await fetch(resolveUrl(path), {
+  async function apiGet(name) {
+    const res = await fetch(fn(name), { credentials: "same-origin" });
+    return res.json();
+  }
+
+  async function apiPost(name, body) {
+    const res = await fetch(fn(name), {
+      method: "POST",
       credentials: "same-origin",
-      ...opts,
-      headers: { "Content-Type": "application/json", ...(opts.headers || {}) },
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     });
     return res.json();
   }
@@ -72,7 +71,19 @@
 
   function imgSrc(url) {
     if (!url) return "";
-    return /^https?:\/\//i.test(url) ? url : "../" + url.replace(/^\//, "");
+    if (/^https?:\/\//i.test(url) || url.startsWith("/.netlify/") || url.startsWith("data:")) {
+      return url;
+    }
+    return "../" + url.replace(/^\//, "");
+  }
+
+  function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error("Dosya okunamadı"));
+      reader.readAsDataURL(file);
+    });
   }
 
   function imageField(label, path, value) {
@@ -80,7 +91,7 @@
     const preview = value ? `<div class="preview"><img src="${escAttr(imgSrc(value))}" alt="" onerror="this.style.display='none'"></div>` : "";
     return `<div class="field image-field">
       <label>${label}</label>
-      <input type="url" id="${id}" data-path="${path}" value="${escAttr(value || "")}" placeholder="URL veya assets/uploads/...">
+      <input type="url" id="${id}" data-path="${path}" value="${escAttr(value || "")}" placeholder="URL veya Yükle ile görsel ekleyin">
       ${preview}
       <div class="image-actions">
         <label class="btn btn-secondary btn-sm"><input type="file" accept="image/*" data-upload="${path}" hidden> Yükle</label>
@@ -131,19 +142,17 @@
         const file = input.files?.[0];
         if (!file) return;
         const path = input.dataset.upload;
-        const fd = new FormData();
-        fd.append("file", file);
         try {
-          const res = await fetch(API + "/upload.php", { method: "POST", body: fd, credentials: "same-origin" });
-          const json = await res.json();
-          if (!json.ok) throw new Error(json.error);
+          const dataUrl = await readFileAsDataUrl(file);
+          const json = await apiPost("upload", { dataUrl, filename: file.name });
+          if (!json.ok) throw new Error(json.error || "Yükleme başarısız");
           deepSet(content, path, json.url);
           const urlInput = root.querySelector(`[data-path="${path}"]`);
           if (urlInput) {
             urlInput.value = json.url;
             urlInput.dispatchEvent(new Event("input"));
           }
-          toast("Görsel yüklendi");
+          toast("Görsel yüklendi — Kaydet ile yayınlayın");
         } catch (e) {
           toast(e.message || "Yükleme hatası", true);
         }
@@ -637,9 +646,9 @@
 
   async function loadContent() {
     try {
-      const json = await api("/content.php");
+      const json = await apiGet("content");
       if (json.ok && json.data) content = json.data;
-      else throw new Error("no php");
+      else throw new Error("no api");
     } catch {
       const res = await fetch("../data/content.json");
       if (!res.ok) throw new Error("Yüklenemedi");
@@ -667,15 +676,8 @@
   }
 
   async function save() {
-    if (IS_NETLIFY) {
-      toast(
-        "Netlify'da sunucuya kayıt yok. Yerelde WAMP admin ile kaydedin, git push ile yayınlayın.",
-        true
-      );
-      return;
-    }
     collectFromDom();
-    const json = await api("/content.php", { method: "POST", body: JSON.stringify({ data: content }) });
+    const json = await apiPost("content", { data: content });
     if (!json.ok) {
       toast(json.error || "Kayıt hatası", true);
       return;
@@ -691,7 +693,7 @@
   }
 
   async function checkAuth() {
-    const json = await api("/auth.php?action=check");
+    const json = await apiGet("auth-check");
     if (json.loggedIn) {
       showApp(true);
       await loadContent();
@@ -703,10 +705,7 @@
     e.preventDefault();
     const username = $("#username").value.trim();
     const password = $("#password").value;
-    const json = await api("/auth.php?action=login", {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-    });
+    const json = await apiPost("login", { username, password });
     if (!json.ok) {
       $("#login-error").style.display = "block";
       $("#login-error").textContent = json.error || "Giriş başarısız";
@@ -718,7 +717,7 @@
   });
 
   $("#logout-btn").addEventListener("click", async () => {
-    await api("/auth.php?action=logout", { method: "POST" });
+    await apiPost("logout", {});
     showApp(false);
   });
 

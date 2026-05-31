@@ -4,7 +4,6 @@ export const ADMIN_USER = process.env.ADMIN_USER || "mumine.serap@themumine.com"
 export const ADMIN_PASS = process.env.ADMIN_PASS || "1L0veSemerkand";
 
 const SECRET = process.env.ADMIN_SESSION_SECRET || "themumine-admin-session-v1";
-const COOKIE = "themumine_admin";
 
 export function json(body, status = 200, headers = {}) {
   return {
@@ -42,4 +41,6 @@ export function readCookie(event) {
   return match ? decodeURIComponent(match[1]) : "";
 }
 
-export { COOKIE };
+export function requireAuth(event) {
+  return verifyToken(readCookie(event));
+}

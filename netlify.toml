@@ -2,9 +2,13 @@
 # https://docs.netlify.com/configure-builds/file-based-configuration/
 
 [build]
+  command = "npm install"
   publish = "."
   functions = "netlify/functions"
-  # Build komutu gerekmez; HTML/CSS/JS doğrudan yayınlanır
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["data/content.json"]
 
 [[headers]]
   for = "/data/*"
