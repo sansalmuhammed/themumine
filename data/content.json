@@ -1,14 +1,30 @@
 {
   "site": {
     "logo": "The Mumine",
-    "logoImage": "assets/logo-wordmark.png",
+    "logoImage": "assets/uploads/1780256865434-Logo_The_Mumine.png",
     "footer": "The Mumine — Mümine Serap",
     "metaDescription": "Mümine Serap — creative portfolio and heartfelt stories.",
     "nav": [
-      { "label": "VISION", "href": "index.html", "page": "home" },
-      { "label": "PROJECT", "href": "works.html", "page": "works" },
-      { "label": "BLOG", "href": "thinking.html", "page": "thinking" },
-      { "label": "ABOUT ME", "href": "about.html", "page": "about" }
+      {
+        "label": "VISION",
+        "href": "index.html",
+        "page": "home"
+      },
+      {
+        "label": "PROJECT",
+        "href": "works.html",
+        "page": "works"
+      },
+      {
+        "label": "BLOG",
+        "href": "thinking.html",
+        "page": "thinking"
+      },
+      {
+        "label": "ABOUT ME",
+        "href": "about.html",
+        "page": "about"
+      }
     ],
     "contactButton": {
       "label": "CONTACT",
@@ -37,7 +53,7 @@
   },
   "home": {
     "hero": {
-      "title": "Heartfelt Stories of Our Time",
+      "title": "Heartfelt stories   of our era",
       "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
       "imageAlt": ""
     },
@@ -55,23 +71,51 @@
     "witness": {
       "sectionTitle": "The Witness Book",
       "items": [
-        { "title": "Chapter I — Memory", "text": "Zamanın üzerinde kalan izler; kişisel ve kolektif hafızanın kesiştiği anlar." },
-        { "title": "Chapter II — Place", "text": "Mekânın hikâyeyi nasıl şekillendirdiği; şehirler, sınırlar ve sessiz tanıklar." },
-        { "title": "Chapter III — Voice", "text": "Anlatının tonu; söylenmemiş cümlelerin ağırlığı ve görüntünün dili." },
-        { "title": "Chapter IV — Return", "text": "Geri dönüşler, tekrar eden motifler ve hikâyenin kapanışına doğru yürüyüş." }
+        {
+          "title": "Chapter I — Memory",
+          "text": "Zamanın üzerinde kalan izler; kişisel ve kolektif hafızanın kesiştiği anlar."
+        },
+        {
+          "title": "Chapter II — Place",
+          "text": "Mekânın hikâyeyi nasıl şekillendirdiği; şehirler, sınırlar ve sessiz tanıklar."
+        },
+        {
+          "title": "Chapter III — Voice",
+          "text": "Anlatının tonu; söylenmemiş cümlelerin ağırlığı ve görüntünün dili."
+        },
+        {
+          "title": "Chapter IV — Return",
+          "text": "Geri dönüşler, tekrar eden motifler ve hikâyenin kapanışına doğru yürüyüş."
+        }
       ]
     },
     "experience": {
       "sectionTitle": "Built On Experience",
       "items": [
-        { "num": "01", "title": "Research & Narrative", "text": "Konsept geliştirme, araştırma ve hikâye iskeletinin kurulması." },
-        { "num": "02", "title": "Visual Direction", "text": "Görsel dil, renk ve kompozisyon kararları." },
-        { "num": "03", "title": "Production & Delivery", "text": "Kurgu, yayın ve portfolyo sunumu — web, video veya baskı." }
+        {
+          "num": "01",
+          "title": "Research & Narrative",
+          "text": "Konsept geliştirme, araştırma ve hikâye iskeletinin kurulması."
+        },
+        {
+          "num": "02",
+          "title": "Visual Direction",
+          "text": "Görsel dil, renk ve kompozisyon kararları."
+        },
+        {
+          "num": "03",
+          "title": "Production & Delivery",
+          "text": "Kurgu, yayın ve portfolyo sunumu — web, video veya baskı."
+        }
       ]
     },
     "contact": {
       "sectionTitle": "Get In Touch",
-      "labels": { "name": "İsim", "email": "E-posta", "message": "Mesaj" },
+      "labels": {
+        "name": "İsim",
+        "email": "E-posta",
+        "message": "Mesaj"
+      },
       "submitText": "Gönder",
       "formAction": "",
       "successMessage": "Mesajınız alındı. Teşekkürler!"
@@ -90,14 +134,44 @@
       "Portfolyom The Mumine markası altında; projeler, yazılar ve kişisel araştırmalarımı bir araya getiriyor."
     ],
     "portraits": [
-      { "src": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&grayscale", "alt": "Portre 1" },
-      { "src": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&grayscale", "alt": "Portre 2" }
+      {
+        "src": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&grayscale",
+        "alt": "Portre 1"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&grayscale",
+        "alt": "Portre 2"
+      }
     ],
     "skillsTitle": "Skills",
     "skills": [
-      { "title": "Creative", "items": ["Art direction", "Storyboarding", "Editorial layout", "Visual research"] },
-      { "title": "Tools", "items": ["Figma", "Adobe Creative Suite", "Video editing", "Prototyping"] },
-      { "title": "Focus", "items": ["Narrative design", "Documentary tone", "Brand storytelling", "Multilingual content"] }
+      {
+        "title": "Creative",
+        "items": [
+          "Art direction",
+          "Storyboarding",
+          "Editorial layout",
+          "Visual research"
+        ]
+      },
+      {
+        "title": "Tools",
+        "items": [
+          "Figma",
+          "Adobe Creative Suite",
+          "Video editing",
+          "Prototyping"
+        ]
+      },
+      {
+        "title": "Focus",
+        "items": [
+          "Narrative design",
+          "Documentary tone",
+          "Brand storytelling",
+          "Multilingual content"
+        ]
+      }
     ]
   },
   "projects": [
@@ -117,8 +191,18 @@
       "sideImageAlt": "Proje görseli",
       "storyTitle": "Story of Name",
       "storySections": [
-        { "heading": "Origin", "paragraphs": ["İsmin ve konseptin kökeni — anlatının başlangıç noktası, ilham kaynağı ve ilk eskizler."] },
-        { "heading": "Development", "paragraphs": ["Gelişim süreci: iterasyonlar, iş birlikleri ve görsel dilin olgunlaşması."] }
+        {
+          "heading": "Origin",
+          "paragraphs": [
+            "İsmin ve konseptin kökeni — anlatının başlangıç noktası, ilham kaynağı ve ilk eskizler."
+          ]
+        },
+        {
+          "heading": "Development",
+          "paragraphs": [
+            "Gelişim süreci: iterasyonlar, iş birlikleri ve görsel dilin olgunlaşması."
+          ]
+        }
       ],
       "gallery": [
         "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
@@ -133,11 +217,20 @@
       "heroImage": "https://images.unsplash.com/photo-1493246507134-91ee19fadba5?w=1400&q=80",
       "showPlayButton": false,
       "title": "The Witness Book",
-      "paragraphs": ["Editoryal seri — tanıklık ve hafıza üzerine görsel araştırma."],
+      "paragraphs": [
+        "Editoryal seri — tanıklık ve hafıza üzerine görsel araştırma."
+      ],
       "sideImage": "https://images.unsplash.com/photo-1493246507134-91ee19fadba5?w=600&q=80",
       "sideImageAlt": "",
       "storyTitle": "Story of Name",
-      "storySections": [{ "heading": "Origin", "paragraphs": ["Serinin kökeni ve kavramsal çerçeve."] }],
+      "storySections": [
+        {
+          "heading": "Origin",
+          "paragraphs": [
+            "Serinin kökeni ve kavramsal çerçeve."
+          ]
+        }
+      ],
       "gallery": []
     },
     {
@@ -148,7 +241,9 @@
       "heroImage": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1400&q=80",
       "showPlayButton": true,
       "title": "Heartfelt Stories",
-      "paragraphs": ["Sinematik anlatı ve duygusal ton üzerine film projesi."],
+      "paragraphs": [
+        "Sinematik anlatı ve duygusal ton üzerine film projesi."
+      ],
       "sideImage": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80",
       "sideImageAlt": "",
       "storyTitle": "Story of Name",
@@ -163,7 +258,9 @@
       "heroImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1400&q=80",
       "showPlayButton": false,
       "title": "Chronologies",
-      "paragraphs": ["Zaman çizgileri ve görsel araştırma notları."],
+      "paragraphs": [
+        "Zaman çizgileri ve görsel araştırma notları."
+      ],
       "sideImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80",
       "sideImageAlt": "",
       "storyTitle": "Story of Name",
@@ -179,16 +276,53 @@
       "cardImage": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
       "title": "One Fire in Different Chronologies",
       "blocks": [
-        { "type": "paragraph", "text": "Aynı ateşin farklı zaman çizgilerinde nasıl okunduğuna dair uzun form metin." },
-        { "type": "paragraph", "text": "Tarih, mimari ve hafıza üzerine düşünceler — Akropolis'ten piramitlere uzanan görsel araştırma serisi." },
-        { "type": "image", "src": "https://images.unsplash.com/photo-1555993528-0e7c028a3fd0?w=1000&q=80", "alt": "Akropolis" },
-        { "type": "heading", "text": "I. The first light" },
-        { "type": "paragraph", "text": "Alt başlık ve gövde metni. Numaralı listeler ve ara başlıklar makale sayfasındaki yapıya uyumludur." },
-        { "type": "list", "items": ["Kronoloji bir çizgi değil, katmanlı bir alandır.", "Tanık olmak, görmekten önce dinlemeyi gerektirir.", "Ateş hem yok eder hem bir arada tutar."] },
-        { "type": "image", "src": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=80", "alt": "Antik kalıntılar" },
-        { "type": "paragraph", "text": "Devam paragrafları…" },
-        { "type": "image", "src": "https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1000&q=80", "alt": "Piramitler" },
-        { "type": "end", "text": "End of the story…" }
+        {
+          "type": "paragraph",
+          "text": "Aynı ateşin farklı zaman çizgilerinde nasıl okunduğuna dair uzun form metin."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tarih, mimari ve hafıza üzerine düşünceler — Akropolis'ten piramitlere uzanan görsel araştırma serisi."
+        },
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1555993528-0e7c028a3fd0?w=1000&q=80",
+          "alt": "Akropolis"
+        },
+        {
+          "type": "heading",
+          "text": "I. The first light"
+        },
+        {
+          "type": "paragraph",
+          "text": "Alt başlık ve gövde metni. Numaralı listeler ve ara başlıklar makale sayfasındaki yapıya uyumludur."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Kronoloji bir çizgi değil, katmanlı bir alandır.",
+            "Tanık olmak, görmekten önce dinlemeyi gerektirir.",
+            "Ateş hem yok eder hem bir arada tutar."
+          ]
+        },
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=80",
+          "alt": "Antik kalıntılar"
+        },
+        {
+          "type": "paragraph",
+          "text": "Devam paragrafları…"
+        },
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1000&q=80",
+          "alt": "Piramitler"
+        },
+        {
+          "type": "end",
+          "text": "End of the story…"
+        }
       ]
     },
     {
@@ -198,8 +332,14 @@
       "cardImage": "https://images.unsplash.com/photo-1547981609-4c6a41e18677?w=800&q=80",
       "title": "Layers of Witness",
       "blocks": [
-        { "type": "paragraph", "text": "Tanıklığın katmanları üzerine kısa notlar." },
-        { "type": "end", "text": "End of the story…" }
+        {
+          "type": "paragraph",
+          "text": "Tanıklığın katmanları üzerine kısa notlar."
+        },
+        {
+          "type": "end",
+          "text": "End of the story…"
+        }
       ]
     },
     {
@@ -209,8 +349,14 @@
       "cardImage": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
       "title": "On Memory and Return",
       "blocks": [
-        { "type": "paragraph", "text": "Hafıza ve geri dönüş üzerine düşünceler." },
-        { "type": "end", "text": "End of the story…" }
+        {
+          "type": "paragraph",
+          "text": "Hafıza ve geri dönüş üzerine düşünceler."
+        },
+        {
+          "type": "end",
+          "text": "End of the story…"
+        }
       ]
     },
     {
@@ -220,8 +366,14 @@
       "cardImage": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
       "title": "Maps We Carry",
       "blocks": [
-        { "type": "paragraph", "text": "Taşıdığımız haritalar — mekân ve yazı." },
-        { "type": "end", "text": "End of the story…" }
+        {
+          "type": "paragraph",
+          "text": "Taşıdığımız haritalar — mekân ve yazı."
+        },
+        {
+          "type": "end",
+          "text": "End of the story…"
+        }
       ]
     }
   ]
