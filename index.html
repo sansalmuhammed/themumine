@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-page="home">
+  <!-- Netlify build-time form detection (fields must match live form) -->
+  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="firstName">
+    <input type="text" name="lastName">
+    <input type="email" name="email">
+    <input type="text" name="organization">
+    <textarea name="message"></textarea>
+  </form>
   <header class="site-header" id="site-header"></header>
   <main id="page-root"></main>
   <footer class="site-footer" id="site-footer"></footer>

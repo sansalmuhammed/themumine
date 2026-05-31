@@ -314,7 +314,6 @@
     const wit = h.witness || {};
     const exp = h.experience || {};
     const c = h.contact || {};
-    const labels = c.labels || {};
     const slugs = (content.projects || []).map((p) => p.slug).join(", ");
 
     let witnessHtml = (wit.items || [])
@@ -338,7 +337,13 @@
             i,
             field("Numara", `home.experience.items.${i}.num`, e.num) +
               field("Başlık", `home.experience.items.${i}.title`, e.title) +
-              field("Açıklama", `home.experience.items.${i}.text`, e.text, "textarea"),
+              field(
+                "Detaylar",
+                `home.experience.items.${i}.details`,
+                e.details ?? e.text ?? "",
+                "textarea",
+                "Hizmetleri · ile ayırın"
+              ),
             "exp-" + i
           )
       )
@@ -368,17 +373,32 @@
         <button type="button" class="btn btn-secondary btn-sm" id="add-witness">+ Bölüm ekle</button>
       </div>
       <div class="panel"><h3>Built On Experience</h3>
-        ${field("Bölüm başlığı", "home.experience.sectionTitle", exp.sectionTitle)}
+        ${field("Başlık satır 1 (beyaz)", "home.experience.titleLine1", exp.titleLine1)}
+        ${field("Başlık satır 2 (kırmızı)", "home.experience.titleLine2", exp.titleLine2)}
+        ${imageField("Sağ görsel (çiçek dalı)", "home.experience.image", exp.image)}
+        ${field("Görsel alt metni", "home.experience.imageAlt", exp.imageAlt)}
         ${expHtml}
         <button type="button" class="btn btn-secondary btn-sm" id="add-experience">+ Madde ekle</button>
       </div>
-      <div class="panel"><h3>İletişim formu</h3>
-        ${field("Bölüm başlığı", "home.contact.sectionTitle", c.sectionTitle)}
-        ${field("İsim etiketi", "home.contact.labels.name", labels.name)}
-        ${field("E-posta etiketi", "home.contact.labels.email", labels.email)}
-        ${field("Mesaj etiketi", "home.contact.labels.message", labels.message)}
+      <div class="panel"><h3>İletişim (Get in Touch)</h3>
+        ${field("Başlık satır 1 (beyaz)", "home.contact.titleLine1", c.titleLine1)}
+        ${field("Başlık satır 2 (kırmızı)", "home.contact.titleLine2", c.titleLine2)}
+        ${field("Bölge etiketi (kırmızı)", "home.contact.regionLabel", c.regionLabel)}
+        ${field("Şehir başlığı", "home.contact.locationTitle", c.locationTitle)}
+        ${field("Adres satırları", "home.contact._addressLines", c._addressLines ?? (c.addressLines || []).join("\n"), "textarea")}
+        ${field("E-posta (gösterim)", "home.contact.email", c.email)}
+        ${field("LinkedIn URL", "home.contact.social.0.href", c.social?.[0]?.href)}
+        ${field("Instagram URL", "home.contact.social.1.href", c.social?.[1]?.href)}
+        ${field("YouTube URL", "home.contact.social.2.href", c.social?.[2]?.href)}
+        ${field("Substance URL", "home.contact.social.3.href", c.social?.[3]?.href)}
+        ${field("Form başlığı", "home.contact.formHeading", c.formHeading)}
+        ${field("Ad placeholder", "home.contact.placeholders.firstName", c.placeholders?.firstName)}
+        ${field("Soyad placeholder", "home.contact.placeholders.lastName", c.placeholders?.lastName)}
+        ${field("E-posta placeholder", "home.contact.placeholders.email", c.placeholders?.email)}
+        ${field("Kurum placeholder", "home.contact.placeholders.organization", c.placeholders?.organization)}
+        ${field("Mesaj etiketi", "home.contact.messageLabel", c.messageLabel)}
         ${field("Gönder butonu", "home.contact.submitText", c.submitText)}
-        ${field("Form action URL (boş = demo)", "home.contact.formAction", c.formAction, "url")}
+        ${field("Bildirim e-postası (Netlify panel)", "home.contact.notifyEmail", c.notifyEmail, "text", "Netlify → Forms → Notifications: bu adrese gönderin")}
         ${field("Başarı mesajı", "home.contact.successMessage", c.successMessage)}
       </div>`;
   }
@@ -563,6 +583,21 @@
   }
 
   function syncSpecialFields() {
+    const contact = content.home?.contact;
+    if (contact?._addressLines != null) {
+      contact.addressLines = contact._addressLines
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean);
+      delete contact._addressLines;
+    }
+    if (contact?.social) {
+      const defaults = ["LinkedIn", "Instagram", "YouTube", "Substance"];
+      contact.social = contact.social.map((s, i) => ({
+        label: (s && s.label) || defaults[i] || "Link",
+        href: (s && s.href) || "#",
+      }));
+    }
     const feat = content.home?.featured;
     if (feat && feat._paragraphs != null) {
       feat.paragraphs = feat._paragraphs.split(/\n\n+/).map((s) => s.trim()).filter(Boolean);
@@ -655,7 +690,7 @@
     $("#add-experience", root)?.addEventListener("click", () => {
       content.home.experience.items = content.home.experience.items || [];
       const n = String(content.home.experience.items.length + 1).padStart(2, "0");
-      content.home.experience.items.push({ num: n, title: "Yeni", text: "" });
+      content.home.experience.items.push({ num: n, title: "Yeni", details: "" });
       render();
     });
 
@@ -791,6 +826,16 @@
     }
     if (content.home?.featured?.paragraphs) {
       content.home.featured._paragraphs = content.home.featured.paragraphs.join("\n\n");
+    }
+    if (content.home?.contact?.addressLines) {
+      content.home.contact._addressLines = content.home.contact.addressLines.join("\n");
+    }
+    if (content.home?.contact?.social) {
+      const defaults = ["LinkedIn", "Instagram", "YouTube", "Substance"];
+      content.home.contact.social = content.home.contact.social.map((s, i) => ({
+        label: s.label || defaults[i],
+        href: s.href || "#",
+      }));
     }
     (content.projects || []).forEach((p) => {
       if (p.paragraphs) p._paragraphs = p.paragraphs.join("\n\n");

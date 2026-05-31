@@ -57,6 +57,10 @@ Admin (Netlify) → GitHub API → content.json / görseller güncellenir
 **Görsel kırık**  
 → Deploy tamamlandıktan sonra sayfayı yenileyin; yol `assets/uploads/...` olmalı.
 
-## İletişim formu
+## İletişim formu (Netlify Forms)
 
-Admin → Ana Sayfa → **Form action URL** → [Formspree](https://formspree.io) adresi.
+Ana sayfadaki **Get in Touch** formu Netlify Form Detection ile çalışır (`index.html` içinde gizli şablon + canlı form).
+
+**E-posta bildirimi:** Netlify → **Forms** → form adı `contact` → **Form notifications** → e-posta: `mumine.serap@themumine.com`
+
+Form detection site ayarlarında açık olmalı. Gönderimler Netlify panelinde **Submissions** altında görünür.

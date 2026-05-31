@@ -94,35 +94,57 @@
       ]
     },
     "experience": {
-      "sectionTitle": "Built On Experience",
+      "titleLine1": "Built on",
+      "titleLine2": "Experience",
+      "image": "assets/experience-blossom.png",
+      "imageAlt": "Cherry blossom branches",
       "items": [
         {
           "num": "01",
-          "title": "Research & Narrative",
-          "text": "Konsept geliştirme, araştırma ve hikâye iskeletinin kurulması."
+          "title": "Storytelling & Writing",
+          "details": "Animated TV Series · Musical Lyrics · Screenplays · Game Narrative · Fantasy & Comedy"
         },
         {
           "num": "02",
-          "title": "Visual Direction",
-          "text": "Görsel dil, renk ve kompozisyon kararları."
+          "title": "Visual & Creative Development",
+          "details": "Concept Design · 3D Character Animation · Story Illustration · Data Visualization · Moodboard & Presentation"
         },
         {
           "num": "03",
-          "title": "Production & Delivery",
-          "text": "Kurgu, yayın ve portfolyo sunumu — web, video veya baskı."
+          "title": "Project Development",
+          "details": "Project Management · Product Ideation · Market Research · Workshop Design · Interactive Educational Tools"
         }
       ]
     },
     "contact": {
-      "sectionTitle": "Get In Touch",
-      "labels": {
-        "name": "İsim",
-        "email": "E-posta",
-        "message": "Mesaj"
+      "titleLine1": "Get in",
+      "titleLine2": "touch",
+      "regionLabel": "Global Architecture",
+      "locationTitle": "Istanbul",
+      "addressLines": [
+        "Levent, Büyükdere Cd.",
+        "34330 Beşiktaş, Türkiye"
+      ],
+      "email": "ist@themumine.com",
+      "social": [
+        { "label": "LinkedIn", "href": "https://www.linkedin.com/" },
+        { "label": "Instagram", "href": "https://www.instagram.com/" },
+        { "label": "YouTube", "href": "https://www.youtube.com/" },
+        { "label": "Substance", "href": "https://www.adobe.com/products/substance3d.html" }
+      ],
+      "formHeading": "Initiate Contact",
+      "formName": "contact",
+      "notifyEmail": "mumine.serap@themumine.com",
+      "placeholders": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email address",
+        "organization": "Organization (optional)"
       },
-      "submitText": "Gönder",
-      "formAction": "",
-      "successMessage": "Mesajınız alındı. Teşekkürler!"
+      "messageLabel": "Your objective",
+      "submitText": "Transmit inquiry",
+      "formAction": "/index.html?contact=success#contact",
+      "successMessage": "Your inquiry has been received. Thank you."
     }
   },
   "works": {

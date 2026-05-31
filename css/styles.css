@@ -436,105 +436,412 @@ main {
   font-size: 0.95rem;
 }
 
-/* Experience */
+/* Experience — Figma Built on Experience */
 
-.experience {
+.experience-section {
+  padding: 4rem 0 5rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.experience-section__inner {
+  position: relative;
   display: grid;
-  gap: 3rem;
-  align-items: center;
+  gap: 2.5rem;
+  align-items: start;
 }
 
 @media (min-width: 900px) {
-  .experience {
+  .experience-section__inner {
+    grid-template-columns: minmax(0, 58%) minmax(0, 42%);
+    gap: 0;
+    min-height: 520px;
+  }
+}
+
+.experience-content {
+  position: relative;
+  z-index: 2;
+}
+
+.experience-section__title {
+  margin: 0 0 2.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.experience-section__line {
+  display: block;
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+}
+
+.experience-section__line--light {
+  color: var(--text);
+}
+
+.experience-section__line--accent {
+  color: var(--accent);
+}
+
+.experience-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 3.5rem;
+  position: relative;
+}
+
+.experience-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.65rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: var(--text);
+}
+
+.experience-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1rem 1.25rem;
+  padding: 2rem 0;
+}
+
+.experience-item:first-child {
+  padding-top: 0.5rem;
+}
+
+.experience-item:last-child {
+  padding-bottom: 0;
+}
+
+.experience-item__marker {
+  position: absolute;
+  left: calc(0.65rem - 4px);
+  top: 2.35rem;
+  width: 9px;
+  height: 9px;
+  background: var(--accent);
+  z-index: 1;
+}
+
+.experience-item:first-child .experience-item__marker {
+  top: 0.85rem;
+}
+
+.experience-item__num {
+  font-family: var(--font-body);
+  font-size: clamp(2.75rem, 5vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #6b6b6b;
+  letter-spacing: 0.02em;
+}
+
+.experience-item__title {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.experience-item__details {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+  max-width: 38rem;
+}
+
+.experience-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .experience-visual {
+    position: absolute;
+    right: -2%;
+    bottom: -8%;
+    width: min(52%, 520px);
+    height: auto;
+    justify-content: flex-end;
+  }
+}
+
+.experience-visual img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  object-fit: contain;
+  object-position: right bottom;
+}
+
+@media (max-width: 899px) {
+  .experience-visual {
+    margin-top: 1rem;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}
+
+/* Contact — Figma GET IN TOUCH */
+
+.contact-section {
+  padding: 4rem 0 5rem;
+  border-top: 1px solid var(--border);
+}
+
+.contact-section__grid {
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 900px) {
+  .contact-section__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .contact-info {
+    padding-right: 3rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .contact-form-col {
+    padding-left: 3rem;
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.contact-info__title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.contact-info__line {
+  display: block;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.contact-info__line--light {
+  color: var(--text);
+}
+
+.contact-info__line--accent {
+  color: var(--accent);
+}
+
+.contact-info__rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 0 1.75rem;
+  width: 100%;
+  max-width: 12rem;
+}
+
+.contact-info__region {
+  margin: 0 0 1.25rem;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.contact-info__address p {
+  margin: 0 0 0.35rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.contact-info__city {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem !important;
+}
+
+.contact-info__mail a {
+  color: var(--text);
+}
+
+.contact-info__mail a:hover {
+  color: var(--accent);
+}
+
+.contact-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 1.75rem;
+  margin-top: auto;
+  padding-top: 3rem;
+}
+
+.contact-social a {
+  color: var(--text);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-social a:hover {
+  color: var(--accent);
+}
+
+.contact-form__heading {
+  margin: 0 0 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.contact-form__box {
+  background: #141414;
+  padding: 1.25rem;
+}
+
+.contact-form__row {
+  margin-bottom: 0.75rem;
+}
+
+.contact-form__row:last-child {
+  margin-bottom: 0;
+}
+
+.contact-form__row--split {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 520px) {
+  .contact-form__row--split {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-.experience-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.experience-list li {
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.experience-list .num {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  color: var(--accent);
-  line-height: 1;
-}
-
-.experience-list h3 {
-  margin: 0 0 0.35rem;
-  font-size: 1rem;
-  font-family: var(--font-body);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.experience-list p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.experience-graphic {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 280px;
-}
-
-.experience-graphic svg {
-  width: min(100%, 320px);
-  height: auto;
-  color: var(--accent);
-}
-
-/* Contact form */
-
-.contact-form {
-  display: grid;
-  gap: 1.25rem;
-  max-width: 520px;
-}
-
-.contact-form label {
-  display: block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  margin-bottom: 0.35rem;
-}
-
-.contact-form input,
-.contact-form textarea {
+.contact-form__box input[type="text"],
+.contact-form__box input[type="email"] {
   width: 100%;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 0.85rem 1rem;
+  background: #ffffff;
+  border: none;
+  color: #111111;
+  padding: 0.8rem 1rem;
   font: inherit;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: var(--accent);
+.contact-form__box input::placeholder {
+  color: #888888;
+  text-transform: uppercase;
 }
 
-.contact-form textarea {
+.contact-form__box input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+}
+
+.contact-form__message {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+}
+
+.contact-form__message label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contact-form__message textarea {
+  width: 100%;
   min-height: 140px;
+  padding: 0.25rem 0 0.75rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--text);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.6;
   resize: vertical;
+}
+
+.contact-form__message textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.contact-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.contact-form__submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid var(--text);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.contact-form__submit:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.contact-form__notice {
+  margin: 1rem 0 0;
+  color: var(--accent);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.contact-form__notice:not([hidden]) {
+  display: block;
 }
 
 .btn {

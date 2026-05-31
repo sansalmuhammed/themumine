@@ -23,10 +23,26 @@ function initSiteUI() {
     });
   }
 
+  const params = new URLSearchParams(location.search);
+  if (params.get("contact") === "success") {
+    const notice = document.querySelector("[data-contact-success]");
+    const form = document.querySelector(".contact-form[data-netlify]");
+    if (notice) {
+      notice.textContent =
+        form?.getAttribute("data-success") || "Your inquiry has been received. Thank you.";
+      notice.hidden = false;
+    }
+    if (location.hash !== "#contact") {
+      history.replaceState(null, "", location.pathname + location.search + "#contact");
+    }
+  }
+
   const form = document.querySelector(".contact-form");
   if (form && !form.dataset.bound) {
     form.dataset.bound = "1";
+    const isNetlify = form.hasAttribute("data-netlify");
     form.addEventListener("submit", function (e) {
+      if (isNetlify) return;
       const action = form.getAttribute("action");
       if (!action || action === "#") {
         e.preventDefault();

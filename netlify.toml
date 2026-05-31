@@ -17,3 +17,6 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# İletişim formu: Netlify → Site configuration → Forms → form "contact"
+# → Notifications → mumine.serap@themumine.com

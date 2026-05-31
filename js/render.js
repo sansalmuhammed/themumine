@@ -203,6 +203,138 @@
       <nav class="site-nav" aria-label="Mobil menü">${mobileNav}</nav>`;
   }
 
+  function experienceTitleLines(exp) {
+    if (exp.titleLine1 || exp.titleLine2) {
+      return { line1: exp.titleLine1 || "", line2: exp.titleLine2 || "" };
+    }
+    const full = String(exp.sectionTitle || "Built on Experience").trim();
+    const words = full.split(/\s+/);
+    if (words.length > 2) {
+      const mid = Math.ceil(words.length / 2);
+      return { line1: words.slice(0, mid).join(" "), line2: words.slice(mid).join(" ") };
+    }
+    return { line1: full, line2: "" };
+  }
+
+  function experienceItemDetails(item) {
+    if (item.details) return item.details;
+    return item.text || "";
+  }
+
+  function renderExperience(exp) {
+    const lines = experienceTitleLines(exp);
+    const items = (exp.items || [])
+      .map(
+        (e) => `
+        <li class="experience-item">
+          <span class="experience-item__marker" aria-hidden="true"></span>
+          <span class="experience-item__num">${esc(e.num)}</span>
+          <div class="experience-item__body">
+            <h3 class="experience-item__title">${esc(e.title)}</h3>
+            <p class="experience-item__details">${esc(experienceItemDetails(e))}</p>
+          </div>
+        </li>`
+      )
+      .join("");
+    const visual = exp.image
+      ? `<div class="experience-visual" aria-hidden="true">
+          <img src="${esc(exp.image)}" alt="${esc(exp.imageAlt || "")}" width="560" height="800">
+        </div>`
+      : "";
+
+    return `
+      <section class="experience-section">
+        <div class="container experience-section__inner">
+          <div class="experience-content">
+            <h2 class="experience-section__title">
+              <span class="experience-section__line experience-section__line--light">${esc(lines.line1)}</span>
+              <span class="experience-section__line experience-section__line--accent">${esc(lines.line2)}</span>
+            </h2>
+            <ol class="experience-timeline">${items}</ol>
+          </div>
+          ${visual}
+        </div>
+      </section>`;
+  }
+
+  function renderContact(c) {
+    const ph = c.placeholders || {};
+    const formName = c.formName || "contact";
+    const social = (c.social || [])
+      .map(
+        (s) =>
+          `<a href="${esc(s.href || "#")}" target="_blank" rel="noopener noreferrer">${esc(s.label)}</a>`
+      )
+      .join("");
+    const addressLines = (c.addressLines || [])
+      .map((line) => `<p>${esc(line)}</p>`)
+      .join("");
+    const mail = c.email ? `<p class="contact-info__mail"><a href="mailto:${esc(c.email)}">${esc(c.email)}</a></p>` : "";
+
+    return `
+      <section class="contact-section" id="contact">
+        <div class="container contact-section__grid">
+          <div class="contact-info">
+            <h2 class="contact-info__title">
+              <span class="contact-info__line contact-info__line--light">${esc(c.titleLine1)}</span>
+              <span class="contact-info__line contact-info__line--accent">${esc(c.titleLine2)}</span>
+            </h2>
+            <hr class="contact-info__rule" aria-hidden="true">
+            <p class="contact-info__region">${esc(c.regionLabel)}</p>
+            <div class="contact-info__address">
+              <p class="contact-info__city">${esc(c.locationTitle)}</p>
+              ${addressLines}
+              ${mail}
+            </div>
+            <nav class="contact-social" aria-label="Social links">${social}</nav>
+          </div>
+          <div class="contact-form-col">
+            <h3 class="contact-form__heading">${esc(c.formHeading)}</h3>
+            <form
+              class="contact-form"
+              name="${esc(formName)}"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              action="${esc(c.formAction || "/index.html?contact=success#contact")}"
+              data-success="${esc(c.successMessage)}"
+            >
+              <input type="hidden" name="form-name" value="${esc(formName)}">
+              <p class="contact-form__hp" hidden>
+                <label>Don't fill this out: <input name="bot-field"></label>
+              </p>
+              <div class="contact-form__box">
+                <div class="contact-form__row contact-form__row--split">
+                  <input type="text" name="firstName" placeholder="${escAttr(ph.firstName || "First name")}" required autocomplete="given-name">
+                  <input type="text" name="lastName" placeholder="${escAttr(ph.lastName || "Last name")}" required autocomplete="family-name">
+                </div>
+                <div class="contact-form__row">
+                  <input type="email" name="email" placeholder="${escAttr(ph.email || "Email address")}" required autocomplete="email">
+                </div>
+                <div class="contact-form__row">
+                  <input type="text" name="organization" placeholder="${escAttr(ph.organization || "Organization (optional)")}" autocomplete="organization">
+                </div>
+                <div class="contact-form__message">
+                  <label for="contact-message">${esc(c.messageLabel || "Your objective")}</label>
+                  <textarea id="contact-message" name="message" required></textarea>
+                </div>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="contact-form__submit">
+                  ${esc(c.submitText || "Transmit inquiry")} <span aria-hidden="true">→</span>
+                </button>
+              </div>
+              <p class="contact-form__notice" role="status" hidden data-contact-success></p>
+            </form>
+          </div>
+        </div>
+      </section>`;
+  }
+
+  function escAttr(s) {
+    return esc(s).replace(/"/g, "&quot;");
+  }
+
   function renderFooter(site) {
     const logoSrc = site.logoImage || "assets/logo-wordmark.png";
     const credit = site.footerDesignCredit || "";
@@ -229,23 +361,11 @@
       )
       .join("");
 
-    const exp = (h.experience?.items || [])
-      .map(
-        (e) => `
-        <li>
-          <span class="num">${esc(e.num)}</span>
-          <div>
-            <h3>${esc(e.title)}</h3>
-            <p>${esc(e.text)}</p>
-          </div>
-        </li>`
-      )
-      .join("");
+    const expSection = renderExperience(h.experience || {});
 
     const featParas = (h.featured?.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join("");
 
     const c = h.contact || {};
-    const labels = c.labels || {};
     const hero = h.hero || {};
     const heroLines = heroTitleLines(hero);
     const heroLead = hero.lead ? `<p class="hero-lead">${esc(hero.lead)}</p>` : "";
@@ -283,32 +403,8 @@
           <div class="witness-grid">${witness}</div>
         </div>
       </section>
-      <section class="section">
-        <div class="container experience">
-          <div>
-            <h2 class="section-title">${esc(h.experience?.sectionTitle)}</h2>
-            <ol class="experience-list">${exp}</ol>
-          </div>
-          <div class="experience-graphic" aria-hidden="true">
-            <svg viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M100 20 C40 80 40 140 100 200 C160 140 160 80 100 20Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M100 200 L100 260 M70 230 L130 230" stroke="currentColor" stroke-width="2"/>
-              <path d="M60 120 Q100 60 140 120 Q100 180 60 120" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            </svg>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="contact">
-        <div class="container">
-          <h2 class="section-title">${esc(c.sectionTitle)}</h2>
-          <form class="contact-form" action="${esc(c.formAction || "#")}" method="post" data-success="${esc(c.successMessage)}">
-            <div><label for="name">${esc(labels.name)}</label><input type="text" id="name" name="name" required autocomplete="name"></div>
-            <div><label for="email">${esc(labels.email)}</label><input type="email" id="email" name="email" required autocomplete="email"></div>
-            <div><label for="message">${esc(labels.message)}</label><textarea id="message" name="message" required></textarea></div>
-            <button type="submit" class="btn">${esc(c.submitText)}</button>
-          </form>
-        </div>
-      </section>`;
+      ${expSection}
+      ${renderContact(c)}`;
   }
 
   function projectCard(p) {
