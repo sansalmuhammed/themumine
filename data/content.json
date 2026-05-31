@@ -4,7 +4,7 @@
     "logoImage": "assets/uploads/1780256865434-Logo_The_Mumine.png",
     "footer": "The Mumine — Mümine Serap",
     "footerDesignCredit": "Design by Muhammad Kizilirmak",
-    "footerCopyright": "© 2024 THE MUMINE",
+    "footerCopyright": "© 2026 THE MUMINE",
     "metaDescription": "Mümine Serap — creative portfolio and heartfelt stories.",
     "nav": [
       {
@@ -144,7 +144,9 @@
       "messageLabel": "Your objective",
       "submitText": "Transmit inquiry",
       "formAction": "/index.html?contact=success#contact",
-      "successMessage": "Your inquiry has been received. Thank you."
+      "successMessage": "Your inquiry has been received. Thank you.",
+      "redirectDelayMs": 3000,
+      "redirectHint": "Ana sayfaya yönlendiriliyorsunuz…"
     }
   },
   "works": {
@@ -427,7 +429,7 @@
       ],
       "seo": {
         "description": "Tanıklığın katmanları üzerine kısa notlar ve düşünceler.",
-        "title": ""
+        "title": "Layers of Witness — The Mumine"
       },
       "blocks": [
         {
@@ -463,7 +465,7 @@
       ],
       "seo": {
         "description": "Hafıza ve geri dönüş üzerine düşünceler.",
-        "title": ""
+        "title": "On Memory and Return — The Mumine"
       },
       "blocks": [
         {
@@ -495,7 +497,7 @@
       ],
       "seo": {
         "description": "Taşıdığımız haritalar — mekân ve yazı üzerine.",
-        "title": ""
+        "title": "Maps We Carry — The Mumine"
       },
       "blocks": [
         {

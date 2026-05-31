@@ -27,14 +27,23 @@ function initSiteUI() {
   if (params.get("contact") === "success") {
     const notice = document.querySelector("[data-contact-success]");
     const form = document.querySelector(".contact-form[data-netlify]");
+    const baseMsg =
+      form?.getAttribute("data-success") || "Your inquiry has been received. Thank you.";
+    const redirectMs = parseInt(form?.getAttribute("data-redirect-ms") || "3000", 10);
+
     if (notice) {
       notice.textContent =
-        form?.getAttribute("data-success") || "Your inquiry has been received. Thank you.";
+        baseMsg + " " + (form?.getAttribute("data-redirect-hint") || "Ana sayfaya yönlendiriliyorsunuz…");
       notice.hidden = false;
     }
     if (location.hash !== "#contact") {
       history.replaceState(null, "", location.pathname + location.search + "#contact");
     }
+
+    setTimeout(function () {
+      const home = new URL("/", location.origin);
+      window.location.replace(home.href);
+    }, redirectMs);
   }
 
   const form = document.querySelector(".contact-form");

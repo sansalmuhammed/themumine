@@ -8,19 +8,23 @@ Site ve admin **sadece Netlify** üzerinde çalışır. WAMP, PHP veya yerel sun
 
 Proje bir GitHub reposuna bağlı olmalı (Netlify bu repodan deploy eder).
 
-### 2. Netlify ortam değişkenleri
+### 2. Netlify ortam değişkenleri (zorunlu)
 
-**Site configuration → Environment variables:**
+**Site configuration → Environment variables** — tanımlanmadan admin çalışmaz.
 
 | Değişken | Örnek / açıklama |
 |----------|------------------|
 | `GITHUB_OWNER` | GitHub kullanıcı adınız veya organizasyon |
-| `GITHUB_REPO` | Repo adı (ör. `the-mumine`) |
+| `GITHUB_REPO` | Repo adı (ör. `themumine`) |
 | `GITHUB_TOKEN` | [Personal access token](https://github.com/settings/tokens) — **repo** yetkisi |
 | `GITHUB_BRANCH` | `main` (varsayılan dal) |
 | `ADMIN_USER` | Admin giriş e-postası |
-| `ADMIN_PASS` | Admin şifresi |
-| `ADMIN_SESSION_SECRET` | Uzun rastgele metin |
+| `ADMIN_PASS` | Güçlü şifre (**kaynak kodda varsayılan yok**) |
+| `ADMIN_SESSION_SECRET` | 32+ karakter rastgele metin |
+
+Env değişikliğinden sonra **yeniden deploy** edin.
+
+**Teslim kontrol listesi:** `HANDOFF.md`
 
 ### 3. Deploy
 

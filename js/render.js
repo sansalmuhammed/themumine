@@ -149,6 +149,20 @@
     document.head.appendChild(script);
   }
 
+  function applySiteMeta(site, page) {
+    if (page === "article") return;
+    const desc = site.metaDescription;
+    if (!desc) return;
+    upsertMeta("description", desc);
+    upsertMeta("og:description", desc, true);
+    const title = document.title || site.logo || "The Mumine";
+    upsertMeta("og:title", title, true);
+    upsertMeta("og:type", "website", true);
+    upsertMeta("og:url", location.href, true);
+    const logo = site.logoImage;
+    if (logo) upsertMeta("og:image", new URL(logo, location.origin).href, true);
+  }
+
   function applyThinkingSeo(tagSlug, tagLabel) {
     if (!tagSlug) return;
     const title = `Tag: ${tagLabel} — What I'm Thinking — The Mumine`;
@@ -298,6 +312,8 @@
               netlify-honeypot="bot-field"
               action="${esc(c.formAction || "/index.html?contact=success#contact")}"
               data-success="${esc(c.successMessage)}"
+              data-redirect-ms="${esc(String(c.redirectDelayMs ?? 3000))}"
+              data-redirect-hint="${esc(c.redirectHint || "Ana sayfaya yönlendiriliyorsunuz…")}"
             >
               <input type="hidden" name="form-name" value="${esc(formName)}">
               <p class="contact-form__hp" hidden>
@@ -534,27 +550,6 @@
       </section>`;
   }
 
-  function renderTagCloud(articles) {
-    const map = new Map();
-    (articles || []).forEach((a) => {
-      normalizeTags(a.tags).forEach((t) => {
-        if (!map.has(t.slug)) map.set(t.slug, { label: t.label, count: 0 });
-        map.get(t.slug).count += 1;
-      });
-    });
-    if (!map.size) return "";
-    const items = [...map.entries()]
-      .sort((a, b) => b[1].count - a[1].count)
-      .map(
-        ([slug, t]) =>
-          `<li class="tag-pill tag-pill--cloud"><a href="thinking.html?tag=${encodeURIComponent(
-            slug
-          )}" rel="tag">${esc(t.label)} <span class="tag-count">${t.count}</span></a></li>`
-      )
-      .join("");
-    return `<div class="tag-cloud"><span class="tag-cloud__label">Etiketler</span><ul class="tag-list">${items}</ul></div>`;
-  }
-
   function renderProject(p) {
     const paras = (p.paragraphs || []).map((x) => `<p>${esc(x)}</p>`).join("");
     const story = (p.storySections || [])
@@ -722,6 +717,7 @@
     if (page === "works" && titles.works) document.title = titles.works;
     if (page === "thinking" && titles.thinking) document.title = titles.thinking;
     if (page === "about" && titles.about) document.title = titles.about;
+    applySiteMeta(site, page);
 
     const headerEl = document.getElementById("site-header");
     const mainEl = document.getElementById("page-root");

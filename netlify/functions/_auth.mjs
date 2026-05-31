@@ -1,9 +1,24 @@
 import crypto from "crypto";
 
-export const ADMIN_USER = process.env.ADMIN_USER || "mumine.serap@themumine.com";
-export const ADMIN_PASS = process.env.ADMIN_PASS || "1L0veSemerkand";
+const IS_NETLIFY = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME);
 
-const SECRET = process.env.ADMIN_SESSION_SECRET || "themumine-admin-session-v1";
+export const ADMIN_USER = process.env.ADMIN_USER || "";
+export const ADMIN_PASS = process.env.ADMIN_PASS || "";
+
+export function isAuthConfigured() {
+  return Boolean(
+    String(process.env.ADMIN_USER || "").trim() &&
+      process.env.ADMIN_PASS &&
+      process.env.ADMIN_SESSION_SECRET
+  );
+}
+
+function sessionSecret() {
+  const secret = process.env.ADMIN_SESSION_SECRET;
+  if (secret) return secret;
+  if (IS_NETLIFY) return null;
+  return "local-dev-only-change-in-netlify";
+}
 
 export function json(body, status = 200, headers = {}) {
   return {
@@ -14,17 +29,20 @@ export function json(body, status = 200, headers = {}) {
 }
 
 export function createToken(username) {
+  const secret = sessionSecret();
+  if (!secret) throw new Error("ADMIN_SESSION_SECRET is not configured");
   const exp = Date.now() + 24 * 60 * 60 * 1000;
   const payload = `${username}|${exp}`;
-  const sig = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+  const sig = crypto.createHmac("sha256", secret).update(payload).digest("hex");
   return `${Buffer.from(payload, "utf8").toString("base64url")}.${sig}`;
 }
 
 export function verifyToken(token) {
-  if (!token || !token.includes(".")) return null;
+  const secret = sessionSecret();
+  if (!secret || !token || !token.includes(".")) return null;
   const [data, sig] = token.split(".");
   const payload = Buffer.from(data, "base64url").toString("utf8");
-  const expected = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+  const expected = crypto.createHmac("sha256", secret).update(payload).digest("hex");
   if (sig !== expected) return null;
   const [username, exp] = payload.split("|");
   if (Date.now() > Number(exp)) return null;
@@ -42,5 +60,6 @@ export function readCookie(event) {
 }
 
 export function requireAuth(event) {
+  if (!isAuthConfigured()) return null;
   return verifyToken(readCookie(event));
 }

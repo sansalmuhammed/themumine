@@ -400,6 +400,8 @@
         ${field("Gönder butonu", "home.contact.submitText", c.submitText)}
         ${field("Bildirim e-postası (Netlify panel)", "home.contact.notifyEmail", c.notifyEmail, "text", "Netlify → Forms → Notifications: bu adrese gönderin")}
         ${field("Başarı mesajı", "home.contact.successMessage", c.successMessage)}
+        ${field("Yönlendirme gecikmesi (ms)", "home.contact.redirectDelayMs", c.redirectDelayMs ?? 3000)}
+        ${field("Yönlendirme metni", "home.contact.redirectHint", c.redirectHint)}
       </div>`;
   }
 
@@ -470,8 +472,6 @@
       .map((a, i) => {
         let blocksHtml = (a.blocks || [])
           .map((b, bi) => {
-            let fields = field("Tür", `articles.${i}.blocks.${bi}.type`, b.type) +
-              `<option value="">—</option>`;
             const types = ["paragraph", "heading", "list", "image", "end"];
             const typeSelect = `<div class="field"><label>Blok türü</label><select data-block-type data-article="${i}" data-block="${bi}">
               ${types.map((t) => `<option value="${t}"${b.type === t ? " selected" : ""}>${t}</option>`).join("")}

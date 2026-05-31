@@ -20,3 +20,8 @@
 
 # İletişim formu: Netlify → Site configuration → Forms → form "contact"
 # → Notifications → mumine.serap@themumine.com
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
