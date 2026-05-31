@@ -134,7 +134,7 @@
     "lead": "An evolving collection of thoughts, stories, and the things that inspire me.",
     "cardLinkText": "Review the blog →",
     "loadMoreText": "Load more archive",
-    "initialVisible": 4
+    "initialVisible": "4"
   },
   "about": {
     "hero": {
@@ -146,13 +146,13 @@
         "From TEKNOFEST stages to Vancouver film kitchens, I gather influences and return them as stories that ask who gets to tell the tale."
       ],
       "image": {
-        "src": "assets/about-hero-portrait.jpg",
+        "src": "assets/uploads/1780261015445-Frame24.png",
         "alt": "Mümine Serap portrait"
       }
     },
     "story": {
       "image": {
-        "src": "assets/about-story-portrait.jpg",
+        "src": "assets/uploads/1780261022279-siyah_21.png",
         "alt": "Mümine Serap"
       },
       "blocks": [
@@ -315,9 +315,18 @@
       "cardImage": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
       "title": "One Fire in Different Chronologies",
       "tags": [
-        { "label": "Essay", "slug": "essay" },
-        { "label": "History", "slug": "history" },
-        { "label": "Visual Research", "slug": "visual-research" }
+        {
+          "label": "Essay",
+          "slug": "essay"
+        },
+        {
+          "label": "History",
+          "slug": "history"
+        },
+        {
+          "label": "Visual Research",
+          "slug": "visual-research"
+        }
       ],
       "seo": {
         "title": "One Fire in Different Chronologies — The Mumine",
@@ -381,11 +390,18 @@
       "cardImage": "https://images.unsplash.com/photo-1547981609-4c6a41e18677?w=800&q=80",
       "title": "Layers of Witness",
       "tags": [
-        { "label": "Notes", "slug": "notes" },
-        { "label": "Witness", "slug": "witness" }
+        {
+          "label": "Notes",
+          "slug": "notes"
+        },
+        {
+          "label": "Witness",
+          "slug": "witness"
+        }
       ],
       "seo": {
-        "description": "Tanıklığın katmanları üzerine kısa notlar ve düşünceler."
+        "description": "Tanıklığın katmanları üzerine kısa notlar ve düşünceler.",
+        "title": ""
       },
       "blocks": [
         {
@@ -406,11 +422,18 @@
       "cardImage": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
       "title": "On Memory and Return",
       "tags": [
-        { "label": "Reflection", "slug": "reflection" },
-        { "label": "Memory", "slug": "memory" }
+        {
+          "label": "Reflection",
+          "slug": "reflection"
+        },
+        {
+          "label": "Memory",
+          "slug": "memory"
+        }
       ],
       "seo": {
-        "description": "Hafıza ve geri dönüş üzerine düşünceler."
+        "description": "Hafıza ve geri dönüş üzerine düşünceler.",
+        "title": ""
       },
       "blocks": [
         {
@@ -431,11 +454,18 @@
       "cardImage": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
       "title": "Maps We Carry",
       "tags": [
-        { "label": "Travel", "slug": "travel" },
-        { "label": "Writing", "slug": "writing" }
+        {
+          "label": "Travel",
+          "slug": "travel"
+        },
+        {
+          "label": "Writing",
+          "slug": "writing"
+        }
       ],
       "seo": {
-        "description": "Taşıdığımız haritalar — mekân ve yazı üzerine."
+        "description": "Taşıdığımız haritalar — mekân ve yazı üzerine.",
+        "title": ""
       },
       "blocks": [
         {
