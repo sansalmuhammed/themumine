@@ -55,7 +55,9 @@
   },
   "home": {
     "hero": {
-      "title": "Heartfelt stories   of our era",
+      "titleLine1": "Heartfelt stories",
+      "titleLine2": "of our era",
+      "lead": "I build on systems of meaning, using metaphors as architecture and symbols as argument. I seek the essence that survives translation in cultural stories to create a shared ground—where different histories meet and the audience leaves carrying something new.",
       "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
       "imageAlt": ""
     },
@@ -306,6 +308,15 @@
       "meta": "Essay · May 2026",
       "cardImage": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
       "title": "One Fire in Different Chronologies",
+      "tags": [
+        { "label": "Essay", "slug": "essay" },
+        { "label": "History", "slug": "history" },
+        { "label": "Visual Research", "slug": "visual-research" }
+      ],
+      "seo": {
+        "title": "One Fire in Different Chronologies — The Mumine",
+        "description": "Aynı ateşin farklı zaman çizgilerinde nasıl okunduğuna dair uzun form metin; tarih, mimari ve hafıza üzerine görsel araştırma."
+      },
       "blocks": [
         {
           "type": "paragraph",
@@ -362,6 +373,13 @@
       "meta": "Notes · 2026",
       "cardImage": "https://images.unsplash.com/photo-1547981609-4c6a41e18677?w=800&q=80",
       "title": "Layers of Witness",
+      "tags": [
+        { "label": "Notes", "slug": "notes" },
+        { "label": "Witness", "slug": "witness" }
+      ],
+      "seo": {
+        "description": "Tanıklığın katmanları üzerine kısa notlar ve düşünceler."
+      },
       "blocks": [
         {
           "type": "paragraph",
@@ -379,6 +397,13 @@
       "meta": "Reflection",
       "cardImage": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
       "title": "On Memory and Return",
+      "tags": [
+        { "label": "Reflection", "slug": "reflection" },
+        { "label": "Memory", "slug": "memory" }
+      ],
+      "seo": {
+        "description": "Hafıza ve geri dönüş üzerine düşünceler."
+      },
       "blocks": [
         {
           "type": "paragraph",
@@ -396,6 +421,13 @@
       "meta": "Travel · Writing",
       "cardImage": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
       "title": "Maps We Carry",
+      "tags": [
+        { "label": "Travel", "slug": "travel" },
+        { "label": "Writing", "slug": "writing" }
+      ],
+      "seo": {
+        "description": "Taşıdığımız haritalar — mekân ve yazı üzerine."
+      },
       "blocks": [
         {
           "type": "paragraph",

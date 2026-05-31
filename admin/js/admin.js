@@ -121,6 +121,44 @@
     return esc(s).replace(/"/g, "&quot;");
   }
 
+  function slugifyTag(text) {
+    return String(text)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  function tagsToText(tags) {
+    return (tags || [])
+      .map((t) => {
+        if (typeof t === "string") return t;
+        if (!t || !t.label) return "";
+        if (t.slug && t.slug !== slugifyTag(t.label)) return `${t.label}|${t.slug}`;
+        return t.label;
+      })
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  function parseTagsText(str) {
+    return String(str || "")
+      .split("\n")
+      .map((line) => {
+        line = line.trim();
+        if (!line) return null;
+        if (line.includes("|")) {
+          const parts = line.split("|");
+          const label = parts[0].trim();
+          const slug = (parts[1] || "").trim() || slugifyTag(label);
+          return { label, slug: slugifyTag(slug) };
+        }
+        return { label: line, slug: slugifyTag(line) };
+      })
+      .filter(Boolean);
+  }
+
   function bindFields(root) {
     root.querySelectorAll("[data-path]").forEach((el) => {
       const ev = el.type === "checkbox" ? "change" : "input";
@@ -310,7 +348,9 @@
 
     return `
       <div class="panel"><h3>Hero</h3>
-        ${field("Başlık", "home.hero.title", hero.title)}
+        ${field("Başlık satır 1 (beyaz)", "home.hero.titleLine1", hero.titleLine1)}
+        ${field("Başlık satır 2 (kırmızı)", "home.hero.titleLine2", hero.titleLine2)}
+        ${field("Alt metin (kırmızı çizgili)", "home.hero.lead", hero.lead, "textarea")}
         ${imageField("Arka plan görseli", "home.hero.image", hero.image)}
         ${field("Görsel alt metni", "home.hero.imageAlt", hero.imageAlt)}
       </div>
@@ -425,14 +465,26 @@
           })
           .join("");
 
+        const seo = a.seo || {};
+        const tagsText = a._tags ?? tagsToText(a.tags);
+
         return itemCard(
           a.cardTitle || a.slug,
           i,
-          field("Slug", `articles.${i}.slug`, a.slug) +
+          field("Slug (URL)", `articles.${i}.slug`, a.slug, "text", "SEO: article.html?slug=...") +
             field("Kart başlığı", `articles.${i}.cardTitle`, a.cardTitle) +
-            field("Kart meta", `articles.${i}.meta`, a.meta) +
+            field("Kart meta (tarih / tür)", `articles.${i}.meta`, a.meta) +
             imageField("Kart görseli", `articles.${i}.cardImage`, a.cardImage) +
             field("Makale başlığı", `articles.${i}.title`, a.title) +
+            field(
+              "Etiketler (SEO)",
+              `articles.${i}._tags`,
+              tagsText,
+              "textarea",
+              "Her satır bir etiket. Özel URL için: Görsel Araştırma|visual-research"
+            ) +
+            field("SEO başlık (opsiyonel)", `articles.${i}.seo.title`, seo.title) +
+            field("SEO açıklama", `articles.${i}.seo.description`, seo.description, "textarea") +
             blocksHtml +
             `<button type="button" class="btn btn-secondary btn-sm" data-add-block="${i}">+ Blok ekle</button>` +
             `<button type="button" class="btn btn-danger btn-sm" data-del-article="${i}" style="margin-top:1rem">Makaleyi sil</button>`,
@@ -537,6 +589,11 @@
       }
     });
     (content.articles || []).forEach((a) => {
+      if (a._tags != null) {
+        a.tags = parseTagsText(a._tags);
+        delete a._tags;
+      }
+      if (!a.seo) a.seo = {};
       (a.blocks || []).forEach((b) => {
         if (b._items != null) {
           b.items = b._items.split("\n").map((s) => s.trim()).filter(Boolean);
@@ -640,6 +697,8 @@
         meta: "",
         cardImage: "",
         title: "Yeni Yazı",
+        tags: [],
+        seo: { title: "", description: "" },
         blocks: [{ type: "paragraph", text: "" }, { type: "end", text: "End of the story…" }],
       });
       render();
@@ -737,6 +796,7 @@
       if (c.items) c._items = c.items.join("\n");
     });
     (content.articles || []).forEach((a) => {
+      if (a.tags) a._tags = tagsToText(a.tags);
       (a.blocks || []).forEach((b) => {
         if (b.items) b._items = b.items.join("\n");
       });

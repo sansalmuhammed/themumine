@@ -12,6 +12,151 @@
     return new URLSearchParams(location.search).get("slug") || "";
   }
 
+  function getTagFilter() {
+    return new URLSearchParams(location.search).get("tag") || "";
+  }
+
+  function heroTitleLines(hero) {
+    if (hero.titleLine1 || hero.titleLine2) {
+      return {
+        line1: hero.titleLine1 || "",
+        line2: hero.titleLine2 || "",
+      };
+    }
+    const t = String(hero.title || "").trim().replace(/\s+/g, " ");
+    const splitAt = t.toLowerCase().lastIndexOf(" of ");
+    if (splitAt > 0) {
+      return {
+        line1: t.slice(0, splitAt).trim(),
+        line2: t.slice(splitAt + 1).trim(),
+      };
+    }
+    return { line1: t, line2: "" };
+  }
+
+  function slugifyTag(text) {
+    return String(text)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  function normalizeTags(tags) {
+    if (!Array.isArray(tags)) return [];
+    return tags
+      .map((t) => {
+        if (typeof t === "string") {
+          const label = t.trim();
+          return label ? { label, slug: slugifyTag(label) } : null;
+        }
+        if (t && t.label) {
+          return {
+            label: String(t.label).trim(),
+            slug: slugifyTag(t.slug || t.label),
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
+  }
+
+  function articleHasTag(article, tagSlug) {
+    return normalizeTags(article.tags).some((t) => t.slug === tagSlug);
+  }
+
+  function renderTagList(tags, options) {
+    const opts = options || {};
+    const list = normalizeTags(tags);
+    if (!list.length) return "";
+    const items = list
+      .map((t) => {
+        const href = `thinking.html?tag=${encodeURIComponent(t.slug)}`;
+        const cls = opts.className || "tag-pill";
+        const inner = opts.linkable === false ? esc(t.label) : `<a href="${href}" rel="tag">${esc(t.label)}</a>`;
+        return `<li class="${cls}">${inner}</li>`;
+      })
+      .join("");
+    return `<ul class="tag-list" aria-label="Etiketler">${items}</ul>`;
+  }
+
+  function articleExcerpt(article) {
+    const seo = article.seo || {};
+    if (seo.description) return seo.description;
+    const block = (article.blocks || []).find((b) => b.type === "paragraph" && b.text);
+    return block ? block.text.slice(0, 160) : "";
+  }
+
+  function upsertMeta(name, content, isProperty) {
+    const attr = isProperty ? "property" : "name";
+    let el = document.querySelector(`meta[${attr}="${name}"]`);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attr, name);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", content);
+  }
+
+  function applyArticleSeo(article, site) {
+    const tags = normalizeTags(article.tags);
+    const seo = article.seo || {};
+    const title = seo.title || `${article.title} — The Mumine`;
+    const description = seo.description || articleExcerpt(article);
+    const keywords = tags.map((t) => t.label).join(", ");
+    const canonical = new URL(
+      `article.html?slug=${encodeURIComponent(article.slug)}`,
+      location.origin
+    ).href;
+
+    document.title = title;
+    upsertMeta("description", description);
+    if (keywords) upsertMeta("keywords", keywords);
+    upsertMeta("robots", "index, follow");
+    upsertMeta("og:title", title, true);
+    upsertMeta("og:description", description, true);
+    upsertMeta("og:type", "article", true);
+    upsertMeta("og:url", canonical, true);
+    if (article.cardImage) upsertMeta("og:image", article.cardImage, true);
+    upsertMeta("article:tag", tags.map((t) => t.label).join(","), true);
+
+    let canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement("link");
+      canonicalEl.rel = "canonical";
+      document.head.appendChild(canonicalEl);
+    }
+    canonicalEl.href = canonical;
+
+    const oldLd = document.getElementById("article-jsonld");
+    if (oldLd) oldLd.remove();
+    const ld = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: article.title,
+      description,
+      url: canonical,
+      image: article.cardImage || undefined,
+      keywords: keywords || undefined,
+      author: { "@type": "Person", name: site.logo || "The Mumine" },
+      publisher: { "@type": "Organization", name: site.logo || "The Mumine" },
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "article-jsonld";
+    script.textContent = JSON.stringify(ld);
+    document.head.appendChild(script);
+  }
+
+  function applyThinkingSeo(tagSlug, tagLabel) {
+    if (!tagSlug) return;
+    const title = `Tag: ${tagLabel} — What I'm Thinking — The Mumine`;
+    document.title = title;
+    upsertMeta("description", `${tagLabel} etiketli blog yazıları — The Mumine`);
+    upsertMeta("robots", "index, follow");
+  }
+
   function applyTheme(theme, fonts) {
     const r = document.documentElement;
     if (theme) {
@@ -101,12 +246,21 @@
 
     const c = h.contact || {};
     const labels = c.labels || {};
+    const hero = h.hero || {};
+    const heroLines = heroTitleLines(hero);
+    const heroLead = hero.lead ? `<p class="hero-lead">${esc(hero.lead)}</p>` : "";
 
     return `
       <section class="hero">
-        <img class="hero-bg" src="${esc(h.hero?.image)}" alt="${esc(h.hero?.imageAlt || "")}" width="1600" height="900">
+        <img class="hero-bg" src="${esc(hero.image)}" alt="${esc(hero.imageAlt || "")}" width="1600" height="900">
         <div class="hero-overlay" aria-hidden="true"></div>
-        <div class="hero-content"><h1>${esc(h.hero?.title)}</h1></div>
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="hero-title__line hero-title__line--light">${esc(heroLines.line1)}</span>
+            <span class="hero-title__line hero-title__line--accent">${esc(heroLines.line2)}</span>
+          </h1>
+          ${heroLead}
+        </div>
       </section>
       <section class="section" id="projects">
         <div class="container">
@@ -167,10 +321,12 @@
   }
 
   function articleCard(a) {
+    const tags = renderTagList(a.tags, { className: "tag-pill tag-pill--sm" });
     return `
-      <a href="article.html?slug=${esc(a.slug)}" class="card">
+      <a href="article.html?slug=${esc(a.slug)}" class="card card--article">
         <img class="card-image" src="${esc(a.cardImage)}" alt="" width="800" height="500">
         <h2>${esc(a.cardTitle)}</h2>
+        ${tags}
         <p class="meta">${esc(a.meta)}</p>
       </a>`;
   }
@@ -182,11 +338,59 @@
       <div class="container card-grid">${cards}</div>`;
   }
 
-  function renderThinking(t, articles) {
-    const cards = articles.map(articleCard).join("");
+  function renderThinking(t, articles, allArticles) {
+    const tagSlug = getTagFilter();
+    let list = articles || [];
+    let heading = t.title || "What I'm Thinking";
+    let intro = "";
+
+    if (tagSlug) {
+      list = (allArticles || list).filter((a) => articleHasTag(a, tagSlug));
+      let label = tagSlug.replace(/-/g, " ");
+      (allArticles || []).forEach((a) => {
+        normalizeTags(a.tags).forEach((t) => {
+          if (t.slug === tagSlug) label = t.label;
+        });
+      });
+      heading = `Tag: ${label}`;
+      intro = `<p class="tag-filter-intro"><a href="thinking.html">← Tüm yazılar</a></p>`;
+      applyThinkingSeo(tagSlug, label);
+    }
+
+    const cards = list.length
+      ? list.map(articleCard).join("")
+      : `<p class="tag-empty">Bu etikette henüz yazı yok.</p>`;
+
+    const tagCloud = renderTagCloud(allArticles || list);
+
     return `
-      <div class="container page-hero"><h1>${esc(t.title)}</h1></div>
+      <div class="container page-hero page-hero--thinking">
+        <h1>${esc(heading)}</h1>
+        ${intro}
+        ${tagCloud}
+      </div>
       <div class="container card-grid">${cards}</div>`;
+  }
+
+  function renderTagCloud(articles) {
+    const map = new Map();
+    (articles || []).forEach((a) => {
+      normalizeTags(a.tags).forEach((t) => {
+        if (!map.has(t.slug)) map.set(t.slug, { label: t.label, count: 0 });
+        map.get(t.slug).count += 1;
+      });
+    });
+    if (!map.size) return "";
+    const items = [...map.entries()]
+      .sort((a, b) => b[1].count - a[1].count)
+      .map(
+        ([slug, t]) =>
+          `<li class="tag-pill tag-pill--cloud"><a href="thinking.html?tag=${encodeURIComponent(
+            slug
+          )}" rel="tag">${esc(t.label)} <span class="tag-count">${t.count}</span></a></li>`
+      )
+      .join("");
+    return `<div class="tag-cloud"><span class="tag-cloud__label">Etiketler</span><ul class="tag-list">${items}</ul></div>`;
   }
 
   function renderProject(p) {
@@ -245,8 +449,14 @@
 
   function renderArticle(a) {
     const body = (a.blocks || []).map(renderArticleBlock).join("");
+    const tags = renderTagList(a.tags);
+    const metaLine = a.meta ? `<p class="article-meta-line">${esc(a.meta)}</p>` : "";
     return `
-      <header class="container article-header"><h1>${esc(a.title)}</h1></header>
+      <header class="container article-header">
+        ${tags}
+        <h1>${esc(a.title)}</h1>
+        ${metaLine}
+      </header>
       <article class="container article-body">${body}</article>`;
   }
 
@@ -369,7 +579,11 @@
     } else if (page === "works") {
       mainEl.innerHTML = renderWorks(data.works || {}, data.projects || []);
     } else if (page === "thinking") {
-      mainEl.innerHTML = renderThinking(data.thinking || {}, data.articles || []);
+      mainEl.innerHTML = renderThinking(
+        data.thinking || {},
+        data.articles || [],
+        data.articles || []
+      );
     } else if (page === "about") {
       mainEl.innerHTML = renderAbout(data.about || {});
     } else if (page === "project") {
@@ -387,7 +601,7 @@
       if (!a) {
         mainEl.innerHTML = `<div class="container page-hero"><h1>Yazı bulunamadı</h1><p><a href="thinking.html">← Tüm yazılar</a></p></div>`;
       } else {
-        document.title = a.title + " — The Mumine";
+        applyArticleSeo(a, site);
         mainEl.innerHTML = renderArticle(a);
       }
     }
