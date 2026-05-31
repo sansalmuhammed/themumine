@@ -1,0 +1,16 @@
+# The Mumine — Netlify statik yayın
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  publish = "."
+  # Build komutu gerekmez; HTML/CSS/JS doğrudan yayınlanır
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

@@ -1,0 +1,7 @@
+# Yerel / gizli
+.env
+api/config.local.php
+
+# İsteğe bağlı: yüklenen görselleri repoda tutmuyorsanız açın
+# assets/uploads/*
+# !assets/uploads/.gitkeep
