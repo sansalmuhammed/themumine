@@ -1,11 +1,19 @@
-import { getStore } from "@netlify/blobs";
 import { json, requireAuth } from "./_auth.mjs";
+import {
+  githubConfigured,
+  githubError,
+  readRepoFile,
+  writeRepoFile,
+} from "./_github.mjs";
 
-async function loadDefaultContent() {
-  const base = process.env.URL || process.env.DEPLOY_PRIME_URL || "";
-  if (!base) return null;
+const CONTENT_PATH = "data/content.json";
+
+async function loadDefaultFromDeploy(event) {
+  const host = event.headers.host || event.headers.Host;
+  const proto = event.headers["x-forwarded-proto"] || "https";
+  if (!host) return null;
   try {
-    const res = await fetch(`${base}/data/content.json`);
+    const res = await fetch(`${proto}://${host}/data/content.json`);
     if (res.ok) return await res.json();
   } catch {
     /* ignore */
@@ -14,18 +22,26 @@ async function loadDefaultContent() {
 }
 
 export async function handler(event) {
-  const store = getStore("site");
-
   if (event.httpMethod === "GET") {
-    let raw = await store.get("content", { type: "text" });
-    let data = raw ? JSON.parse(raw) : null;
-    if (!data) data = await loadDefaultContent();
-    if (!data) return json({ ok: false, error: "İçerik bulunamadı" }, 404);
-    return json({ ok: true, data });
+    if (githubConfigured()) {
+      try {
+        const file = await readRepoFile(CONTENT_PATH);
+        if (file) {
+          return json({ ok: true, data: JSON.parse(file.text) });
+        }
+      } catch (e) {
+        return json({ ok: false, error: e.message }, 500);
+      }
+    }
+    const fallback = await loadDefaultFromDeploy(event);
+    if (fallback) return json({ ok: true, data: fallback });
+    return json({ ok: false, error: "İçerik bulunamadı" }, 404);
   }
 
   if (event.httpMethod === "POST") {
     if (!requireAuth(event)) return json({ ok: false, error: "Yetkisiz" }, 401);
+    if (!githubConfigured()) return json(githubError(), 503);
+
     let body;
     try {
       body = JSON.parse(event.body || "{}");
@@ -35,8 +51,23 @@ export async function handler(event) {
     if (!body.data || typeof body.data !== "object") {
       return json({ ok: false, error: "Geçersiz veri" }, 400);
     }
-    await store.set("content", JSON.stringify(body.data));
-    return json({ ok: true, message: "İçerik kaydedildi" });
+
+    try {
+      const existing = await readRepoFile(CONTENT_PATH);
+      const text = JSON.stringify(body.data, null, 2) + "\n";
+      await writeRepoFile(
+        CONTENT_PATH,
+        text,
+        "Admin: içerik güncellendi",
+        existing?.sha
+      );
+      return json({
+        ok: true,
+        message: "Kaydedildi. Site birkaç dakika içinde otomatik güncellenir.",
+      });
+    } catch (e) {
+      return json({ ok: false, error: e.message }, 500);
+    }
   }
 
   return json({ ok: false, error: "Method not allowed" }, 405);

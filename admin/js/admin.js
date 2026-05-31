@@ -21,9 +21,18 @@
     about: "Hakkımda",
   };
 
+  async function parseResponse(res) {
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch {
+      return { ok: false, error: text || res.statusText || "Sunucu hatası" };
+    }
+  }
+
   async function apiGet(name) {
     const res = await fetch(fn(name), { credentials: "same-origin" });
-    return res.json();
+    return parseResponse(res);
   }
 
   async function apiPost(name, body) {
@@ -33,7 +42,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    return res.json();
+    return parseResponse(res);
   }
 
   function toast(msg, isError) {
@@ -71,7 +80,12 @@
 
   function imgSrc(url) {
     if (!url) return "";
-    if (/^https?:\/\//i.test(url) || url.startsWith("/.netlify/") || url.startsWith("data:")) {
+    if (
+      /^https?:\/\//i.test(url) ||
+      url.startsWith("/.netlify/") ||
+      url.startsWith("data:") ||
+      url.includes("raw.githubusercontent.com")
+    ) {
       return url;
     }
     return "../" + url.replace(/^\//, "");
@@ -146,13 +160,24 @@
           const dataUrl = await readFileAsDataUrl(file);
           const json = await apiPost("upload", { dataUrl, filename: file.name });
           if (!json.ok) throw new Error(json.error || "Yükleme başarısız");
-          deepSet(content, path, json.url);
+          const storedUrl = json.url || json.path;
+          deepSet(content, path, storedUrl);
           const urlInput = root.querySelector(`[data-path="${path}"]`);
           if (urlInput) {
-            urlInput.value = json.url;
+            urlInput.value = storedUrl;
             urlInput.dispatchEvent(new Event("input"));
           }
-          toast("Görsel yüklendi — Kaydet ile yayınlayın");
+          if (json.previewUrl) {
+            const wrap = input.closest(".image-field");
+            let prev = wrap?.querySelector(".preview");
+            if (!prev && wrap) {
+              prev = document.createElement("div");
+              prev.className = "preview";
+              wrap.insertBefore(prev, wrap.querySelector(".image-actions"));
+            }
+            if (prev) prev.innerHTML = `<img src="${escAttr(json.previewUrl)}" alt="">`;
+          }
+          toast(json.message || "Görsel yüklendi");
         } catch (e) {
           toast(e.message || "Yükleme hatası", true);
         }
@@ -682,7 +707,7 @@
       toast(json.error || "Kayıt hatası", true);
       return;
     }
-    toast("Tüm değişiklikler kaydedildi");
+    toast(json.message || "Tüm değişiklikler kaydedildi");
     await loadContent();
     render();
   }

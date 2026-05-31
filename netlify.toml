@@ -2,13 +2,11 @@
 # https://docs.netlify.com/configure-builds/file-based-configuration/
 
 [build]
-  command = "npm install"
   publish = "."
   functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
-  included_files = ["data/content.json"]
 
 [[headers]]
   for = "/data/*"

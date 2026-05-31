@@ -278,7 +278,7 @@
         if (json.ok && json.data) return json.data;
       }
     } catch (e) {
-      /* yerel önizleme */
+      /* API yoksa statik yedek */
     }
     const res = await fetch("data/content.json");
     if (!res.ok) throw new Error("İçerik yüklenemedi");

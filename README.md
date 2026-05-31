@@ -1,63 +1,62 @@
-# The Mumine — Portfolio (Netlify)
+# The Mumine — Portfolio (yalnızca Netlify)
 
-[Figma tasarımı](https://www.figma.com/design/Y9pDcCEtiTHpJeWqf6rEEo/the-mumine?node-id=1-2) temel alınmış portfolio sitesi. **Yalnızca Netlify** üzerinde yayınlanır.
+Site ve admin **sadece Netlify** üzerinde çalışır. WAMP, PHP veya yerel sunucu gerekmez.
 
-## Canlı adresler
+## Kurulum (bir kez)
 
-- Site: `https://SITENIZ.netlify.app/`
-- Admin: `https://SITENIZ.netlify.app/admin/`
+### 1. GitHub repo
 
-## Deploy (Git)
+Proje bir GitHub reposuna bağlı olmalı (Netlify bu repodan deploy eder).
+
+### 2. Netlify ortam değişkenleri
+
+**Site configuration → Environment variables:**
+
+| Değişken | Örnek / açıklama |
+|----------|------------------|
+| `GITHUB_OWNER` | GitHub kullanıcı adınız veya organizasyon |
+| `GITHUB_REPO` | Repo adı (ör. `the-mumine`) |
+| `GITHUB_TOKEN` | [Personal access token](https://github.com/settings/tokens) — **repo** yetkisi |
+| `GITHUB_BRANCH` | `main` (varsayılan dal) |
+| `ADMIN_USER` | Admin giriş e-postası |
+| `ADMIN_PASS` | Admin şifresi |
+| `ADMIN_SESSION_SECRET` | Uzun rastgele metin |
+
+### 3. Deploy
 
 ```bash
-git add .
-git commit -m "Güncelleme"
 git push
 ```
 
-Netlify repoyu bağlıysa otomatik deploy eder. İlk kurulumda **Build command** boş, **Publish directory** `.` (kök).
+Netlify otomatik build alır.
 
-## Admin girişi
+## Kullanım
 
-| Alan | Varsayılan |
-|------|------------|
-| Kullanıcı adı | `mumine.serap@themumine.com` |
-| Şifre | *(kurulumda belirlediğiniz)* |
+- **Site:** `https://SITENIZ.netlify.app/`
+- **Admin:** `https://SITENIZ.netlify.app/admin/`
 
-Netlify → **Site configuration → Environment variables** (önerilir):
+Admin’de metin veya görsel değiştirip **Kaydet** dediğinizde içerik **GitHub’daki `data/content.json`** dosyasına yazılır; Netlify birkaç dakika içinde siteyi yeniden yayınlar.
 
-- `ADMIN_USER` — giriş kullanıcı adı
-- `ADMIN_PASS` — şifre
-- `ADMIN_SESSION_SECRET` — rastgele uzun bir metin (oturum güvenliği)
+Görsel **Yükle** → dosya `assets/uploads/` altına GitHub’a gider.
 
-## Admin özellikleri
-
-- Tüm sayfa metinleri, menü, tema renkleri
-- **Görsel yükleme** → Netlify Blobs (`/.netlify/functions/upload`)
-- **Kaydet** → içerik Netlify Blobs’ta saklanır; site anında güncellenir
-
-Logo ve diğer görseller: Admin → Site & Tema → Logo görseli → **Yükle** → **Kaydet**.
-
-## Yerel test (isteğe bağlı)
-
-```bash
-npm install
-npx netlify dev
-```
-
-WAMP / PHP gerekmez.
-
-## Proje yapısı
+## Akış
 
 ```
-├── index.html, works.html, …   # Sayfalar
-├── css/, js/render.js          # Ön yüz
-├── data/content.json           # İlk / yedek içerik
-├── admin/                      # Yönetim paneli
-├── netlify/functions/          # API (giriş, içerik, yükleme)
-└── netlify.toml
+Admin (Netlify) → GitHub API → content.json / görseller güncellenir
+                → Netlify otomatik deploy → Canlı site güncellenir
 ```
+
+## Sorun giderme
+
+**“GitHub bağlantısı eksik”**  
+→ `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_TOKEN` tanımlı mı? Deploy yenilendi mi?
+
+**Kayıt oldu ama sitede eski içerik**  
+→ Deploy bitmesini bekleyin (Netlify Deploys sekmesi, 1–3 dk).
+
+**Görsel kırık**  
+→ Deploy tamamlandıktan sonra sayfayı yenileyin; yol `assets/uploads/...` olmalı.
 
 ## İletişim formu
 
-Admin → Ana Sayfa → **Form action URL** alanına [Formspree](https://formspree.io) adresi yazın; veya forma `data-netlify="true"` ekleyin.
+Admin → Ana Sayfa → **Form action URL** → [Formspree](https://formspree.io) adresi.
