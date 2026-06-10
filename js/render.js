@@ -16,6 +16,42 @@
     return new URLSearchParams(location.search).get("tag") || "";
   }
 
+  function splitTitleLines(section, fallback) {
+    if (section.titleLine1 || section.titleLine2) {
+      return { line1: section.titleLine1 || "", line2: section.titleLine2 || "" };
+    }
+    const full = String(section.title || section.sectionTitle || fallback || "").trim();
+    const words = full.split(/\s+/);
+    if (words.length > 2) {
+      const mid = Math.ceil(words.length / 2);
+      return { line1: words.slice(0, mid).join(" "), line2: words.slice(mid).join(" ") };
+    }
+    if (words.length === 2) return { line1: words[0], line2: words[1] };
+    return { line1: full, line2: "" };
+  }
+
+  function renderSplitHeading(lines, options) {
+    const opts = options || {};
+    const tag = opts.tag || "h2";
+    const baseClass = opts.className || "split-heading";
+    const accentOn = opts.accentOn === "line1" ? 1 : opts.accentOn === "none" ? 0 : 2;
+    const line1Class =
+      accentOn === 1
+        ? "split-heading__line split-heading__line--accent"
+        : "split-heading__line split-heading__line--light";
+    const line2Class =
+      accentOn === 2
+        ? "split-heading__line split-heading__line--accent"
+        : "split-heading__line split-heading__line--light";
+    const line2Html = lines.line2
+      ? `<span class="${line2Class}">${esc(lines.line2)}</span>`
+      : "";
+    return `<${tag} class="${baseClass}">
+      <span class="${line1Class}">${esc(lines.line1)}</span>
+      ${line2Html}
+    </${tag}>`;
+  }
+
   function heroTitleLines(hero) {
     if (hero.titleLine1 || hero.titleLine2) {
       return {
@@ -218,16 +254,7 @@
   }
 
   function experienceTitleLines(exp) {
-    if (exp.titleLine1 || exp.titleLine2) {
-      return { line1: exp.titleLine1 || "", line2: exp.titleLine2 || "" };
-    }
-    const full = String(exp.sectionTitle || "Built on Experience").trim();
-    const words = full.split(/\s+/);
-    if (words.length > 2) {
-      const mid = Math.ceil(words.length / 2);
-      return { line1: words.slice(0, mid).join(" "), line2: words.slice(mid).join(" ") };
-    }
-    return { line1: full, line2: "" };
+    return splitTitleLines(exp, "Built on Experience");
   }
 
   function experienceItemDetails(item) {
@@ -260,10 +287,7 @@
       <section class="experience-section">
         <div class="container experience-section__inner">
           <div class="experience-content">
-            <h2 class="experience-section__title">
-              <span class="experience-section__line experience-section__line--light">${esc(lines.line1)}</span>
-              <span class="experience-section__line experience-section__line--accent">${esc(lines.line2)}</span>
-            </h2>
+            ${renderSplitHeading(lines, { className: "split-heading split-heading--section" })}
             <ol class="experience-timeline">${items}</ol>
           </div>
           ${visual}
@@ -289,10 +313,10 @@
       <section class="contact-section" id="contact">
         <div class="container contact-section__grid">
           <div class="contact-info">
-            <h2 class="contact-info__title">
-              <span class="contact-info__line contact-info__line--light">${esc(c.titleLine1)}</span>
-              <span class="contact-info__line contact-info__line--accent">${esc(c.titleLine2)}</span>
-            </h2>
+            ${renderSplitHeading(
+              { line1: c.titleLine1 || "Get in", line2: c.titleLine2 || "touch" },
+              { className: "split-heading split-heading--section contact-info__title" }
+            )}
             <hr class="contact-info__rule" aria-hidden="true">
             <p class="contact-info__region">${esc(c.regionLabel)}</p>
             <div class="contact-info__address">
@@ -371,13 +395,18 @@
       .map(
         (w) => `
         <article class="witness-item">
-          <h3>${esc(w.title)}</h3>
+          <h3 class="witness-item__title">${esc(w.title)}</h3>
           <p>${esc(w.text)}</p>
         </article>`
       )
       .join("");
 
     const expSection = renderExperience(h.experience || {});
+    const feat = h.featured || {};
+    const featLines = splitTitleLines(feat, "Creative Projects");
+    const witLines = splitTitleLines(h.witness || {}, "The Witness Book");
+    const featProject = (projects || []).find((p) => p.slug === featSlug);
+    const featBadge = featProject?.cardTitle || feat.badgeText || featLines.line1;
 
     const featParas = (h.featured?.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join("");
 
@@ -398,24 +427,24 @@
           ${heroLead}
         </div>
       </section>
-      <section class="section" id="projects">
+      <section class="home-section" id="projects">
         <div class="container">
-          <h2 class="section-title">${esc(h.featured?.sectionTitle)}</h2>
+          ${renderSplitHeading(featLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
           <div class="featured-project">
-            <div class="media">
-              <span class="accent-square" aria-hidden="true"></span>
-              <img src="${esc(h.featured?.image)}" alt="${esc(h.featured?.imageAlt || "")}" width="800" height="600">
+            <div class="featured-project__media">
+              <img src="${esc(feat.image)}" alt="${esc(feat.imageAlt || "")}" width="800" height="600">
+              <span class="featured-project__badge">${esc(featBadge)}</span>
             </div>
-            <div class="copy">
+            <div class="featured-project__copy">
               ${featParas}
-              <a href="project.html?slug=${esc(featSlug)}" class="link-arrow">${esc(h.featured?.linkText)}</a>
+              <a href="project.html?slug=${esc(featSlug)}" class="link-arrow">${esc(feat.linkText)}</a>
             </div>
           </div>
         </div>
       </section>
-      <section class="section">
+      <section class="home-section home-section--witness">
         <div class="container">
-          <h2 class="section-title">${esc(h.witness?.sectionTitle)}</h2>
+          ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "none" })}
           <div class="witness-grid">${witness}</div>
         </div>
       </section>
@@ -425,10 +454,12 @@
 
   function projectCard(p) {
     return `
-      <a href="project.html?slug=${esc(p.slug)}" class="card">
-        <img class="card-image" src="${esc(p.cardImage)}" alt="" width="800" height="500">
-        <h2>${esc(p.cardTitle)}</h2>
-        <p class="meta">${esc(p.meta)}</p>
+      <a href="project.html?slug=${esc(p.slug)}" class="work-card">
+        <img class="work-card__image" src="${esc(p.cardImage)}" alt="" width="800" height="500">
+        <div class="work-card__body">
+          <h2 class="work-card__title">${esc(p.cardTitle)}</h2>
+          <p class="work-card__meta">${esc(p.meta)}</p>
+        </div>
       </a>`;
   }
 
@@ -469,26 +500,21 @@
   }
 
   function thinkingTitleLines(t) {
-    if (t.titleLine1 || t.titleLine2) {
-      return { line1: t.titleLine1 || "", line2: t.titleLine2 || "" };
-    }
-    const full = String(t.title || "What I'm Thinking").trim();
-    const words = full.split(/\s+/);
-    if (words.length > 2) {
-      const mid = Math.ceil(words.length / 2);
-      return {
-        line1: words.slice(0, mid).join(" "),
-        line2: words.slice(mid).join(" "),
-      };
-    }
-    return { line1: full, line2: "" };
+    return splitTitleLines(t, "What I'm Thinking");
   }
 
   function renderWorks(w, projects) {
+    const lines = splitTitleLines(w, "Selected Works");
     const cards = projects.map(projectCard).join("");
     return `
-      <div class="container page-hero"><h1>${esc(w.title)}</h1></div>
-      <div class="container card-grid">${cards}</div>`;
+      <section class="works-hero">
+        <div class="container">
+          ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page", accentOn: "line2" })}
+        </div>
+      </section>
+      <section class="works-archive">
+        <div class="container works-grid">${cards}</div>
+      </section>`;
   }
 
   function renderThinking(t, articles, allArticles) {
@@ -518,10 +544,7 @@
       heroHtml = `
         <section class="thinking-hero">
           <div class="container">
-            <h1 class="thinking-hero__title">
-              <span class="thinking-hero__line thinking-hero__line--light">${esc(lines.line1)}</span>
-              <span class="thinking-hero__line thinking-hero__line--accent">${esc(lines.line2)}</span>
-            </h1>
+            ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page" })}
             ${t.lead ? `<p class="thinking-hero__lead">${esc(t.lead)}</p>` : ""}
           </div>
         </section>`;
@@ -571,7 +594,12 @@
         <img src="${esc(p.heroImage)}" alt="">
         ${play}
       </div>
-      <div class="container project-title"><h1>${esc(p.title)}</h1></div>
+      <div class="container project-title">
+        ${renderSplitHeading(
+          splitTitleLines({ titleLine1: p.titleLine1 || "Project", titleLine2: p.titleLine2 || p.title }, p.title),
+          { tag: "h1", className: "split-heading split-heading--project", accentOn: "line2" }
+        )}
+      </div>
       <div class="container two-col">
         <div class="prose">${paras}</div>
         <div class="vertical-image">

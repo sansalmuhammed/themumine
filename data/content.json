@@ -62,6 +62,8 @@
       "imageAlt": ""
     },
     "featured": {
+      "titleLine1": "Creative",
+      "titleLine2": "Projects",
       "sectionTitle": "Creative Projects",
       "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
       "imageAlt": "Öne çıkan proje görseli",
@@ -73,6 +75,8 @@
       "projectSlug": "bubble-buddies"
     },
     "witness": {
+      "titleLine1": "The Witness",
+      "titleLine2": "Book",
       "sectionTitle": "The Witness Book",
       "items": [
         {
@@ -150,6 +154,8 @@
     }
   },
   "works": {
+    "titleLine1": "Selected",
+    "titleLine2": "Works",
     "title": "Selected Works"
   },
   "thinking": {
@@ -239,7 +245,9 @@
   "projects": [
     {
       "slug": "bubble-buddies",
-      "cardTitle": "Project: Bubble Buddies",
+      "titleLine1": "Project",
+      "titleLine2": "Bubble Buddies",
+      "cardTitle": "Bubble Buddies",
       "meta": "Creative direction · 2025",
       "cardImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77bcea?w=800&q=80",
       "heroImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77bcea?w=1400&q=80",
@@ -251,7 +259,7 @@
       ],
       "sideImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
       "sideImageAlt": "Proje görseli",
-      "storyTitle": "Story of Name",
+      "storyTitle": "Story Board",
       "storySections": [
         {
           "heading": "Origin",
@@ -284,7 +292,7 @@
       ],
       "sideImage": "https://images.unsplash.com/photo-1493246507134-91ee19fadba5?w=600&q=80",
       "sideImageAlt": "",
-      "storyTitle": "Story of Name",
+      "storyTitle": "Story Board",
       "storySections": [
         {
           "heading": "Origin",
@@ -308,7 +316,7 @@
       ],
       "sideImage": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80",
       "sideImageAlt": "",
-      "storyTitle": "Story of Name",
+      "storyTitle": "Story Board",
       "storySections": [],
       "gallery": []
     },
@@ -325,7 +333,7 @@
       ],
       "sideImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80",
       "sideImageAlt": "",
-      "storyTitle": "Story of Name",
+      "storyTitle": "Story Board",
       "storySections": [],
       "gallery": []
     }

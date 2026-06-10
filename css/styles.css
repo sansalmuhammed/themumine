@@ -359,43 +359,109 @@ main {
   border-top: 1px solid var(--border);
 }
 
-/* Featured project */
+/* Figma split headings (shared) */
+
+.split-heading {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.split-heading__line {
+  display: block;
+}
+
+.split-heading--page .split-heading__line {
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+}
+
+.split-heading--section .split-heading__line {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.split-heading--project .split-heading__line {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+.split-heading__line--light {
+  color: var(--text);
+}
+
+.split-heading__line--accent {
+  color: var(--accent);
+}
+
+.split-heading--section {
+  margin-bottom: 2rem;
+}
+
+/* Home sections — Figma VISION */
+
+.home-section {
+  padding: 4rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.home-section--witness {
+  padding-bottom: 5rem;
+}
+
+/* Featured project — Figma Creative Projects */
 
 .featured-project {
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: start;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .featured-project {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 3rem;
   }
 }
 
-.featured-project .media {
+.featured-project__media {
   position: relative;
 }
 
-.featured-project .accent-square {
-  position: absolute;
-  bottom: -1rem;
-  left: -1rem;
-  width: 4rem;
-  height: 4rem;
-  background: var(--accent);
-  z-index: 1;
-}
-
-.featured-project .media img {
+.featured-project__media img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-.featured-project .copy p {
+.featured-project__badge {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.5rem;
+  min-height: 7.5rem;
+  max-width: 11rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--text);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.featured-project__copy p {
   color: var(--text-muted);
   margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 38ch;
 }
 
 .link-arrow {
@@ -423,17 +489,26 @@ main {
   }
 }
 
-.witness-item h3 {
-  font-size: 1.1rem;
+.witness-item {
+  border: 1px solid var(--border);
+  padding: 1.35rem 1.5rem;
+}
+
+.witness-item__title {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
   margin: 0 0 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
+  color: var(--text);
 }
 
 .witness-item p {
   color: var(--text-muted);
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
 }
 
 /* Experience — Figma Built on Experience */
@@ -463,28 +538,6 @@ main {
 .experience-content {
   position: relative;
   z-index: 2;
-}
-
-.experience-section__title {
-  margin: 0 0 2.5rem;
-  font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.experience-section__line {
-  display: block;
-  font-size: clamp(2.25rem, 5.5vw, 4rem);
-}
-
-.experience-section__line--light {
-  color: var(--text);
-}
-
-.experience-section__line--accent {
-  color: var(--accent);
 }
 
 .experience-timeline {
@@ -881,28 +934,6 @@ main {
   border-bottom: 1px solid var(--border);
 }
 
-.thinking-hero__title {
-  margin: 0;
-  font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.thinking-hero__line {
-  display: block;
-  font-size: clamp(2.75rem, 8vw, 5.5rem);
-}
-
-.thinking-hero__line--light {
-  color: var(--text);
-}
-
-.thinking-hero__line--accent {
-  color: var(--accent);
-}
-
 .thinking-hero__lead {
   margin: 1.75rem 0 0;
   padding-left: 1.25rem;
@@ -1089,49 +1120,65 @@ main {
   line-height: 1;
 }
 
-/* Card grid (works) */
+/* Works — Figma Selected Works */
 
-.card-grid {
+.works-hero {
+  padding: 3.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.works-archive {
+  padding: 3rem 0 var(--section-gap);
+}
+
+.works-grid {
   display: grid;
-  gap: 2.5rem;
-  padding-bottom: var(--section-gap);
+  gap: 2.5rem 2rem;
 }
 
 @media (min-width: 768px) {
-  .card-grid {
+  .works-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-.card {
+.work-card {
   display: block;
+  color: inherit;
 }
 
-.card-image {
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+.work-card:hover {
+  color: inherit;
+}
+
+.work-card__image {
+  display: block;
   width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   margin-bottom: 1rem;
   transition: opacity 0.25s;
 }
 
-.card:hover .card-image {
-  opacity: 0.85;
+.work-card:hover .work-card__image {
+  opacity: 0.88;
 }
 
-.card h2 {
+.work-card__title {
+  margin: 0 0 0.4rem;
   font-family: var(--font-body);
-  font-size: 1.15rem;
-  font-weight: 600;
-  text-transform: none;
-  letter-spacing: 0;
-  margin: 0 0 0.35rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
 }
 
-.card .meta {
-  color: var(--text-muted);
-  font-size: 0.85rem;
+.work-card__meta {
   margin: 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
 }
 
 /* Project detail */
@@ -1177,10 +1224,18 @@ main {
   padding: 3rem 0 2rem;
 }
 
-.project-title h1 {
-  color: var(--accent);
-  font-size: clamp(1.75rem, 5vw, 3rem);
+.project-title .split-heading--project {
   margin: 0;
+}
+
+.story-section h2 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 2rem;
 }
 
 .two-col {
@@ -1213,12 +1268,6 @@ main {
 .story-section {
   padding: 3rem 0;
   border-top: 1px solid var(--border);
-}
-
-.story-section h2 {
-  color: var(--accent);
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  margin: 0 0 2rem;
 }
 
 .story-block h3 {

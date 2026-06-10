@@ -360,7 +360,8 @@
         ${field("Görsel alt metni", "home.hero.imageAlt", hero.imageAlt)}
       </div>
       <div class="panel"><h3>Creative Projects (öne çıkan)</h3>
-        ${field("Bölüm başlığı", "home.featured.sectionTitle", feat.sectionTitle)}
+        ${field("Başlık satır 1 (beyaz)", "home.featured.titleLine1", feat.titleLine1)}
+        ${field("Başlık satır 2 (kırmızı)", "home.featured.titleLine2", feat.titleLine2)}
         ${imageField("Görsel", "home.featured.image", feat.image)}
         ${field("Görsel alt", "home.featured.imageAlt", feat.imageAlt)}
         ${field("Paragraflar (boş satırla ayırın)", "home.featured._paragraphs", featParas, "textarea")}
@@ -368,7 +369,8 @@
         ${field("Bağlı proje slug", "home.featured.projectSlug", feat.projectSlug, "text", "Mevcut: " + slugs)}
       </div>
       <div class="panel"><h3>The Witness Book</h3>
-        ${field("Bölüm başlığı", "home.witness.sectionTitle", wit.sectionTitle)}
+        ${field("Başlık satır 1 (beyaz)", "home.witness.titleLine1", wit.titleLine1)}
+        ${field("Başlık satır 2 (beyaz)", "home.witness.titleLine2", wit.titleLine2)}
         ${witnessHtml}
         <button type="button" class="btn btn-secondary btn-sm" id="add-witness">+ Bölüm ekle</button>
       </div>
@@ -407,7 +409,10 @@
 
   function renderWorks() {
     const w = content.works || {};
-    return `<div class="panel">${field("Sayfa başlığı", "works.title", w.title)}</div>
+    return `<div class="panel">
+        ${field("Başlık satır 1 (beyaz)", "works.titleLine1", w.titleLine1)}
+        ${field("Başlık satır 2 (kırmızı)", "works.titleLine2", w.titleLine2)}
+      </div>
       <p class="hint">Proje kartları «Projeler» bölümünden düzenlenir.</p>`;
   }
 
