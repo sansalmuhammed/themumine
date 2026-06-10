@@ -8,6 +8,12 @@
       .replace(/"/g, "&quot;");
   }
 
+  /** Preserves intentional line breaks from CMS/Figma copy (\n → br). */
+  function formatText(s) {
+    if (s == null) return "";
+    return esc(s).replace(/\n/g, "<br>");
+  }
+
   function getSlug() {
     return new URLSearchParams(location.search).get("slug") || "";
   }
@@ -650,14 +656,14 @@
     const hero = ab.hero || {};
     const story = ab.story || {};
     const skills = ab.skills || {};
-    const heroParas = (hero.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join("");
+    const heroParas = (hero.paragraphs || []).map((p) => `<p>${formatText(p)}</p>`).join("");
     const storyBlocks = (story.blocks || [])
       .map(
         (b) => `
         <article class="about-story-block">
           <p class="about-story-label"><span class="about-story-num">${esc(b.num)}</span> / <span class="about-story-tag">${esc(b.label)}</span></p>
-          <blockquote class="about-story-quote">${esc(b.quote)}</blockquote>
-          <p class="about-story-text">${esc(b.text)}</p>
+          <blockquote class="about-story-quote">${formatText(b.quote)}</blockquote>
+          <p class="about-story-text">${formatText(b.text)}</p>
         </article>`
       )
       .join("");

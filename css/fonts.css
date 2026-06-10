@@ -36,4 +36,29 @@
   --tracking-nav: 0.14em;
   --tracking-cta: 0.12em;
   --tracking-tag: 0.1em;
+
+  /* Figma canvas (1440px frame) */
+  --canvas-width: 1440px;
+  --content-width: 1200px;
+  --site-gutter: clamp(1.25rem, 5vw, 7.5rem);
+
+  /* Fluid type — overridden at desktop */
+  --text-hero-line: clamp(2.5rem, 5.5vw, 4.5rem);
+  --text-page-line: clamp(2.75rem, 7vw, 5.5rem);
+  --text-section-line: clamp(2rem, 4.5vw, 3.5rem);
+  --text-project-line: clamp(2rem, 4vw, 3.25rem);
+  --text-about-name: clamp(2.5rem, 5.5vw, 4.25rem);
+  --text-stat-num: clamp(2.75rem, 5vw, 3.75rem);
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --text-hero-line: 4.5rem;
+    --text-page-line: 5.5rem;
+    --text-section-line: 3.5rem;
+    --text-project-line: 3.25rem;
+    --text-about-name: 4.25rem;
+    --text-stat-num: 3.75rem;
+    --site-gutter: 7.5rem;
+  }
 }
