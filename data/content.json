@@ -42,7 +42,9 @@
     },
     "fonts": {
       "body": "Inter",
-      "display": "Bebas Neue"
+      "display": "Bebas Neue",
+      "logoSerif": "",
+      "logoScript": ""
     },
     "pageTitles": {
       "home": "The Mumine — Heartfelt Stories",
@@ -431,7 +433,7 @@
       "cardTitle": "Layers of Witness",
       "cardExcerpt": "Notes on the layers of testimony — place, voice, and what remains after the image fades.",
       "meta": "Notes · 2026",
-      "cardImage": "https://images.unsplash.com/photo-1547981609-4c6a41e18677?w=800&q=80",
+      "cardImage": "assets/uploads/1781100532462-eeec6899b621588d031ff9ed03f3950cf98c5d58.png",
       "title": "Layers of Witness",
       "tags": [
         {
