@@ -5,11 +5,27 @@ const IS_NETLIFY = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTIO
 export const ADMIN_USER = process.env.ADMIN_USER || "";
 export const ADMIN_PASS = process.env.ADMIN_PASS || "";
 
+const AUTH_ENV_KEYS = ["ADMIN_USER", "ADMIN_PASS", "ADMIN_SESSION_SECRET"];
+
+export function getMissingAuthEnv() {
+  const missing = [];
+  if (!String(process.env.ADMIN_USER || "").trim()) missing.push("ADMIN_USER");
+  if (!process.env.ADMIN_PASS) missing.push("ADMIN_PASS");
+  if (!String(process.env.ADMIN_SESSION_SECRET || "").trim()) missing.push("ADMIN_SESSION_SECRET");
+  return missing;
+}
+
 export function isAuthConfigured() {
-  return Boolean(
-    String(process.env.ADMIN_USER || "").trim() &&
-      process.env.ADMIN_PASS &&
-      process.env.ADMIN_SESSION_SECRET
+  return getMissingAuthEnv().length === 0;
+}
+
+export function authConfigErrorMessage() {
+  const missing = getMissingAuthEnv();
+  if (!missing.length) return "";
+  return (
+    "Admin yapılandırması eksik. Netlify → Site configuration → Environment variables " +
+    "bölümünde şunları tanımlayıp siteyi yeniden deploy edin: " +
+    missing.join(", ")
   );
 }
 

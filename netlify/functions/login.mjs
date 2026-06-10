@@ -4,6 +4,7 @@ import {
   createToken,
   cookieHeader,
   isAuthConfigured,
+  authConfigErrorMessage,
   json,
 } from "./_auth.mjs";
 
@@ -13,13 +14,7 @@ export async function handler(event) {
   }
 
   if (!isAuthConfigured()) {
-    return json(
-      {
-        ok: false,
-        error: "Admin yapılandırması eksik. Netlify ortam değişkenlerini tanımlayın.",
-      },
-      503
-    );
+    return json({ ok: false, error: authConfigErrorMessage() }, 503);
   }
 
   let body = {};

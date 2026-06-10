@@ -877,6 +877,17 @@
 
   async function checkAuth() {
     const json = await apiGet("auth-check");
+    const warn = $("#login-config-warn");
+    if (warn && json.configured === false) {
+      const missing = (json.missing || []).join(", ");
+      warn.style.display = "block";
+      warn.textContent =
+        "Sunucu yapılandırması eksik (" +
+        (missing || "ADMIN_USER, ADMIN_PASS, ADMIN_SESSION_SECRET") +
+        "). Netlify → Site configuration → Environment variables → değişkenleri ekleyin → Deploy site.";
+    } else if (warn) {
+      warn.style.display = "none";
+    }
     if (json.loggedIn) {
       showApp(true);
       await loadContent();

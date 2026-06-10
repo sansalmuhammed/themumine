@@ -22,6 +22,8 @@ Kaydettikten sonra: **Deploys → Trigger deploy → Deploy site** (env değişi
 
 > **Önemli:** Kodda artık varsayılan admin şifresi yok. Bu değişkenler tanımlı değilse admin panele giriş yapılamaz.
 
+> **“Admin yapılandırması eksik” hatası:** Genelde `ADMIN_SESSION_SECRET` Netlify’da hiç tanımlanmamıştır (eskiden kod içinde varsayılan vardı). Üç değişkenin hepsini ekleyip yeniden deploy edin. Giriş ekranında hangi değişkenlerin eksik olduğu listelenir.
+
 ### 2. GitHub token
 
 1. [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens)
