@@ -322,7 +322,7 @@
           <div class="contact-info">
             ${renderSplitHeading(
               { line1: c.titleLine1 || "Get in", line2: c.titleLine2 || "touch" },
-              ${renderSplitHeading(lines, { className: "split-heading split-heading--section contact-info__title", accentOn: "line2" })}
+              { className: "split-heading split-heading--section contact-info__title", accentOn: "line2" }
             )}
             <hr class="contact-info__rule" aria-hidden="true">
             <p class="contact-info__region">${esc(c.regionLabel)}</p>
