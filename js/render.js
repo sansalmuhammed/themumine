@@ -396,31 +396,56 @@
       </div>`;
   }
 
-  function renderCreativeShowcase(section, feat, projects) {
-    const sc = section.showcase || {};
-    const slug = sc.projectSlug || feat.projectSlug || projects[0]?.slug || "";
+  function renderCreativeBento(section, feat, projects, site) {
+    const b = section.bento || {};
+    const slug = b.projectSlug || feat.projectSlug || projects[0]?.slug || "";
     const project = (projects || []).find((p) => p.slug === slug) || projects[0] || {};
-    const image = sc.image || feat.image || project.cardImage || "";
-    const badge = sc.badge || project.homeBadge || "";
-    const red1 = sc.redCardLine1 || section.titleLine1 || feat.titleLine1 || "Creative";
-    const red2 = sc.redCardLine2 || section.titleLine2 || feat.titleLine2 || "Projects";
-    const paragraphs = sc.paragraphs || feat.paragraphs || project.paragraphs || [];
-    const paras = paragraphs.map((p) => `<p>${formatText(p)}</p>`).join("");
-    const linkText = sc.linkText || feat.linkText || "Read more…";
+    const href = `project.html?slug=${encodeURIComponent(slug)}`;
+    const heroImage = b.heroImage || feat.image || project.heroImage || project.cardImage || "";
+    const heroAlt = b.heroImageAlt || project.cardTitle || b.projectTitle || "";
+    const badge = b.badge || project.homeBadge || "Lastest Project";
+    const projectTitle = b.projectTitle || project.cardTitle || "";
+    const sealImage = b.sealImage || site?.logoImage || "";
+    const tags = (b.tags || [])
+      .map((t) => `<span class="creative-bento__tag">${esc(t)}</span>`)
+      .join("");
+    const breakdownItems = (b.breakdownItems || [])
+      .map((item) => `<li>${esc(item)}</li>`)
+      .join("");
 
     return `
-      <div class="creative-showcase">
-        <div class="creative-showcase__media">
-          <img src="${esc(image)}" alt="" width="480" height="400">
-          ${badge ? `<span class="creative-showcase__badge">${esc(badge)}</span>` : ""}
+      <div class="creative-bento">
+        <div class="creative-bento__row creative-bento__row--top">
+          <a href="${href}" class="creative-bento__cell creative-bento__cell--hero">
+            <img src="${esc(heroImage)}" alt="${esc(heroAlt)}" width="780" height="420" loading="lazy">
+            <span class="creative-bento__badge">${esc(badge)}</span>
+            <span class="creative-bento__hero-title">${esc(projectTitle)}</span>
+            <span class="creative-bento__ext" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 13.5L13.5 4.5M13.5 4.5H7.5M13.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+          <div class="creative-bento__cell creative-bento__cell--info">
+            <div class="creative-bento__field">
+              <span class="creative-bento__label">${esc(b.genreLabel || "GENRE")}</span>
+              <p class="creative-bento__value">${esc(b.genre || "")}</p>
+            </div>
+            <div class="creative-bento__field">
+              <span class="creative-bento__label">${esc(b.loglineLabel || "LOGLINE")}</span>
+              <p class="creative-bento__logline">${formatText(b.logline || "")}</p>
+            </div>
+          </div>
         </div>
-        <div class="creative-showcase__accent" aria-hidden="true">
-          <span class="creative-showcase__accent-line">${esc(red1)}</span>
-          <span class="creative-showcase__accent-line">${esc(red2)}</span>
-        </div>
-        <div class="creative-showcase__copy">
-          ${paras}
-          <a href="project.html?slug=${esc(slug)}" class="link-arrow">${esc(linkText)}</a>
+        <div class="creative-bento__row creative-bento__row--bottom">
+          <div class="creative-bento__cell creative-bento__cell--seal" aria-hidden="true">
+            ${sealImage ? `<img src="${esc(sealImage)}" alt="" class="creative-bento__seal-panel" width="360" height="320" loading="lazy">` : `<div class="creative-bento__pattern"></div>`}
+          </div>
+          <div class="creative-bento__cell creative-bento__cell--breakdown">
+            ${tags ? `<div class="creative-bento__tags">${tags}</div>` : ""}
+            <h3 class="creative-bento__breakdown-title">${esc(b.breakdownTitle || "PROJECT BREAKDOWN")}</h3>
+            <ul class="creative-bento__breakdown-list">${breakdownItems}</ul>
+          </div>
         </div>
       </div>`;
   }
@@ -451,16 +476,21 @@
       </article>`;
   }
 
-  function renderCreativeProjects(h, projects) {
+  function renderCreativeProjects(h, projects, site) {
     const section = h.creativeProjects || {};
     const feat = h.featured || {};
     const lines = splitTitleLines(
       section.titleLine1 || section.titleLine2 ? section : feat,
       "Creative Projects"
     );
-    const useShowcase = section.showcase || feat.image || feat.projectSlug;
-    const body = useShowcase
-      ? renderCreativeShowcase(section, feat, projects)
+    const useBento =
+      section.bento &&
+      (section.bento.projectSlug ||
+        section.bento.heroImage ||
+        section.bento.projectTitle ||
+        (section.bento.breakdownItems && section.bento.breakdownItems.length));
+    const body = useBento
+      ? renderCreativeBento(section, feat, projects, site)
       : (() => {
           let items = section.items;
           if (!items || !items.length) {
@@ -490,7 +520,7 @@
       </section>`;
   }
 
-  function renderHome(h, projects) {
+  function renderHome(h, projects, site) {
     const witness = (h.witness?.items || [])
       .map(
         (w) => `
@@ -525,7 +555,7 @@
           ${heroLead}
         </div>
       </section>
-      ${renderCreativeProjects(h, projects)}
+      ${renderCreativeProjects(h, projects, site)}
       <section class="home-section home-section--witness">
         <div class="container">
           ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
@@ -878,7 +908,7 @@
     if (!mainEl) return;
 
     if (page === "home") {
-      mainEl.innerHTML = renderHome(data.home || {}, data.projects || []);
+      mainEl.innerHTML = renderHome(data.home || {}, data.projects || [], site);
     } else if (page === "works") {
       mainEl.innerHTML = renderWorks(data.works || {}, data.projects || []);
     } else if (page === "thinking") {

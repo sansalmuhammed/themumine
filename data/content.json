@@ -65,9 +65,26 @@
     "creativeProjects": {
       "titleLine1": "Creative",
       "titleLine2": "Projects",
-      "showcase": {
+      "bento": {
         "projectSlug": "bubble-buddies",
-        "badge": "NEW"
+        "heroImage": "assets/creative/crema-cosmo-hero.png",
+        "heroImageAlt": "Crema Cosmo — fantasy family musical",
+        "badge": "Lastest Project",
+        "projectTitle": "CREMA COSMO",
+        "genreLabel": "GENRE",
+        "genre": "FANTASY/ FAMILY/ MUSICAL",
+        "loglineLabel": "LOGLINE",
+        "logline": "Two bickering siblings get slurped into Grandma's coffee cup , where they grow silly milk mustaches, dodge grumpy cup-guards, and discover that the only way to save her is to sing, laugh, and make the weirdest coffee noises ever.",
+        "sealImage": "assets/creative/seal-panel.png",
+        "tags": ["CONCEPT", "COSMO"],
+        "breakdownTitle": "PROJECT BREAKDOWN",
+        "breakdownItems": [
+          "Visual Swirl: Visualizing Conflict.",
+          "Milk Mustache Motif: Emblem of Discovery.",
+          "Cup Guard Design: Manifesting Daily Grumpiness.",
+          "Musical Soundscape: Unique 'Coffee Noise' Engineering.",
+          "Sibling Dynamic: Balancing Fantasy & Family Themes."
+        ]
       }
     },
     "featured": {
@@ -272,10 +289,10 @@
     {
       "slug": "bubble-buddies",
       "titleLine1": "Project:",
-      "titleLine2": "Bubble Buddies",
-      "homeBadge": "NEW",
-      "homeDescription": "A whimsical world of floating companions — cinematic 3D narrative exploring friendship, wonder, and the language of bubbles.",
-      "cardTitle": "Bubble Buddies",
+      "titleLine2": "Crema Cosmo",
+      "homeBadge": "Lastest Project",
+      "homeDescription": "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical.",
+      "cardTitle": "Crema Cosmo",
       "meta": "Creative direction · 2025",
       "cardImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77bcea?w=800&q=80",
       "heroImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77bcea?w=1400&q=80",
