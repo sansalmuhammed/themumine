@@ -42,9 +42,8 @@
     },
     "fonts": {
       "body": "Inter",
-      "display": "Bebas Neue",
-      "logoSerif": "",
-      "logoScript": ""
+      "logoSerif": "Playfair Display",
+      "logoScript": "Great Vibes"
     },
     "pageTitles": {
       "home": "The Mumine — Heartfelt Stories",
@@ -58,10 +57,25 @@
   "home": {
     "hero": {
       "titleLine1": "Heartfelt stories",
-      "titleLine2": "of our era",
+      "titleLine2": "of our own",
       "lead": "I build on systems of meaning, using metaphors as architecture and symbols as argument. I seek the essence that survives translation in cultural stories to create a shared ground—where different histories meet and the audience leaves carrying something new.",
       "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
       "imageAlt": ""
+    },
+    "creativeProjects": {
+      "titleLine1": "Creative",
+      "titleLine2": "Projects",
+      "items": [
+        {
+          "projectSlug": "bubble-buddies",
+          "badge": "IN PROGRESS",
+          "linkText": "Learn more →"
+        },
+        {
+          "projectSlug": "witness-book",
+          "linkText": "Learn more →"
+        }
+      ]
     },
     "featured": {
       "titleLine1": "Creative",
@@ -78,24 +92,25 @@
     },
     "witness": {
       "titleLine1": "The Witness",
-      "titleLine2": "Book",
-      "sectionTitle": "The Witness Book",
+      "titleLine2": "Desk",
+      "intro": "Notes, essays, and visual research from the field — a desk for testimony and return.",
+      "sectionTitle": "The Witness Desk",
       "items": [
         {
           "title": "Chapter I — Memory",
-          "text": "Zamanın üzerinde kalan izler; kişisel ve kolektif hafızanın kesiştiği anlar."
+          "text": "Traces that remain on time; moments where personal and collective memory intersect."
         },
         {
           "title": "Chapter II — Place",
-          "text": "Mekânın hikâyeyi nasıl şekillendirdiği; şehirler, sınırlar ve sessiz tanıklar."
+          "text": "How place shapes the story; cities, borders, and silent witnesses."
         },
         {
           "title": "Chapter III — Voice",
-          "text": "Anlatının tonu; söylenmemiş cümlelerin ağırlığı ve görüntünün dili."
+          "text": "The tone of narration; the weight of unspoken sentences and the language of image."
         },
         {
           "title": "Chapter IV — Return",
-          "text": "Geri dönüşler, tekrar eden motifler ve hikâyenin kapanışına doğru yürüyüş."
+          "text": "Returns, recurring motifs, and the walk toward the closing of the story."
         }
       ]
     },
@@ -160,7 +175,7 @@
         "organization": "Organization (optional)"
       },
       "messageLabel": "Your objective",
-      "submitText": "Transmit inquiry",
+      "submitText": "Send message",
       "formAction": "/index.html?contact=success#contact",
       "successMessage": "Your inquiry has been received. Thank you.",
       "redirectDelayMs": "3000",
@@ -176,14 +191,14 @@
     "titleLine1": "What I'm",
     "titleLine2": "Thinking",
     "lead": "An evolving collection of thoughts, stories, and the things that inspire me.",
-    "cardLinkText": "Review the blog →",
+    "cardLinkText": "Read more →",
     "loadMoreText": "Load more archive",
     "initialVisible": "4"
   },
   "about": {
     "hero": {
       "nameLine1": "MUMINE SERAP",
-      "nameLine2": "KIZILIRMAK",
+      "nameLine2": "WHO AM I REALLY?",
       "paragraphs": [
         "A 21st-century explorer and maker of meanings, Mümine Serap Kızılırmak\n is a player of time and a weaver of stories.",
         "From animation to stage musicals, she builds worlds that move \nand question. Drawing from existence, culture, and human \nexperience, she uses storytelling to bridge worlds and shared \nmemory. Her greatest desire: to leave a beautiful trace through \nstories that inspire wonder and shape the future.",
@@ -203,18 +218,21 @@
         {
           "num": "01",
           "label": "ORIGINS",
+          "heading": "Emotion lives in timing and the smallest gesture.",
           "quote": "Emotion lives in timing and the smallest gesture.",
           "text": "Her path began in animation at Istanbul Kultur University and Siyahmarti Studios, \nwhere she mastered the rhythm of 3D movement. In 2023, her dedication \nto innovation earned her first place at TEKNOFEST, marking the beginning \nof a journey where technology meets deep human emotion."
         },
         {
           "num": "02",
           "label": "EXPANSION",
+          "heading": "Vancouver was an international kitchen; everyone brought their own flavors.",
           "quote": "Vancouver was an international kitchen; everyone brought their own flavors.",
           "text": "Moving to Vancouver Film School to study writing changed everything. \nIt was a place of diverse perspectives that sharpened her craft and widened \nher lens. She emerged from this global experience with a new dream: the stage, \nand a hunger to create stories for an audience she had never \"cooked\" for before."
         },
         {
           "num": "03",
           "label": "PHILOSOPHY",
+          "heading": "Until lions have their own historians, tales of hunting will always glorify the hunter.",
           "quote": "Until lions have their own historians, tales of hunting will always glorify the hunter.",
           "text": "Whether through public theatre criticism or cooking for friends, she believes that \npreparing a meal and building a story both require deep trust. Her work aims to be \nthe voice of the unheard, ensuring that every narrative is crafted with soul, care, \nand a truth that lands exactly where it’s supposed to."
         }
@@ -259,8 +277,10 @@
   "projects": [
     {
       "slug": "bubble-buddies",
-      "titleLine1": "Project",
+      "titleLine1": "Project:",
       "titleLine2": "Bubble Buddies",
+      "homeBadge": "IN PROGRESS",
+      "homeDescription": "A whimsical world of floating companions — cinematic 3D narrative exploring friendship, wonder, and the language of bubbles.",
       "cardTitle": "Bubble Buddies",
       "meta": "Creative direction · 2025",
       "cardImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77bcea?w=800&q=80",
@@ -355,6 +375,8 @@
   "articles": [
     {
       "slug": "one-fire",
+      "titleLine1": "One fire in different",
+      "titleLine2": "complex cases",
       "cardTitle": "One Fire in Different Chronologies",
       "cardExcerpt": "The cosmologies of Medea & Cleopatra — a long-form essay on fire, memory, and visual research.",
       "meta": "Essay · May 2026",
@@ -424,7 +446,9 @@
         },
         {
           "type": "end",
-          "text": "End of the story…"
+          "line1": "End of",
+          "line2": "the day…",
+          "text": "the day…"
         }
       ]
     },

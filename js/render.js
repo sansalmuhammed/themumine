@@ -396,8 +396,63 @@
       </div>`;
   }
 
+  function renderCreativeProjectCard(item, project) {
+    const slug = item.projectSlug || project?.slug || "";
+    const image = item.image || project?.cardImage || "";
+    const badge = item.badge || project?.homeBadge || "";
+    const title = item.title || project?.cardTitle || "";
+    const desc =
+      item.description ||
+      project?.homeDescription ||
+      (project?.paragraphs && project.paragraphs[0]) ||
+      "";
+    const linkText = item.linkText || "Learn more →";
+
+    return `
+      <article class="creative-project-card">
+        <div class="creative-project-card__media">
+          <img src="${esc(image)}" alt="" width="480" height="360">
+          ${badge ? `<span class="creative-project-card__badge">${esc(badge)}</span>` : ""}
+        </div>
+        <div class="creative-project-card__body">
+          <h3 class="creative-project-card__title">${esc(title)}</h3>
+          ${desc ? `<p class="creative-project-card__text">${formatText(desc)}</p>` : ""}
+          <a href="project.html?slug=${esc(slug)}" class="link-arrow">${esc(linkText)}</a>
+        </div>
+      </article>`;
+  }
+
+  function renderCreativeProjects(h, projects) {
+    const section = h.creativeProjects || h.featured || {};
+    const lines = splitTitleLines(section, "Creative Projects");
+    let items = section.items;
+    if (!items || !items.length) {
+      items = (projects || []).slice(0, 2).map((p) => ({
+        projectSlug: p.slug,
+        image: p.cardImage,
+        title: p.cardTitle,
+        description: p.homeDescription || p.paragraphs?.[0] || "",
+        badge: p.homeBadge || "",
+        linkText: "Learn more →",
+      }));
+    }
+    const cards = items
+      .map((item) => {
+        const p = (projects || []).find((x) => x.slug === item.projectSlug);
+        return renderCreativeProjectCard(item, p || item);
+      })
+      .join("");
+
+    return `
+      <section class="home-section" id="projects">
+        <div class="container">
+          ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2" })}
+          <div class="creative-projects-list">${cards}</div>
+        </div>
+      </section>`;
+  }
+
   function renderHome(h, projects) {
-    const featSlug = h.featured?.projectSlug || (projects[0] && projects[0].slug) || "";
     const witness = (h.witness?.items || [])
       .map(
         (w) => `
@@ -409,13 +464,10 @@
       .join("");
 
     const expSection = renderExperience(h.experience || {});
-    const feat = h.featured || {};
-    const featLines = splitTitleLines(feat, "Creative Projects");
-    const witLines = splitTitleLines(h.witness || {}, "The Witness Book");
-    const featProject = (projects || []).find((p) => p.slug === featSlug);
-    const featBadge = featProject?.cardTitle || feat.badgeText || featLines.line1;
-
-    const featParas = (h.featured?.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join("");
+    const witLines = splitTitleLines(h.witness || {}, "The Witness Desk");
+    const witIntro = h.witness?.intro
+      ? `<p class="witness-intro">${formatText(h.witness.intro)}</p>`
+      : "";
 
     const c = h.contact || {};
     const hero = h.hero || {};
@@ -434,24 +486,11 @@
           ${heroLead}
         </div>
       </section>
-      <section class="home-section" id="projects">
-        <div class="container">
-          ${renderSplitHeading(featLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
-          <div class="featured-project">
-            <div class="featured-project__media">
-              <img src="${esc(feat.image)}" alt="${esc(feat.imageAlt || "")}" width="800" height="600">
-              <span class="featured-project__badge">${esc(featBadge)}</span>
-            </div>
-            <div class="featured-project__copy">
-              ${featParas}
-              <a href="project.html?slug=${esc(featSlug)}" class="link-arrow">${esc(feat.linkText)}</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      ${renderCreativeProjects(h, projects)}
       <section class="home-section home-section--witness">
         <div class="container">
-          ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "none" })}
+          ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
+          ${witIntro}
           <div class="witness-grid">${witness}</div>
         </div>
       </section>
@@ -460,12 +499,14 @@
   }
 
   function projectCard(p) {
+    const desc = p.cardExcerpt || (p.paragraphs && p.paragraphs[0]) || "";
     return `
       <a href="project.html?slug=${esc(p.slug)}" class="work-card">
-        <img class="work-card__image" src="${esc(p.cardImage)}" alt="" width="800" height="500">
+        <img class="work-card__image" src="${esc(p.cardImage)}" alt="" width="800" height="800">
         <div class="work-card__body">
+          <p class="work-card__category">${esc(p.meta)}</p>
           <h2 class="work-card__title">${esc(p.cardTitle)}</h2>
-          <p class="work-card__meta">${esc(p.meta)}</p>
+          ${desc ? `<p class="work-card__desc">${esc(desc)}</p>` : ""}
         </div>
       </a>`;
   }
@@ -490,7 +531,7 @@
   function articleCard(a, ctaText) {
     const tags = renderBlogCardTags(a.tags);
     const excerpt = articleCardExcerpt(a);
-    const cta = ctaText || "Review the blog →";
+    const cta = ctaText || "Read more →";
     const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
     return `
       <article class="blog-card">
@@ -633,6 +674,12 @@
       case "image":
         return `<figure class="figure"><img src="${esc(b.src)}" alt="${esc(b.alt || "")}" width="1000" height="625"></figure>`;
       case "end":
+        if (b.line1 || b.line2) {
+          return `<p class="article-end">
+            <span class="article-end__line article-end__line--light">${esc(b.line1 || "End of")}</span>
+            <span class="article-end__line article-end__line--accent">${esc(b.line2 || b.text || "")}</span>
+          </p>`;
+        }
         return `<p class="article-end">${esc(b.text)}</p>`;
       default:
         return "";
@@ -643,10 +690,17 @@
     const body = (a.blocks || []).map(renderArticleBlock).join("");
     const tags = renderTagList(a.tags);
     const metaLine = a.meta ? `<p class="article-meta-line">${esc(a.meta)}</p>` : "";
+    const titleHtml =
+      a.titleLine1 || a.titleLine2
+        ? renderSplitHeading(
+            { line1: a.titleLine1 || a.title, line2: a.titleLine2 || "" },
+            { tag: "h1", className: "split-heading split-heading--article", accentOn: "line2" }
+          )
+        : `<h1>${esc(a.title)}</h1>`;
     return `
       <header class="container article-header">
         ${tags}
-        <h1>${esc(a.title)}</h1>
+        ${titleHtml}
         ${metaLine}
       </header>
       <article class="container article-body">${body}</article>`;
@@ -662,7 +716,7 @@
         (b) => `
         <article class="about-story-block">
           <p class="about-story-label"><span class="about-story-num">${esc(b.num)}</span> / <span class="about-story-tag">${esc(b.label)}</span></p>
-          <blockquote class="about-story-quote">${formatText(b.quote)}</blockquote>
+          <h3 class="about-story-heading">${formatText(b.heading || b.quote || "")}</h3>
           <p class="about-story-text">${formatText(b.text)}</p>
         </article>`
       )
