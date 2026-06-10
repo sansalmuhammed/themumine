@@ -42,8 +42,7 @@
     },
     "fonts": {
       "body": "Inter",
-      "logoSerif": "Playfair Display",
-      "logoScript": "Great Vibes"
+      "display": "Bebas Neue"
     },
     "pageTitles": {
       "home": "The Mumine — Heartfelt Stories",
@@ -357,7 +356,7 @@
       "cardTitle": "One Fire in Different Chronologies",
       "cardExcerpt": "The cosmologies of Medea & Cleopatra — a long-form essay on fire, memory, and visual research.",
       "meta": "Essay · May 2026",
-      "cardImage": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
+      "cardImage": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
       "title": "One Fire in Different Chronologies",
       "tags": [
         {
