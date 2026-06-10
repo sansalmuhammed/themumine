@@ -597,11 +597,29 @@
     return `<ul class="blog-card__tags" aria-label="Etiketler">${items}</ul>`;
   }
 
+  function renderArticleCardTitle(a, href) {
+    const l1 = a.cardTitleLine1;
+    const l2 = a.cardTitleLine2;
+    if (l1 || l2) {
+      const line1 = l1 ? `<span class="blog-card__title-line">${esc(l1)}</span>` : "";
+      const line2 = l2 ? `<span class="blog-card__title-line">${esc(l2)}</span>` : "";
+      return `<h2 class="blog-card__title"><a href="${href}">${line1}${line2}</a></h2>`;
+    }
+    const title = a.cardTitle || a.title || "";
+    const parts = String(title).split("\n");
+    if (parts.length > 1) {
+      return `<h2 class="blog-card__title"><a href="${href}">${parts
+        .map((p) => `<span class="blog-card__title-line">${esc(p.trim())}</span>`)
+        .join("")}</a></h2>`;
+    }
+    return `<h2 class="blog-card__title"><a href="${href}">${esc(title)}</a></h2>`;
+  }
+
   function articleCard(a, ctaText, options) {
     const opts = options || {};
     const tags = opts.textOnly ? "" : renderBlogCardTags(a.tags);
     const excerpt = articleCardExcerpt(a);
-    const cta = ctaText || "Read more →";
+    const cta = ctaText || "DEEP DIVE →";
     const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
     const cardClass = opts.textOnly ? "blog-card blog-card--text" : "blog-card";
     const media = opts.textOnly
@@ -616,7 +634,7 @@
         ${media}
         <div class="blog-card__body">
           ${tags}
-          <h2 class="blog-card__title"><a href="${href}">${esc(a.cardTitle)}</a></h2>
+          ${renderArticleCardTitle(a, href)}
           ${excerpt ? `<p class="blog-card__excerpt">${esc(excerpt)}</p>` : ""}
           <a class="blog-card__cta" href="${href}">${esc(cta)}</a>
         </div>
@@ -646,9 +664,16 @@
   function renderThinking(t, articles, allArticles) {
     const tagSlug = getTagFilter();
     let list = articles || [];
-    const ctaText = t.cardLinkText || "Deep dive →";
+    const ctaText = t.cardLinkText || "DEEP DIVE →";
     const textOnlyCards = t.textOnlyCards !== false;
     let heroHtml = "";
+    const catalog = allArticles || articles || [];
+
+    if (!tagSlug && Array.isArray(t.cardSlugs) && t.cardSlugs.length) {
+      list = t.cardSlugs
+        .map((slug) => catalog.find((a) => a.slug === slug))
+        .filter(Boolean);
+    }
 
     if (tagSlug) {
       list = (allArticles || list).filter((a) => articleHasTag(a, tagSlug));

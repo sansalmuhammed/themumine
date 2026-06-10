@@ -49,6 +49,10 @@
   --text-project-line: clamp(2rem, 4vw, 3.25rem);
   --text-about-name: clamp(2.5rem, 5.5vw, 4.25rem);
   --text-stat-num: clamp(2.75rem, 5vw, 3.75rem);
+  --text-witness-lead: 1.125rem;
+  --text-witness-card-title: clamp(1.5rem, 2.2vw, 2rem);
+  --text-witness-card-body: 1rem;
+  --text-witness-cta: 0.875rem;
 }
 
 @media (min-width: 1440px) {
@@ -59,6 +63,10 @@
     --text-project-line: 3.25rem;
     --text-about-name: 4.25rem;
     --text-stat-num: 3.75rem;
+    --text-witness-lead: 1.125rem;
+    --text-witness-card-title: 2rem;
+    --text-witness-card-body: 1rem;
+    --text-witness-cta: 0.875rem;
     --site-gutter: 7.5rem;
   }
 }
