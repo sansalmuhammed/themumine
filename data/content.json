@@ -57,7 +57,7 @@
   "home": {
     "hero": {
       "titleLine1": "Heartfelt stories",
-      "titleLine2": "of our own",
+      "titleLine2": "of our time",
       "lead": "I build on systems of meaning, using metaphors as architecture and symbols as argument. I seek the essence that survives translation in cultural stories to create a shared ground—where different histories meet and the audience leaves carrying something new.",
       "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
       "imageAlt": ""
@@ -65,17 +65,10 @@
     "creativeProjects": {
       "titleLine1": "Creative",
       "titleLine2": "Projects",
-      "items": [
-        {
-          "projectSlug": "bubble-buddies",
-          "badge": "IN PROGRESS",
-          "linkText": "Learn more →"
-        },
-        {
-          "projectSlug": "witness-book",
-          "linkText": "Learn more →"
-        }
-      ]
+      "showcase": {
+        "projectSlug": "bubble-buddies",
+        "badge": "NEW"
+      }
     },
     "featured": {
       "titleLine1": "Creative",
@@ -84,10 +77,10 @@
       "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
       "imageAlt": "Öne çıkan proje görseli",
       "paragraphs": [
-        "Görsel anlatım ve kurgu odaklı projeler; duyguyu merkeze alan, zamana tanıklık eden işler.",
-        "Her proje, izleyiciyi bir hikâyenin içine davet eden sinematik bir dil kullanır."
+        "Visual storytelling and editorial projects that center emotion and witness the passage of time.",
+        "Each work invites the viewer into a cinematic language built on metaphor, symbol, and shared memory."
       ],
-      "linkText": "Projeyi incele →",
+      "linkText": "Read more…",
       "projectSlug": "bubble-buddies"
     },
     "witness": {
@@ -185,7 +178,8 @@
   "works": {
     "titleLine1": "Selected",
     "titleLine2": "Works",
-    "title": "Selected Works"
+    "title": "Selected Works",
+    "lead": "A curated selection of creative direction, narrative design, and visual research."
   },
   "thinking": {
     "titleLine1": "What I'm",
@@ -279,7 +273,7 @@
       "slug": "bubble-buddies",
       "titleLine1": "Project:",
       "titleLine2": "Bubble Buddies",
-      "homeBadge": "IN PROGRESS",
+      "homeBadge": "NEW",
       "homeDescription": "A whimsical world of floating companions — cinematic 3D narrative exploring friendship, wonder, and the language of bubbles.",
       "cardTitle": "Bubble Buddies",
       "meta": "Creative direction · 2025",
@@ -293,7 +287,9 @@
       ],
       "sideImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
       "sideImageAlt": "Proje görseli",
-      "storyTitle": "Story Board",
+      "storyTitle": "Story Engine",
+      "storyTitleLine1": "Story",
+      "storyTitleLine2": "Engine",
       "storySections": [
         {
           "heading": "Origin",
@@ -376,7 +372,7 @@
     {
       "slug": "one-fire",
       "titleLine1": "One fire in different",
-      "titleLine2": "complex cases",
+      "titleLine2": "cultural dishes",
       "cardTitle": "One Fire in Different Chronologies",
       "cardExcerpt": "The cosmologies of Medea & Cleopatra — a long-form essay on fire, memory, and visual research.",
       "meta": "Essay · May 2026",
@@ -447,8 +443,8 @@
         {
           "type": "end",
           "line1": "End of",
-          "line2": "the day…",
-          "text": "the day…"
+          "line2": "the dish…",
+          "text": "the dish…"
         }
       ]
     },

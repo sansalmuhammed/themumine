@@ -448,7 +448,112 @@ main {
   padding-bottom: calc(var(--home-section-pad) + 1rem);
 }
 
-/* Creative Projects — Figma bordered list cards */
+/* Creative Projects — Figma 3-column showcase */
+
+.creative-showcase {
+  display: grid;
+  border: 1px solid var(--text);
+  background: var(--bg);
+}
+
+@media (min-width: 900px) {
+  .creative-showcase {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr) minmax(0, 1.15fr);
+    min-height: 320px;
+  }
+}
+
+.creative-showcase__media {
+  position: relative;
+  min-height: 240px;
+  border-bottom: 1px solid var(--text);
+}
+
+@media (min-width: 900px) {
+  .creative-showcase__media {
+    border-bottom: none;
+    border-right: 1px solid var(--text);
+  }
+}
+
+.creative-showcase__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+}
+
+.creative-showcase__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.35rem 0.65rem;
+  background: var(--accent);
+  color: var(--text);
+  font-size: var(--text-tiny);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.creative-showcase__accent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 2rem 1.25rem;
+  background: var(--accent);
+  color: var(--text);
+  text-align: center;
+  border-bottom: 1px solid var(--text);
+}
+
+@media (min-width: 900px) {
+  .creative-showcase__accent {
+    border-bottom: none;
+    border-right: 1px solid var(--text);
+  }
+}
+
+.creative-showcase__accent-line {
+  display: block;
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+.creative-showcase__copy {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .creative-showcase__copy {
+    padding: 2rem 2.25rem;
+  }
+}
+
+.creative-showcase__copy p {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+  font-size: var(--text-small);
+  line-height: 1.625;
+  max-width: 42ch;
+}
+
+.creative-showcase__copy p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Creative Projects — list fallback */
 
 .creative-projects-list {
   display: flex;
@@ -483,15 +588,13 @@ main {
 
 .creative-project-card__badge {
   position: absolute;
+  top: 1rem;
   left: 1rem;
-  bottom: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 5.5rem;
-  min-height: 5.5rem;
-  padding: 0.65rem;
-  border-radius: 50%;
+  bottom: auto;
+  min-width: auto;
+  min-height: auto;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0;
   background: var(--accent);
   color: var(--text);
   font-size: 0.55rem;
@@ -622,10 +725,20 @@ main {
 }
 
 .witness-item {
+  position: relative;
   border: 1px solid var(--surface-border);
   background: var(--surface);
-  padding: 1.5rem 1.75rem;
+  padding: 1.5rem 1.75rem 2.25rem;
   min-height: 100%;
+}
+
+.witness-item__arrow {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  color: var(--accent);
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 .witness-item__title {
@@ -1243,6 +1356,14 @@ main {
   border-bottom: 1px solid var(--border);
 }
 
+.works-hero__lead {
+  margin: 1.5rem 0 0;
+  max-width: 32rem;
+  color: var(--text-muted);
+  font-size: var(--text-body-sm);
+  line-height: 1.625;
+}
+
 .thinking-hero {
   padding: var(--home-section-pad) 0 2.5rem;
   border-bottom: 1px solid var(--border);
@@ -1371,14 +1492,22 @@ main {
   margin: 0;
 }
 
-.story-section h2 {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 2rem;
+.story-section h2,
+.story-section__title {
+  margin: 0;
+}
+
+.story-section__head {
+  margin-bottom: 2rem;
+}
+
+.story-section__rule {
+  display: block;
+  width: 100%;
+  max-width: 12rem;
+  height: 3px;
+  margin-top: 1rem;
+  background: var(--accent);
 }
 
 .two-col {

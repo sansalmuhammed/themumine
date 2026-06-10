@@ -294,7 +294,7 @@
       <section class="experience-section">
         <div class="container experience-section__inner">
           <div class="experience-content">
-            ${renderSplitHeading(lines, { className: "split-heading split-heading--section" })}
+            ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2" })}
             <ol class="experience-timeline">${items}</ol>
           </div>
           ${visual}
@@ -322,7 +322,7 @@
           <div class="contact-info">
             ${renderSplitHeading(
               { line1: c.titleLine1 || "Get in", line2: c.titleLine2 || "touch" },
-              { className: "split-heading split-heading--section contact-info__title" }
+              ${renderSplitHeading(lines, { className: "split-heading split-heading--section contact-info__title", accentOn: "line2" })}
             )}
             <hr class="contact-info__rule" aria-hidden="true">
             <p class="contact-info__region">${esc(c.regionLabel)}</p>
@@ -396,6 +396,35 @@
       </div>`;
   }
 
+  function renderCreativeShowcase(section, feat, projects) {
+    const sc = section.showcase || {};
+    const slug = sc.projectSlug || feat.projectSlug || projects[0]?.slug || "";
+    const project = (projects || []).find((p) => p.slug === slug) || projects[0] || {};
+    const image = sc.image || feat.image || project.cardImage || "";
+    const badge = sc.badge || project.homeBadge || "";
+    const red1 = sc.redCardLine1 || section.titleLine1 || feat.titleLine1 || "Creative";
+    const red2 = sc.redCardLine2 || section.titleLine2 || feat.titleLine2 || "Projects";
+    const paragraphs = sc.paragraphs || feat.paragraphs || project.paragraphs || [];
+    const paras = paragraphs.map((p) => `<p>${formatText(p)}</p>`).join("");
+    const linkText = sc.linkText || feat.linkText || "Read more…";
+
+    return `
+      <div class="creative-showcase">
+        <div class="creative-showcase__media">
+          <img src="${esc(image)}" alt="" width="480" height="400">
+          ${badge ? `<span class="creative-showcase__badge">${esc(badge)}</span>` : ""}
+        </div>
+        <div class="creative-showcase__accent" aria-hidden="true">
+          <span class="creative-showcase__accent-line">${esc(red1)}</span>
+          <span class="creative-showcase__accent-line">${esc(red2)}</span>
+        </div>
+        <div class="creative-showcase__copy">
+          ${paras}
+          <a href="project.html?slug=${esc(slug)}" class="link-arrow">${esc(linkText)}</a>
+        </div>
+      </div>`;
+  }
+
   function renderCreativeProjectCard(item, project) {
     const slug = item.projectSlug || project?.slug || "";
     const image = item.image || project?.cardImage || "";
@@ -423,31 +452,40 @@
   }
 
   function renderCreativeProjects(h, projects) {
-    const section = h.creativeProjects || h.featured || {};
-    const lines = splitTitleLines(section, "Creative Projects");
-    let items = section.items;
-    if (!items || !items.length) {
-      items = (projects || []).slice(0, 2).map((p) => ({
-        projectSlug: p.slug,
-        image: p.cardImage,
-        title: p.cardTitle,
-        description: p.homeDescription || p.paragraphs?.[0] || "",
-        badge: p.homeBadge || "",
-        linkText: "Learn more →",
-      }));
-    }
-    const cards = items
-      .map((item) => {
-        const p = (projects || []).find((x) => x.slug === item.projectSlug);
-        return renderCreativeProjectCard(item, p || item);
-      })
-      .join("");
+    const section = h.creativeProjects || {};
+    const feat = h.featured || {};
+    const lines = splitTitleLines(
+      section.titleLine1 || section.titleLine2 ? section : feat,
+      "Creative Projects"
+    );
+    const useShowcase = section.showcase || feat.image || feat.projectSlug;
+    const body = useShowcase
+      ? renderCreativeShowcase(section, feat, projects)
+      : (() => {
+          let items = section.items;
+          if (!items || !items.length) {
+            items = (projects || []).slice(0, 2).map((p) => ({
+              projectSlug: p.slug,
+              image: p.cardImage,
+              title: p.cardTitle,
+              description: p.homeDescription || p.paragraphs?.[0] || "",
+              badge: p.homeBadge || "",
+              linkText: "Learn more →",
+            }));
+          }
+          return `<div class="creative-projects-list">${items
+            .map((item) => {
+              const p = (projects || []).find((x) => x.slug === item.projectSlug);
+              return renderCreativeProjectCard(item, p || item);
+            })
+            .join("")}</div>`;
+        })();
 
     return `
       <section class="home-section" id="projects">
         <div class="container">
           ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2" })}
-          <div class="creative-projects-list">${cards}</div>
+          ${body}
         </div>
       </section>`;
   }
@@ -459,6 +497,7 @@
         <article class="witness-item">
           <h3 class="witness-item__title">${esc(w.title)}</h3>
           <p>${esc(w.text)}</p>
+          <span class="witness-item__arrow" aria-hidden="true">→</span>
         </article>`
       )
       .join("");
@@ -553,11 +592,13 @@
 
   function renderWorks(w, projects) {
     const lines = splitTitleLines(w, "Selected Works");
+    const lead = w.lead ? `<p class="works-hero__lead">${esc(w.lead)}</p>` : "";
     const cards = projects.map(projectCard).join("");
     return `
       <section class="works-hero">
         <div class="container">
           ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page", accentOn: "line2" })}
+          ${lead}
         </div>
       </section>
       <section class="works-archive">
@@ -637,6 +678,14 @@
       ? '<div class="play-btn" aria-label="Video oynat"></div>'
       : "";
 
+    const storyTitleLines = splitTitleLines(
+      {
+        titleLine1: p.storyTitleLine1 || "Story",
+        titleLine2: p.storyTitleLine2 || p.storyTitle?.replace(/^Story\s*/i, "") || "Engine",
+      },
+      p.storyTitle || "Story Engine"
+    );
+
     return `
       <div class="project-hero">
         <img src="${esc(p.heroImage)}" alt="">
@@ -644,7 +693,7 @@
       </div>
       <div class="container project-title">
         ${renderSplitHeading(
-          splitTitleLines({ titleLine1: p.titleLine1 || "Project", titleLine2: p.titleLine2 || p.title }, p.title),
+          splitTitleLines({ titleLine1: p.titleLine1 || "Project:", titleLine2: p.titleLine2 || p.title }, p.title),
           { tag: "h1", className: "split-heading split-heading--project", accentOn: "line2" }
         )}
       </div>
@@ -656,7 +705,14 @@
       </div>
       <section class="story-section">
         <div class="container">
-          <h2>${esc(p.storyTitle)}</h2>
+          <div class="story-section__head">
+            ${renderSplitHeading(storyTitleLines, {
+              tag: "h2",
+              className: "split-heading split-heading--section story-section__title",
+              accentOn: "line2",
+            })}
+            <span class="story-section__rule" aria-hidden="true"></span>
+          </div>
           <div class="story-block">${story}</div>
         </div>
       </section>
