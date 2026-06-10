@@ -48,7 +48,7 @@
     "pageTitles": {
       "home": "The Mumine — Heartfelt Stories",
       "works": "Selected Works — The Mumine",
-      "thinking": "What I'm Thinking — The Mumine",
+      "thinking": "The Witness Desk — The Mumine",
       "about": "About Me — The Mumine",
       "project": "Proje — The Mumine",
       "article": "Yazı — The Mumine"
@@ -103,23 +103,23 @@
     "witness": {
       "titleLine1": "The Witness",
       "titleLine2": "Desk",
-      "intro": "Notes, essays, and visual research from the field — a desk for testimony and return.",
+      "intro": "Notes, essays, and visual research from the field — A desk for testimony and return.",
       "sectionTitle": "The Witness Desk",
       "items": [
         {
-          "title": "Chapter I — Memory",
+          "title": "CHAPTER I — MEMORY",
           "text": "Traces that remain on time; moments where personal and collective memory intersect."
         },
         {
-          "title": "Chapter II — Place",
+          "title": "CHAPTER II — PLACE",
           "text": "How place shapes the story; cities, borders, and silent witnesses."
         },
         {
-          "title": "Chapter III — Voice",
+          "title": "CHAPTER III — VOICE",
           "text": "The tone of narration; the weight of unspoken sentences and the language of image."
         },
         {
-          "title": "Chapter IV — Return",
+          "title": "CHAPTER IV — RETURN",
           "text": "Returns, recurring motifs, and the walk toward the closing of the story."
         }
       ]
@@ -199,10 +199,11 @@
     "lead": "A curated selection of creative direction, narrative design, and visual research."
   },
   "thinking": {
-    "titleLine1": "What I'm",
-    "titleLine2": "Thinking",
-    "lead": "An evolving collection of thoughts, stories, and the things that inspire me.",
-    "cardLinkText": "Read more →",
+    "titleLine1": "The Witness",
+    "titleLine2": "Desk",
+    "lead": "Essays on theatre, myth, and the stories that shape how we see the world.",
+    "cardLinkText": "Deep dive →",
+    "textOnlyCards": true,
     "loadMoreText": "Load more archive",
     "initialVisible": "4"
   },
@@ -390,8 +391,8 @@
       "slug": "one-fire",
       "titleLine1": "One fire in different",
       "titleLine2": "cultural dishes",
-      "cardTitle": "One Fire in Different Chronologies",
-      "cardExcerpt": "The cosmologies of Medea & Cleopatra — a long-form essay on fire, memory, and visual research.",
+      "cardTitle": "One Fire in Different Cosmologies",
+      "cardExcerpt": "A Review of Shen Yun Performing Arts",
       "meta": "Essay · May 2026",
       "cardImage": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
       "title": "One Fire in Different Chronologies",
@@ -467,8 +468,8 @@
     },
     {
       "slug": "layers-of-witness",
-      "cardTitle": "Layers of Witness",
-      "cardExcerpt": "Notes on the layers of testimony — place, voice, and what remains after the image fades.",
+      "cardTitle": "Storytelling by Using Kinesthetic Empathy",
+      "cardExcerpt": "Movement as meaning — how the body carries story before language does.",
       "meta": "Notes · 2026",
       "cardImage": "assets/uploads/1781100532462-eeec6899b621588d031ff9ed03f3950cf98c5d58.png",
       "title": "Layers of Witness",

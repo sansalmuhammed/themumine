@@ -597,16 +597,23 @@
     return `<ul class="blog-card__tags" aria-label="Etiketler">${items}</ul>`;
   }
 
-  function articleCard(a, ctaText) {
-    const tags = renderBlogCardTags(a.tags);
+  function articleCard(a, ctaText, options) {
+    const opts = options || {};
+    const tags = opts.textOnly ? "" : renderBlogCardTags(a.tags);
     const excerpt = articleCardExcerpt(a);
     const cta = ctaText || "Read more →";
     const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
-    return `
-      <article class="blog-card">
+    const cardClass = opts.textOnly ? "blog-card blog-card--text" : "blog-card";
+    const media = opts.textOnly
+      ? ""
+      : `
         <a class="blog-card__media" href="${href}">
-          <img class="blog-card__image" src="${esc(a.cardImage)}" alt="" width="800" height="500">
-        </a>
+          <img class="blog-card__image" src="${esc(a.cardImage)}" alt="" width="800" height="500" loading="lazy">
+        </a>`;
+
+    return `
+      <article class="${cardClass}">
+        ${media}
         <div class="blog-card__body">
           ${tags}
           <h2 class="blog-card__title"><a href="${href}">${esc(a.cardTitle)}</a></h2>
@@ -617,7 +624,7 @@
   }
 
   function thinkingTitleLines(t) {
-    return splitTitleLines(t, "What I'm Thinking");
+    return splitTitleLines(t, "The Witness Desk");
   }
 
   function renderWorks(w, projects) {
@@ -639,7 +646,8 @@
   function renderThinking(t, articles, allArticles) {
     const tagSlug = getTagFilter();
     let list = articles || [];
-    const ctaText = t.cardLinkText || "Review the blog →";
+    const ctaText = t.cardLinkText || "Deep dive →";
+    const textOnlyCards = t.textOnlyCards !== false;
     let heroHtml = "";
 
     if (tagSlug) {
@@ -663,14 +671,18 @@
       heroHtml = `
         <section class="thinking-hero">
           <div class="container">
-            ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page" })}
+            ${renderSplitHeading(lines, {
+              tag: "h1",
+              className: "split-heading split-heading--page",
+              accentOn: "line2",
+            })}
             ${t.lead ? `<p class="thinking-hero__lead">${esc(t.lead)}</p>` : ""}
           </div>
         </section>`;
     }
 
     const cards = list.length
-      ? list.map((a) => articleCard(a, ctaText)).join("")
+      ? list.map((a) => articleCard(a, ctaText, { textOnly: textOnlyCards && !tagSlug })).join("")
       : `<p class="blog-grid__empty">Bu etikette henüz yazı yok.</p>`;
 
     const initialVisible = Number(t.initialVisible) > 0 ? Number(t.initialVisible) : 4;
