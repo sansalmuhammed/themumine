@@ -296,8 +296,9 @@
         </div>
       </div>
       <div class="panel"><h3>Fontlar</h3>
-        ${field("Gövde fontu", "site.fonts.body", f.body)}
-        ${field("Başlık fontu", "site.fonts.display", f.display)}
+        ${field("Gövde fontu (Inter)", "site.fonts.body", f.body)}
+        ${field("Logo serif (Playfair)", "site.fonts.logoSerif", f.logoSerif)}
+        ${field("Logo script (Great Vibes)", "site.fonts.logoScript", f.logoScript)}
       </div>
       <div class="panel"><h3>Sayfa başlıkları (tarayıcı sekmesi)</h3>
         ${field("Ana sayfa", "site.pageTitles.home", pt.home)}

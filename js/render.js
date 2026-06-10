@@ -218,7 +218,8 @@
       if (theme.border) r.style.setProperty("--border", theme.border);
     }
     if (fonts?.body) r.style.setProperty("--font-body", `"${fonts.body}", system-ui, sans-serif`);
-    if (fonts?.display) r.style.setProperty("--font-display", `"${fonts.display}", sans-serif`);
+    if (fonts?.logoSerif) r.style.setProperty("--font-logo-serif", `"${fonts.logoSerif}", Georgia, serif`);
+    if (fonts?.logoScript) r.style.setProperty("--font-logo-script", `"${fonts.logoScript}", cursive`);
   }
 
   function renderHeader(site, activePage) {

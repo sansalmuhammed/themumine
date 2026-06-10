@@ -42,7 +42,8 @@
     },
     "fonts": {
       "body": "Inter",
-      "display": "Bebas Neue"
+      "logoSerif": "Playfair Display",
+      "logoScript": "Great Vibes"
     },
     "pageTitles": {
       "home": "The Mumine — Heartfelt Stories",

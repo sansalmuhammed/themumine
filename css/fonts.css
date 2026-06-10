@@ -1,0 +1,39 @@
+/* The Mumine — Figma typography (the-mumine) */
+
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap");
+
+:root {
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-logo-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-logo-script: "Great Vibes", cursive;
+
+  /* Figma text styles */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --text-body: 1rem;
+  --text-body-sm: 0.9375rem;
+  --text-small: 0.875rem;
+  --text-caption: 0.8125rem;
+  --text-label: 0.75rem;
+  --text-micro: 0.6875rem;
+  --text-tiny: 0.625rem;
+
+  --leading-body: 1.65;
+  --leading-relaxed: 1.7;
+  --leading-tight: 0.95;
+  --leading-snug: 1.15;
+  --leading-normal: 1.35;
+  --leading-heading: 1.25;
+
+  --tracking-body: 0;
+  --tracking-tight: 0.02em;
+  --tracking-label: 0.04em;
+  --tracking-ui: 0.06em;
+  --tracking-wide: 0.08em;
+  --tracking-nav: 0.14em;
+  --tracking-cta: 0.12em;
+  --tracking-tag: 0.1em;
+}

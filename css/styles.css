@@ -10,11 +10,7 @@
   --max-width: 1200px;
   --header-max: 1320px;
   --nav-height: 88px;
-  --font-logo-script: "Great Vibes", cursive;
-  --font-logo-serif: "Playfair Display", Georgia, serif;
   --section-gap: 6rem;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-display: "Bebas Neue", "Inter", sans-serif;
 }
 
 *,
@@ -32,9 +28,13 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: var(--text-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 img {
@@ -54,16 +54,20 @@ a:hover {
 
 h1,
 h2,
-h3,
-.section-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: 0.04em;
+h3 {
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: var(--leading-tight);
 }
 
 .section-title {
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  line-height: var(--leading-tight);
   color: var(--accent);
   font-size: clamp(2rem, 5vw, 3.25rem);
   margin: 0 0 2rem;
@@ -124,17 +128,20 @@ h3,
   gap: 0.15rem;
   font-family: var(--font-logo-serif);
   font-size: 1.65rem;
-  font-weight: 500;
+  font-weight: var(--fw-semibold);
   color: var(--text);
-  letter-spacing: 0.02em;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
 }
 
 .brand__text-the {
   font-family: var(--font-logo-script);
   font-size: 1.35rem;
+  font-weight: var(--fw-regular);
   color: var(--accent);
   margin-right: 0.15rem;
   transform: translateY(-0.35rem);
+  letter-spacing: 0;
 }
 
 .header-nav {
@@ -147,9 +154,9 @@ h3,
 
 .header-nav a {
   font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-size: var(--text-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-nav);
   text-transform: uppercase;
   color: var(--text);
   padding-bottom: 0.35rem;
@@ -175,9 +182,9 @@ h3,
   border: 1px solid var(--text);
   color: var(--accent);
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: var(--text-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-nav);
   text-transform: uppercase;
   background: transparent;
   transition: background 0.2s, color 0.2s;
@@ -320,9 +327,9 @@ main {
 .hero-title {
   margin: 0;
   font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
+  font-weight: var(--fw-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
   text-transform: uppercase;
 }
 
@@ -345,8 +352,10 @@ main {
   border-left: 3px solid var(--accent);
   max-width: 36rem;
   color: var(--text-muted);
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-  line-height: 1.65;
+  font-size: clamp(0.9rem, 1.5vw, var(--text-body));
+  font-weight: var(--fw-regular);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
 }
 
 /* ——— Sections ——— */
@@ -364,9 +373,9 @@ main {
 .split-heading {
   margin: 0;
   font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
+  font-weight: var(--fw-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
   text-transform: uppercase;
 }
 
@@ -923,7 +932,12 @@ main {
 
 .page-hero h1 {
   color: var(--accent);
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
   font-size: clamp(2.5rem, 8vw, 5rem);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
   margin: 0;
 }
 
@@ -1384,8 +1398,13 @@ main {
 }
 
 .article-header h1 {
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
   color: var(--accent);
   font-size: clamp(1.75rem, 5vw, 3.25rem);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-snug);
+  text-transform: uppercase;
   margin: 0;
   max-width: 20ch;
 }
@@ -1424,9 +1443,11 @@ main {
 
 .article-end {
   color: var(--accent);
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
   padding: 2rem 0 4rem;
 }
 
@@ -1452,9 +1473,9 @@ main {
 .about-hero__title {
   margin: 0 0 2rem;
   font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
+  font-weight: var(--fw-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
   text-transform: uppercase;
 }
 
@@ -1588,10 +1609,10 @@ main {
   margin: 0 0 2.5rem;
   font-family: var(--font-body);
   font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
   text-transform: uppercase;
-  line-height: 1;
+  line-height: var(--leading-tight);
 }
 
 .about-skills__heading-accent {
