@@ -57,10 +57,10 @@
   "home": {
     "hero": {
       "titleLine1": "Heartfelt stories",
-      "titleLine2": "of our time",
-      "lead": "I build on systems of meaning, using metaphors as architecture and symbols as argument. I seek the essence that survives translation in cultural stories to create a shared ground—where different histories meet and the audience leaves carrying something new.",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
-      "imageAlt": ""
+      "titleLine2": "of our era",
+      "lead": "I build on systems of meaning, using metaphors as architecture and symbols as argument. I seek the essence that survives translation in cultural stories to create a shared ground—\nwhere different histories meet and the audience leaves carrying something new.",
+      "image": "assets/creative/hero-corridor.png",
+      "imageAlt": "Concrete corridor with a beam of light"
     },
     "creativeProjects": {
       "titleLine1": "Creative",
@@ -103,25 +103,13 @@
     "witness": {
       "titleLine1": "The Witness",
       "titleLine2": "Desk",
-      "intro": "Notes, essays, and visual research from the field — A desk for testimony and return.",
-      "sectionTitle": "The Witness Desk",
-      "items": [
-        {
-          "title": "CHAPTER I — MEMORY",
-          "text": "Traces that remain on time; moments where personal and collective memory intersect."
-        },
-        {
-          "title": "CHAPTER II — PLACE",
-          "text": "How place shapes the story; cities, borders, and silent witnesses."
-        },
-        {
-          "title": "CHAPTER III — VOICE",
-          "text": "The tone of narration; the weight of unspoken sentences and the language of image."
-        },
-        {
-          "title": "CHAPTER IV — RETURN",
-          "text": "Returns, recurring motifs, and the walk toward the closing of the story."
-        }
+      "intro": "Essays on theatre, myth, and the stories that shape how we see the world.",
+      "cardLinkText": "DEEP DIVE →",
+      "cardSlugs": [
+        "one-fire",
+        "layers-of-witness",
+        "one-fire",
+        "layers-of-witness"
       ]
     },
     "experience": {
@@ -133,17 +121,17 @@
         {
           "num": "01",
           "title": "Storytelling & Writing",
-          "details": "Animated TV Series · Musical Lyrics · Screenplays · Game Narrative · Fantasy & Comedy"
+          "details": "Animated TV Series · Musical Lyrics · Screenplays\n· Game Narrative · Fantasy & Comedy"
         },
         {
           "num": "02",
           "title": "Visual & Creative Development",
-          "details": "Concept Design · 3D Character Animation · Story Illustration · Data Visualization · Moodboard & Presentation"
+          "details": "Concept Design · 3D Character Animation · Story Illustration\n· Data Visualization · Moodboard & Presentation"
         },
         {
           "num": "03",
           "title": "Project Development",
-          "details": "Project Management · Product Ideation · Market Research · Workshop Design · Interactive Educational Tools"
+          "details": "Project Management · Product Ideation\n· Market Research · Workshop Design\n· Interactive Educational Tools"
         }
       ]
     },
@@ -185,7 +173,7 @@
         "organization": "Organization (optional)"
       },
       "messageLabel": "Your objective",
-      "submitText": "Send message",
+      "submitText": "Transmit inquiry",
       "formAction": "/index.html?contact=success#contact",
       "successMessage": "Your inquiry has been received. Thank you.",
       "redirectDelayMs": "3000",

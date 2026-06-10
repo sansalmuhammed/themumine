@@ -279,7 +279,7 @@
           <span class="experience-item__num">${esc(e.num)}</span>
           <div class="experience-item__body">
             <h3 class="experience-item__title">${esc(e.title)}</h3>
-            <p class="experience-item__details">${esc(experienceItemDetails(e))}</p>
+            <p class="experience-item__details">${formatText(experienceItemDetails(e))}</p>
           </div>
         </li>`
       )
@@ -520,28 +520,36 @@
       </section>`;
   }
 
-  function renderHome(h, projects, site) {
-    const witness = (h.witness?.items || [])
-      .map(
-        (w) => `
-        <article class="witness-item">
-          <h3 class="witness-item__title">${esc(w.title)}</h3>
-          <p>${esc(w.text)}</p>
-          <span class="witness-item__arrow" aria-hidden="true">→</span>
-        </article>`
-      )
+  function renderHomeWitnessDesk(section, articles) {
+    const witLines = splitTitleLines(section || {}, "The Witness Desk");
+    const witIntro = section?.intro
+      ? `<p class="witness-intro">${esc(section.intro)}</p>`
+      : "";
+    const linkText = section?.cardLinkText || "DEEP DIVE →";
+    const slugs = section?.cardSlugs || ["one-fire", "layers-of-witness", "one-fire", "layers-of-witness"];
+    const catalog = articles || [];
+    const cards = slugs
+      .map((slug) => catalog.find((a) => a.slug === slug))
+      .filter(Boolean)
+      .map((a) => articleCard(a, linkText, { textOnly: true }))
       .join("");
 
-    const expSection = renderExperience(h.experience || {});
-    const witLines = splitTitleLines(h.witness || {}, "The Witness Desk");
-    const witIntro = h.witness?.intro
-      ? `<p class="witness-intro">${formatText(h.witness.intro)}</p>`
-      : "";
+    return `
+      <section class="home-section home-section--witness">
+        <div class="container">
+          ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
+          ${witIntro}
+          <div class="witness-desk-grid blog-grid">${cards}</div>
+        </div>
+      </section>`;
+  }
 
+  function renderHome(h, projects, site, articles) {
+    const expSection = renderExperience(h.experience || {});
     const c = h.contact || {};
     const hero = h.hero || {};
     const heroLines = heroTitleLines(hero);
-    const heroLead = hero.lead ? `<p class="hero-lead">${esc(hero.lead)}</p>` : "";
+    const heroLead = hero.lead ? `<p class="hero-lead">${formatText(hero.lead)}</p>` : "";
 
     return `
       <section class="hero">
@@ -556,13 +564,7 @@
         </div>
       </section>
       ${renderCreativeProjects(h, projects, site)}
-      <section class="home-section home-section--witness">
-        <div class="container">
-          ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
-          ${witIntro}
-          <div class="witness-grid">${witness}</div>
-        </div>
-      </section>
+      ${renderHomeWitnessDesk(h.witness || {}, articles)}
       ${expSection}
       ${renderContact(c)}`;
   }
@@ -945,7 +947,7 @@
     if (!mainEl) return;
 
     if (page === "home") {
-      mainEl.innerHTML = renderHome(data.home || {}, data.projects || [], site);
+      mainEl.innerHTML = renderHome(data.home || {}, data.projects || [], site, data.articles || []);
     } else if (page === "works") {
       mainEl.innerHTML = renderWorks(data.works || {}, data.projects || []);
     } else if (page === "thinking") {

@@ -360,13 +360,11 @@ main {
 
 .hero-lead {
   margin: 1.75rem 0 0;
-  padding-left: 1.25rem;
-  border-left: 3px solid var(--accent);
-  max-width: 36rem;
+  max-width: 38rem;
   color: var(--text-muted);
-  font-size: var(--text-body);
+  font-size: var(--text-home-lead);
   font-weight: var(--fw-regular);
-  line-height: 1.625;
+  line-height: 1.65;
   letter-spacing: var(--tracking-body);
 }
 
@@ -537,10 +535,10 @@ main {
   padding: 0.45rem 0.85rem 0.45rem 1.25rem;
   background: var(--accent);
   color: var(--text);
-  font-size: var(--text-tiny);
+  font-size: 0.875rem;
   font-weight: var(--fw-bold);
   letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
+  text-transform: none;
   line-height: 1.35;
   border-radius: 0 999px 999px 0;
 }
@@ -550,7 +548,7 @@ main {
   left: 1.25rem;
   bottom: 1.25rem;
   font-family: var(--font-body);
-  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-size: 2rem;
   font-weight: var(--fw-bold);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -588,7 +586,7 @@ main {
 }
 
 .creative-bento__label {
-  font-size: var(--text-tiny);
+  font-size: 0.8125rem;
   font-weight: var(--fw-bold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
@@ -597,7 +595,7 @@ main {
 
 .creative-bento__value {
   margin: 0;
-  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+  font-size: 1.25rem;
   font-weight: var(--fw-bold);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -607,8 +605,8 @@ main {
 
 .creative-bento__logline {
   margin: 0;
-  font-size: var(--text-small);
-  line-height: 1.625;
+  font-size: 0.875rem;
+  line-height: 1.65;
   color: var(--text-muted);
   max-width: 38ch;
 }
@@ -674,11 +672,11 @@ main {
 .creative-bento__breakdown-title {
   margin: 0;
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-size: 2rem;
   font-weight: var(--fw-bold);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  line-height: 1.25;
+  line-height: 1.15;
   color: var(--text);
 }
 
@@ -692,8 +690,8 @@ main {
 }
 
 .creative-bento__breakdown-list li {
-  font-size: var(--text-small);
-  line-height: 1.55;
+  font-size: 1rem;
+  line-height: 1.65;
   color: var(--text-muted);
 }
 
@@ -847,7 +845,7 @@ main {
   color: var(--accent-hover);
 }
 
-/* Witness desk grid — Figma home */
+/* Witness desk — home (PDF VISION) */
 
 .home-section--witness .split-heading--section {
   margin-bottom: 1.25rem;
@@ -856,66 +854,27 @@ main {
 .witness-intro {
   margin: 0 0 2.5rem;
   color: var(--text-muted);
-  font-size: var(--text-small);
-  line-height: 1.625;
+  font-size: var(--text-witness-lead);
+  line-height: 1.65;
   max-width: 40rem;
 }
 
-.witness-grid {
+.witness-desk-grid {
   display: grid;
   gap: 1.25rem;
 }
 
-@media (min-width: 640px) {
-  .witness-grid {
+@media (min-width: 768px) {
+  .witness-desk-grid {
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem 1.5rem;
   }
 }
 
 @media (min-width: 1440px) {
-  .witness-grid {
+  .witness-desk-grid {
     gap: 1.5rem 2rem;
   }
-}
-
-.witness-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #1c1c1c;
-  background: var(--surface);
-  padding: 1.75rem 1.5rem 3rem;
-  min-height: 11.5rem;
-}
-
-.witness-item__arrow {
-  position: absolute;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  color: var(--accent);
-  font-size: 1rem;
-  line-height: 1;
-}
-
-.witness-item__title {
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-  font-weight: var(--fw-bold);
-  margin: 0 0 1rem;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  line-height: 1.35;
-  color: var(--text);
-}
-
-.witness-item p {
-  color: var(--text-muted);
-  margin: 0;
-  padding-right: 1.75rem;
-  font-size: var(--text-small);
-  line-height: 1.625;
-  flex: 1;
 }
 
 /* Experience — Figma Built on Experience */
@@ -1003,23 +962,27 @@ main {
   letter-spacing: var(--tracking-tight);
 }
 
+.experience-section .split-heading--section .split-heading__line {
+  font-size: var(--text-experience-section);
+}
+
 .experience-item__title {
   margin: 0 0 0.65rem;
   font-family: var(--font-body);
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: var(--text-experience-title);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--text);
-  line-height: 1.25;
+  line-height: 1.15;
 }
 
 .experience-item__details {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: var(--text-experience-details);
   line-height: 1.65;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--tracking-body);
   max-width: 38rem;
 }
 
@@ -1108,17 +1071,17 @@ main {
 .contact-info__region {
   margin: 0 0 1.25rem;
   color: var(--accent);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
 }
 
 .contact-info__address p {
   margin: 0 0 0.35rem;
   color: var(--text);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
 .contact-info__city {
@@ -1146,9 +1109,9 @@ main {
 
 .contact-social a {
   color: var(--text);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
 }
 
@@ -1158,11 +1121,12 @@ main {
 
 .contact-form__heading {
   margin: 0 0 1.25rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--text-contact-form-heading);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--text);
+  line-height: 1.15;
 }
 
 .contact-form__box {
@@ -1197,9 +1161,9 @@ main {
   color: #111111;
   padding: 0.8rem 1rem;
   font: inherit;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-size: 0.875rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-ui);
   text-transform: uppercase;
 }
 
@@ -1222,9 +1186,9 @@ main {
   display: block;
   margin-bottom: 0.75rem;
   color: var(--text-muted);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
 }
 
@@ -1262,9 +1226,9 @@ main {
   background: transparent;
   color: var(--text);
   font: inherit;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.875rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-cta);
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
