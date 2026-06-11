@@ -409,14 +409,14 @@
       "slug": "witness-book",
       "cardTitle": "The Witness Book",
       "meta": "Editorial · Series",
-      "cardImage": "https://images.unsplash.com/photo-1493246507134-91ee19fadba5?w=800&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1493246507134-91ee19fadba5?w=1400&q=80",
+      "cardImage": "assets/uploads/1781181460095-bubble-buddies.png",
+      "heroImage": "assets/uploads/1781181408583-bubble-buddies.png",
       "showPlayButton": false,
       "title": "The Witness Book",
       "paragraphs": [
         "Editoryal seri — tanıklık ve hafıza üzerine görsel araştırma."
       ],
-      "sideImage": "https://images.unsplash.com/photo-1493246507134-91ee19fadba5?w=600&q=80",
+      "sideImage": "assets/uploads/1781181421659-bubble-buddies.png",
       "sideImageAlt": "",
       "storyTitle": "Story Board",
       "storySections": [
@@ -427,7 +427,9 @@
           ]
         }
       ],
-      "gallery": [],
+      "gallery": [
+        "assets/uploads/1781181421659-bubble-buddies.png"
+      ],
       "cardExcerpt": "",
       "homeBadge": "",
       "homeDescription": "",
