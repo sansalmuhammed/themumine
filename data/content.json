@@ -348,15 +348,15 @@
         "Preschool Educational (Ages 4-6)"
       ],
       "meta": "Adventure · Preschool",
-      "cardImage": "assets/creative/bubble-buddies-card.png",
-      "heroImage": "assets/creative/bubble-buddies-card.png",
+      "cardImage": "assets/uploads/1781181306835-bubble-buddies.png",
+      "heroImage": "assets/uploads/1781181309445-bubble-buddies.png",
       "showPlayButton": true,
       "title": "Project: Bubble Buddies",
       "paragraphs": [
         "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds.",
         "By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure."
       ],
-      "sideImage": "assets/creative/bubble-buddies-card.png",
+      "sideImage": "assets/uploads/1781181313460-bubble-buddies.png",
       "sideImageAlt": "Bubble Buddies illustration",
       "storyTitle": "Story Engine",
       "storyTitleLine1": "Story",
@@ -370,7 +370,7 @@
         }
       ],
       "gallery": [
-        "assets/creative/bubble-buddies-card.png"
+        "assets/uploads/1781181313460-bubble-buddies.png"
       ],
       "homeBadge": "",
       "homeDescription": ""
