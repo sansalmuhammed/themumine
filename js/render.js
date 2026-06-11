@@ -569,17 +569,33 @@
       ${renderContact(c)}`;
   }
 
-  function projectCard(p) {
+  function renderWorkCardTags(tags) {
+    const list = normalizeTags(tags || []);
+    if (!list.length) return "";
+    const items = list.map((t) => `<li class="work-card__tag">${esc(t.label)}</li>`).join("");
+    return `<ul class="work-card__tags" aria-label="Tags">${items}</ul>`;
+  }
+
+  function projectCard(p, ctaText) {
     const desc = p.cardExcerpt || (p.paragraphs && p.paragraphs[0]) || "";
+    const href = `project.html?slug=${encodeURIComponent(p.slug)}`;
+    const tags = renderWorkCardTags(p.cardTags || p.tags);
+    const cta = ctaText || "Review the project";
     return `
-      <a href="project.html?slug=${esc(p.slug)}" class="work-card">
-        <img class="work-card__image" src="${esc(p.cardImage)}" alt="" width="800" height="800">
+      <article class="work-card">
+        <a class="work-card__media" href="${href}">
+          <img class="work-card__image" src="${esc(p.cardImage)}" alt="" width="550" height="413" loading="lazy">
+        </a>
         <div class="work-card__body">
-          <p class="work-card__category">${esc(p.meta)}</p>
-          <h2 class="work-card__title">${esc(p.cardTitle)}</h2>
+          ${tags}
+          <h2 class="work-card__title"><a href="${href}">${esc(p.cardTitle)}</a></h2>
           ${desc ? `<p class="work-card__desc">${esc(desc)}</p>` : ""}
+          <a class="work-card__cta" href="${href}">
+            <span>${esc(cta).toUpperCase()}</span>
+            <span class="work-card__cta-icon" aria-hidden="true">→</span>
+          </a>
         </div>
-      </a>`;
+      </article>`;
   }
 
   function articleCardExcerpt(article) {
@@ -652,8 +668,25 @@
 
   function renderWorks(w, projects) {
     const lines = splitTitleLines(w, "Selected Works");
-    const lead = w.lead ? `<p class="works-hero__lead">${esc(w.lead)}</p>` : "";
-    const cards = projects.map(projectCard).join("");
+    const catalog = projects || [];
+    let list = catalog;
+    if (Array.isArray(w.projectSlugs) && w.projectSlugs.length) {
+      list = w.projectSlugs
+        .map((slug) => catalog.find((p) => p.slug === slug))
+        .filter(Boolean);
+    }
+    const lead = w.lead ? `<p class="works-hero__lead hero-lead">${esc(w.lead)}</p>` : "";
+    const ctaText = w.cardLinkText || "Review the project";
+    const cards = list.map((p) => projectCard(p, ctaText)).join("");
+    const loadMore =
+      w.showLoadMore !== false
+        ? `<div class="works-load-more">
+            <button type="button" class="works-load-more__btn" data-load-more>
+              ${esc(w.loadMoreText || "Load more archive").toUpperCase()}
+              <span class="works-load-more__icon" aria-hidden="true">↓</span>
+            </button>
+          </div>`
+        : "";
     return `
       <section class="works-hero">
         <div class="container">
@@ -662,7 +695,10 @@
         </div>
       </section>
       <section class="works-archive">
-        <div class="container works-grid">${cards}</div>
+        <div class="container">
+          <div class="works-grid">${cards}</div>
+          ${loadMore}
+        </div>
       </section>`;
   }
 

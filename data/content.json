@@ -66,7 +66,7 @@
       "titleLine1": "Creative",
       "titleLine2": "Projects",
       "bento": {
-        "projectSlug": "bubble-buddies",
+        "projectSlug": "crema-cosmo",
         "heroImage": "assets/creative/crema-cosmo-hero.png",
         "heroImageAlt": "Crema Cosmo — fantasy family musical",
         "badge": "Lastest Project",
@@ -98,7 +98,7 @@
         "Each work invites the viewer into a cinematic language built on metaphor, symbol, and shared memory."
       ],
       "linkText": "Read more…",
-      "projectSlug": "bubble-buddies"
+      "projectSlug": "crema-cosmo"
     },
     "witness": {
       "titleLine1": "The Witness",
@@ -184,7 +184,15 @@
     "titleLine1": "Selected",
     "titleLine2": "Works",
     "title": "Selected Works",
-    "lead": "A curated selection of creative direction, narrative design, and visual research."
+    "lead": "A meticulously curated selection of my finest work, where ideas take tangible form.",
+    "cardLinkText": "Review the project",
+    "loadMoreText": "Load more archive",
+    "projectSlugs": [
+      "crema-cosmo",
+      "bubble-buddies",
+      "void-manifesto",
+      "bubble-buddies"
+    ]
   },
   "thinking": {
     "titleLine1": "The Witness",
@@ -282,23 +290,25 @@
   },
   "projects": [
     {
-      "slug": "bubble-buddies",
+      "slug": "crema-cosmo",
       "titleLine1": "Project:",
       "titleLine2": "Crema Cosmo",
       "homeBadge": "Lastest Project",
       "homeDescription": "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical.",
       "cardTitle": "Crema Cosmo",
-      "meta": "Creative direction · 2025",
-      "cardImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77bcea?w=800&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1526170375885-4d8ecf77bcea?w=1400&q=80",
+      "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
+      "cardTags": ["Fantasy", "Musical"],
+      "meta": "Fantasy · Musical",
+      "cardImage": "assets/creative/crema-cosmo-hero.png",
+      "heroImage": "assets/creative/crema-cosmo-hero.png",
       "showPlayButton": true,
-      "title": "Project: Bubble Buddies",
+      "title": "Project: Crema Cosmo",
       "paragraphs": [
-        "Bu sayfa proje detay şablonuna göre hazırlandı. Sol sütuna proje açıklamanızı, sağ sütuna dikey görselinizi yerleştirin.",
-        "Admin panelinden tüm metin ve görselleri düzenleyebilirsiniz."
+        "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical where silly songs and weird coffee noises might be the only way home.",
+        "Visual swirl, milk-mustache motifs, and cup-guard designs shape a world built on conflict, discovery, and family."
       ],
-      "sideImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-      "sideImageAlt": "Proje görseli",
+      "sideImage": "assets/creative/crema-cosmo-hero.png",
+      "sideImageAlt": "Crema Cosmo illustration",
       "storyTitle": "Story Engine",
       "storyTitleLine1": "Story",
       "storyTitleLine2": "Engine",
@@ -306,19 +316,76 @@
         {
           "heading": "Origin",
           "paragraphs": [
-            "İsmin ve konseptin kökeni — anlatının başlangıç noktası, ilham kaynağı ve ilk eskizler."
+            "A fantasy family musical born from the image of siblings swallowed by Grandma's coffee cup — conflict turned into song."
           ]
         },
         {
           "heading": "Development",
           "paragraphs": [
-            "Gelişim süreci: iterasyonlar, iş birlikleri ve görsel dilin olgunlaşması."
+            "Visual swirl language, cup-guard character design, and a musical soundscape built around coffee-noise comedy."
           ]
         }
       ],
       "gallery": [
-        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
-        "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1200&q=80"
+        "assets/creative/crema-cosmo-hero.png"
+      ]
+    },
+    {
+      "slug": "bubble-buddies",
+      "titleLine1": "Project:",
+      "titleLine2": "Bubble Buddies",
+      "cardTitle": "Bubble Buddies",
+      "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve...",
+      "cardTags": ["Adventure", "Preschool Educational (Ages 4-6)"],
+      "meta": "Adventure · Preschool",
+      "cardImage": "assets/creative/bubble-buddies-card.png",
+      "heroImage": "assets/creative/bubble-buddies-card.png",
+      "showPlayButton": true,
+      "title": "Project: Bubble Buddies",
+      "paragraphs": [
+        "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds.",
+        "By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure."
+      ],
+      "sideImage": "assets/creative/bubble-buddies-card.png",
+      "sideImageAlt": "Bubble Buddies illustration",
+      "storyTitle": "Story Engine",
+      "storyTitleLine1": "Story",
+      "storyTitleLine2": "Engine",
+      "storySections": [
+        {
+          "heading": "Origin",
+          "paragraphs": [
+            "A cosmic preschool adventure about popping isolation bubbles and learning to understand other worlds."
+          ]
+        }
+      ],
+      "gallery": [
+        "assets/creative/bubble-buddies-card.png"
+      ]
+    },
+    {
+      "slug": "void-manifesto",
+      "titleLine1": "Project:",
+      "titleLine2": "Void Manifesto",
+      "cardTitle": "Void Manifesto",
+      "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
+      "cardTags": ["Fantasy", "Musical"],
+      "meta": "Fantasy · Musical",
+      "cardImage": "assets/creative/crema-cosmo-hero.png",
+      "heroImage": "assets/creative/crema-cosmo-hero.png",
+      "showPlayButton": true,
+      "title": "Project: Void Manifesto",
+      "paragraphs": [
+        "A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens."
+      ],
+      "sideImage": "assets/creative/crema-cosmo-hero.png",
+      "sideImageAlt": "Void Manifesto illustration",
+      "storyTitle": "Story Engine",
+      "storyTitleLine1": "Story",
+      "storyTitleLine2": "Engine",
+      "storySections": [],
+      "gallery": [
+        "assets/creative/crema-cosmo-hero.png"
       ]
     },
     {
