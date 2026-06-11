@@ -159,6 +159,17 @@
       .filter(Boolean);
   }
 
+  function linesToText(arr) {
+    return (arr || []).join("\n");
+  }
+
+  function parseLinesText(str) {
+    return String(str || "")
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+  }
+
   function bindFields(root) {
     root.querySelectorAll("[data-path]").forEach((el) => {
       const ev = el.type === "checkbox" ? "change" : "input";
@@ -311,24 +322,16 @@
   function renderHome() {
     const h = content.home || {};
     const hero = h.hero || {};
-    const feat = h.featured || {};
+    const creative = h.creativeProjects || {};
+    const bento = creative.bento || {};
     const wit = h.witness || {};
     const exp = h.experience || {};
     const c = h.contact || {};
-    const slugs = (content.projects || []).map((p) => p.slug).join(", ");
-
-    let witnessHtml = (wit.items || [])
-      .map(
-        (w, i) =>
-          itemCard(
-            w.title || "Bölüm " + (i + 1),
-            i,
-            field("Başlık", `home.witness.items.${i}.title`, w.title) +
-              field("Metin", `home.witness.items.${i}.text`, w.text, "textarea"),
-            "wit-" + i
-          )
-      )
-      .join("");
+    const projectSlugs = (content.projects || []).map((p) => p.slug).join(", ");
+    const articleSlugs = (content.articles || []).map((a) => a.slug).join(", ");
+    const bentoTags = bento._tags ?? linesToText(bento.tags);
+    const breakdownItems = bento._breakdownItems ?? linesToText(bento.breakdownItems);
+    const witnessSlugs = wit._cardSlugs ?? linesToText(wit.cardSlugs);
 
     let expHtml = (exp.items || [])
       .map(
@@ -350,8 +353,6 @@
       )
       .join("");
 
-    const featParas = feat._paragraphs ?? (feat.paragraphs || []).join("\n\n");
-
     return `
       <div class="panel"><h3>Hero</h3>
         ${field("Başlık satır 1 (beyaz)", "home.hero.titleLine1", hero.titleLine1)}
@@ -360,20 +361,35 @@
         ${imageField("Arka plan görseli", "home.hero.image", hero.image)}
         ${field("Görsel alt metni", "home.hero.imageAlt", hero.imageAlt)}
       </div>
-      <div class="panel"><h3>Creative Projects (öne çıkan)</h3>
-        ${field("Başlık satır 1 (beyaz)", "home.featured.titleLine1", feat.titleLine1)}
-        ${field("Başlık satır 2 (kırmızı)", "home.featured.titleLine2", feat.titleLine2)}
-        ${imageField("Görsel", "home.featured.image", feat.image)}
-        ${field("Görsel alt", "home.featured.imageAlt", feat.imageAlt)}
-        ${field("Paragraflar (boş satırla ayırın)", "home.featured._paragraphs", featParas, "textarea")}
-        ${field("Link metni", "home.featured.linkText", feat.linkText)}
-        ${field("Bağlı proje slug", "home.featured.projectSlug", feat.projectSlug, "text", "Mevcut: " + slugs)}
+      <div class="panel"><h3>Creative Projects (bento grid)</h3>
+        ${field("Bölüm başlığı satır 1 (beyaz)", "home.creativeProjects.titleLine1", creative.titleLine1)}
+        ${field("Bölüm başlığı satır 2 (kırmızı)", "home.creativeProjects.titleLine2", creative.titleLine2)}
+        ${field("Bağlı proje slug", "home.creativeProjects.bento.projectSlug", bento.projectSlug, "text", "Mevcut: " + projectSlugs)}
+        ${imageField("Hero görseli (sol üst)", "home.creativeProjects.bento.heroImage", bento.heroImage)}
+        ${field("Hero görsel alt", "home.creativeProjects.bento.heroImageAlt", bento.heroImageAlt)}
+        ${field("Rozet metni", "home.creativeProjects.bento.badge", bento.badge, "text", "Örn: Lastest Project")}
+        ${field("Proje başlığı (kart üstü)", "home.creativeProjects.bento.projectTitle", bento.projectTitle)}
+        ${field("Genre etiketi", "home.creativeProjects.bento.genreLabel", bento.genreLabel, "text", "Örn: GENRE")}
+        ${field("Genre değeri", "home.creativeProjects.bento.genre", bento.genre)}
+        ${field("Logline etiketi", "home.creativeProjects.bento.loglineLabel", bento.loglineLabel, "text", "Örn: LOGLINE")}
+        ${field("Logline metni", "home.creativeProjects.bento.logline", bento.logline, "textarea")}
+        ${imageField("Mühür paneli (sol alt)", "home.creativeProjects.bento.sealImage", bento.sealImage)}
+        ${field("Breakdown etiketleri", "home.creativeProjects.bento._tags", bentoTags, "textarea", "Her satır bir etiket. Örn: CONCEPT")}
+        ${field("Breakdown başlığı", "home.creativeProjects.bento.breakdownTitle", bento.breakdownTitle)}
+        ${field("Breakdown maddeleri", "home.creativeProjects.bento._breakdownItems", breakdownItems, "textarea", "Her satır bir madde")}
       </div>
-      <div class="panel"><h3>The Witness Book</h3>
+      <div class="panel"><h3>The Witness Desk (ana sayfa)</h3>
         ${field("Başlık satır 1 (beyaz)", "home.witness.titleLine1", wit.titleLine1)}
-        ${field("Başlık satır 2 (beyaz)", "home.witness.titleLine2", wit.titleLine2)}
-        ${witnessHtml}
-        <button type="button" class="btn btn-secondary btn-sm" id="add-witness">+ Bölüm ekle</button>
+        ${field("Başlık satır 2 (kırmızı)", "home.witness.titleLine2", wit.titleLine2)}
+        ${field("Giriş metni", "home.witness.intro", wit.intro, "textarea")}
+        ${field("Kart link metni", "home.witness.cardLinkText", wit.cardLinkText, "text", "Örn: DEEP DIVE →")}
+        ${field(
+          "Kart sırası (slug listesi)",
+          "home.witness._cardSlugs",
+          witnessSlugs,
+          "textarea",
+          "Her satır bir makale slug. Mevcut: " + articleSlugs
+        )}
       </div>
       <div class="panel"><h3>Built On Experience</h3>
         ${field("Başlık satır 1 (beyaz)", "home.experience.titleLine1", exp.titleLine1)}
@@ -410,21 +426,45 @@
 
   function renderWorks() {
     const w = content.works || {};
-    return `<div class="panel">
+    const projectSlugs = (content.projects || []).map((p) => p.slug).join(", ");
+    const gridSlugs = w._projectSlugs ?? linesToText(w.projectSlugs);
+    return `
+      <div class="panel"><h3>Selected Works sayfası</h3>
         ${field("Başlık satır 1 (beyaz)", "works.titleLine1", w.titleLine1)}
         ${field("Başlık satır 2 (kırmızı)", "works.titleLine2", w.titleLine2)}
+        ${field("Alt metin (kırmızı çizgili)", "works.lead", w.lead, "textarea")}
+        ${field("Kart link metni", "works.cardLinkText", w.cardLinkText, "text", "Örn: Review the project")}
+        ${field("Load more metni", "works.loadMoreText", w.loadMoreText)}
+        ${field(
+          "Grid sırası (proje slug listesi)",
+          "works._projectSlugs",
+          gridSlugs,
+          "textarea",
+          "Her satır bir proje. Aynı slug tekrarlanabilir. Mevcut: " + projectSlugs
+        )}
+        ${field("Load more butonunu göster", "works.showLoadMore", w.showLoadMore !== false, "checkbox")}
       </div>
-      <p class="hint">Proje kartları «Projeler» bölümünden düzenlenir.</p>`;
+      <p class="hint">Kart görselleri, etiketler ve özet metinler «Projeler» bölümünden düzenlenir.</p>`;
   }
 
   function renderThinking() {
     const t = content.thinking || {};
+    const articleSlugs = (content.articles || []).map((a) => a.slug).join(", ");
+    const cardSlugs = t._cardSlugs ?? linesToText(t.cardSlugs);
     return `
-      <div class="panel"><h3>Blog sayfası (What I'm Thinking)</h3>
+      <div class="panel"><h3>The Witness Desk (blog sayfası)</h3>
         ${field("Başlık satır 1 (beyaz)", "thinking.titleLine1", t.titleLine1)}
         ${field("Başlık satır 2 (kırmızı)", "thinking.titleLine2", t.titleLine2)}
         ${field("Alt metin", "thinking.lead", t.lead, "textarea")}
-        ${field("Kart link metni", "thinking.cardLinkText", t.cardLinkText, "text", "Örn: Review the blog →")}
+        ${field("Kart link metni", "thinking.cardLinkText", t.cardLinkText, "text", "Örn: DEEP DIVE →")}
+        ${field(
+          "Kart sırası (slug listesi)",
+          "thinking._cardSlugs",
+          cardSlugs,
+          "textarea",
+          "Her satır bir makale slug. Mevcut: " + articleSlugs
+        )}
+        ${field("Sadece metin kartları", "thinking.textOnlyCards", t.textOnlyCards !== false, "checkbox")}
         ${field("Load more metni", "thinking.loadMoreText", t.loadMoreText)}
         ${field("İlk görünen kart sayısı", "thinking.initialVisible", t.initialVisible ?? 4, "text", "Fazlası Load more ile açılır")}
       </div>
@@ -449,16 +489,30 @@
           )
           .join("");
 
+        const cardTags = p._cardTags ?? linesToText(p.cardTags);
+
         return itemCard(
           p.cardTitle || p.slug,
           i,
           field("Slug (URL)", `projects.${i}.slug`, p.slug, "text", "project.html?slug=...") +
             field("Kart başlığı", `projects.${i}.cardTitle`, p.cardTitle) +
-            field("Kart alt metin", `projects.${i}.meta`, p.meta) +
+            field(
+              "Kart etiketleri (Works sayfası)",
+              `projects.${i}._cardTags`,
+              cardTags,
+              "textarea",
+              "Her satır bir etiket. Örn: Fantasy"
+            ) +
+            field("Kart özet (Works sayfası)", `projects.${i}.cardExcerpt`, p.cardExcerpt, "textarea") +
+            field("Kart meta (opsiyonel)", `projects.${i}.meta`, p.meta) +
             imageField("Kart görseli", `projects.${i}.cardImage`, p.cardImage) +
             imageField("Hero görseli", `projects.${i}.heroImage`, p.heroImage) +
+            field("Ana sayfa rozeti", `projects.${i}.homeBadge`, p.homeBadge, "text", "Örn: Lastest Project") +
+            field("Ana sayfa kısa açıklama", `projects.${i}.homeDescription`, p.homeDescription, "textarea") +
             field("Video play ikonu", `projects.${i}.showPlayButton`, p.showPlayButton, "checkbox") +
-            field("Detay başlığı", `projects.${i}.title`, p.title) +
+            field("Detay başlık satır 1", `projects.${i}.titleLine1`, p.titleLine1) +
+            field("Detay başlık satır 2 (kırmızı)", `projects.${i}.titleLine2`, p.titleLine2) +
+            field("Detay başlığı (yedek)", `projects.${i}.title`, p.title) +
             field("Paragraflar", `projects.${i}._paragraphs`, paras, "textarea") +
             imageField("Yan görsel", `projects.${i}.sideImage`, p.sideImage) +
             field("Yan görsel alt", `projects.${i}.sideImageAlt`, p.sideImageAlt) +
@@ -515,6 +569,8 @@
               "Her satır bir etiket. Özel URL: Görsel Araştırma|visual-research"
             ) +
             field("Kart başlığı", `articles.${i}.cardTitle`, a.cardTitle) +
+            field("Kart başlık satır 1", `articles.${i}.cardTitleLine1`, a.cardTitleLine1, "text", "Witness Desk iki satırlı başlık") +
+            field("Kart başlık satır 2", `articles.${i}.cardTitleLine2`, a.cardTitleLine2, "text", "İkinci satır kırmızı vurgulu gösterilmez; kartta alt satır") +
             field("Kart özet (gri alt metin)", `articles.${i}.cardExcerpt`, a.cardExcerpt, "textarea") +
             field("Kart meta (opsiyonel)", `articles.${i}.meta`, a.meta) +
             field("Makale başlığı", `articles.${i}.title`, a.title) +
@@ -609,7 +665,35 @@
       feat.paragraphs = feat._paragraphs.split(/\n\n+/).map((s) => s.trim()).filter(Boolean);
       delete feat._paragraphs;
     }
+    const bento = content.home?.creativeProjects?.bento;
+    if (bento?._tags != null) {
+      bento.tags = parseLinesText(bento._tags);
+      delete bento._tags;
+    }
+    if (bento?._breakdownItems != null) {
+      bento.breakdownItems = parseLinesText(bento._breakdownItems);
+      delete bento._breakdownItems;
+    }
+    const witness = content.home?.witness;
+    if (witness?._cardSlugs != null) {
+      witness.cardSlugs = parseLinesText(witness._cardSlugs);
+      delete witness._cardSlugs;
+    }
+    const works = content.works;
+    if (works?._projectSlugs != null) {
+      works.projectSlugs = parseLinesText(works._projectSlugs);
+      delete works._projectSlugs;
+    }
+    const thinking = content.thinking;
+    if (thinking?._cardSlugs != null) {
+      thinking.cardSlugs = parseLinesText(thinking._cardSlugs);
+      delete thinking._cardSlugs;
+    }
     (content.projects || []).forEach((p) => {
+      if (p._cardTags != null) {
+        p.cardTags = parseLinesText(p._cardTags);
+        delete p._cardTags;
+      }
       if (p._paragraphs != null) {
         p.paragraphs = p._paragraphs.split(/\n\n+/).map((s) => s.trim()).filter(Boolean);
         delete p._paragraphs;
@@ -687,12 +771,6 @@
       render();
     });
 
-    $("#add-witness", root)?.addEventListener("click", () => {
-      content.home.witness.items = content.home.witness.items || [];
-      content.home.witness.items.push({ title: "Yeni bölüm", text: "" });
-      render();
-    });
-
     $("#add-experience", root)?.addEventListener("click", () => {
       content.home.experience.items = content.home.experience.items || [];
       const n = String(content.home.experience.items.length + 1).padStart(2, "0");
@@ -705,15 +783,21 @@
       content.projects.push({
         slug: "yeni-proje-" + Date.now(),
         cardTitle: "Yeni Proje",
+        cardExcerpt: "",
+        cardTags: [],
         meta: "",
         cardImage: "",
         heroImage: "",
+        homeBadge: "",
+        homeDescription: "",
         showPlayButton: false,
+        titleLine1: "Project:",
+        titleLine2: "Yeni Proje",
         title: "Yeni Proje",
         paragraphs: [],
         sideImage: "",
         sideImageAlt: "",
-        storyTitle: "Story of Name",
+        storyTitle: "Story Engine",
         storySections: [],
         gallery: [],
       });
@@ -833,6 +917,18 @@
     if (content.home?.featured?.paragraphs) {
       content.home.featured._paragraphs = content.home.featured.paragraphs.join("\n\n");
     }
+    const bento = content.home?.creativeProjects?.bento;
+    if (bento?.tags) bento._tags = linesToText(bento.tags);
+    if (bento?.breakdownItems) bento._breakdownItems = linesToText(bento.breakdownItems);
+    if (content.home?.witness?.cardSlugs) {
+      content.home.witness._cardSlugs = linesToText(content.home.witness.cardSlugs);
+    }
+    if (content.works?.projectSlugs) {
+      content.works._projectSlugs = linesToText(content.works.projectSlugs);
+    }
+    if (content.thinking?.cardSlugs) {
+      content.thinking._cardSlugs = linesToText(content.thinking.cardSlugs);
+    }
     if (content.home?.contact?.addressLines) {
       content.home.contact._addressLines = content.home.contact.addressLines.join("\n");
     }
@@ -844,6 +940,7 @@
       }));
     }
     (content.projects || []).forEach((p) => {
+      if (p.cardTags) p._cardTags = linesToText(p.cardTags);
       if (p.paragraphs) p._paragraphs = p.paragraphs.join("\n\n");
       if (p.gallery) p._gallery = p.gallery.join("\n");
       (p.storySections || []).forEach((s) => {
