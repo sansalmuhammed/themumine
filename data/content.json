@@ -35,10 +35,10 @@
     "theme": {
       "bg": "#000000",
       "text": "#ffffff",
-      "textMuted": "#b8b6b7",
-      "accent": "#e8001c",
-      "accentHover": "#ff1a35",
-      "border": "#2a2a2a"
+      "textMuted": "#e4beb8",
+      "accent": "#dc2626",
+      "accentHover": "#ef4444",
+      "border": "#ffffff"
     },
     "fonts": {
       "body": "Inter",
@@ -121,17 +121,17 @@
         {
           "num": "01",
           "title": "Storytelling & Writing",
-          "details": "Animated TV Series · Musical Lyrics · Screenplays\n· Game Narrative · Fantasy & Comedy"
+          "details": "Animated TV Series · Musical Lyrics · Screenplays · Game Narrative · Fantasy & Comedy"
         },
         {
           "num": "02",
           "title": "Visual & Creative Development",
-          "details": "Concept Design · 3D Character Animation · Story Illustration\n· Data Visualization · Moodboard & Presentation"
+          "details": "Concept Design · 3D Character Animation · Story Illustration · Data Visualization · Moodboard & Presentation"
         },
         {
           "num": "03",
           "title": "Project Development",
-          "details": "Project Management · Product Ideation\n· Market Research · Workshop Design\n· Interactive Educational Tools"
+          "details": "Project Management · Product Ideation · Market Research · Workshop Design · Interactive Educational Tools"
         }
       ]
     },

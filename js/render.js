@@ -427,9 +427,9 @@
             </span>
           </a>
           <div class="creative-bento__cell creative-bento__cell--info">
-            <div class="creative-bento__field">
-              <span class="creative-bento__label">${esc(b.genreLabel || "GENRE")}</span>
-              <p class="creative-bento__value">${esc(b.genre || "")}</p>
+            <div class="creative-bento__genre-wrap">
+              <p class="creative-bento__genre-label">${esc(b.genreLabel || "GENRE")}</p>
+              <p class="creative-bento__genre-value">${esc(b.genre || "")}</p>
             </div>
             <div class="creative-bento__field">
               <span class="creative-bento__label">${esc(b.loglineLabel || "LOGLINE")}</span>
@@ -512,7 +512,7 @@
         })();
 
     return `
-      <section class="home-section" id="projects">
+      <section class="home-section home-section--creative" id="projects">
         <div class="container">
           ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2" })}
           ${body}
@@ -623,6 +623,9 @@
     const excerpt = articleCardExcerpt(a);
     const cta = ctaText || "DEEP DIVE →";
     const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
+    const ctaHtml = opts.textOnly
+      ? `<a class="blog-card__cta" href="${href}"><span>DEEP DIVE</span><span class="blog-card__cta-icon" aria-hidden="true">→</span></a>`
+      : `<a class="blog-card__cta" href="${href}">${esc(cta)}</a>`;
     const cardClass = opts.textOnly ? "blog-card blog-card--text" : "blog-card";
     const media = opts.textOnly
       ? ""
@@ -638,7 +641,7 @@
           ${tags}
           ${renderArticleCardTitle(a, href)}
           ${excerpt ? `<p class="blog-card__excerpt">${esc(excerpt)}</p>` : ""}
-          <a class="blog-card__cta" href="${href}">${esc(cta)}</a>
+          ${ctaHtml}
         </div>
       </article>`;
   }

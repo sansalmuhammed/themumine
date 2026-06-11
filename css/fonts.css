@@ -1,13 +1,13 @@
-/* The Mumine — Figma typography (the-mumine) */
+/* The Mumine — Figma VISION (1280px) */
 
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:ital,wght@0,400;0,500;0,600;0,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=Space+Grotesk:wght@500;600;700&display=swap");
 
 :root {
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Space Grotesk", var(--font-body);
   --font-logo-serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-logo-script: "Great Vibes", cursive;
 
-  /* Figma text styles */
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
@@ -18,37 +18,35 @@
   --text-small: 0.875rem;
   --text-caption: 0.8125rem;
   --text-label: 0.75rem;
-  --text-micro: 0.6875rem;
-  --text-tiny: 0.625rem;
 
   --leading-body: 1.65;
-  --leading-relaxed: 1.7;
-  --leading-tight: 0.95;
+  --leading-tight: 1.1;
   --leading-snug: 1.15;
-  --leading-normal: 1.35;
   --leading-heading: 1.25;
 
   --tracking-body: 0;
-  --tracking-tight: 0.02em;
-  --tracking-label: 0.04em;
+  --tracking-tight: -0.04em;
+  --tracking-section: -0.04em;
+  --tracking-experience: -0.015em;
+  --tracking-label: 0.1em;
   --tracking-ui: 0.06em;
   --tracking-wide: 0.08em;
-  --tracking-nav: 0.14em;
-  --tracking-cta: 0.12em;
+  --tracking-nav: 0.2em;
+  --tracking-cta: 0.1em;
   --tracking-tag: 0.1em;
+  --tracking-submit: 0.2em;
 
-  /* Figma canvas (1440px frame) */
-  --canvas-width: 1440px;
-  --content-width: 1200px;
-  --site-gutter: clamp(1.25rem, 5vw, 7.5rem);
+  --canvas-width: 1280px;
+  --content-width: 1152px;
+  --site-gutter: clamp(1.25rem, 5vw, 4rem);
 
-  /* Fluid type — overridden at desktop */
   --text-hero-line: clamp(2.5rem, 5.5vw, 4.5rem);
-  --text-page-line: clamp(2.75rem, 7vw, 5.5rem);
+  --text-page-line: clamp(2.75rem, 7vw, 4.5rem);
   --text-section-line: clamp(2rem, 4.5vw, 4.5rem);
   --text-project-line: clamp(2rem, 4vw, 3.25rem);
   --text-about-name: clamp(2.5rem, 5.5vw, 4.25rem);
-  --text-stat-num: clamp(2.75rem, 5vw, 3.75rem);
+  --text-stat-num: clamp(2.75rem, 5vw, 4.5rem);
+  --text-experience-section: clamp(2.75rem, 5vw, 4.0625rem);
   --text-witness-lead: 1.125rem;
   --text-witness-card-title: clamp(1.5rem, 2.2vw, 2rem);
   --text-witness-card-body: 1rem;
@@ -56,18 +54,19 @@
   --text-home-lead: 1.125rem;
   --text-experience-title: clamp(1.5rem, 2.2vw, 2rem);
   --text-experience-details: 1rem;
-  --text-experience-section: clamp(2.75rem, 5vw, 4.0625rem);
   --text-contact-form-heading: clamp(1.5rem, 2.2vw, 2rem);
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1280px) {
   :root {
+    --site-gutter: 64px;
     --text-hero-line: 4.5rem;
-    --text-page-line: 5.5rem;
+    --text-page-line: 4.5rem;
     --text-section-line: 4.5rem;
     --text-project-line: 3.25rem;
     --text-about-name: 4.25rem;
-    --text-stat-num: 3.75rem;
+    --text-stat-num: 4.5rem;
+    --text-experience-section: 4.0625rem;
     --text-witness-lead: 1.125rem;
     --text-witness-card-title: 2rem;
     --text-witness-card-body: 1rem;
@@ -75,8 +74,6 @@
     --text-home-lead: 1.125rem;
     --text-experience-title: 2rem;
     --text-experience-details: 1rem;
-    --text-experience-section: 4.0625rem;
     --text-contact-form-heading: 2rem;
-    --site-gutter: 7.5rem;
   }
 }
