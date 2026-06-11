@@ -2,6 +2,7 @@
   "site": {
     "logo": "The Mumine",
     "logoImage": "assets/uploads/1780256865434-Logo_The_Mumine.png",
+    "footerLogoImage": "assets/logo-footer.png",
     "footer": "The Mumine — Mümine Serap",
     "footerDesignCredit": "Design by Muhammad Kizilirmak",
     "footerCopyright": "© 2026 THE MUMINE",
@@ -19,8 +20,8 @@
       },
       {
         "label": "BLOG",
-        "href": "thinking.html",
-        "page": "thinking"
+        "href": "blog.html",
+        "page": "blog"
       },
       {
         "label": "ABOUT ME",
@@ -48,6 +49,7 @@
     "pageTitles": {
       "home": "The Mumine — Heartfelt Stories",
       "works": "Selected Works — The Mumine",
+      "blog": "What I'm Thinking — The Mumine",
       "thinking": "The Witness Desk — The Mumine",
       "about": "About Me — The Mumine",
       "project": "Proje — The Mumine",
@@ -197,6 +199,20 @@
       "bubble-buddies"
     ],
     "showLoadMore": true
+  },
+  "blog": {
+    "titleLine1": "What I'm",
+    "titleLine2": "Thinking",
+    "title": "What I'm Thinking",
+    "lead": "An evolving collection of thoughts, stories, and the things that inspire me.",
+    "cardLinkText": "Review the blog",
+    "loadMoreText": "Load more archive",
+    "cardSlugs": [
+      "one-fire",
+      "layers-of-witness",
+      "one-fire",
+      "layers-of-witness"
+    ]
   },
   "thinking": {
     "titleLine1": "The Witness",
@@ -492,7 +508,7 @@
       "cardTitle": "One Fire in Different Cosmologies",
       "cardTitleLine1": "One Fire in Different",
       "cardTitleLine2": "Cosmologies",
-      "cardExcerpt": "Every era produces characters that carry the full weight of their civilization's beliefs about what a human being is, what they owe the world, and what happens when they fall short. Medea and Cleopatra, are two going to analyze them.",
+      "cardExcerpt": "The Cosmologies of Medea & Cleopatra, and Lady Zulaykha (pbuh)",
       "meta": "Essay · May 2026",
       "cardImage": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
       "title": "One Fire in Different Chronologies",
@@ -568,9 +584,9 @@
     },
     {
       "slug": "layers-of-witness",
-      "cardTitle": "Storytelling By Using Kinesthetic Empathy",
-      "cardTitleLine1": "Storytelling By Using",
-      "cardTitleLine2": "Kinesthetic Empathy",
+      "cardTitle": "Kinesthetic Storytelling",
+      "cardTitleLine1": "Kinesthetic",
+      "cardTitleLine2": "Storytelling",
       "cardExcerpt": "A Review of Shen Yun Performing Arts",
       "meta": "Notes · 2026",
       "cardImage": "assets/uploads/1781100532462-eeec6899b621588d031ff9ed03f3950cf98c5d58.png",

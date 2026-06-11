@@ -114,7 +114,7 @@
     if (!list.length) return "";
     const items = list
       .map((t) => {
-        const href = `thinking.html?tag=${encodeURIComponent(t.slug)}`;
+        const href = `blog.html?tag=${encodeURIComponent(t.slug)}`;
         const cls = opts.className || "tag-pill";
         const inner = opts.linkable === false ? esc(t.label) : `<a href="${href}" rel="tag">${esc(t.label)}</a>`;
         return `<li class="${cls}">${inner}</li>`;
@@ -245,7 +245,7 @@
       `<a href="${esc(contact.href)}" class="header-cta header-cta--mobile">${esc(contact.label)}</a>`;
 
     const brand = logoSrc
-      ? `<a href="index.html" class="brand"><img class="brand__img" src="${esc(logoSrc)}" alt="${esc(logoAlt)}" width="240" height="58"></a>`
+      ? `<a href="index.html" class="brand"><img class="brand__img" src="${esc(logoSrc)}" alt="${esc(logoAlt)}" width="257" height="115"></a>`
       : `<a href="index.html" class="brand"><span class="brand__text"><span class="brand__text-the">the</span> Mumine</span></a>`;
 
     return `
@@ -383,13 +383,13 @@
   }
 
   function renderFooter(site) {
-    const logoSrc = site.logoImage || "assets/logo-wordmark.png";
+    const logoSrc = site.footerLogoImage || site.logoImage || "assets/logo-footer.png";
     const credit = site.footerDesignCredit || "";
     const copy = site.footerCopyright || site.footer || "";
     return `
       <div class="container footer-inner">
         <a href="index.html" class="footer-brand">
-          <img src="${esc(logoSrc)}" alt="${esc(site.logo || "The Mumine")}" width="160" height="40">
+          <img src="${esc(logoSrc)}" alt="${esc(site.logo || "The Mumine")}" width="131" height="48">
         </a>
         <p class="footer-credit">${esc(credit)}</p>
         <p class="footer-copy">${esc(copy)}</p>
@@ -603,16 +603,47 @@
     return articleExcerpt(article);
   }
 
-  function renderBlogCardTags(tags) {
+  function renderBlogCardTags(tags, tagPage) {
     const list = normalizeTags(tags);
     if (!list.length) return "";
+    const base = tagPage || "blog.html";
     const items = list
       .map((t) => {
-        const href = `thinking.html?tag=${encodeURIComponent(t.slug)}`;
+        const href = `${base}?tag=${encodeURIComponent(t.slug)}`;
         return `<li class="blog-tag"><a href="${href}" rel="tag">${esc(t.label)}</a></li>`;
       })
       .join("");
     return `<ul class="blog-card__tags" aria-label="Etiketler">${items}</ul>`;
+  }
+
+  function renderArchiveCardTags(tags) {
+    const list = normalizeTags(tags);
+    if (!list.length) return "";
+    const items = list.map((t) => `<li class="blog-card__tag">${esc(t.label)}</li>`).join("");
+    return `<ul class="blog-card__tags" aria-label="Tags">${items}</ul>`;
+  }
+
+  function articleArchiveCard(a, ctaText) {
+    const excerpt = articleCardExcerpt(a);
+    const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
+    const tags = renderArchiveCardTags(a.tags);
+    const title = a.cardTitle || a.title || "";
+    const cta = ctaText || "Review the blog";
+    return `
+      <article class="blog-card blog-card--archive">
+        <a class="blog-card__media" href="${href}">
+          <img class="blog-card__image" src="${esc(a.cardImage)}" alt="" width="550" height="413" loading="lazy">
+        </a>
+        <div class="blog-card__body">
+          ${tags}
+          <h2 class="blog-card__title"><a href="${href}">${esc(title)}</a></h2>
+          ${excerpt ? `<p class="blog-card__excerpt">${esc(excerpt)}</p>` : ""}
+          <a class="blog-card__cta" href="${href}">
+            <span>${esc(cta).toUpperCase()}</span>
+            <span class="blog-card__cta-icon" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>`;
   }
 
   function renderArticleCardTitle(a, href) {
@@ -664,6 +695,74 @@
 
   function thinkingTitleLines(t) {
     return splitTitleLines(t, "The Witness Desk");
+  }
+
+  function blogTitleLines(b) {
+    return splitTitleLines(b, "What I'm Thinking");
+  }
+
+  function renderBlog(b, articles, allArticles) {
+    const tagSlug = getTagFilter();
+    let list = articles || [];
+    const catalog = allArticles || articles || [];
+    const ctaText = b.cardLinkText || "Review the blog";
+
+    if (!tagSlug && Array.isArray(b.cardSlugs) && b.cardSlugs.length) {
+      list = b.cardSlugs
+        .map((slug) => catalog.find((a) => a.slug === slug))
+        .filter(Boolean);
+    }
+
+    let heroHtml = "";
+    if (tagSlug) {
+      list = (allArticles || list).filter((a) => articleHasTag(a, tagSlug));
+      let label = tagSlug.replace(/-/g, " ");
+      (allArticles || []).forEach((a) => {
+        normalizeTags(a.tags).forEach((tag) => {
+          if (tag.slug === tagSlug) label = tag.label;
+        });
+      });
+      applyThinkingSeo(tagSlug, label);
+      heroHtml = `
+        <section class="blog-hero blog-hero--filter">
+          <div class="container">
+            <p class="blog-back"><a href="blog.html">← All posts</a></p>
+            <h1 class="blog-hero__title blog-hero__title--filter">${esc(label)}</h1>
+          </div>
+        </section>`;
+    } else {
+      const lines = blogTitleLines(b);
+      const lead = b.lead ? `<p class="blog-hero__lead hero-lead">${esc(b.lead)}</p>` : "";
+      heroHtml = `
+        <section class="blog-hero">
+          <div class="container">
+            ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page", accentOn: "line2" })}
+            ${lead}
+          </div>
+        </section>`;
+    }
+
+    const cards = list.length
+      ? list.map((a) => articleArchiveCard(a, ctaText)).join("")
+      : `<p class="blog-grid__empty">No posts with this tag yet.</p>`;
+    const loadMore =
+      !tagSlug && b.showLoadMore !== false
+        ? `<div class="blog-load-more">
+            <button type="button" class="blog-load-more__btn" data-load-more>
+              ${esc(b.loadMoreText || "Load more archive").toUpperCase()}
+              <span class="blog-load-more__icon" aria-hidden="true">↓</span>
+            </button>
+          </div>`
+        : "";
+
+    return `
+      ${heroHtml}
+      <section class="blog-archive">
+        <div class="container">
+          <div class="blog-grid blog-grid--archive">${cards}</div>
+          ${loadMore}
+        </div>
+      </section>`;
   }
 
   function renderWorks(w, projects) {
@@ -968,6 +1067,7 @@
     const titles = site.pageTitles || {};
     if (page === "home" && titles.home) document.title = titles.home;
     if (page === "works" && titles.works) document.title = titles.works;
+    if (page === "blog" && titles.blog) document.title = titles.blog;
     if (page === "thinking" && titles.thinking) document.title = titles.thinking;
     if (page === "about" && titles.about) document.title = titles.about;
     applySiteMeta(site, page);
@@ -978,7 +1078,7 @@
 
     let activePage = page;
     if (page === "project") activePage = "works";
-    if (page === "article") activePage = "thinking";
+    if (page === "article") activePage = "blog";
 
     if (headerEl) headerEl.innerHTML = renderHeader(site, activePage);
     if (footerEl) footerEl.innerHTML = renderFooter(site);
@@ -989,6 +1089,8 @@
       mainEl.innerHTML = renderHome(data.home || {}, data.projects || [], site, data.articles || []);
     } else if (page === "works") {
       mainEl.innerHTML = renderWorks(data.works || {}, data.projects || []);
+    } else if (page === "blog") {
+      mainEl.innerHTML = renderBlog(data.blog || {}, data.articles || [], data.articles || []);
     } else if (page === "thinking") {
       mainEl.innerHTML = renderThinking(
         data.thinking || {},
@@ -1010,7 +1112,7 @@
       const slug = getSlug();
       const a = (data.articles || []).find((x) => x.slug === slug);
       if (!a) {
-        mainEl.innerHTML = `<div class="container page-hero"><h1>Yazı bulunamadı</h1><p><a href="thinking.html">← Tüm yazılar</a></p></div>`;
+        mainEl.innerHTML = `<div class="container page-hero"><h1>Yazı bulunamadı</h1><p><a href="blog.html">← All posts</a></p></div>`;
       } else {
         applyArticleSeo(a, site);
         mainEl.innerHTML = renderArticle(a);

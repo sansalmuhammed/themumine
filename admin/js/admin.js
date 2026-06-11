@@ -16,7 +16,8 @@
     home: "Ana Sayfa",
     works: "Selected Works",
     projects: "Projeler",
-    thinking: "Yazılar Listesi",
+    blog: "Blog",
+    thinking: "Witness Desk",
     articles: "Makaleler",
     about: "Hakkımda",
   };
@@ -278,7 +279,8 @@
     return `
       <div class="panel"><h3>Genel</h3>
         ${field("Logo metni (alt)", "site.logo", s.logo)}
-        ${imageField("Logo görseli", "site.logoImage", s.logoImage)}
+        ${imageField("Header logo görseli", "site.logoImage", s.logoImage)}
+        ${imageField("Footer logo görseli", "site.footerLogoImage", s.footerLogoImage)}
         ${field("Footer metni (yedek)", "site.footer", s.footer)}
         ${field("Footer tasarım", "site.footerDesignCredit", s.footerDesignCredit)}
         ${field("Footer telif", "site.footerCopyright", s.footerCopyright)}
@@ -286,7 +288,7 @@
       </div>
       <div class="panel"><h3>Menü (VISION, PROJECT…)</h3>${navHtml}
         <button type="button" class="btn btn-secondary btn-sm" id="add-nav">+ Menü öğesi</button>
-        <p class="hint">Sayfa kodları: home, works, thinking, about</p>
+        <p class="hint">Sayfa kodları: home, works, blog, thinking, about</p>
       </div>
       <div class="panel"><h3>Contact butonu</h3>
         ${field("Buton metni", "site.contactButton.label", contact.label)}
@@ -314,7 +316,8 @@
       <div class="panel"><h3>Sayfa başlıkları (tarayıcı sekmesi)</h3>
         ${field("Ana sayfa", "site.pageTitles.home", pt.home)}
         ${field("Works", "site.pageTitles.works", pt.works)}
-        ${field("Thinking", "site.pageTitles.thinking", pt.thinking)}
+        ${field("Blog", "site.pageTitles.blog", pt.blog)}
+        ${field("Witness Desk", "site.pageTitles.thinking", pt.thinking)}
         ${field("About", "site.pageTitles.about", pt.about)}
       </div>`;
   }
@@ -447,12 +450,35 @@
       <p class="hint">Kart görselleri, etiketler ve özet metinler «Projeler» bölümünden düzenlenir.</p>`;
   }
 
+  function renderBlog() {
+    const b = content.blog || {};
+    const articleSlugs = (content.articles || []).map((a) => a.slug).join(", ");
+    const cardSlugs = b._cardSlugs ?? linesToText(b.cardSlugs);
+    return `
+      <div class="panel"><h3>Blog sayfası (What I'm Thinking)</h3>
+        ${field("Başlık satır 1 (beyaz)", "blog.titleLine1", b.titleLine1)}
+        ${field("Başlık satır 2 (kırmızı)", "blog.titleLine2", b.titleLine2)}
+        ${field("Alt metin (kırmızı çizgili)", "blog.lead", b.lead, "textarea")}
+        ${field("Kart link metni", "blog.cardLinkText", b.cardLinkText, "text", "Örn: Review the blog")}
+        ${field("Load more metni", "blog.loadMoreText", b.loadMoreText)}
+        ${field(
+          "Kart sırası (slug listesi)",
+          "blog._cardSlugs",
+          cardSlugs,
+          "textarea",
+          "Her satır bir makale slug. Mevcut: " + articleSlugs
+        )}
+        ${field("Load more butonunu göster", "blog.showLoadMore", b.showLoadMore !== false, "checkbox")}
+      </div>
+      <p class="hint">Kart görselleri, etiketler ve özet metinler «Makaleler» bölümünden düzenlenir.</p>`;
+  }
+
   function renderThinking() {
     const t = content.thinking || {};
     const articleSlugs = (content.articles || []).map((a) => a.slug).join(", ");
     const cardSlugs = t._cardSlugs ?? linesToText(t.cardSlugs);
     return `
-      <div class="panel"><h3>The Witness Desk (blog sayfası)</h3>
+      <div class="panel"><h3>The Witness Desk (ana sayfa bölümü)</h3>
         ${field("Başlık satır 1 (beyaz)", "thinking.titleLine1", t.titleLine1)}
         ${field("Başlık satır 2 (kırmızı)", "thinking.titleLine2", t.titleLine2)}
         ${field("Alt metin", "thinking.lead", t.lead, "textarea")}
@@ -684,6 +710,11 @@
       works.projectSlugs = parseLinesText(works._projectSlugs);
       delete works._projectSlugs;
     }
+    const blog = content.blog;
+    if (blog?._cardSlugs != null) {
+      blog.cardSlugs = parseLinesText(blog._cardSlugs);
+      delete blog._cardSlugs;
+    }
     const thinking = content.thinking;
     if (thinking?._cardSlugs != null) {
       thinking.cardSlugs = parseLinesText(thinking._cardSlugs);
@@ -753,6 +784,7 @@
     if (section === "site") html = renderSite();
     else if (section === "home") html = renderHome();
     else if (section === "works") html = renderWorks();
+    else if (section === "blog") html = renderBlog();
     else if (section === "thinking") html = renderThinking();
     else if (section === "projects") html = renderProjects();
     else if (section === "articles") html = renderArticles();
@@ -925,6 +957,9 @@
     }
     if (content.works?.projectSlugs) {
       content.works._projectSlugs = linesToText(content.works.projectSlugs);
+    }
+    if (content.blog?.cardSlugs) {
+      content.blog._cardSlugs = linesToText(content.blog.cardSlugs);
     }
     if (content.thinking?.cardSlugs) {
       content.thinking._cardSlugs = linesToText(content.thinking.cardSlugs);
