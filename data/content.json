@@ -67,7 +67,7 @@
       "titleLine2": "Projects",
       "bento": {
         "projectSlug": "crema-cosmo",
-        "heroImage": "assets/creative/crema-cosmo-hero.png",
+        "heroImage": "assets/uploads/1781180865892-29ae6c08dde8dbd096db3ca2db0e38f56bded4cbc.png",
         "heroImageAlt": "Crema Cosmo — fantasy family musical",
         "badge": "Lastest Project",
         "projectTitle": "CREMA COSMO",
@@ -76,7 +76,10 @@
         "loglineLabel": "LOGLINE",
         "logline": "Two bickering siblings get slurped into Grandma's coffee cup , where they grow silly milk mustaches, dodge grumpy cup-guards, and discover that the only way to save her is to sing, laugh, and make the weirdest coffee noises ever.",
         "sealImage": "assets/creative/seal-panel.png",
-        "tags": ["CONCEPT", "COSMO"],
+        "tags": [
+          "CONCEPT",
+          "COSMO"
+        ],
         "breakdownTitle": "PROJECT BREAKDOWN",
         "breakdownItems": [
           "Visual Swirl: Visualizing Conflict.",
@@ -297,7 +300,10 @@
       "homeDescription": "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical.",
       "cardTitle": "Crema Cosmo",
       "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
-      "cardTags": ["Fantasy", "Musical"],
+      "cardTags": [
+        "Fantasy",
+        "Musical"
+      ],
       "meta": "Fantasy · Musical",
       "cardImage": "assets/creative/crema-cosmo-hero.png",
       "heroImage": "assets/creative/crema-cosmo-hero.png",
@@ -336,7 +342,10 @@
       "titleLine2": "Bubble Buddies",
       "cardTitle": "Bubble Buddies",
       "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve...",
-      "cardTags": ["Adventure", "Preschool Educational (Ages 4-6)"],
+      "cardTags": [
+        "Adventure",
+        "Preschool Educational (Ages 4-6)"
+      ],
       "meta": "Adventure · Preschool",
       "cardImage": "assets/creative/bubble-buddies-card.png",
       "heroImage": "assets/creative/bubble-buddies-card.png",
@@ -369,7 +378,10 @@
       "titleLine2": "Void Manifesto",
       "cardTitle": "Void Manifesto",
       "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
-      "cardTags": ["Fantasy", "Musical"],
+      "cardTags": [
+        "Fantasy",
+        "Musical"
+      ],
       "meta": "Fantasy · Musical",
       "cardImage": "assets/creative/crema-cosmo-hero.png",
       "heroImage": "assets/creative/crema-cosmo-hero.png",
