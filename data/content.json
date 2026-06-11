@@ -386,21 +386,21 @@
         "Musical"
       ],
       "meta": "Fantasy · Musical",
-      "cardImage": "assets/creative/crema-cosmo-hero.png",
-      "heroImage": "assets/creative/crema-cosmo-hero.png",
+      "cardImage": "assets/uploads/1781181356823-crema-cosmo.png",
+      "heroImage": "assets/uploads/1781181366289-crema-cosmo.png",
       "showPlayButton": true,
       "title": "Project: Void Manifesto",
       "paragraphs": [
         "A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens."
       ],
-      "sideImage": "assets/creative/crema-cosmo-hero.png",
+      "sideImage": "assets/uploads/1781181374796-crema-cosmo.png",
       "sideImageAlt": "Void Manifesto illustration",
       "storyTitle": "Story Engine",
       "storyTitleLine1": "Story",
       "storyTitleLine2": "Engine",
       "storySections": [],
       "gallery": [
-        "assets/creative/crema-cosmo-hero.png"
+        "assets/uploads/1781181374796-crema-cosmo.png"
       ],
       "homeBadge": "",
       "homeDescription": ""
