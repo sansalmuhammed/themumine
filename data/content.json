@@ -195,7 +195,8 @@
       "bubble-buddies",
       "void-manifesto",
       "bubble-buddies"
-    ]
+    ],
+    "showLoadMore": true
   },
   "thinking": {
     "titleLine1": "The Witness",
@@ -305,15 +306,15 @@
         "Musical"
       ],
       "meta": "Fantasy · Musical",
-      "cardImage": "assets/creative/crema-cosmo-hero.png",
-      "heroImage": "assets/creative/crema-cosmo-hero.png",
+      "cardImage": "assets/uploads/1781181199470-crema-cosmo.png",
+      "heroImage": "assets/uploads/1781181206249-crema-cosmo.png",
       "showPlayButton": true,
       "title": "Project: Crema Cosmo",
       "paragraphs": [
         "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical where silly songs and weird coffee noises might be the only way home.",
         "Visual swirl, milk-mustache motifs, and cup-guard designs shape a world built on conflict, discovery, and family."
       ],
-      "sideImage": "assets/creative/crema-cosmo-hero.png",
+      "sideImage": "assets/uploads/1781181215737-crema-cosmo.png",
       "sideImageAlt": "Crema Cosmo illustration",
       "storyTitle": "Story Engine",
       "storyTitleLine1": "Story",
@@ -370,7 +371,9 @@
       ],
       "gallery": [
         "assets/creative/bubble-buddies-card.png"
-      ]
+      ],
+      "homeBadge": "",
+      "homeDescription": ""
     },
     {
       "slug": "void-manifesto",
@@ -398,7 +401,9 @@
       "storySections": [],
       "gallery": [
         "assets/creative/crema-cosmo-hero.png"
-      ]
+      ],
+      "homeBadge": "",
+      "homeDescription": ""
     },
     {
       "slug": "witness-book",
@@ -422,7 +427,13 @@
           ]
         }
       ],
-      "gallery": []
+      "gallery": [],
+      "cardExcerpt": "",
+      "homeBadge": "",
+      "homeDescription": "",
+      "titleLine1": "",
+      "titleLine2": "",
+      "cardTags": []
     },
     {
       "slug": "heartfelt-stories",
@@ -439,7 +450,13 @@
       "sideImageAlt": "",
       "storyTitle": "Story Board",
       "storySections": [],
-      "gallery": []
+      "gallery": [],
+      "cardExcerpt": "",
+      "homeBadge": "",
+      "homeDescription": "",
+      "titleLine1": "",
+      "titleLine2": "",
+      "cardTags": []
     },
     {
       "slug": "chronologies",
@@ -456,7 +473,13 @@
       "sideImageAlt": "",
       "storyTitle": "Story Board",
       "storySections": [],
-      "gallery": []
+      "gallery": [],
+      "cardExcerpt": "",
+      "homeBadge": "",
+      "homeDescription": "",
+      "titleLine1": "",
+      "titleLine2": "",
+      "cardTags": []
     }
   ],
   "articles": [
