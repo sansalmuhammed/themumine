@@ -873,7 +873,124 @@
     return renderWorkCardTags(tags);
   }
 
-  function renderProject(p) {
+  function renderProjectMissionPanel(mission, align) {
+    const paras = (mission.paragraphs || [])
+      .map((x) => `<p>${formatText(x)}</p>`)
+      .join("");
+    return `
+      <p class="project-inside__mission-label">${esc(mission.label || "THE MISSION")}</p>
+      <p class="project-inside__mission-quote">${formatText(mission.quote || "")}</p>
+      <div class="project-inside__mission-copy">${paras}</div>`;
+  }
+
+  function renderProjectInside(p) {
+    const mission = p.mission || {};
+    const missionImage = mission.image || p.sideImage || p.heroImage;
+    const play = p.showPlayButton
+      ? `<button type="button" class="project-inside__play" aria-label="Play video">
+          <span class="project-inside__play-icon" aria-hidden="true"></span>
+        </button>`
+      : "";
+    const displayTitle =
+      p.displayTitle ||
+      [p.titleLine1, p.titleLine2].filter(Boolean).join(" ").toUpperCase() ||
+      (p.title || "").toUpperCase();
+    const projectDate = p.projectDate || "";
+    const storyIntro = p.storyEngineIntro || "";
+    const articles = (p.storyArticles || [])
+      .map(
+        (a) => `
+        <article class="project-inside__article">
+          <h3 class="project-inside__article-title">${esc(a.heading)}</h3>
+          <div class="project-inside__article-body">
+            ${(a.paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("")}
+          </div>
+        </article>`
+      )
+      .join("");
+    const cta = p.materialsCta || {};
+    const materialsBtn = cta.text
+      ? `<a class="project-inside__materials-btn" href="${esc(cta.href || "#")}">
+          <span>${esc(cta.text).toUpperCase()}</span>
+          <span class="project-inside__materials-icon" aria-hidden="true"></span>
+        </a>`
+      : "";
+    const closingImage = p.closingImage || p.heroImage;
+
+    return `
+      <div class="project-inside">
+        <section class="project-inside__hero" aria-label="Project video">
+          <div class="project-inside__hero-frame">
+            <img
+              class="project-inside__hero-image"
+              src="${esc(p.heroImage)}"
+              alt="${esc(p.sideImageAlt || p.cardTitle || "")}"
+              width="1280"
+              height="720"
+            >
+            ${play}
+          </div>
+        </section>
+
+        <div class="project-inside__main">
+          <header class="project-inside__title-block">
+            ${projectDate ? `<p class="project-inside__date">${esc(projectDate)}</p>` : ""}
+            <h1 class="project-inside__page-title">${esc(displayTitle)}</h1>
+          </header>
+
+          <section class="project-inside__brief project-inside__brief--left" aria-labelledby="mission-left">
+            <div class="project-inside__brief-stage">
+              <div class="project-inside__brief-media" aria-hidden="true">
+                <img src="${esc(missionImage)}" alt="" width="727" height="1279" loading="lazy">
+              </div>
+              <div class="project-inside__brief-panel" id="mission-left">
+                ${renderProjectMissionPanel(mission, "left")}
+              </div>
+            </div>
+          </section>
+
+          <section class="project-inside__story" aria-labelledby="story-engine-title">
+            <header class="project-inside__story-head">
+              <h2 class="project-inside__story-title" id="story-engine-title">STORY ENGINE</h2>
+              <span class="project-inside__story-rule" aria-hidden="true"></span>
+              ${storyIntro ? `<p class="project-inside__story-intro">${formatText(storyIntro)}</p>` : ""}
+            </header>
+            ${articles ? `<div class="project-inside__articles">${articles}</div>` : ""}
+          </section>
+
+          <section class="project-inside__brief project-inside__brief--right" aria-labelledby="mission-right">
+            <div class="project-inside__brief-stage project-inside__brief-stage--split">
+              <div class="project-inside__brief-media project-inside__brief-media--split" aria-hidden="true">
+                <img src="${esc(missionImage)}" alt="" width="727" height="1279" loading="lazy">
+              </div>
+              <div class="project-inside__brief-panel project-inside__brief-panel--right" id="mission-right">
+                <div class="project-inside__brief-panel-inner">
+                  ${renderProjectMissionPanel(mission, "right")}
+                  ${materialsBtn}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          ${
+            closingImage
+              ? `<section class="project-inside__closing" aria-hidden="true">
+                  <img
+                    class="project-inside__closing-image"
+                    src="${esc(closingImage)}"
+                    alt=""
+                    width="1280"
+                    height="724"
+                    loading="lazy"
+                  >
+                </section>`
+              : ""
+          }
+        </div>
+      </div>`;
+  }
+
+  function renderProjectLegacy(p) {
     const paras = (p.paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("");
     const story = (p.storySections || [])
       .map(
@@ -948,6 +1065,13 @@
         </div>
       </section>
       ${gallery ? `<section class="project-gallery"><div class="container project-gallery__stack">${gallery}</div></section>` : ""}`;
+  }
+
+  function renderProject(p) {
+    if (p.mission || (p.storyArticles && p.storyArticles.length)) {
+      return renderProjectInside(p);
+    }
+    return renderProjectLegacy(p);
   }
 
   function renderArticleBlock(b) {

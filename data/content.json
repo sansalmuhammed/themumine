@@ -357,6 +357,8 @@
       "slug": "bubble-buddies",
       "titleLine1": "Project:",
       "titleLine2": "Bubble Buddies",
+      "displayTitle": "PROJECT: BUBBLE BUDDIES",
+      "projectDate": "01/JAN/2026",
       "cardTitle": "Bubble Buddies",
       "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure.",
       "cardTags": [
@@ -368,33 +370,49 @@
       "heroImage": "assets/uploads/1781181309445-bubble-buddies.png",
       "showPlayButton": true,
       "title": "Project: Bubble Buddies",
-      "paragraphs": [
-        "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure.",
-        "Set across shimmering nebulae and underwater dreamscapes, the series follows a whimsical crew who turn misunderstanding into music, motion, and shared wonder — one bubble at a time."
+      "mission": {
+        "label": "THE MISSION",
+        "quote": "A cosmic bridge—a series that breathes understanding.",
+        "image": "assets/uploads/1781181421659-bubble-buddies.png",
+        "paragraphs": [
+          "We built the foundation of BubbleBudies on a philosophical imperative to connect isolated worlds and dissolve the barriers of misunderstanding. By integrating the \"Stimulus-Question-Dialogue-Reflection\" cycle into every galactic adventure, we remove the cognitive friction that prevents empathy and growth.",
+          "Through the lens of multiple perspectives and open-ended inquiry, we transformed a classic fantasy journey into a dynamic space where curiosity thrives. This is an environment where children learn that every voice is a valid piece of a much larger, beautifully connected universe."
+        ]
+      },
+      "storyEngineIntro": "A new bubble appears: it represents a misunderstood emotion/jucie question then, the crew search its meaning, the bubble pops, harmony returns but nobady knows whats the answer.",
+      "storyArticles": [
+        {
+          "heading": "LOGLINE",
+          "paragraphs": [
+            "Bubble Buddies travel across the universe to pop bubbles and bring understanding to worlds trapped inside them. When we listen and try to understand, everything starts to make sense."
+          ]
+        },
+        {
+          "heading": "BUBBLEBUDIES - STORY",
+          "paragraphs": [
+            "During a school science camp in Puerto Rico, young dreamer Candice shares her strange theory with her classmates: the universe might be made of invisible bubbles. The other kids laugh at her imagination, so Candice wanders into the forest with her best friend John. There they discover an old Arecibo radio telescope, half hidden among the trees. Curious, John begins to experiment with the controls while Candice excitedly explains her idea about \"bubble worlds.\" When John accidentally activates the telescope, the machine suddenly reveals a new visual spectrum — and for the first time, they see the truth: Earth is trapped inside a giant cosmic bubble. As the telescope's energy destabilizes the barrier, the bubble suddenly pops, sending a shockwave across the galaxy. The disturbance immediately alerts two forces: the controlling Bubble Masters, who keep planets trapped inside bubbles, and the adventurous BubbleBuds, explorers dedicated to freeing worlds from isolation. When the BubbleBudies arrive on Earth, they discover that Candice's curiosity and John's invention have revealed something extraordinary. Realizing the two friends may hold the key to understanding and freeing other worlds, they invite them aboard their starship, the Puffernaut. Together, they begin a journey across the universe, traveling from planet to planet — popping bubbles, solving mysteries, and helping civilizations see beyond their own worlds."
+          ]
+        },
+        {
+          "heading": "STIMULUS-QUESTION- DIALOGUE-REFLECTION CYCLE",
+          "paragraphs": [
+            "Every episode follows the core P4C cycle: a stimulus sparks a question, ideas are shared, and reflection is left open-ended. Each character models a different way of thinking, showing children that there are many valid perspectives.Children think through movement as the show uses physical play and action to explore philosophical ideas.Stories resolve physically, but philosophical questions remain unanswered to encourage child-led thinking."
+          ]
+        }
       ],
+      "materialsCta": {
+        "text": "More project materials",
+        "href": "#materials"
+      },
+      "closingImage": "assets/uploads/1781181405076-bubble-buddies.png",
       "sideImage": "assets/uploads/1781181313460-bubble-buddies.png",
       "sideImageAlt": "Bubble Buddies — cosmic preschool adventure",
       "storyTitle": "Story Engine",
       "storyTitleLine1": "Story",
       "storyTitleLine2": "Engine",
-      "storySections": [
-        {
-          "heading": "Origin",
-          "paragraphs": [
-            "Born from the idea that empathy can look like play, Bubble Buddies began as a visual metaphor: isolation as a bubble, understanding as the pop that lets light through."
-          ]
-        },
-        {
-          "heading": "Development",
-          "paragraphs": [
-            "Character design, bubble physics, and preschool-friendly conflict loops were shaped into a tone that balances cosmic scale with intimate, funny sibling energy."
-          ]
-        }
-      ],
-      "gallery": [
-        "assets/uploads/1781181405076-bubble-buddies.png",
-        "assets/uploads/1781181421659-bubble-buddies.png"
-      ],
+      "paragraphs": [],
+      "storySections": [],
+      "gallery": [],
       "homeBadge": "",
       "homeDescription": ""
     },
