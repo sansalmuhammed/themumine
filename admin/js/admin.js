@@ -61,8 +61,12 @@
     const keys = path.split(".");
     let cur = obj;
     for (let i = 0; i < keys.length - 1; i++) {
-      if (cur[keys[i]] == null) cur[keys[i]] = {};
-      cur = cur[keys[i]];
+      const key = keys[i];
+      const nextKey = keys[i + 1];
+      if (cur[key] == null) {
+        cur[key] = /^\d+$/.test(nextKey) ? [] : {};
+      }
+      cur = cur[key];
     }
     cur[keys[keys.length - 1]] = val;
   }
@@ -212,13 +216,13 @@
           if (!json.ok) throw new Error(json.error || "Yükleme başarısız");
           const storedUrl = json.url || json.path;
           deepSet(content, path, storedUrl);
-          const urlInput = root.querySelector(`[data-path="${path}"]`);
+          const wrap = input.closest(".image-field");
+          const urlInput = wrap?.querySelector("[data-path]");
           if (urlInput) {
             urlInput.value = storedUrl;
             urlInput.dispatchEvent(new Event("input"));
           }
           if (json.previewUrl) {
-            const wrap = input.closest(".image-field");
             let prev = wrap?.querySelector(".preview");
             if (!prev && wrap) {
               prev = document.createElement("div");
@@ -236,11 +240,18 @@
     });
   }
 
-  function itemCard(title, index, bodyHtml, cardId) {
-    const open = openCards.has(cardId) ? " is-open" : "";
+  function itemCard(title, index, bodyHtml, cardId, forceOpen) {
+    const open = forceOpen || openCards.has(cardId) ? " is-open" : "";
     return `<div class="item-card${open}" data-card="${cardId}">
       <div class="item-card-header" data-toggle="${cardId}"><strong>${esc(title)}</strong><span>▼</span></div>
       <div class="item-card-body">${bodyHtml}</div>
+    </div>`;
+  }
+
+  function insideSectionEditor(title, bodyHtml, blockId) {
+    return `<div class="inside-section-editor" data-inside-block="${blockId}">
+      <div class="inside-section-editor__head"><strong>${esc(title)}</strong></div>
+      <div class="inside-section-editor__body">${bodyHtml}</div>
     </div>`;
   }
 
@@ -340,45 +351,78 @@
 
   function renderArticleInsideSectionFields(a, i, s, si) {
     const base = `articles.${i}.insideSections.${si}`;
+    const sectionType = s.type || "prose";
     const types = [
-      ["prose", "Metin + vurgu"],
-      ["marker", "Numara kutusu"],
-      ["quote-section", "Bölüm başlığı + metin"],
-      ["image", "Görsel"],
+      ["prose", "Giriş metni (paragraf + italik vurgu)"],
+      ["marker", "Numara kutusu (01, 02…)"],
+      ["quote-section", "Bölüm başlığı (48px) + metin"],
+      ["image", "Tam genişlik görsel (1066×603)"],
     ];
     const typeSelect = `<div class="field"><label>Bölüm türü</label><select data-inside-type data-article="${i}" data-section="${si}">
-      ${types.map(([t, label]) => `<option value="${t}"${s.type === t ? " selected" : ""}>${label}</option>`).join("")}
+      ${types.map(([t, label]) => `<option value="${t}"${sectionType === t ? " selected" : ""}>${label}</option>`).join("")}
     </select></div>`;
 
     let inner = "";
-    if (s.type === "prose") {
+    if (sectionType === "prose") {
       inner =
-        paragraphsField("Paragraflar", `${base}._paragraphs`, s.paragraphs) +
-        field("İtalik vurgu (opsiyonel)", `${base}.emphasis`, s.emphasis, "textarea");
-    } else if (s.type === "marker") {
-      inner = field("Numara", `${base}.value`, s.value, "text", "Örn: 01");
-    } else if (s.type === "quote-section") {
+        paragraphsField(
+          "Paragraflar",
+          `${base}._paragraphs`,
+          s.paragraphs,
+          "Sayfadaki beyaz gövde metni. Paragraflar arasında boş satır bırakın."
+        ) +
+        field(
+          "İtalik vurgu (ortalanmış, opsiyonel)",
+          `${base}.emphasis`,
+          s.emphasis,
+          "textarea",
+          "Örn: Same theory. Same bones…"
+        );
+    } else if (sectionType === "marker") {
+      inner = field("Kutu içindeki numara", `${base}.value`, s.value, "text", "Örn: 01 veya 02");
+    } else if (sectionType === "quote-section") {
       inner =
-        field("Bölüm başlığı", `${base}.quote`, s.quote) +
-        paragraphsField("Paragraflar", `${base}._paragraphs`, s.paragraphs) +
-        field("İtalik vurgu (opsiyonel)", `${base}.emphasis`, s.emphasis, "textarea");
-    } else if (s.type === "image") {
-      inner = imageField("Görsel", `${base}.src`, s.src) + field("Alt metin", `${base}.alt`, s.alt);
+        field(
+          "Bölüm başlığı (büyük uppercase)",
+          `${base}.quote`,
+          s.quote,
+          "text",
+          "Örn: TRAGIC CHARACTER STRUCTURE"
+        ) +
+        paragraphsField(
+          "Paragraflar",
+          `${base}._paragraphs`,
+          s.paragraphs,
+          "Bölüm altındaki beyaz metin. Paragraflar arasında boş satır bırakın."
+        ) +
+        field(
+          "İtalik vurgu (ortalanmış, opsiyonel)",
+          `${base}.emphasis`,
+          s.emphasis,
+          "textarea"
+        );
+    } else if (sectionType === "image") {
+      inner =
+        imageField("Görsel URL", `${base}.src`, s.src) +
+        field("Alt metin (erişilebilirlik)", `${base}.alt`, s.alt, "text", "Görsel açıklaması");
+    } else {
+      inner = paragraphsField("Paragraflar", `${base}._paragraphs`, s.paragraphs);
     }
 
     const label =
-      s.type === "marker"
-        ? "Numara: " + (s.value || si + 1)
-        : s.type === "image"
-          ? "Görsel"
-          : s.quote || s.emphasis?.slice(0, 40) || "Bölüm " + (si + 1);
+      sectionType === "marker"
+        ? "Bölüm " + (si + 1) + " — Numara: " + (s.value || "—")
+        : sectionType === "image"
+          ? "Bölüm " + (si + 1) + " — Görsel"
+          : "Bölüm " + (si + 1) + " — " + (s.quote || (s.paragraphs && s.paragraphs[0]?.slice(0, 48)) || "Metin");
 
-    return itemCard(
+    return insideSectionEditor(
       label,
-      si,
       typeSelect +
         inner +
-        `<button type="button" class="btn btn-danger btn-sm" data-del-inside-section="${i}:${si}">Bölümü sil</button>`,
+        `<div class="inside-section-editor__actions">
+          <button type="button" class="btn btn-danger btn-sm" data-del-inside-section="${i}:${si}">Bu bölümü sil</button>
+        </div>`,
       `art-${i}-inside-${si}`
     );
   }
@@ -386,19 +430,46 @@
   function renderArticleInsideFields(a, i) {
     const closing = a.closingSection || {};
     const closingParas = closing._paragraphs ?? (closing.paragraphs || []).join("\n\n");
-    const insideHtml = (a.insideSections || []).map((s, si) => renderArticleInsideSectionFields(a, i, s, si)).join("");
+    const sections = a.insideSections || [];
+    const insideHtml = sections.length
+      ? sections.map((s, si) => renderArticleInsideSectionFields(a, i, s, si)).join("")
+      : `<p class="hint">Henüz içerik bölümü yok. Aşağıdaki butonla metin, görsel veya numara kutusu ekleyin.</p>`;
 
     return (
       adminGroup(
         "Detay sayfası (BLOG INSIDE)",
-        field("Görünen başlık", `articles.${i}.displayTitle`, a.displayTitle, "text", "Örn: ONE FIRE IN DIFFERENT COSMOLOGIES") +
-          field("Alt başlık", `articles.${i}.subtitle`, a.subtitle, "textarea") +
-          insideHtml +
-          `<button type="button" class="btn btn-secondary btn-sm" data-add-inside-section="${i}">+ İçerik bölümü</button>` +
+        `<p class="hint" style="margin:0 0 1rem">article.html?slug=${esc(a.slug || "")} sayfasındaki sırayla düzenleyin.</p>` +
+          field(
+            "Ana başlık (72px, uppercase)",
+            `articles.${i}.displayTitle`,
+            a.displayTitle,
+            "textarea",
+            "Örn: ONE FIRE IN DIFFERENT COSMOLOGIES"
+          ) +
+          field(
+            "Alt başlık (32px)",
+            `articles.${i}.subtitle`,
+            a.subtitle,
+            "textarea",
+            "Örn: The Cosmologies of Medea & Cleopatra…"
+          ) +
+          `<div class="inside-sections-list">${insideHtml}</div>` +
+          `<div class="inside-sections-toolbar">
+            <button type="button" class="btn btn-secondary btn-sm" data-add-inside-section="${i}" data-section-type="prose">+ Metin bölümü</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-add-inside-section="${i}" data-section-type="quote-section">+ Başlıklı bölüm</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-add-inside-section="${i}" data-section-type="image">+ Görsel</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-add-inside-section="${i}" data-section-type="marker">+ Numara kutusu</button>
+          </div>` +
           adminGroup(
-            "Kapanış",
+            "Kapanış (END OF THE DAY…)",
             field("Kapanış başlığı", `articles.${i}.closingSection.title`, closing.title, "text", "Örn: END OF THE DAY…") +
-              field("Kapanış paragrafları", `articles.${i}.closingSection._paragraphs`, closingParas, "textarea")
+              field(
+                "Kapanış paragrafları",
+                `articles.${i}.closingSection._paragraphs`,
+                closingParas,
+                "textarea",
+                "Sayfanın sonundaki kapanış metni"
+              )
           )
       ) +
       adminGroup(
@@ -746,7 +817,8 @@
           ) +
             renderArticleInsideFields(a, i) +
             `<button type="button" class="btn btn-danger btn-sm" data-del-article="${i}" style="margin-top:1rem">Makaleyi sil</button>`,
-          "art-" + i
+          "art-" + i,
+          true
         );
       })
       .join("") + `<button type="button" class="btn btn-secondary" id="add-article">+ Yeni makale</button>`;
@@ -1100,8 +1172,20 @@
       btn.addEventListener("click", () => {
         collectFromDom();
         const i = parseInt(btn.dataset.addInsideSection, 10);
+        const type = btn.dataset.sectionType || "prose";
         content.articles[i].insideSections = content.articles[i].insideSections || [];
-        content.articles[i].insideSections.push({ type: "prose", paragraphs: [""] });
+        const section = { type };
+        if (type === "marker") section.value = "01";
+        else if (type === "image") {
+          section.src = "";
+          section.alt = "";
+        } else if (type === "quote-section") {
+          section.quote = "";
+          section.paragraphs = [""];
+        } else {
+          section.paragraphs = [""];
+        }
+        content.articles[i].insideSections.push(section);
         render();
       });
     });
