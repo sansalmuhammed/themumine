@@ -528,15 +528,17 @@
   "articles": [
     {
       "slug": "one-fire",
-      "titleLine1": "One fire in different",
-      "titleLine2": "cultural dishes",
+      "titleLine1": "One Fire in Different",
+      "titleLine2": "Cosmologies",
+      "displayTitle": "ONE FIRE IN DIFFERENT COSMOLOGIES",
+      "subtitle": "The Cosmologies of Medea & Cleopatra, and Lady Zulaykha (pbuh)",
       "cardTitle": "One Fire in Different Cosmologies",
       "cardTitleLine1": "One Fire in Different",
       "cardTitleLine2": "Cosmologies",
       "cardExcerpt": "The Cosmologies of Medea & Cleopatra, and Lady Zulaykha (pbuh)",
       "meta": "Essay · May 2026",
       "cardImage": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
-      "title": "One Fire in Different Chronologies",
+      "title": "One Fire in Different Cosmologies",
       "tags": [
         {
           "label": "Essay",
@@ -552,60 +554,94 @@
         }
       ],
       "seo": {
-        "title": "One Fire in Different Chronologies — The Mumine",
-        "description": "Aynı ateşin farklı zaman çizgilerinde nasıl okunduğuna dair uzun form metin; tarih, mimari ve hafıza üzerine görsel araştırma."
+        "title": "One Fire in Different Cosmologies — The Mumine",
+        "description": "Medea, Cleopatra, and Lady Zulaykha through Greek, Roman-Baroque, and Islamic cosmologies — an essay on tragic structure, desire, and transformation."
       },
-      "blocks": [
+      "insideSections": [
         {
-          "type": "paragraph",
-          "text": "Aynı ateşin farklı zaman çizgilerinde nasıl okunduğuna dair uzun form metin."
+          "type": "prose",
+          "paragraphs": [
+            "Two works I read and watched one after another, two women I took great pleasure in meeting. One from Greece, one from Rome. Medea and Cleopatra were, for me, two different answers to one question. I came out of the reading group for Euripides' Medea first, the play still echoing somewhere in my mind, and then the next day I sat in a dark hall and watched a mezzo-soprano playing Julius Caesar while Cleopatra dismantled him from the inside. One came from ancient Greece. One from Baroque opera's Rome. Centuries apart, different stages, different languages. But when I placed them side by side in my mind, something clicked into place. Both women walked every step of Aristotle's tragic hero structure, step by step, with an almost uncomfortable precision. High status. A fatal flaw. A reversal of fortune. A moment of recognition. The full architecture was there, in both of them, exactly where it should be. And yet their endings could not be more different. Medea fled on a dragon chariot, her children dead, her name permanently fused with the word monster. Cleopatra was crowned Queen of Egypt, Caesar beside her, the Nile celebrating."
+          ],
+          "emphasis": "Same theory. Same bones. Completely different conclusions. Why? The answer had to do with the universe each of them inhabited. They were reflecting a worldview, a cosmology. Aristotle's framework was not just mapping the anatomy of a fall — it was mapping the cosmology behind it. The civilization that produced the story decided what the fall meant, and therefore where it ended."
         },
         {
-          "type": "paragraph",
-          "text": "Tarih, mimari ve hafıza üzerine düşünceler — Akropolis'ten piramitlere uzanan görsel araştırma serisi."
+          "type": "marker",
+          "value": "01"
         },
         {
-          "type": "image",
-          "src": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
-          "alt": "Akropolis"
-        },
-        {
-          "type": "heading",
-          "text": "I. The first light"
-        },
-        {
-          "type": "paragraph",
-          "text": "Alt başlık ve gövde metni. Numaralı listeler ve ara başlıklar makale sayfasındaki yapıya uyumludur."
-        },
-        {
-          "type": "list",
-          "items": [
-            "Kronoloji bir çizgi değil, katmanlı bir alandır.",
-            "Tanık olmak, görmekten önce dinlemeyi gerektirir.",
-            "Ateş hem yok eder hem bir arada tutar."
+          "type": "quote-section",
+          "quote": "TRAGIC CHARACTER STRUCTURE",
+          "paragraphs": [
+            "High status: The hero must begin elevated. There must be something to lose. Hamartia: The flaw. An excess, a blindness. The very quality that makes the hero great is the one that will ultimately destroy them. Hubris: The moment the hero crosses a boundary they should not cross. Often at the precise moment they believe they have won. Peripeteia: The reversal of fortune. Sudden. Irreversible. Anagnorisis:Recognition. The hero finally sees what was true all along. But this knowledge arrives either too late or at terrible cost. Catharsis: Not the hero's release. The audience's. The purging of pity and fear.",
+            "This architecture has stood for over two thousand years. And when applied to both Medea and Cleopatra, every beam falls into place. And yet the same structure leads them to two completely different ends. To understand why, we need to look behind the structure at the universe each story stands inside."
           ]
         },
         {
           "type": "image",
-          "src": "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=80",
-          "alt": "Antik kalıntılar"
+          "src": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
+          "alt": "Visual research — classical architecture"
         },
         {
-          "type": "paragraph",
-          "text": "Devam paragrafları…"
+          "type": "quote-section",
+          "quote": "HOW DID THE GREEK UNIVERSE HANDLE MEDEA?",
+          "paragraphs": [
+            "The Greek universe was built on balance. Every being had a place in this order — gods, humans, nature. And every being had a measure: metron. Metron was not merely a rule. It was an existential boundary. \"Know thyself\" — gnothi seauton — was inscribed on the wall of the temple at Delphi, and it was not a philosophical suggestion. It was a warning: know what you are, and stay within that boundary. To cross that boundary was to disturb cosmic balance. And the universe would correct it. The Greeks called this corrective force Nemesis. Nemesis was not a moral judgment — it was cosmic mathematics. What rose too high was brought low. What swelled too much was extinguished. It had nothing to do with whether a person was good or bad. It concerned only whether they had exceeded their limits. This was what the universe asked of people: to know their place. Excess could not survive in this universe. Greek tragedy exists precisely for this reason — not to tell the story of a person who crossed their limits, but to show the inevitable consequence of that crossing. And Medea was the purest answer this universe could produce. Medea was a princess of Colchis and granddaughter of the sun god Helios — the one who actually made Jason a hero was her knowledge and power (high status). She loved without limit: her family, her brother, her homeland — all given up for Jason (hamartia). When Jason remarried, Greek law offered her nothing — she was a foreigner, a woman, a sorceress. So she stepped entirely outside the law: she poisoned the new bride, she killed her own children (hubris). The moment Jason remarried was the moment everything inverted (peripeteia) — and Euripides gave her the most agonizing internal monologue in all of Greek tragedy: \"I know exactly what I am doing and I cannot stop\" (anagnorisis). It is impossible to leave her story with a clean feeling — this catharsis is not the release of grief, but the release of realizing how thin the line between devotion and destruction actually is (catharsis)."
+          ],
+          "emphasis": "Medea did not die. She fled on a dragon chariot, continued her life — but in exile. The Greek universe could not destroy her — because she was already beyond every boundary. Divine lineage, human body. Foreign identity, power inside a Greek city. Mother, child-killer. Love, annihilation. This universe could not contain any of those things simultaneously. So, it did the only thing it could: it cast her out. And in the Greek moral imagination, this was a fate worse than death. Aristotle himself had written: \"A man who lives outside the polis is either a beast or a god.\" Medea was hurled into that outside — neither beast nor god, both at once, forever. Her name fused with monstrosity, stateless, without belonging, carrying everything she destroyed as she continued on. Nemesis did not punish her. It removed her from the system."
         },
         {
           "type": "image",
-          "src": "https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1000&q=80",
-          "alt": "Piramitler"
+          "src": "assets/uploads/1781180920822-83a169143c65e4e429fdfe961cadcff981de87d3.jpg",
+          "alt": "Visual research — Greek tragedy"
         },
         {
-          "type": "end",
-          "line1": "End of",
-          "line2": "the dish…",
-          "text": "the dish…"
+          "type": "quote-section",
+          "quote": "HOW DID THE ROMAN-BAROQUE UNIVERSE CROWN CLEOPATRA?",
+          "paragraphs": [
+            "The Roman universe asked a different question: What was the outcome? Virtus — the disciplined excellence of will in action — was the fundamental value of this universe. In Greece, the boundary could not be crossed; in Rome, the boundary was a target. And when Handel wrote this opera (in 1724), on the threshold of the Enlightenment, the individual and individual will were moving to the center. Feeling was no longer weakness — it was proof of authenticity. Cleopatra had risen through her intelligence and political instinct — her power came not from where she was born but from how sharply she read the world (high status). Her plan was flawless: she entered Caesar's camp disguised as a handmaiden called \"Lidia\" and began dismantling him from the inside — not through crude seduction but through wit and conversation (hamartia). Then in the second act, at the precise moment the strategy was working, an assassination attempt was made against Caesar — and Cleopatra did not make the logical move but the real one: she warned him, revealed her identity, and let her most powerful asset escape from her own hands (hubris). Caesar fled into the harbour and word came of his death — Cleopatra was taken prisoner, the architect of events was now trapped inside them (peripeteia). Handel gave her the most devastating aria in the Baroque repertoire, in that dark cell: \"I will weep for my fate.\" And what she recognized was not a strategic miscalculation — she saw who was underneath Lidia, what lay beneath the plan (anagnorisis). Leaving her story, Medea's disturbance is gone — in its place something warmer and more complicated: the release of watching someone choose not calculation but herself (catharsis)."
+          ],
+          "emphasis": "Cleopatra in her cell, her plan collapsed, her identity exposed, her strategy in pieces — and at that precise moment, the thing that mattered most to the Roman-Baroque universe occurred: the real Cleopatra beneath Lidia appeared. Caesar was alive. He returned. He defeated Ptolemy. Cleopatra ascended to her throne. Her hamartia was not corrected — it was vindicated. Feeling defeated strategy but saved the right person. For the Roman-Baroque universe, that was enough. The only measure was the outcome — and the outcome was a crown."
+        },
+        {
+          "type": "prose",
+          "paragraphs": [
+            "Two women. Two different universes. But in both, the same thing: a boundless feeling, and a map of where that feeling can take a person. Medea's destruction and Cleopatra's transformation did not feel foreign to me — because the logic of that passion, the logic of that point of \"I gave everything and I will not step back,\" is very human. Disturbingly familiar."
+          ],
+          "emphasis": "While I was thinking about these characters, another woman appeared in a corner of my mind. Zulaykha, from the qissa of the Prophet Joseph (PBUH)."
+        },
+        {
+          "type": "marker",
+          "value": "02"
+        },
+        {
+          "type": "quote-section",
+          "quote": "WHAT IS A QISSA?",
+          "paragraphs": [
+            "But before arriving here, I want to open something up: a qissa is not mythology. It is not the story of a tragic hero either. Qissa — from the Arabic root meaning \"to track, to follow\" — is a narrative that was truly lived, that has a soul, that carries a lesson inside it. In the Quran, qissas are not works of imagination; they are historical and spiritual at the same time. When the Quran says \"We relate to you the best of stories,\" it is not offering a story. Offering a reality. And this reality carries its own cosmology."
+          ]
+        },
+        {
+          "type": "image",
+          "src": "assets/uploads/1781180865892-29ae6c08dde8dbd096db3ca2db0e38f56bded4cbc.png",
+          "alt": "Visual research — Islamic narrative tradition"
+        },
+        {
+          "type": "quote-section",
+          "quote": "ISLAMIC COSMOLOGY AND LADY ZULAYKHA (pbuh)",
+          "paragraphs": [
+            "In Lady Zulaykha too, we see love. But this love resembles neither Medea's consuming flame nor Cleopatra's calculated passion that transforms into something real. Zulaykha's love is a different thing — a long, silent, stubborn captivation. She was still a young woman when she first saw Prophet Yusuf (pbuh). And from that moment on, every decision of her life, every move she made, flowed in that single direction. She wanted him. She lost. She lost her reputation. For years her name was spoken as \"that woman.\" Yusuf went to prison, Zulaykha was brought low. From the outside, this too looks like a story of ruin. But in Islamic cosmology, a fall is not the end — it is the starting point."
+          ],
+          "emphasis": "Lady Zulaykha's love consumed her, yes. But as it consumed her, what lay beneath that love became visible: a soul directed toward a human face, searching without knowing it for divine beauty. The Sufi tradition has read it this way for centuries — Yusuf was the earthly reflection of divine beauty, and Zulaykha was, without realizing it, searching for Allah (god). Repentance came. Transformation came. And at the end of the qissa she was united with Yusuf — but she was no longer that first Zulaykha. Love had transformed her. The Islamic universe did not exile her, nor did it simply crown her. It recreated her."
         }
-      ]
+      ],
+      "closingSection": {
+        "title": "END OF THE DAY…",
+        "paragraphs": [
+          "Three women. Three universes. Three different ends. But that fire — the force that wants without limit, gives everything, refuses to step back — was the same in all three. Love and Desire… Everything falls into place: the force of desire that sets a person in motion is nothing other than the fallen reflection of the first divine love into this world. The Greek universe saw it as danger and exiled it. The Roman-Baroque universe crowned it as proof of authenticity. The Islamic universe read it as a starting point — and placed it at the door of transformation. Same fire. Different hands."
+        ]
+      },
+      "blocks": []
     },
     {
       "slug": "layers-of-witness",

@@ -1097,7 +1097,68 @@
     }
   }
 
-  function renderArticle(a) {
+  function renderArticleInsideProse(paragraphs, emphasis) {
+    const paras = (paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("");
+    const emph = emphasis ? `<p class="article-inside__emphasis">${formatText(emphasis)}</p>` : "";
+    return `<div class="article-inside__prose-copy">${paras}${emph}</div>`;
+  }
+
+  function renderArticleInsideSection(s) {
+    switch (s.type) {
+      case "prose":
+        return `<section class="article-inside__section article-inside__section--prose">${renderArticleInsideProse(
+          s.paragraphs,
+          s.emphasis
+        )}</section>`;
+      case "marker":
+        return `<div class="article-inside__marker-row">
+          <span class="article-inside__marker">${esc(s.value)}</span>
+        </div>`;
+      case "quote-section":
+        return `<section class="article-inside__quote-block">
+          <blockquote class="article-inside__quote">${esc(s.quote)}</blockquote>
+          ${renderArticleInsideProse(s.paragraphs, s.emphasis)}
+        </section>`;
+      case "image":
+        return `<figure class="article-inside__photo">
+          <img src="${esc(s.src)}" alt="${esc(s.alt || "")}" width="1066" height="603" loading="lazy">
+        </figure>`;
+      case "closing":
+        return `<section class="article-inside__closing">
+          <h2 class="article-inside__closing-title">${esc(s.title)}</h2>
+          <div class="article-inside__closing-body">${renderArticleInsideProse(s.paragraphs)}</div>
+        </section>`;
+      default:
+        return "";
+    }
+  }
+
+  function renderArticleInside(a) {
+    const displayTitle =
+      a.displayTitle ||
+      [a.titleLine1, a.titleLine2].filter(Boolean).join(" ").toUpperCase() ||
+      (a.title || "").toUpperCase();
+    const subtitle = a.subtitle || a.cardExcerpt || "";
+    const sections = (a.insideSections || []).map(renderArticleInsideSection).join("");
+    const closing = a.closingSection
+      ? renderArticleInsideSection({ type: "closing", ...a.closingSection })
+      : "";
+
+    return `
+      <article class="article-inside">
+        <div class="article-inside__intro">
+          <header class="article-inside__head">
+            <h1 class="article-inside__title">${esc(displayTitle)}</h1>
+            ${subtitle ? `<p class="article-inside__subtitle">${formatText(subtitle)}</p>` : ""}
+            <span class="article-inside__divider" aria-hidden="true"></span>
+          </header>
+          <div class="article-inside__content">${sections}</div>
+        </div>
+        ${closing ? `<div class="article-inside__outro">${closing}</div>` : ""}
+      </article>`;
+  }
+
+  function renderArticleLegacy(a) {
     const body = (a.blocks || []).map(renderArticleBlock).join("");
     const tags = renderTagList(a.tags);
     const metaLine = a.meta ? `<p class="article-meta-line">${esc(a.meta)}</p>` : "";
@@ -1115,6 +1176,13 @@
         ${metaLine}
       </header>
       <article class="container article-body">${body}</article>`;
+  }
+
+  function renderArticle(a) {
+    if (a.insideSections && a.insideSections.length) {
+      return renderArticleInside(a);
+    }
+    return renderArticleLegacy(a);
   }
 
   function renderAbout(ab) {
