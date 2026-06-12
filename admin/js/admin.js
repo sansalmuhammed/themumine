@@ -244,6 +244,190 @@
     </div>`;
   }
 
+  function adminGroup(title, bodyHtml) {
+    return `<div class="admin-group"><h3 class="admin-group__title">${esc(title)}</h3>${bodyHtml}</div>`;
+  }
+
+  function paragraphsField(label, path, paragraphs, hint) {
+    return field(
+      label,
+      path,
+      (paragraphs || []).join("\n\n"),
+      "textarea",
+      hint || "Paragraflar arasında boş satır bırakın"
+    );
+  }
+
+  function syncParagraphsField(obj, key, tempKey) {
+    if (obj[tempKey] != null) {
+      obj[key] = String(obj[tempKey])
+        .split(/\n\n+/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      delete obj[tempKey];
+    }
+  }
+
+  function renderProjectInsideFields(p, i) {
+    const mission = p.mission || {};
+    const cta = p.materialsCta || {};
+    const missionParas = mission._paragraphs ?? (mission.paragraphs || []).join("\n\n");
+
+    let storyArticlesHtml = (p.storyArticles || [])
+      .map(
+        (art, ai) =>
+          itemCard(
+            art.heading || "Story makalesi " + (ai + 1),
+            ai,
+            field("Başlık", `projects.${i}.storyArticles.${ai}.heading`, art.heading) +
+              paragraphsField("Paragraflar", `projects.${i}.storyArticles.${ai}._p`, art.paragraphs) +
+              `<button type="button" class="btn btn-danger btn-sm" data-del-story-article="${i}:${ai}">Makaleyi sil</button>`,
+            `proj-${i}-inside-art-${ai}`
+          )
+      )
+      .join("");
+
+    return (
+      adminGroup(
+        "Detay sayfası (PROJECT INSIDE)",
+        field("Görünen başlık", `projects.${i}.displayTitle`, p.displayTitle, "text", "Örn: PROJECT: BUBBLE BUDDIES") +
+          field("Tarih", `projects.${i}.projectDate`, p.projectDate, "text", "Örn: 01/JAN/2026") +
+          imageField("Hero görseli / video kapağı", `projects.${i}.heroImage`, p.heroImage) +
+          field("Video play ikonu", `projects.${i}.showPlayButton`, p.showPlayButton, "checkbox") +
+          imageField("Kapanış görseli", `projects.${i}.closingImage`, p.closingImage) +
+          adminGroup(
+            "THE MISSION",
+            field("Etiket", `projects.${i}.mission.label`, mission.label, "text", "Örn: THE MISSION") +
+              field("Alıntı", `projects.${i}.mission.quote`, mission.quote, "textarea") +
+              imageField("Mission görseli", `projects.${i}.mission.image`, mission.image) +
+              field("Mission paragrafları", `projects.${i}.mission._paragraphs`, missionParas, "textarea")
+          ) +
+          field("Story Engine giriş", `projects.${i}.storyEngineIntro`, p.storyEngineIntro, "textarea") +
+          storyArticlesHtml +
+          `<button type="button" class="btn btn-secondary btn-sm" data-add-story-article="${i}">+ Story makalesi</button>` +
+          adminGroup(
+            "Materyaller butonu",
+            field("Buton metni", `projects.${i}.materialsCta.text`, cta.text) +
+              field("Buton linki", `projects.${i}.materialsCta.href`, cta.href, "text", "Örn: #materials")
+          )
+      ) +
+      adminGroup(
+        "Eski layout (opsiyonel)",
+        field("Detay başlık satır 1", `projects.${i}.titleLine1`, p.titleLine1) +
+          field("Detay başlık satır 2", `projects.${i}.titleLine2`, p.titleLine2) +
+          field("Detay başlığı (yedek)", `projects.${i}.title`, p.title) +
+          paragraphsField("Paragraflar", `projects.${i}._paragraphs`, p.paragraphs) +
+          imageField("Yan görsel", `projects.${i}.sideImage`, p.sideImage) +
+          field("Yan görsel alt", `projects.${i}.sideImageAlt`, p.sideImageAlt) +
+          field("Story bölüm başlığı", `projects.${i}.storyTitle`, p.storyTitle) +
+          (p.storySections || [])
+            .map(
+              (s, si) =>
+                itemCard(
+                  s.heading || "Bölüm",
+                  si,
+                  field("Alt başlık", `projects.${i}.storySections.${si}.heading`, s.heading) +
+                    paragraphsField("Paragraflar", `projects.${i}.storySections.${si}._p`, s.paragraphs),
+                  `proj-${i}-story-${si}`
+                )
+            )
+            .join("") +
+          `<button type="button" class="btn btn-secondary btn-sm" data-add-story="${i}">+ Story bölümü (eski)</button>` +
+          field("Galeri (her satıra bir URL)", `projects.${i}._gallery`, (p.gallery || []).join("\n"), "textarea")
+      )
+    );
+  }
+
+  function renderArticleInsideSectionFields(a, i, s, si) {
+    const base = `articles.${i}.insideSections.${si}`;
+    const types = [
+      ["prose", "Metin + vurgu"],
+      ["marker", "Numara kutusu"],
+      ["quote-section", "Bölüm başlığı + metin"],
+      ["image", "Görsel"],
+    ];
+    const typeSelect = `<div class="field"><label>Bölüm türü</label><select data-inside-type data-article="${i}" data-section="${si}">
+      ${types.map(([t, label]) => `<option value="${t}"${s.type === t ? " selected" : ""}>${label}</option>`).join("")}
+    </select></div>`;
+
+    let inner = "";
+    if (s.type === "prose") {
+      inner =
+        paragraphsField("Paragraflar", `${base}._paragraphs`, s.paragraphs) +
+        field("İtalik vurgu (opsiyonel)", `${base}.emphasis`, s.emphasis, "textarea");
+    } else if (s.type === "marker") {
+      inner = field("Numara", `${base}.value`, s.value, "text", "Örn: 01");
+    } else if (s.type === "quote-section") {
+      inner =
+        field("Bölüm başlığı", `${base}.quote`, s.quote) +
+        paragraphsField("Paragraflar", `${base}._paragraphs`, s.paragraphs) +
+        field("İtalik vurgu (opsiyonel)", `${base}.emphasis`, s.emphasis, "textarea");
+    } else if (s.type === "image") {
+      inner = imageField("Görsel", `${base}.src`, s.src) + field("Alt metin", `${base}.alt`, s.alt);
+    }
+
+    const label =
+      s.type === "marker"
+        ? "Numara: " + (s.value || si + 1)
+        : s.type === "image"
+          ? "Görsel"
+          : s.quote || s.emphasis?.slice(0, 40) || "Bölüm " + (si + 1);
+
+    return itemCard(
+      label,
+      si,
+      typeSelect +
+        inner +
+        `<button type="button" class="btn btn-danger btn-sm" data-del-inside-section="${i}:${si}">Bölümü sil</button>`,
+      `art-${i}-inside-${si}`
+    );
+  }
+
+  function renderArticleInsideFields(a, i) {
+    const closing = a.closingSection || {};
+    const closingParas = closing._paragraphs ?? (closing.paragraphs || []).join("\n\n");
+    const insideHtml = (a.insideSections || []).map((s, si) => renderArticleInsideSectionFields(a, i, s, si)).join("");
+
+    return (
+      adminGroup(
+        "Detay sayfası (BLOG INSIDE)",
+        field("Görünen başlık", `articles.${i}.displayTitle`, a.displayTitle, "text", "Örn: ONE FIRE IN DIFFERENT COSMOLOGIES") +
+          field("Alt başlık", `articles.${i}.subtitle`, a.subtitle, "textarea") +
+          insideHtml +
+          `<button type="button" class="btn btn-secondary btn-sm" data-add-inside-section="${i}">+ İçerik bölümü</button>` +
+          adminGroup(
+            "Kapanış",
+            field("Kapanış başlığı", `articles.${i}.closingSection.title`, closing.title, "text", "Örn: END OF THE DAY…") +
+              field("Kapanış paragrafları", `articles.${i}.closingSection._paragraphs`, closingParas, "textarea")
+          )
+      ) +
+      adminGroup(
+        "Eski layout (bloklar)",
+        (a.blocks || [])
+          .map((b, bi) => {
+            const types = ["paragraph", "heading", "list", "image", "end"];
+            const typeSelect = `<div class="field"><label>Blok türü</label><select data-block-type data-article="${i}" data-block="${bi}">
+              ${types.map((t) => `<option value="${t}"${b.type === t ? " selected" : ""}>${t}</option>`).join("")}
+            </select></div>`;
+            let inner = "";
+            if (b.type === "paragraph" || b.type === "end") inner = field("Metin", `articles.${i}.blocks.${bi}.text`, b.text, "textarea");
+            if (b.type === "heading") inner = field("Başlık", `articles.${i}.blocks.${bi}.text`, b.text);
+            if (b.type === "list") inner = field("Maddeler (her satır bir madde)", `articles.${i}.blocks.${bi}._items`, (b.items || []).join("\n"), "textarea");
+            if (b.type === "image") inner = imageField("Görsel", `articles.${i}.blocks.${bi}.src`, b.src) + field("Alt", `articles.${i}.blocks.${bi}.alt`, b.alt);
+            return itemCard(
+              (b.type || "blok") + " #" + (bi + 1),
+              bi,
+              typeSelect +
+                inner +
+                `<button type="button" class="btn btn-danger btn-sm" data-del-block="${i}:${bi}">Bloğu sil</button>`,
+              `art-${i}-b-${bi}`
+            );
+          })
+          .join("") + `<button type="button" class="btn btn-secondary btn-sm" data-add-block="${i}">+ Blok ekle</button>`
+      )
+    );
+  }
+
   function bindCards(root) {
     root.querySelectorAll("[data-toggle]").forEach((h) => {
       h.addEventListener("click", () => {
@@ -500,52 +684,30 @@
   function renderProjects() {
     return (content.projects || [])
       .map((p, i) => {
-        const paras = (p.paragraphs || []).join("\n\n");
-        const gallery = (p.gallery || []).join("\n");
-        let storyHtml = (p.storySections || [])
-          .map(
-            (s, si) =>
-              itemCard(
-                s.heading || "Bölüm",
-                si,
-                field("Alt başlık", `projects.${i}.storySections.${si}.heading`, s.heading) +
-                  field("Paragraflar", `projects.${i}.storySections.${si}._p`, (s.paragraphs || []).join("\n\n"), "textarea"),
-                `proj-${i}-story-${si}`
-              )
-          )
-          .join("");
-
         const cardTags = p._cardTags ?? linesToText(p.cardTags);
 
         return itemCard(
           p.cardTitle || p.slug,
           i,
-          field("Slug (URL)", `projects.${i}.slug`, p.slug, "text", "project.html?slug=...") +
-            field("Kart başlığı", `projects.${i}.cardTitle`, p.cardTitle) +
-            field(
-              "Kart etiketleri (Works sayfası)",
-              `projects.${i}._cardTags`,
-              cardTags,
-              "textarea",
-              "Her satır bir etiket. Örn: Fantasy"
-            ) +
-            field("Kart özet (Works sayfası)", `projects.${i}.cardExcerpt`, p.cardExcerpt, "textarea") +
-            field("Kart meta (opsiyonel)", `projects.${i}.meta`, p.meta) +
-            imageField("Kart görseli", `projects.${i}.cardImage`, p.cardImage) +
-            imageField("Hero görseli", `projects.${i}.heroImage`, p.heroImage) +
-            field("Ana sayfa rozeti", `projects.${i}.homeBadge`, p.homeBadge, "text", "Örn: Lastest Project") +
-            field("Ana sayfa kısa açıklama", `projects.${i}.homeDescription`, p.homeDescription, "textarea") +
-            field("Video play ikonu", `projects.${i}.showPlayButton`, p.showPlayButton, "checkbox") +
-            field("Detay başlık satır 1", `projects.${i}.titleLine1`, p.titleLine1) +
-            field("Detay başlık satır 2 (kırmızı)", `projects.${i}.titleLine2`, p.titleLine2) +
-            field("Detay başlığı (yedek)", `projects.${i}.title`, p.title) +
-            field("Paragraflar", `projects.${i}._paragraphs`, paras, "textarea") +
-            imageField("Yan görsel", `projects.${i}.sideImage`, p.sideImage) +
-            field("Yan görsel alt", `projects.${i}.sideImageAlt`, p.sideImageAlt) +
-            field("Story bölüm başlığı", `projects.${i}.storyTitle`, p.storyTitle) +
-            storyHtml +
-            `<button type="button" class="btn btn-secondary btn-sm" data-add-story="${i}">+ Story bölümü</button>` +
-            field("Galeri (her satıra bir URL)", `projects.${i}._gallery`, gallery, "textarea") +
+          adminGroup(
+            "Kart & listeler",
+            field("Slug (URL)", `projects.${i}.slug`, p.slug, "text", "project.html?slug=...") +
+              field("Kart başlığı", `projects.${i}.cardTitle`, p.cardTitle) +
+              field(
+                "Kart etiketleri (Works sayfası)",
+                `projects.${i}._cardTags`,
+                cardTags,
+                "textarea",
+                "Her satır bir etiket. Örn: Fantasy"
+              ) +
+              field("Kart özet (Works sayfası)", `projects.${i}.cardExcerpt`, p.cardExcerpt, "textarea") +
+              field("Kart meta (opsiyonel)", `projects.${i}.meta`, p.meta) +
+              imageField("Kart görseli", `projects.${i}.cardImage`, p.cardImage) +
+              field("Ana sayfa rozeti", `projects.${i}.homeBadge`, p.homeBadge, "text", "Örn: Lastest Project") +
+              field("Ana sayfa kısa açıklama", `projects.${i}.homeDescription`, p.homeDescription, "textarea") +
+              field("Sayfa başlığı (tarayıcı)", `projects.${i}.title`, p.title)
+          ) +
+            renderProjectInsideFields(p, i) +
             `<button type="button" class="btn btn-danger btn-sm" data-del-project="${i}" style="margin-top:1rem">Projeyi sil</button>`,
           "proj-" + i
         );
@@ -556,54 +718,33 @@
   function renderArticles() {
     return (content.articles || [])
       .map((a, i) => {
-        let blocksHtml = (a.blocks || [])
-          .map((b, bi) => {
-            const types = ["paragraph", "heading", "list", "image", "end"];
-            const typeSelect = `<div class="field"><label>Blok türü</label><select data-block-type data-article="${i}" data-block="${bi}">
-              ${types.map((t) => `<option value="${t}"${b.type === t ? " selected" : ""}>${t}</option>`).join("")}
-            </select></div>`;
-
-            let inner = "";
-            if (b.type === "paragraph" || b.type === "end") inner = field("Metin", `articles.${i}.blocks.${bi}.text`, b.text, "textarea");
-            if (b.type === "heading") inner = field("Başlık", `articles.${i}.blocks.${bi}.text`, b.text);
-            if (b.type === "list") inner = field("Maddeler (her satır bir madde)", `articles.${i}.blocks.${bi}._items`, (b.items || []).join("\n"), "textarea");
-            if (b.type === "image") inner = imageField("Görsel", `articles.${i}.blocks.${bi}.src`, b.src) + field("Alt", `articles.${i}.blocks.${bi}.alt`, b.alt);
-
-            return itemCard(
-              (b.type || "blok") + " #" + (bi + 1),
-              bi,
-              typeSelect + inner +
-                `<button type="button" class="btn btn-danger btn-sm" data-del-block="${i}:${bi}">Bloğu sil</button>`,
-              `art-${i}-b-${bi}`
-            );
-          })
-          .join("");
-
         const seo = a.seo || {};
         const tagsText = a._tags ?? tagsToText(a.tags);
 
         return itemCard(
           a.cardTitle || a.slug,
           i,
-          field("Slug (URL)", `articles.${i}.slug`, a.slug, "text", "SEO: article.html?slug=...") +
-            imageField("Kart görseli", `articles.${i}.cardImage`, a.cardImage) +
-            field(
-              "Etiketler (kart üstü, kırmızı kutu)",
-              `articles.${i}._tags`,
-              tagsText,
-              "textarea",
-              "Her satır bir etiket. Özel URL: Görsel Araştırma|visual-research"
-            ) +
-            field("Kart başlığı", `articles.${i}.cardTitle`, a.cardTitle) +
-            field("Kart başlık satır 1", `articles.${i}.cardTitleLine1`, a.cardTitleLine1, "text", "Witness Desk iki satırlı başlık") +
-            field("Kart başlık satır 2", `articles.${i}.cardTitleLine2`, a.cardTitleLine2, "text", "İkinci satır kırmızı vurgulu gösterilmez; kartta alt satır") +
-            field("Kart özet (gri alt metin)", `articles.${i}.cardExcerpt`, a.cardExcerpt, "textarea") +
-            field("Kart meta (opsiyonel)", `articles.${i}.meta`, a.meta) +
-            field("Makale başlığı", `articles.${i}.title`, a.title) +
-            field("SEO başlık (opsiyonel)", `articles.${i}.seo.title`, seo.title) +
-            field("SEO açıklama", `articles.${i}.seo.description`, seo.description, "textarea") +
-            blocksHtml +
-            `<button type="button" class="btn btn-secondary btn-sm" data-add-block="${i}">+ Blok ekle</button>` +
+          adminGroup(
+            "Kart & SEO",
+            field("Slug (URL)", `articles.${i}.slug`, a.slug, "text", "article.html?slug=...") +
+              imageField("Kart görseli", `articles.${i}.cardImage`, a.cardImage) +
+              field(
+                "Etiketler (kart üstü)",
+                `articles.${i}._tags`,
+                tagsText,
+                "textarea",
+                "Her satır bir etiket. Özel URL: Görsel Araştırma|visual-research"
+              ) +
+              field("Kart başlığı", `articles.${i}.cardTitle`, a.cardTitle) +
+              field("Kart başlık satır 1", `articles.${i}.cardTitleLine1`, a.cardTitleLine1, "text", "Witness Desk iki satırlı başlık") +
+              field("Kart başlık satır 2", `articles.${i}.cardTitleLine2`, a.cardTitleLine2, "text", "Kartta alt satır") +
+              field("Kart özet (gri alt metin)", `articles.${i}.cardExcerpt`, a.cardExcerpt, "textarea") +
+              field("Kart meta (opsiyonel)", `articles.${i}.meta`, a.meta) +
+              field("Sayfa başlığı (tarayıcı)", `articles.${i}.title`, a.title) +
+              field("SEO başlık (opsiyonel)", `articles.${i}.seo.title`, seo.title) +
+              field("SEO açıklama", `articles.${i}.seo.description`, seo.description, "textarea")
+          ) +
+            renderArticleInsideFields(a, i) +
             `<button type="button" class="btn btn-danger btn-sm" data-del-article="${i}" style="margin-top:1rem">Makaleyi sil</button>`,
           "art-" + i
         );
@@ -725,19 +866,19 @@
         p.cardTags = parseLinesText(p._cardTags);
         delete p._cardTags;
       }
-      if (p._paragraphs != null) {
-        p.paragraphs = p._paragraphs.split(/\n\n+/).map((s) => s.trim()).filter(Boolean);
-        delete p._paragraphs;
-      }
+      syncParagraphsField(p, "paragraphs", "_paragraphs");
       if (p._gallery != null) {
         p.gallery = p._gallery.split("\n").map((s) => s.trim()).filter(Boolean);
         delete p._gallery;
       }
+      if (p.mission) {
+        syncParagraphsField(p.mission, "paragraphs", "_paragraphs");
+      }
+      (p.storyArticles || []).forEach((s) => {
+        syncParagraphsField(s, "paragraphs", "_p");
+      });
       (p.storySections || []).forEach((s) => {
-        if (s._p != null) {
-          s.paragraphs = s._p.split(/\n\n+/).map((x) => x.trim()).filter(Boolean);
-          delete s._p;
-        }
+        syncParagraphsField(s, "paragraphs", "_p");
       });
     });
     if (content.about?.hero?._paragraphs != null) {
@@ -759,6 +900,12 @@
         delete a._tags;
       }
       if (!a.seo) a.seo = {};
+      (a.insideSections || []).forEach((s) => {
+        syncParagraphsField(s, "paragraphs", "_paragraphs");
+      });
+      if (a.closingSection) {
+        syncParagraphsField(a.closingSection, "paragraphs", "_paragraphs");
+      }
       (a.blocks || []).forEach((b) => {
         if (b._items != null) {
           b.items = b._items.split("\n").map((s) => s.trim()).filter(Boolean);
@@ -823,9 +970,21 @@
         homeBadge: "",
         homeDescription: "",
         showPlayButton: false,
+        displayTitle: "PROJECT: YENİ PROJE",
+        projectDate: "",
         titleLine1: "Project:",
         titleLine2: "Yeni Proje",
         title: "Yeni Proje",
+        mission: {
+          label: "THE MISSION",
+          quote: "",
+          image: "",
+          paragraphs: [],
+        },
+        storyEngineIntro: "",
+        storyArticles: [],
+        materialsCta: { text: "More project materials", href: "#materials" },
+        closingImage: "",
         paragraphs: [],
         sideImage: "",
         sideImageAlt: "",
@@ -855,6 +1014,25 @@
       });
     });
 
+    $$("[data-add-story-article]", root).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        collectFromDom();
+        const i = parseInt(btn.dataset.addStoryArticle, 10);
+        content.projects[i].storyArticles = content.projects[i].storyArticles || [];
+        content.projects[i].storyArticles.push({ heading: "YENİ BÖLÜM", paragraphs: [""] });
+        render();
+      });
+    });
+
+    $$("[data-del-story-article]", root).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        collectFromDom();
+        const [pi, ai] = btn.dataset.delStoryArticle.split(":").map(Number);
+        content.projects[pi].storyArticles.splice(ai, 1);
+        render();
+      });
+    });
+
     $("#add-article", root)?.addEventListener("click", () => {
       content.articles = content.articles || [];
       content.articles.push({
@@ -863,10 +1041,14 @@
         cardExcerpt: "",
         meta: "",
         cardImage: "",
+        displayTitle: "YENİ YAZI",
+        subtitle: "",
         title: "Yeni Yazı",
         tags: [],
         seo: { title: "", description: "" },
-        blocks: [{ type: "paragraph", text: "" }, { type: "end", text: "End of the story…" }],
+        insideSections: [{ type: "prose", paragraphs: [""] }],
+        closingSection: { title: "END OF THE DAY…", paragraphs: [""] },
+        blocks: [],
       });
       render();
     });
@@ -910,6 +1092,47 @@
         else if (type === "image") block.src = "";
         else block.text = "";
         content.articles[i].blocks[bi] = block;
+        render();
+      });
+    });
+
+    $$("[data-add-inside-section]", root).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        collectFromDom();
+        const i = parseInt(btn.dataset.addInsideSection, 10);
+        content.articles[i].insideSections = content.articles[i].insideSections || [];
+        content.articles[i].insideSections.push({ type: "prose", paragraphs: [""] });
+        render();
+      });
+    });
+
+    $$("[data-del-inside-section]", root).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        collectFromDom();
+        const [ai, si] = btn.dataset.delInsideSection.split(":").map(Number);
+        content.articles[ai].insideSections.splice(si, 1);
+        render();
+      });
+    });
+
+    $$("[data-inside-type]", root).forEach((sel) => {
+      sel.addEventListener("change", () => {
+        collectFromDom();
+        const i = parseInt(sel.dataset.article, 10);
+        const si = parseInt(sel.dataset.section, 10);
+        const type = sel.value;
+        const section = { type };
+        if (type === "marker") section.value = "01";
+        else if (type === "image") {
+          section.src = "";
+          section.alt = "";
+        } else if (type === "quote-section") {
+          section.quote = "";
+          section.paragraphs = [""];
+        } else {
+          section.paragraphs = [""];
+        }
+        content.articles[i].insideSections[si] = section;
         render();
       });
     });
