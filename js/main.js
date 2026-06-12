@@ -33,7 +33,7 @@ function initSiteUI() {
 
     if (notice) {
       notice.textContent =
-        baseMsg + " " + (form?.getAttribute("data-redirect-hint") || "Ana sayfaya yönlendiriliyorsunuz…");
+        baseMsg + " " + (form?.getAttribute("data-redirect-hint") || "Redirecting to the homepage…");
       notice.hidden = false;
     }
     if (location.hash !== "#contact") {
@@ -55,7 +55,7 @@ function initSiteUI() {
       const action = form.getAttribute("action");
       if (!action || action === "#") {
         e.preventDefault();
-        const msg = form.getAttribute("data-success") || "Mesajınız alındı.";
+        const msg = form.getAttribute("data-success") || "Your inquiry has been received.";
         alert(msg);
         form.reset();
       }

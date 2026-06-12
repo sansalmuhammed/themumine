@@ -231,7 +231,7 @@
   function renderHeader(site, activePage) {
     const nav = site.nav || [];
     const contact = site.contactButton || { label: "CONTACT", href: "index.html#contact" };
-    const logoSrc = site.logoImage || "assets/logo-wordmark.png";
+    const logoSrc = site.logoImage || "assets/logo-footer.png";
     const logoAlt = site.logo || "The Mumine";
 
     function navLink(item, className) {
@@ -306,9 +306,10 @@
     const ph = c.placeholders || {};
     const formName = c.formName || "contact";
     const social = (c.social || [])
+      .filter((s) => s && s.href && s.href !== "#")
       .map(
         (s) =>
-          `<a href="${esc(s.href || "#")}" target="_blank" rel="noopener noreferrer">${esc(s.label)}</a>`
+          `<a href="${esc(s.href)}" target="_blank" rel="noopener noreferrer">${esc(s.label)}</a>`
       )
       .join("");
     const addressLines = (c.addressLines || [])
@@ -403,7 +404,7 @@
     const href = `project.html?slug=${encodeURIComponent(slug)}`;
     const heroImage = b.heroImage || feat.image || project.heroImage || project.cardImage || "";
     const heroAlt = b.heroImageAlt || project.cardTitle || b.projectTitle || "";
-    const badge = b.badge || project.homeBadge || "Lastest Project";
+    const badge = b.badge || project.homeBadge || "Latest Project";
     const projectTitle = b.projectTitle || project.cardTitle || "";
     const sealImage = b.sealImage || site?.logoImage || "";
     const tags = (b.tags || [])
@@ -745,10 +746,11 @@
     const cards = list.length
       ? list.map((a) => articleArchiveCard(a, ctaText)).join("")
       : `<p class="blog-grid__empty">No posts with this tag yet.</p>`;
+    const blogInitial = parseInt(b.initialVisible || "4", 10);
     const loadMore =
-      !tagSlug && b.showLoadMore !== false
+      !tagSlug && b.showLoadMore !== false && list.length > blogInitial
         ? `<div class="blog-load-more">
-            <button type="button" class="blog-load-more__btn" data-load-more>
+            <button type="button" class="blog-load-more__btn" data-load-more data-initial="${blogInitial}">
               ${esc(b.loadMoreText || "Load more archive").toUpperCase()}
               <span class="blog-load-more__icon" aria-hidden="true">↓</span>
             </button>
@@ -777,10 +779,11 @@
     const lead = w.lead ? `<p class="works-hero__lead hero-lead">${esc(w.lead)}</p>` : "";
     const ctaText = w.cardLinkText || "Review the project";
     const cards = list.map((p) => projectCard(p, ctaText)).join("");
+    const worksInitial = parseInt(w.initialVisible || "4", 10);
     const loadMore =
-      w.showLoadMore !== false
+      w.showLoadMore !== false && list.length > worksInitial
         ? `<div class="works-load-more">
-            <button type="button" class="works-load-more__btn" data-load-more>
+            <button type="button" class="works-load-more__btn" data-load-more data-initial="${worksInitial}">
               ${esc(w.loadMoreText || "Load more archive").toUpperCase()}
               <span class="works-load-more__icon" aria-hidden="true">↓</span>
             </button>
@@ -827,7 +830,7 @@
       heroHtml = `
         <section class="thinking-hero thinking-hero--filter">
           <div class="container">
-            <p class="thinking-back"><a href="thinking.html">← Tüm yazılar</a></p>
+            <p class="thinking-back"><a href="blog.html">← All posts</a></p>
             <h1 class="thinking-hero__title thinking-hero__title--filter">${esc(label)}</h1>
           </div>
         </section>`;
@@ -869,11 +872,7 @@
       </section>`;
   }
 
-  function renderProjectTags(tags) {
-    return renderWorkCardTags(tags);
-  }
-
-  function renderProjectMissionPanel(mission, align) {
+  function renderProjectMissionPanel(mission) {
     const paras = (mission.paragraphs || [])
       .map((x) => `<p>${formatText(x)}</p>`)
       .join("");
@@ -886,11 +885,12 @@
   function renderProjectInside(p) {
     const mission = p.mission || {};
     const missionImage = mission.image || p.sideImage || p.heroImage;
-    const play = p.showPlayButton
-      ? `<button type="button" class="project-inside__play" aria-label="Play video">
+    const play =
+      p.videoUrl && p.showPlayButton
+        ? `<a class="project-inside__play" href="${esc(p.videoUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Play video">
           <span class="project-inside__play-icon" aria-hidden="true"></span>
-        </button>`
-      : "";
+        </a>`
+        : "";
     const displayTitle =
       p.displayTitle ||
       [p.titleLine1, p.titleLine2].filter(Boolean).join(" ").toUpperCase() ||
@@ -944,7 +944,7 @@
                 <img src="${esc(missionImage)}" alt="" width="727" height="1279" loading="lazy">
               </div>
               <div class="project-inside__brief-panel" id="mission-left">
-                ${renderProjectMissionPanel(mission, "left")}
+                ${renderProjectMissionPanel(mission)}
               </div>
             </div>
           </section>
@@ -958,14 +958,14 @@
             ${articles ? `<div class="project-inside__articles">${articles}</div>` : ""}
           </section>
 
-          <section class="project-inside__brief project-inside__brief--right" aria-labelledby="mission-right">
+          <section class="project-inside__brief project-inside__brief--right" id="materials" aria-labelledby="mission-right">
             <div class="project-inside__brief-stage project-inside__brief-stage--split">
               <div class="project-inside__brief-media project-inside__brief-media--split" aria-hidden="true">
                 <img src="${esc(missionImage)}" alt="" width="727" height="1279" loading="lazy">
               </div>
               <div class="project-inside__brief-panel project-inside__brief-panel--right" id="mission-right">
                 <div class="project-inside__brief-panel-inner">
-                  ${renderProjectMissionPanel(mission, "right")}
+                  ${renderProjectMissionPanel(mission)}
                   ${materialsBtn}
                 </div>
               </div>
@@ -1009,12 +1009,13 @@
           </figure>`
       )
       .join("");
-    const play = p.showPlayButton
-      ? `<button type="button" class="project-hero__play" aria-label="Play video">
+    const play =
+      p.videoUrl && p.showPlayButton
+        ? `<a class="project-hero__play" href="${esc(p.videoUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Play video">
           <span class="project-hero__play-icon" aria-hidden="true"></span>
-        </button>`
-      : "";
-    const tags = renderProjectTags(p.cardTags || p.tags);
+        </a>`
+        : "";
+    const tags = renderWorkCardTags(p.cardTags || p.tags);
     const lead = p.cardExcerpt
       ? `<p class="project-header__lead hero-lead">${esc(p.cardExcerpt)}</p>`
       : "";
@@ -1319,7 +1320,7 @@
       const slug = getSlug();
       const p = (data.projects || []).find((x) => x.slug === slug);
       if (!p) {
-        mainEl.innerHTML = `<div class="container page-hero"><h1>Proje bulunamadı</h1><p><a href="works.html">← Tüm projeler</a></p></div>`;
+        mainEl.innerHTML = `<div class="container page-hero"><h1>Project not found</h1><p><a href="works.html">← All projects</a></p></div>`;
       } else {
         document.title = p.title + " — The Mumine";
         mainEl.innerHTML = renderProject(p);
@@ -1328,7 +1329,7 @@
       const slug = getSlug();
       const a = (data.articles || []).find((x) => x.slug === slug);
       if (!a) {
-        mainEl.innerHTML = `<div class="container page-hero"><h1>Yazı bulunamadı</h1><p><a href="blog.html">← All posts</a></p></div>`;
+        mainEl.innerHTML = `<div class="container page-hero"><h1>Article not found</h1><p><a href="blog.html">← All posts</a></p></div>`;
       } else {
         applyArticleSeo(a, site);
         mainEl.innerHTML = renderArticle(a);
@@ -1336,20 +1337,27 @@
     }
 
     if (window.initSiteUI) window.initSiteUI();
-    if (page === "thinking") initThinkingLoadMore();
+    if (page === "works" || page === "blog" || page === "thinking") initArchiveLoadMore();
   }
 
-  function initThinkingLoadMore() {
-    const grid = document.querySelector(".blog-grid");
+  function initArchiveLoadMore() {
     const btn = document.querySelector("[data-load-more]");
-    if (!grid || !btn) return;
+    if (!btn) return;
+    const section = btn.closest("section");
+    const grid = section?.querySelector(".blog-grid, .works-grid");
+    if (!grid) return;
+    const cardSelector = grid.classList.contains("works-grid") ? ".work-card" : ".blog-card";
     const initial = parseInt(btn.dataset.initial || "4", 10);
-    const cards = [...grid.querySelectorAll(".blog-card")];
+    const cards = [...grid.querySelectorAll(cardSelector)];
+    if (cards.length <= initial) {
+      btn.parentElement?.remove();
+      return;
+    }
     cards.forEach((card, i) => {
-      if (i >= initial) card.classList.add("blog-card--hidden");
+      if (i >= initial) card.classList.add("archive-card--hidden");
     });
     btn.addEventListener("click", () => {
-      cards.forEach((card) => card.classList.remove("blog-card--hidden"));
+      cards.forEach((card) => card.classList.remove("archive-card--hidden"));
       btn.parentElement?.remove();
     });
   }

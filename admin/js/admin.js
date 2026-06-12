@@ -304,6 +304,7 @@
         field("Görünen başlık", `projects.${i}.displayTitle`, p.displayTitle, "text", "Örn: PROJECT: BUBBLE BUDDIES") +
           field("Tarih", `projects.${i}.projectDate`, p.projectDate, "text", "Örn: 01/JAN/2026") +
           imageField("Hero görseli / video kapağı", `projects.${i}.heroImage`, p.heroImage) +
+          field("Video URL (play ikonu için)", `projects.${i}.videoUrl`, p.videoUrl, "url", "YouTube/Vimeo linki. Boşsa play ikonu gösterilmez.") +
           field("Video play ikonu", `projects.${i}.showPlayButton`, p.showPlayButton, "checkbox") +
           imageField("Kapanış görseli", `projects.${i}.closingImage`, p.closingImage) +
           adminGroup(
@@ -625,7 +626,7 @@
         ${field("Bağlı proje slug", "home.creativeProjects.bento.projectSlug", bento.projectSlug, "text", "Mevcut: " + projectSlugs)}
         ${imageField("Hero görseli (sol üst)", "home.creativeProjects.bento.heroImage", bento.heroImage)}
         ${field("Hero görsel alt", "home.creativeProjects.bento.heroImageAlt", bento.heroImageAlt)}
-        ${field("Rozet metni", "home.creativeProjects.bento.badge", bento.badge, "text", "Örn: Lastest Project")}
+        ${field("Rozet metni", "home.creativeProjects.bento.badge", bento.badge, "text", "Örn: Latest Project")}
         ${field("Proje başlığı (kart üstü)", "home.creativeProjects.bento.projectTitle", bento.projectTitle)}
         ${field("Genre etiketi", "home.creativeProjects.bento.genreLabel", bento.genreLabel, "text", "Örn: GENRE")}
         ${field("Genre değeri", "home.creativeProjects.bento.genre", bento.genre)}
@@ -774,7 +775,7 @@
               field("Kart özet (Works sayfası)", `projects.${i}.cardExcerpt`, p.cardExcerpt, "textarea") +
               field("Kart meta (opsiyonel)", `projects.${i}.meta`, p.meta) +
               imageField("Kart görseli", `projects.${i}.cardImage`, p.cardImage) +
-              field("Ana sayfa rozeti", `projects.${i}.homeBadge`, p.homeBadge, "text", "Örn: Lastest Project") +
+              field("Ana sayfa rozeti", `projects.${i}.homeBadge`, p.homeBadge, "text", "Örn: Latest Project") +
               field("Ana sayfa kısa açıklama", `projects.${i}.homeDescription`, p.homeDescription, "textarea") +
               field("Sayfa başlığı (tarayıcı)", `projects.${i}.title`, p.title)
           ) +

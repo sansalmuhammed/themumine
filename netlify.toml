@@ -25,3 +25,9 @@
   for = "/admin/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+[[redirects]]
+  from = "/thinking.html"
+  to = "/blog.html"
+  status = 301
+  force = true

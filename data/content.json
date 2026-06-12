@@ -1,7 +1,7 @@
 {
   "site": {
     "logo": "The Mumine",
-    "logoImage": "assets/uploads/1780256865434-Logo_The_Mumine.png",
+    "logoImage": "assets/logo-footer.png",
     "footerLogoImage": "assets/logo-footer.png",
     "footer": "The Mumine — Mümine Serap",
     "footerDesignCredit": "Design by Muhammad Kizilirmak",
@@ -52,8 +52,8 @@
       "blog": "What I'm Thinking — The Mumine",
       "thinking": "The Witness Desk — The Mumine",
       "about": "About Me — The Mumine",
-      "project": "Proje — The Mumine",
-      "article": "Yazı — The Mumine"
+      "project": "Project — The Mumine",
+      "article": "Article — The Mumine"
     }
   },
   "home": {
@@ -71,7 +71,7 @@
         "projectSlug": "crema-cosmo",
         "heroImage": "assets/uploads/1781185655104-29ae6c08dde8dbd096db3ca2db0e38f56bded4cbc.png",
         "heroImageAlt": "Crema Cosmo — fantasy family musical",
-        "badge": "Lastest Project",
+        "badge": "Latest Project",
         "projectTitle": "CREMA COSMO",
         "genreLabel": "GENRE",
         "genre": "FANTASY/ FAMILY/ MUSICAL",
@@ -92,19 +92,6 @@
         ]
       }
     },
-    "featured": {
-      "titleLine1": "Creative",
-      "titleLine2": "Projects",
-      "sectionTitle": "Creative Projects",
-      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
-      "imageAlt": "Öne çıkan proje görseli",
-      "paragraphs": [
-        "Visual storytelling and editorial projects that center emotion and witness the passage of time.",
-        "Each work invites the viewer into a cinematic language built on metaphor, symbol, and shared memory."
-      ],
-      "linkText": "Read more…",
-      "projectSlug": "crema-cosmo"
-    },
     "witness": {
       "titleLine1": "The Witness",
       "titleLine2": "Desk",
@@ -113,14 +100,14 @@
       "cardSlugs": [
         "one-fire",
         "layers-of-witness",
-        "one-fire",
-        "layers-of-witness"
+        "on-memory",
+        "maps-we-carry"
       ]
     },
     "experience": {
       "titleLine1": "Built on",
       "titleLine2": "Experience",
-      "image": "assets/experience-blossom.png",
+      "image": "assets/creative/hero-corridor.png",
       "imageAlt": "Cherry blossom branches",
       "items": [
         {
@@ -153,19 +140,19 @@
       "social": [
         {
           "label": "LinkedIn",
-          "href": "https://www.linkedin.com/"
+          "href": ""
         },
         {
           "label": "Instagram",
-          "href": "https://www.instagram.com/"
+          "href": ""
         },
         {
           "label": "YouTube",
-          "href": "https://www.youtube.com/"
+          "href": ""
         },
         {
           "label": "Substance",
-          "href": "https://www.adobe.com/products/substance3d.html"
+          "href": ""
         }
       ],
       "formHeading": "Initiate Contact",
@@ -182,7 +169,7 @@
       "formAction": "/index.html?contact=success#contact",
       "successMessage": "Your inquiry has been received. Thank you.",
       "redirectDelayMs": "3000",
-      "redirectHint": "Ana sayfaya yönlendiriliyorsunuz…"
+      "redirectHint": "Redirecting to the homepage…"
     }
   },
   "works": {
@@ -195,10 +182,10 @@
     "projectSlugs": [
       "crema-cosmo",
       "bubble-buddies",
-      "void-manifesto",
-      "bubble-buddies"
+      "void-manifesto"
     ],
-    "showLoadMore": true
+    "showLoadMore": true,
+    "initialVisible": "4"
   },
   "blog": {
     "titleLine1": "What I'm",
@@ -210,9 +197,10 @@
     "cardSlugs": [
       "one-fire",
       "layers-of-witness",
-      "one-fire",
-      "layers-of-witness"
-    ]
+      "on-memory",
+      "maps-we-carry"
+    ],
+    "initialVisible": "4"
   },
   "thinking": {
     "titleLine1": "The Witness",
@@ -223,8 +211,8 @@
     "cardSlugs": [
       "one-fire",
       "layers-of-witness",
-      "one-fire",
-      "layers-of-witness"
+      "on-memory",
+      "maps-we-carry"
     ],
     "loadMoreText": "Load more archive",
     "initialVisible": "4"
@@ -239,13 +227,13 @@
         "Every project is built on a system of meaning—metaphors \nas structure, symbols as argument. By carrying their essence\n into the present, she creates a shared ground where people\n from all backgrounds can recognize themselves \nand leave with something new."
       ],
       "image": {
-        "src": "assets/uploads/1780261292717-SOLATED1.png",
+        "src": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
         "alt": "Mümine Serap portrait"
       }
     },
     "story": {
       "image": {
-        "src": "assets/uploads/1780261022279-siyah_21.png",
+        "src": "assets/uploads/1781180865892-29ae6c08dde8dbd096db3ca2db0e38f56bded4cbc.png",
         "alt": "Mümine Serap"
       },
       "blocks": [
@@ -313,7 +301,7 @@
       "slug": "crema-cosmo",
       "titleLine1": "Project:",
       "titleLine2": "Crema Cosmo",
-      "homeBadge": "Lastest Project",
+      "homeBadge": "Latest Project",
       "homeDescription": "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical.",
       "cardTitle": "Crema Cosmo",
       "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
@@ -324,7 +312,7 @@
       "meta": "Fantasy · Musical",
       "cardImage": "assets/uploads/1781181199470-crema-cosmo.png",
       "heroImage": "assets/uploads/1781181206249-crema-cosmo.png",
-      "showPlayButton": true,
+      "showPlayButton": false,
       "title": "Project: Crema Cosmo",
       "paragraphs": [
         "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical where silly songs and weird coffee noises might be the only way home.",
@@ -368,7 +356,7 @@
       "meta": "Adventure · Preschool",
       "cardImage": "assets/uploads/1781181306835-bubble-buddies.png",
       "heroImage": "assets/uploads/1781181309445-bubble-buddies.png",
-      "showPlayButton": true,
+      "showPlayButton": false,
       "title": "Project: Bubble Buddies",
       "mission": {
         "label": "THE MISSION",
@@ -379,7 +367,7 @@
           "Through the lens of multiple perspectives and open-ended inquiry, we transformed a classic fantasy journey into a dynamic space where curiosity thrives. This is an environment where children learn that every voice is a valid piece of a much larger, beautifully connected universe."
         ]
       },
-      "storyEngineIntro": "A new bubble appears: it represents a misunderstood emotion/jucie question then, the crew search its meaning, the bubble pops, harmony returns but nobady knows whats the answer.",
+      "storyEngineIntro": "A new bubble appears: it represents a misunderstood emotion/juice question then, the crew search its meaning, the bubble pops, harmony returns but nobody knows whats the answer.",
       "storyArticles": [
         {
           "heading": "LOGLINE",
@@ -421,7 +409,7 @@
       "titleLine1": "Project:",
       "titleLine2": "Void Manifesto",
       "cardTitle": "Void Manifesto",
-      "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
+      "cardExcerpt": "A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens.",
       "cardTags": [
         "Fantasy",
         "Musical"
@@ -429,7 +417,7 @@
       "meta": "Fantasy · Musical",
       "cardImage": "assets/uploads/1781181356823-crema-cosmo.png",
       "heroImage": "assets/uploads/1781181366289-crema-cosmo.png",
-      "showPlayButton": true,
+      "showPlayButton": false,
       "title": "Project: Void Manifesto",
       "paragraphs": [
         "A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens."
@@ -445,84 +433,6 @@
       ],
       "homeBadge": "",
       "homeDescription": ""
-    },
-    {
-      "slug": "witness-book",
-      "cardTitle": "The Witness Book",
-      "meta": "Editorial · Series",
-      "cardImage": "assets/uploads/1781181460095-bubble-buddies.png",
-      "heroImage": "assets/uploads/1781181408583-bubble-buddies.png",
-      "showPlayButton": false,
-      "title": "The Witness Book",
-      "paragraphs": [
-        "Editoryal seri — tanıklık ve hafıza üzerine görsel araştırma."
-      ],
-      "sideImage": "assets/uploads/1781181421659-bubble-buddies.png",
-      "sideImageAlt": "",
-      "storyTitle": "Story Board",
-      "storySections": [
-        {
-          "heading": "Origin",
-          "paragraphs": [
-            "Serinin kökeni ve kavramsal çerçeve."
-          ]
-        }
-      ],
-      "gallery": [
-        "assets/uploads/1781181421659-bubble-buddies.png"
-      ],
-      "cardExcerpt": "",
-      "homeBadge": "",
-      "homeDescription": "",
-      "titleLine1": "",
-      "titleLine2": "",
-      "cardTags": []
-    },
-    {
-      "slug": "heartfelt-stories",
-      "cardTitle": "Heartfelt Stories",
-      "meta": "Film · Narrative",
-      "cardImage": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1400&q=80",
-      "showPlayButton": true,
-      "title": "Heartfelt Stories",
-      "paragraphs": [
-        "Sinematik anlatı ve duygusal ton üzerine film projesi."
-      ],
-      "sideImage": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80",
-      "sideImageAlt": "",
-      "storyTitle": "Story Board",
-      "storySections": [],
-      "gallery": [],
-      "cardExcerpt": "",
-      "homeBadge": "",
-      "homeDescription": "",
-      "titleLine1": "",
-      "titleLine2": "",
-      "cardTags": []
-    },
-    {
-      "slug": "chronologies",
-      "cardTitle": "Chronologies",
-      "meta": "Essay · Visual research",
-      "cardImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80",
-      "heroImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1400&q=80",
-      "showPlayButton": false,
-      "title": "Chronologies",
-      "paragraphs": [
-        "Zaman çizgileri ve görsel araştırma notları."
-      ],
-      "sideImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80",
-      "sideImageAlt": "",
-      "storyTitle": "Story Board",
-      "storySections": [],
-      "gallery": [],
-      "cardExcerpt": "",
-      "homeBadge": "",
-      "homeDescription": "",
-      "titleLine1": "",
-      "titleLine2": "",
-      "cardTags": []
     }
   ],
   "articles": [
@@ -667,13 +577,13 @@
         }
       ],
       "seo": {
-        "description": "Tanıklığın katmanları üzerine kısa notlar ve düşünceler.",
+        "description": "A review of Shen Yun Performing Arts and kinesthetic storytelling.",
         "title": "Layers of Witness — The Mumine"
       },
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Tanıklığın katmanları üzerine kısa notlar."
+          "text": "A review of Shen Yun Performing Arts — movement, myth, and the body as witness."
         },
         {
           "type": "end",
@@ -703,13 +613,13 @@
         }
       ],
       "seo": {
-        "description": "Hafıza ve geri dönüş üzerine düşünceler.",
+        "description": "Reflections on return journeys, recurring motifs, and the weight of unspoken sentences.",
         "title": "On Memory and Return — The Mumine"
       },
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Hafıza ve geri dönüş üzerine düşünceler."
+          "text": "Reflections on return journeys, recurring motifs, and the weight of unspoken sentences."
         },
         {
           "type": "end",
@@ -735,13 +645,13 @@
         }
       ],
       "seo": {
-        "description": "Taşıdığımız haritalar — mekân ve yazı üzerine.",
+        "description": "Travel writing on the maps we inherit — borders, cities, and silent witnesses.",
         "title": "Maps We Carry — The Mumine"
       },
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Taşıdığımız haritalar — mekân ve yazı."
+          "text": "Travel writing on the maps we inherit — borders, cities, and silent witnesses."
         },
         {
           "type": "end",

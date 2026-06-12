@@ -44,7 +44,8 @@ Admin’deki `notifyEmail` alanı yalnızca hatırlatmadır; Netlify otomatik ok
 
 ### 4. İçerik son düzenlemeler (müşteri / siz)
 
-- [ ] **Sosyal medya linkleri** — `content.json` → `home.contact.social` içindeki LinkedIn, Instagram, YouTube, Substance URL’leri gerçek profillere güncellenmeli (şu an genel ana sayfa linkleri)
+- [ ] **Sosyal medya linkleri** — Admin → Ana Sayfa → iletişim bölümünde LinkedIn, Instagram, YouTube, Substance URL’lerini doldurun (boş bırakılırsa sitede görünmez)
+- [ ] **Header logosu** — Admin → Site & Tema → `logoImage` (şu an `assets/logo-footer.png`; istenirse tam wordmark yükleyin)
 - [ ] **İletişim e-postası** — `ist@themumine.com` doğru mu?
 - [ ] **Footer telif** — `© 2026 THE MUMINE` (admin’den değiştirilebilir)
 - [ ] Unsplash görselleri istenirse kendi görselleriyle değiştirin (admin → Yükle)
