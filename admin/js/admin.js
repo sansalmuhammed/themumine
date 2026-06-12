@@ -83,6 +83,22 @@
     return `<div class="field"><label for="${id}">${label}</label><input type="${type}" id="${id}" data-path="${path}" value="${escAttr(value)}">${hint ? `<p class="hint">${hint}</p>` : ""}</div>`;
   }
 
+  function selectField(label, path, value, options, hint = "") {
+    const id = "f-" + path.replace(/[^a-z0-9]/gi, "-");
+    const opts = options
+      .map(([optValue, optLabel]) => `<option value="${escAttr(optValue)}"${value === optValue ? " selected" : ""}>${esc(optLabel)}</option>`)
+      .join("");
+    return `<div class="field"><label for="${id}">${label}</label><select id="${id}" data-path="${path}">${opts}</select>${hint ? `<p class="hint">${hint}</p>` : ""}</div>`;
+  }
+
+  function resolveLogoType(site) {
+    const type = site?.logoType;
+    if (type === "composite" || type === "single" || type === "text") return type;
+    if (site?.logoIcon) return "composite";
+    if (site?.logoImage || site?.logoWordmark) return "single";
+    return "text";
+  }
+
   function imgSrc(url) {
     if (!url) return "";
     if (
@@ -177,7 +193,7 @@
 
   function bindFields(root) {
     root.querySelectorAll("[data-path]").forEach((el) => {
-      const ev = el.type === "checkbox" ? "change" : "input";
+      const ev = el.type === "checkbox" || el.tagName === "SELECT" ? "change" : "input";
       el.addEventListener(ev, () => {
         let val = el.type === "checkbox" ? el.checked : el.value;
         if (el.dataset.arrayIndex != null) {
@@ -537,12 +553,33 @@
       .join("");
 
     const contact = s.contactButton || {};
+    const logoType = resolveLogoType(s);
 
     return `
-      <div class="panel"><h3>Genel</h3>
-        ${field("Logo metni (alt)", "site.logo", s.logo)}
-        ${imageField("Header logo görseli", "site.logoImage", s.logoImage)}
+      <div class="panel"><h3>Logo</h3>
+        ${selectField(
+          "Header logo tipi",
+          "site.logoType",
+          logoType,
+          [
+            ["composite", "İkon + yazı (bileşik logo)"],
+            ["single", "Tek görsel"],
+            ["text", "Metin logo (görsel yok)"],
+          ],
+          "Sitede header’da hangi logo düzeninin kullanılacağını seçin."
+        )}
+        ${field("Logo metni (alt / erişilebilirlik)", "site.logo", s.logo)}
+        <div data-logo-fields="composite">
+          ${imageField("Logo ikonu (sol)", "site.logoIcon", s.logoIcon)}
+          ${imageField("Logo yazısı / wordmark (sağ)", "site.logoWordmark", s.logoWordmark)}
+        </div>
+        <div data-logo-fields="single">
+          ${imageField("Header logo görseli", "site.logoImage", s.logoImage)}
+        </div>
         ${imageField("Footer logo görseli", "site.footerLogoImage", s.footerLogoImage)}
+        <p class="hint">Bileşik logo için ikon ve wordmark yükleyin. Tek görsel modunda yalnızca header logo görseli kullanılır. Footer için ayrı görsel tanımlayabilirsiniz.</p>
+      </div>
+      <div class="panel"><h3>Genel</h3>
         ${field("Footer metni (yedek)", "site.footer", s.footer)}
         ${field("Footer tasarım", "site.footerDesignCredit", s.footerDesignCredit)}
         ${field("Footer telif", "site.footerCopyright", s.footerCopyright)}
@@ -1018,8 +1055,25 @@
 
     root.innerHTML = html;
     bindFields(root);
+    bindLogoFields(root);
     bindCards(root);
     bindActions(root);
+  }
+
+  function bindLogoFields(root) {
+    const typeSelect = root.querySelector('[data-path="site.logoType"]');
+    if (!typeSelect) return;
+
+    function syncLogoFieldVisibility() {
+      const type = typeSelect.value || "composite";
+      root.querySelectorAll("[data-logo-fields]").forEach((group) => {
+        const modes = group.dataset.logoFields.split(/\s+/);
+        group.style.display = modes.includes(type) ? "" : "none";
+      });
+    }
+
+    typeSelect.addEventListener("change", syncLogoFieldVisibility);
+    syncLogoFieldVisibility();
   }
 
   function bindActions(root) {

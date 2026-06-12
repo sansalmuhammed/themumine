@@ -261,11 +261,21 @@
     if (fonts?.logoScript) r.style.setProperty("--font-logo-script", `"${fonts.logoScript}", cursive`);
   }
 
+  function resolveLogoType(site) {
+    const type = site?.logoType;
+    if (type === "composite" || type === "single" || type === "text") return type;
+    if (site?.logoIcon) return "composite";
+    if (site?.logoImage || site?.logoWordmark) return "single";
+    return "text";
+  }
+
   function renderHeader(site, activePage) {
     const nav = site.nav || [];
     const contact = site.contactButton || { label: "CONTACT", href: "index.html#contact" };
+    const logoType = resolveLogoType(site);
     const logoIcon = site.logoIcon || "";
-    const logoWordmark = site.logoWordmark || site.logoImage || "assets/logo-footer.png";
+    const logoWordmark = site.logoWordmark || "";
+    const logoImage = site.logoImage || site.logoWordmark || "assets/logo-footer.png";
     const logoAlt = site.logo || "The Mumine";
 
     function navLink(item, className) {
@@ -278,14 +288,15 @@
       nav.map((item) => navLink(item, "")).join("") +
       `<a href="${esc(contact.href)}" class="header-cta header-cta--mobile">${esc(contact.label)}</a>`;
 
-    const brand = logoIcon
-      ? `<a href="index.html" class="brand brand--composite" aria-label="${esc(logoAlt)}">
+    const brand =
+      logoType === "composite" && logoIcon && logoWordmark
+        ? `<a href="index.html" class="brand brand--composite" aria-label="${esc(logoAlt)}">
           <img class="brand__icon" src="${esc(logoIcon)}" alt="" width="80" height="115">
           <img class="brand__wordmark" src="${esc(logoWordmark)}" alt="${esc(logoAlt)}" width="131" height="48">
         </a>`
-      : logoWordmark
-        ? `<a href="index.html" class="brand"><img class="brand__img" src="${esc(logoWordmark)}" alt="${esc(logoAlt)}" width="131" height="48"></a>`
-        : `<a href="index.html" class="brand"><span class="brand__text"><span class="brand__text-the">the</span> Mumine</span></a>`;
+        : logoType !== "text" && logoImage
+          ? `<a href="index.html" class="brand"><img class="brand__img" src="${esc(logoImage)}" alt="${esc(logoAlt)}" width="131" height="48"></a>`
+          : `<a href="index.html" class="brand"><span class="brand__text"><span class="brand__text-the">the</span> Mumine</span></a>`;
 
     return `
       <div class="header-inner">
