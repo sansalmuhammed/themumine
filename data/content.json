@@ -1,10 +1,10 @@
 {
   "site": {
     "logo": "The Mumine",
-    "logoImage": "assets/brand/logo-wordmark.png",
+    "logoImage": "assets/uploads/1781298267254-Logo_The_Mumine.png",
     "logoIcon": "assets/brand/logo-icon.png",
     "logoWordmark": "assets/brand/logo-wordmark.png",
-    "footerLogoImage": "assets/brand/logo-wordmark.png",
+    "footerLogoImage": "assets/uploads/1781298274444-Group.png",
     "footer": "The Mumine — Mümine Serap",
     "footerDesignCredit": "Design by Muhammed Kızılırmak",
     "footerCopyright": "© 2026 THE MUMINE",
@@ -142,19 +142,19 @@
       "social": [
         {
           "label": "LinkedIn",
-          "href": ""
+          "href": "#"
         },
         {
           "label": "Instagram",
-          "href": ""
+          "href": "#"
         },
         {
           "label": "youtube",
-          "href": ""
+          "href": "#"
         },
         {
           "label": "substance",
-          "href": ""
+          "href": "#"
         }
       ],
       "formHeading": "Initiate Contact",
