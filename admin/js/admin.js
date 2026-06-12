@@ -304,8 +304,14 @@
         field("Görünen başlık", `projects.${i}.displayTitle`, p.displayTitle, "text", "Örn: PROJECT: BUBBLE BUDDIES") +
           field("Tarih", `projects.${i}.projectDate`, p.projectDate, "text", "Örn: 01/JAN/2026") +
           imageField("Hero görseli / video kapağı", `projects.${i}.heroImage`, p.heroImage) +
-          field("Video URL (play ikonu için)", `projects.${i}.videoUrl`, p.videoUrl, "url", "YouTube/Vimeo linki. Boşsa play ikonu gösterilmez.") +
-          field("Video play ikonu", `projects.${i}.showPlayButton`, p.showPlayButton, "checkbox") +
+          field(
+            "YouTube video linki",
+            `projects.${i}.videoUrl`,
+            p.videoUrl,
+            "url",
+            "Örn: https://www.youtube.com/watch?v=XXXXXXXXXXX veya https://youtu.be/XXXXXXXXXXX"
+          ) +
+          field("Hero'da play ikonu göster", `projects.${i}.showPlayButton`, p.showPlayButton !== false, "checkbox") +
           imageField("Kapanış görseli", `projects.${i}.closingImage`, p.closingImage) +
           adminGroup(
             "THE MISSION",
@@ -1042,7 +1048,8 @@
         heroImage: "",
         homeBadge: "",
         homeDescription: "",
-        showPlayButton: false,
+        videoUrl: "",
+        showPlayButton: true,
         displayTitle: "PROJECT: YENİ PROJE",
         projectDate: "",
         titleLine1: "Project:",

@@ -1,10 +1,12 @@
 {
   "site": {
     "logo": "The Mumine",
-    "logoImage": "assets/logo-footer.png",
-    "footerLogoImage": "assets/logo-footer.png",
+    "logoImage": "assets/brand/logo-wordmark.png",
+    "logoIcon": "assets/brand/logo-icon.png",
+    "logoWordmark": "assets/brand/logo-wordmark.png",
+    "footerLogoImage": "assets/brand/logo-wordmark.png",
     "footer": "The Mumine — Mümine Serap",
-    "footerDesignCredit": "Design by Muhammad Kizilirmak",
+    "footerDesignCredit": "Design by Muhammed Kızılırmak",
     "footerCopyright": "© 2026 THE MUMINE",
     "metaDescription": "Mümine Serap — creative portfolio and heartfelt stories.",
     "nav": [
@@ -60,8 +62,8 @@
     "hero": {
       "titleLine1": "Heartfelt stories",
       "titleLine2": "of our era",
-      "lead": "I build on systems of meaning, using metaphors as architecture and symbols as argument. I seek the essence that survives translation in cultural stories to create a shared ground—\nwhere different histories meet and the audience leaves carrying something new.",
-      "image": "assets/creative/hero-corridor.png",
+      "lead": "I build on systems of meaning, using metaphors as architecture and symbols as argument. I seek the essence that survives translation in cultural stories to create a shared ground—where different histories meet and the audience leaves carrying something new.",
+      "image": "assets/creative/hero-bg-figma.png",
       "imageAlt": "Concrete corridor with a beam of light"
     },
     "creativeProjects": {
@@ -71,10 +73,10 @@
         "projectSlug": "crema-cosmo",
         "heroImage": "assets/uploads/1781185655104-29ae6c08dde8dbd096db3ca2db0e38f56bded4cbc.png",
         "heroImageAlt": "Crema Cosmo — fantasy family musical",
-        "badge": "Latest Project",
+        "badge": "Lastest Project",
         "projectTitle": "CREMA COSMO",
         "genreLabel": "GENRE",
-        "genre": "FANTASY/ FAMILY/ MUSICAL",
+        "genre": "FanTASY/ FAMILY/ MUSICAL",
         "loglineLabel": "LOGLINE",
         "logline": "Two bickering siblings get slurped into Grandma's coffee cup , where they grow silly milk mustaches, dodge grumpy cup-guards, and discover that the only way to save her is to sing, laugh, and make the weirdest coffee noises ever.",
         "sealImage": "assets/uploads/1781180920822-83a169143c65e4e429fdfe961cadcff981de87d3.jpg",
@@ -100,30 +102,30 @@
       "cardSlugs": [
         "one-fire",
         "layers-of-witness",
-        "on-memory",
-        "maps-we-carry"
+        "one-fire",
+        "layers-of-witness"
       ]
     },
     "experience": {
       "titleLine1": "Built on",
       "titleLine2": "Experience",
-      "image": "assets/creative/hero-corridor.png",
+      "image": "assets/creative/cherry-blossom.png",
       "imageAlt": "Cherry blossom branches",
       "items": [
         {
           "num": "01",
           "title": "Storytelling & Writing",
-          "details": "Animated TV Series · Musical Lyrics · Screenplays · Game Narrative · Fantasy & Comedy"
+          "details": "Animated TV Series · Musical Lyrics · Screenplays\n · Game Narrative · Fantasy & Comedy"
         },
         {
           "num": "02",
           "title": "Visual & Creative Development",
-          "details": "Concept Design · 3D Character Animation · Story Illustration · Data Visualization · Moodboard & Presentation"
+          "details": "Concept Design · 3D Character Animation · Story Illustration \n· Data Visualization · Moodboard & Presentation"
         },
         {
           "num": "03",
           "title": "Project Development",
-          "details": "Project Management · Product Ideation · Market Research · Workshop Design · Interactive Educational Tools"
+          "details": "Project Management · Product Ideation\n · Market Research · Workshop Design\n · Interactive Educational Tools"
         }
       ]
     },
@@ -147,11 +149,11 @@
           "href": ""
         },
         {
-          "label": "YouTube",
+          "label": "youtube",
           "href": ""
         },
         {
-          "label": "Substance",
+          "label": "substance",
           "href": ""
         }
       ],
@@ -176,13 +178,14 @@
     "titleLine1": "Selected",
     "titleLine2": "Works",
     "title": "Selected Works",
-    "lead": "A meticulously curated selection of my finest work, where ideas take tangible form.",
+    "lead": "A meticulously curated selection of my finest work,where ideas take tangible form.",
     "cardLinkText": "Review the project",
     "loadMoreText": "Load more archive",
     "projectSlugs": [
       "crema-cosmo",
       "bubble-buddies",
-      "void-manifesto"
+      "void-manifesto",
+      "bubble-buddies"
     ],
     "showLoadMore": true,
     "initialVisible": "4"
@@ -197,8 +200,8 @@
     "cardSlugs": [
       "one-fire",
       "layers-of-witness",
-      "on-memory",
-      "maps-we-carry"
+      "one-fire",
+      "layers-of-witness"
     ],
     "initialVisible": "4"
   },
@@ -219,79 +222,61 @@
   },
   "about": {
     "hero": {
-      "nameLine1": "MUMINE SERAP",
-      "nameLine2": "WHO AM I REALLY?",
-      "paragraphs": [
-        "A 21st-century explorer and maker of meanings, Mümine Serap Kızılırmak\n is a player of time and a weaver of stories.",
-        "From animation to stage musicals, she builds worlds that move \nand question. Drawing from existence, culture, and human \nexperience, she uses storytelling to bridge worlds and shared \nmemory. Her greatest desire: to leave a beautiful trace through \nstories that inspire wonder and shape the future.",
-        "Every project is built on a system of meaning—metaphors \nas structure, symbols as argument. By carrying their essence\n into the present, she creates a shared ground where people\n from all backgrounds can recognize themselves \nand leave with something new."
-      ],
+      "nameLine1": "mumine serap ",
+      "nameLine2": "kızılırmak",
+      "bio": "A 21st-century explorer and maker of meanings, Mümine Serap Kızılırmak\n is a player of time and a weaver of stories.\n\nFrom animation to stage musicals, she builds worlds that move \nand question. Drawing from existence, culture, and human \nexperience, she uses storytelling to bridge worlds and shared \nmemory. Her greatest desire: to leave a beautiful trace through \nstories that inspire wonder and shape the future.\n\nEvery project is built on a system of meaning—metaphors \nas structure, symbols as argument. By carrying their essence\n into the present, she creates a shared ground where people\n from all backgrounds can recognize themselves \nand leave with something new.",
       "image": {
-        "src": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
+        "src": "assets/about/portrait-hero.png",
         "alt": "Mümine Serap portrait"
       }
     },
     "story": {
       "image": {
-        "src": "assets/uploads/1781180865892-29ae6c08dde8dbd096db3ca2db0e38f56bded4cbc.png",
+        "src": "assets/about/portrait-story.png",
         "alt": "Mümine Serap"
       },
       "blocks": [
         {
           "num": "01",
           "label": "ORIGINS",
-          "heading": "Emotion lives in timing and the smallest gesture.",
-          "quote": "Emotion lives in timing and the smallest gesture.",
+          "heading": "\"Emotion lives in timing and the smallest gesture.\"",
+          "quote": "\"Emotion lives in timing and the smallest gesture.\"",
           "text": "Her path began in animation at Istanbul Kultur University and Siyahmarti Studios, \nwhere she mastered the rhythm of 3D movement. In 2023, her dedication \nto innovation earned her first place at TEKNOFEST, marking the beginning \nof a journey where technology meets deep human emotion."
         },
         {
           "num": "02",
           "label": "EXPANSION",
-          "heading": "Vancouver was an international kitchen; everyone brought their own flavors.",
-          "quote": "Vancouver was an international kitchen; everyone brought their own flavors.",
+          "heading": "\"Vancouver was an international kitchen; everyone brought their own flavors.\"",
+          "quote": "\"Vancouver was an international kitchen; everyone brought their own flavors.\"",
           "text": "Moving to Vancouver Film School to study writing changed everything. \nIt was a place of diverse perspectives that sharpened her craft and widened \nher lens. She emerged from this global experience with a new dream: the stage, \nand a hunger to create stories for an audience she had never \"cooked\" for before."
         },
         {
           "num": "03",
           "label": "PHILOSOPHY",
-          "heading": "Until lions have their own historians, tales of hunting will always glorify the hunter.",
-          "quote": "Until lions have their own historians, tales of hunting will always glorify the hunter.",
+          "heading": "\"Until lions have their own historians, tales of hunting will always glorify the hunter.\"",
+          "quote": "\"Until lions have their own historians, tales of hunting will always glorify the hunter.\"",
           "text": "Whether through public theatre criticism or cooking for friends, she believes that \npreparing a meal and building a story both require deep trust. Her work aims to be \nthe voice of the unheard, ensuring that every narrative is crafted with soul, care, \nand a truth that lands exactly where it’s supposed to."
         }
       ]
     },
     "skills": {
-      "titlePart1": "SKILL",
+      "titlePart1": "skill ",
       "titlePart2": "SET",
       "cards": [
         {
           "num": "01",
           "title": "STORYTELLING & WRITING",
-          "items": [
-            "Animated TV Series",
-            "Game Narrative",
-            "Musical Lyrics",
-            "Screenplays in different genre especially in Fantasy & Comedy"
-          ]
+          "body": "Storytelling & Writing : Animated Tv Series - Game Narrative - Musical Lyrics - Screenplays in different \ngenre especially in Fantasy & Comedy"
         },
         {
           "num": "02",
           "title": "VISUAL & CREATIVE DEVELOPMENT",
-          "items": [
-            "Concept Design",
-            "3D Character Animation",
-            "Story Illustration"
-          ]
+          "body": "Concept Design - 3D Character Animation- Story Illustration"
         },
         {
           "num": "03",
           "title": "PROJECT DEVELOPMENT",
-          "items": [
-            "Project Management",
-            "Product Ideation",
-            "Workshop Design & Facilitation",
-            "Interactive Educational Tools"
-          ]
+          "body": "Project Management - Product Ideation - Workshop Design & Facilitation- Interactive \nEducational Tools"
         }
       ]
     }
@@ -312,7 +297,8 @@
       "meta": "Fantasy · Musical",
       "cardImage": "assets/uploads/1781181199470-crema-cosmo.png",
       "heroImage": "assets/uploads/1781181206249-crema-cosmo.png",
-      "showPlayButton": false,
+      "videoUrl": "",
+      "showPlayButton": true,
       "title": "Project: Crema Cosmo",
       "paragraphs": [
         "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical where silly songs and weird coffee noises might be the only way home.",
@@ -343,31 +329,34 @@
     },
     {
       "slug": "bubble-buddies",
-      "titleLine1": "Project:",
-      "titleLine2": "Bubble Buddies",
+      "titleLine1": "PROJECT:",
+      "titleLine2": "BUBBLE BUDDIES",
+      "titleAccent": "BUDDIES",
       "displayTitle": "PROJECT: BUBBLE BUDDIES",
       "projectDate": "01/JAN/2026",
       "cardTitle": "Bubble Buddies",
-      "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure.",
+      "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped \nworlds. By breaking barriers, they help civilizations resolve...",
       "cardTags": [
         "Adventure",
         "Preschool Educational (Ages 4-6)"
       ],
       "meta": "Adventure · Preschool",
       "cardImage": "assets/uploads/1781181306835-bubble-buddies.png",
-      "heroImage": "assets/uploads/1781181309445-bubble-buddies.png",
-      "showPlayButton": false,
+      "heroImage": "assets/project/bubble-hero.png",
+      "heroImageOverlay": "assets/project/bubble-hero-overlay.png",
+      "videoUrl": "",
+      "showPlayButton": true,
       "title": "Project: Bubble Buddies",
       "mission": {
         "label": "THE MISSION",
         "quote": "A cosmic bridge—a series that breathes understanding.",
-        "image": "assets/uploads/1781181421659-bubble-buddies.png",
+        "image": "assets/project/mission-scene.png",
         "paragraphs": [
           "We built the foundation of BubbleBudies on a philosophical imperative to connect isolated worlds and dissolve the barriers of misunderstanding. By integrating the \"Stimulus-Question-Dialogue-Reflection\" cycle into every galactic adventure, we remove the cognitive friction that prevents empathy and growth.",
           "Through the lens of multiple perspectives and open-ended inquiry, we transformed a classic fantasy journey into a dynamic space where curiosity thrives. This is an environment where children learn that every voice is a valid piece of a much larger, beautifully connected universe."
         ]
       },
-      "storyEngineIntro": "A new bubble appears: it represents a misunderstood emotion/juice question then, the crew search its meaning, the bubble pops, harmony returns but nobody knows whats the answer.",
+      "storyEngineIntro": "A new bubble appears: it represents a misunderstood emotion/jucie question then, the crew search its meaning, the bubble pops, harmony returns but nobady knows whats the \nanswer.",
       "storyArticles": [
         {
           "heading": "LOGLINE",
@@ -378,21 +367,30 @@
         {
           "heading": "BUBBLEBUDIES - STORY",
           "paragraphs": [
-            "During a school science camp in Puerto Rico, young dreamer Candice shares her strange theory with her classmates: the universe might be made of invisible bubbles. The other kids laugh at her imagination, so Candice wanders into the forest with her best friend John. There they discover an old Arecibo radio telescope, half hidden among the trees. Curious, John begins to experiment with the controls while Candice excitedly explains her idea about \"bubble worlds.\" When John accidentally activates the telescope, the machine suddenly reveals a new visual spectrum — and for the first time, they see the truth: Earth is trapped inside a giant cosmic bubble. As the telescope's energy destabilizes the barrier, the bubble suddenly pops, sending a shockwave across the galaxy. The disturbance immediately alerts two forces: the controlling Bubble Masters, who keep planets trapped inside bubbles, and the adventurous BubbleBuds, explorers dedicated to freeing worlds from isolation. When the BubbleBudies arrive on Earth, they discover that Candice's curiosity and John's invention have revealed something extraordinary. Realizing the two friends may hold the key to understanding and freeing other worlds, they invite them aboard their starship, the Puffernaut. Together, they begin a journey across the universe, traveling from planet to planet — popping bubbles, solving mysteries, and helping civilizations see beyond their own worlds."
+            "During a school science camp in Puerto Rico, young dreamer Candice shares her strange theory with her classmates: the universe might be made of invisible bubbles. The other kids laugh at her imagination, so Candice wanders into the forest with her best friend John. ",
+            "",
+            "There they discover an old Arecibo radio telescope, half hidden among the trees. Curious, John begins to experiment with the controls while Candice excitedly explains her idea about \"bubble worlds.\" When John accidentally activates the telescope, the machine suddenly reveals a new visual spectrum — and for the first time, they see the truth: ",
+            "",
+            "Earth is trapped inside a giant cosmic bubble. ",
+            "",
+            "As the telescope's energy destabilizes the barrier, the bubble suddenly pops, sending a shockwave across the galaxy. The disturbance immediately alerts two forces: the controlling Bubble Masters, who keep planets trapped inside bubbles, and the adventurous BubbleBuds, explorers dedicated to freeing worlds from isolation.",
+            "When the BubbleBudies arrive on Earth, they discover that Candice's curiosity and John's invention have revealed something extraordinary. Realizing the two friends may hold the key to understanding and freeing other worlds, they invite them aboard their starship, the Puffernaut.",
+            "Together, they begin a journey across the universe, traveling from planet to planet — popping bubbles, solving mysteries, and helping civilizations see beyond their own worlds."
           ]
         },
         {
-          "heading": "STIMULUS-QUESTION- DIALOGUE-REFLECTION CYCLE",
+          "heading": "Stimulus-Question- Dialogue-Reflection Cycle",
           "paragraphs": [
-            "Every episode follows the core P4C cycle: a stimulus sparks a question, ideas are shared, and reflection is left open-ended. Each character models a different way of thinking, showing children that there are many valid perspectives.Children think through movement as the show uses physical play and action to explore philosophical ideas.Stories resolve physically, but philosophical questions remain unanswered to encourage child-led thinking."
+            "Every episode follows the core P4C cycle: a stimulus sparks a question, ideas are shared, and reflection is left open-ended.",
+            "Each character models a different way of thinking, showing children that there are many valid perspectives.Children think through movement as the show uses physical play and action to explore philosophical ideas.Stories resolve physically, but philosophical questions remain unanswered to encourage child-led thinking."
           ]
         }
       ],
       "materialsCta": {
-        "text": "More project materials",
+        "text": "MORE PROJECT MATERIALS",
         "href": "#materials"
       },
-      "closingImage": "assets/uploads/1781181405076-bubble-buddies.png",
+      "closingImage": "assets/project/bubble-hero.png",
       "sideImage": "assets/uploads/1781181313460-bubble-buddies.png",
       "sideImageAlt": "Bubble Buddies — cosmic preschool adventure",
       "storyTitle": "Story Engine",
@@ -409,7 +407,7 @@
       "titleLine1": "Project:",
       "titleLine2": "Void Manifesto",
       "cardTitle": "Void Manifesto",
-      "cardExcerpt": "A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens.",
+      "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they \nmust dodge grumpy guards and unite through silly songs and weird coffee noises...",
       "cardTags": [
         "Fantasy",
         "Musical"
@@ -417,7 +415,8 @@
       "meta": "Fantasy · Musical",
       "cardImage": "assets/uploads/1781181356823-crema-cosmo.png",
       "heroImage": "assets/uploads/1781181366289-crema-cosmo.png",
-      "showPlayButton": false,
+      "videoUrl": "",
+      "showPlayButton": true,
       "title": "Project: Void Manifesto",
       "paragraphs": [
         "A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens."
@@ -446,6 +445,7 @@
       "cardTitleLine1": "One Fire in Different",
       "cardTitleLine2": "Cosmologies",
       "cardExcerpt": "The Cosmologies of Medea & Cleopatra, and Lady Zulaykha (pbuh)",
+      "witnessExcerpt": "Every era produces characters that carry the full weight of their civilization's beliefs about what a human being is, what they owe the world, and what happens when they fall short.  Medea and Cleopatra, are two going to analyze them.",
       "meta": "Essay · May 2026",
       "cardImage": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
       "title": "One Fire in Different Cosmologies",
@@ -556,8 +556,9 @@
     {
       "slug": "layers-of-witness",
       "cardTitle": "Kinesthetic Storytelling",
-      "cardTitleLine1": "Kinesthetic",
-      "cardTitleLine2": "Storytelling",
+      "witnessTitle": "Storytelling By Using Kinesthetic Empathy",
+      "cardTitleLine1": "",
+      "cardTitleLine2": "",
       "cardExcerpt": "A Review of Shen Yun Performing Arts",
       "meta": "Notes · 2026",
       "cardImage": "assets/uploads/1781100532462-eeec6899b621588d031ff9ed03f3950cf98c5d58.png",

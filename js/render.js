@@ -14,6 +14,39 @@
     return esc(s).replace(/\n/g, "<br>");
   }
 
+  /** Extract YouTube video ID from watch, youtu.be, embed, or shorts URLs. */
+  function parseYoutubeId(url) {
+    if (url == null) return "";
+    const s = String(url).trim();
+    if (!s) return "";
+    if (/^[\w-]{11}$/.test(s)) return s;
+    try {
+      const u = new URL(s.includes("://") ? s : "https://" + s);
+      const host = u.hostname.replace(/^www\./, "");
+      if (host === "youtu.be") return u.pathname.split("/").filter(Boolean)[0] || "";
+      if (u.pathname.includes("/shorts/")) {
+        return u.pathname.split("/shorts/")[1]?.split(/[?&#/]/)[0] || "";
+      }
+      if (u.pathname.includes("/embed/")) {
+        return u.pathname.split("/embed/")[1]?.split(/[?&#/]/)[0] || "";
+      }
+      if (host.includes("youtube.com")) return u.searchParams.get("v") || "";
+    } catch (e) {
+      return "";
+    }
+    return "";
+  }
+
+  function renderProjectPlayButton(project, className) {
+    const id = parseYoutubeId(project.videoUrl);
+    if (!id || project.showPlayButton === false) return "";
+    const cls = className || "project-inside__play";
+    const iconCls = cls.replace(/__play$/, "__play-icon");
+    return `<button type="button" class="${esc(cls)}" data-youtube-play="${esc(id)}" aria-label="Play video">
+      <span class="${esc(iconCls)}" aria-hidden="true"></span>
+    </button>`;
+  }
+
   function getSlug() {
     return new URLSearchParams(location.search).get("slug") || "";
   }
@@ -231,7 +264,8 @@
   function renderHeader(site, activePage) {
     const nav = site.nav || [];
     const contact = site.contactButton || { label: "CONTACT", href: "index.html#contact" };
-    const logoSrc = site.logoImage || "assets/logo-footer.png";
+    const logoIcon = site.logoIcon || "";
+    const logoWordmark = site.logoWordmark || site.logoImage || "assets/logo-footer.png";
     const logoAlt = site.logo || "The Mumine";
 
     function navLink(item, className) {
@@ -244,9 +278,14 @@
       nav.map((item) => navLink(item, "")).join("") +
       `<a href="${esc(contact.href)}" class="header-cta header-cta--mobile">${esc(contact.label)}</a>`;
 
-    const brand = logoSrc
-      ? `<a href="index.html" class="brand"><img class="brand__img" src="${esc(logoSrc)}" alt="${esc(logoAlt)}" width="257" height="115"></a>`
-      : `<a href="index.html" class="brand"><span class="brand__text"><span class="brand__text-the">the</span> Mumine</span></a>`;
+    const brand = logoIcon
+      ? `<a href="index.html" class="brand brand--composite" aria-label="${esc(logoAlt)}">
+          <img class="brand__icon" src="${esc(logoIcon)}" alt="" width="80" height="115">
+          <img class="brand__wordmark" src="${esc(logoWordmark)}" alt="${esc(logoAlt)}" width="131" height="48">
+        </a>`
+      : logoWordmark
+        ? `<a href="index.html" class="brand"><img class="brand__img" src="${esc(logoWordmark)}" alt="${esc(logoAlt)}" width="131" height="48"></a>`
+        : `<a href="index.html" class="brand"><span class="brand__text"><span class="brand__text-the">the</span> Mumine</span></a>`;
 
     return `
       <div class="header-inner">
@@ -306,11 +345,14 @@
     const ph = c.placeholders || {};
     const formName = c.formName || "contact";
     const social = (c.social || [])
-      .filter((s) => s && s.href && s.href !== "#")
-      .map(
-        (s) =>
-          `<a href="${esc(s.href)}" target="_blank" rel="noopener noreferrer">${esc(s.label)}</a>`
-      )
+      .filter((s) => s && s.label)
+      .map((s) => {
+        const label = esc(s.label);
+        if (s.href && s.href !== "#") {
+          return `<a href="${esc(s.href)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        }
+        return `<span>${label}</span>`;
+      })
       .join("");
     const addressLines = (c.addressLines || [])
       .map((line) => `<p>${esc(line)}</p>`)
@@ -532,14 +574,16 @@
     const cards = slugs
       .map((slug) => catalog.find((a) => a.slug === slug))
       .filter(Boolean)
-      .map((a) => articleCard(a, linkText, { textOnly: true }))
+      .map((a) => articleCard(a, linkText, { textOnly: true, witnessDesk: true }))
       .join("");
 
     return `
       <section class="home-section home-section--witness">
         <div class="container">
-          ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
-          ${witIntro}
+          <div class="witness-head">
+            ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
+            ${witIntro}
+          </div>
           <div class="witness-desk-grid blog-grid">${cards}</div>
         </div>
       </section>`;
@@ -590,7 +634,7 @@
         <div class="work-card__body">
           ${tags}
           <h2 class="work-card__title"><a href="${href}">${esc(p.cardTitle)}</a></h2>
-          ${desc ? `<p class="work-card__desc">${esc(desc)}</p>` : ""}
+          ${desc ? `<p class="work-card__desc">${formatText(desc)}</p>` : ""}
           <a class="work-card__cta" href="${href}">
             <span>${esc(cta).toUpperCase()}</span>
             <span class="work-card__cta-icon" aria-hidden="true">→</span>
@@ -599,7 +643,9 @@
       </article>`;
   }
 
-  function articleCardExcerpt(article) {
+  function articleCardExcerpt(article, options) {
+    const opts = options || {};
+    if (opts.witnessDesk && article.witnessExcerpt) return article.witnessExcerpt;
     if (article.cardExcerpt) return article.cardExcerpt;
     return articleExcerpt(article);
   }
@@ -638,7 +684,7 @@
         <div class="blog-card__body">
           ${tags}
           <h2 class="blog-card__title"><a href="${href}">${esc(title)}</a></h2>
-          ${excerpt ? `<p class="blog-card__excerpt">${esc(excerpt)}</p>` : ""}
+          ${excerpt ? `<p class="blog-card__excerpt">${formatText(excerpt)}</p>` : ""}
           <a class="blog-card__cta" href="${href}">
             <span>${esc(cta).toUpperCase()}</span>
             <span class="blog-card__cta-icon" aria-hidden="true">→</span>
@@ -647,7 +693,11 @@
       </article>`;
   }
 
-  function renderArticleCardTitle(a, href) {
+  function renderArticleCardTitle(a, href, options) {
+    const opts = options || {};
+    if (opts.witnessDesk && a.witnessTitle) {
+      return `<h2 class="blog-card__title"><a href="${href}">${esc(a.witnessTitle)}</a></h2>`;
+    }
     const l1 = a.cardTitleLine1;
     const l2 = a.cardTitleLine2;
     if (l1 || l2) {
@@ -668,7 +718,7 @@
   function articleCard(a, ctaText, options) {
     const opts = options || {};
     const tags = opts.textOnly ? "" : renderBlogCardTags(a.tags);
-    const excerpt = articleCardExcerpt(a);
+    const excerpt = articleCardExcerpt(a, opts);
     const cta = ctaText || "DEEP DIVE →";
     const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
     const ctaHtml = opts.textOnly
@@ -687,8 +737,8 @@
         ${media}
         <div class="blog-card__body">
           ${tags}
-          ${renderArticleCardTitle(a, href)}
-          ${excerpt ? `<p class="blog-card__excerpt">${esc(excerpt)}</p>` : ""}
+          ${renderArticleCardTitle(a, href, opts)}
+          ${excerpt ? `<p class="blog-card__excerpt">${formatText(excerpt)}</p>` : ""}
           ${ctaHtml}
         </div>
       </article>`;
@@ -733,7 +783,7 @@
         </section>`;
     } else {
       const lines = blogTitleLines(b);
-      const lead = b.lead ? `<p class="blog-hero__lead hero-lead">${esc(b.lead)}</p>` : "";
+      const lead = b.lead ? `<p class="blog-hero__lead hero-lead">${formatText(b.lead)}</p>` : "";
       heroHtml = `
         <section class="blog-hero">
           <div class="container">
@@ -776,7 +826,7 @@
         .map((slug) => catalog.find((p) => p.slug === slug))
         .filter(Boolean);
     }
-    const lead = w.lead ? `<p class="works-hero__lead hero-lead">${esc(w.lead)}</p>` : "";
+    const lead = w.lead ? `<p class="works-hero__lead hero-lead">${formatText(w.lead)}</p>` : "";
     const ctaText = w.cardLinkText || "Review the project";
     const cards = list.map((p) => projectCard(p, ctaText)).join("");
     const worksInitial = parseInt(w.initialVisible || "4", 10);
@@ -885,16 +935,23 @@
   function renderProjectInside(p) {
     const mission = p.mission || {};
     const missionImage = mission.image || p.sideImage || p.heroImage;
-    const play =
-      p.videoUrl && p.showPlayButton
-        ? `<a class="project-inside__play" href="${esc(p.videoUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Play video">
-          <span class="project-inside__play-icon" aria-hidden="true"></span>
-        </a>`
-        : "";
-    const displayTitle =
-      p.displayTitle ||
-      [p.titleLine1, p.titleLine2].filter(Boolean).join(" ").toUpperCase() ||
-      (p.title || "").toUpperCase();
+    const play = renderProjectPlayButton(p, "project-inside__play");
+    const titleHtml = (() => {
+      if (p.titleLine1 && p.titleLine2) {
+        const l1 = esc(String(p.titleLine1).toUpperCase());
+        const l2raw = String(p.titleLine2).toUpperCase();
+        const accentWord = p.titleAccent ? String(p.titleAccent).toUpperCase() : "";
+        if (accentWord && l2raw.includes(accentWord)) {
+          const idx = l2raw.lastIndexOf(accentWord);
+          const prefix = esc(l2raw.slice(0, idx));
+          const accent = esc(l2raw.slice(idx));
+          return `<span class="project-inside__page-title-line">${l1}</span><span class="project-inside__page-title-line">${prefix}<span class="project-inside__page-title-accent">${accent}</span></span>`;
+        }
+        return `<span class="project-inside__page-title-line">${l1}</span><span class="project-inside__page-title-line">${esc(l2raw)}</span>`;
+      }
+      const displayTitle = p.displayTitle || (p.title || "").toUpperCase();
+      return esc(displayTitle);
+    })();
     const projectDate = p.projectDate || "";
     const storyIntro = p.storyEngineIntro || "";
     const articles = (p.storyArticles || [])
@@ -903,7 +960,7 @@
         <article class="project-inside__article">
           <h3 class="project-inside__article-title">${esc(a.heading)}</h3>
           <div class="project-inside__article-body">
-            ${(a.paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("")}
+            ${(a.paragraphs || []).map((x) => (x ? `<p>${formatText(x)}</p>` : "")).join("")}
           </div>
         </article>`
       )
@@ -928,6 +985,7 @@
               width="1280"
               height="720"
             >
+            ${p.heroImageOverlay ? `<img class="project-inside__hero-overlay" src="${esc(p.heroImageOverlay)}" alt="" width="1280" height="720">` : ""}
             ${play}
           </div>
         </section>
@@ -935,7 +993,7 @@
         <div class="project-inside__main">
           <header class="project-inside__title-block">
             ${projectDate ? `<p class="project-inside__date">${esc(projectDate)}</p>` : ""}
-            <h1 class="project-inside__page-title">${esc(displayTitle)}</h1>
+            <h1 class="project-inside__page-title">${titleHtml}</h1>
           </header>
 
           <section class="project-inside__brief project-inside__brief--left" aria-labelledby="mission-left">
@@ -1009,12 +1067,7 @@
           </figure>`
       )
       .join("");
-    const play =
-      p.videoUrl && p.showPlayButton
-        ? `<a class="project-hero__play" href="${esc(p.videoUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Play video">
-          <span class="project-hero__play-icon" aria-hidden="true"></span>
-        </a>`
-        : "";
+    const play = renderProjectPlayButton(p, "project-hero__play");
     const tags = renderWorkCardTags(p.cardTags || p.tags);
     const lead = p.cardExcerpt
       ? `<p class="project-header__lead hero-lead">${esc(p.cardExcerpt)}</p>`
@@ -1190,7 +1243,9 @@
     const hero = ab.hero || {};
     const story = ab.story || {};
     const skills = ab.skills || {};
-    const heroParas = (hero.paragraphs || []).map((p) => `<p>${formatText(p)}</p>`).join("");
+    const heroBioInner = hero.bio
+      ? formatText(hero.bio)
+      : (hero.paragraphs || []).map((p) => `<p>${formatText(p)}</p>`).join("");
     const storyBlocks = (story.blocks || [])
       .map(
         (b) => `
@@ -1207,9 +1262,7 @@
         <div class="about-skill-card">
           <span class="about-skill-card__num">${esc(c.num)}</span>
           <h3 class="about-skill-card__title">${esc(c.title)}</h3>
-          <ul class="about-skill-card__list">
-            ${(c.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}
-          </ul>
+          ${c.body ? `<p class="about-skill-card__body">${formatText(c.body)}</p>` : `<ul class="about-skill-card__list">${(c.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`}
         </div>`
       )
       .join("");
@@ -1222,7 +1275,7 @@
               <span class="about-hero__name">${esc(hero.nameLine1)}</span>
               <span class="about-hero__surname">${esc(hero.nameLine2)}</span>
             </h1>
-            <div class="about-hero__bio">${heroParas}</div>
+            <div class="about-hero__bio">${heroBioInner}</div>
           </div>
           <div class="about-hero__media">
             <img src="${esc(hero.image?.src)}" alt="${esc(hero.image?.alt || "")}" width="560">
