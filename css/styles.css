@@ -1739,7 +1739,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1.23rem;
-  max-width: 736px;
 }
 
 .works-hero .split-heading--page .split-heading__line {
