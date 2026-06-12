@@ -869,21 +869,39 @@
       </section>`;
   }
 
+  function renderProjectTags(tags) {
+    return renderWorkCardTags(tags);
+  }
+
   function renderProject(p) {
-    const paras = (p.paragraphs || []).map((x) => `<p>${esc(x)}</p>`).join("");
+    const paras = (p.paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("");
     const story = (p.storySections || [])
       .map(
         (s) =>
-          `<h3>${esc(s.heading)}</h3>` +
-          (s.paragraphs || []).map((x) => `<p>${esc(x)}</p>`).join("")
+          `<article class="story-block__item">
+            <h3 class="story-block__heading">${esc(s.heading)}</h3>
+            ${(s.paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("")}
+          </article>`
       )
       .join("");
     const gallery = (p.gallery || [])
-      .map((src) => `<img src="${esc(src)}" alt="" width="1200" height="675">`)
+      .map(
+        (src) =>
+          `<figure class="project-gallery__figure">
+            <img src="${esc(src)}" alt="" width="1152" height="713" loading="lazy">
+          </figure>`
+      )
       .join("");
     const play = p.showPlayButton
-      ? '<div class="play-btn" aria-label="Video oynat"></div>'
+      ? `<button type="button" class="project-hero__play" aria-label="Play video">
+          <span class="project-hero__play-icon" aria-hidden="true"></span>
+        </button>`
       : "";
+    const tags = renderProjectTags(p.cardTags || p.tags);
+    const lead = p.cardExcerpt
+      ? `<p class="project-header__lead hero-lead">${esc(p.cardExcerpt)}</p>`
+      : "";
+    const meta = p.meta ? `<p class="project-header__meta">${esc(p.meta)}</p>` : "";
 
     const storyTitleLines = splitTitleLines(
       {
@@ -894,22 +912,28 @@
     );
 
     return `
-      <div class="project-hero">
-        <img src="${esc(p.heroImage)}" alt="">
+      <section class="project-hero">
+        <img class="project-hero__image" src="${esc(p.heroImage)}" alt="${esc(p.sideImageAlt || p.cardTitle || "")}" width="963" height="596">
         ${play}
-      </div>
-      <div class="container project-title">
+      </section>
+      <header class="container project-header">
+        <p class="project-back"><a href="works.html">← All projects</a></p>
+        ${tags}
         ${renderSplitHeading(
           splitTitleLines({ titleLine1: p.titleLine1 || "Project:", titleLine2: p.titleLine2 || p.title }, p.title),
           { tag: "h1", className: "split-heading split-heading--project", accentOn: "line2" }
         )}
-      </div>
-      <div class="container two-col">
-        <div class="prose">${paras}</div>
-        <div class="vertical-image">
-          <img src="${esc(p.sideImage)}" alt="${esc(p.sideImageAlt || "")}" width="600" height="800">
+        ${meta}
+        ${lead}
+      </header>
+      <section class="project-intro">
+        <div class="container project-intro__grid">
+          <div class="project-intro__copy prose">${paras}</div>
+          <figure class="project-intro__figure">
+            <img src="${esc(p.sideImage)}" alt="${esc(p.sideImageAlt || "")}" width="550" height="688" loading="lazy">
+          </figure>
         </div>
-      </div>
+      </section>
       <section class="story-section">
         <div class="container">
           <div class="story-section__head">
@@ -923,7 +947,7 @@
           <div class="story-block">${story}</div>
         </div>
       </section>
-      <div class="container gallery-stack">${gallery}</div>`;
+      ${gallery ? `<section class="project-gallery"><div class="container project-gallery__stack">${gallery}</div></section>` : ""}`;
   }
 
   function renderArticleBlock(b) {

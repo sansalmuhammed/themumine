@@ -358,7 +358,7 @@
       "titleLine1": "Project:",
       "titleLine2": "Bubble Buddies",
       "cardTitle": "Bubble Buddies",
-      "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve...",
+      "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure.",
       "cardTags": [
         "Adventure",
         "Preschool Educational (Ages 4-6)"
@@ -369,11 +369,11 @@
       "showPlayButton": true,
       "title": "Project: Bubble Buddies",
       "paragraphs": [
-        "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds.",
-        "By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure."
+        "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped worlds. By breaking barriers, they help civilizations resolve conflict through empathy, play, and preschool-friendly adventure.",
+        "Set across shimmering nebulae and underwater dreamscapes, the series follows a whimsical crew who turn misunderstanding into music, motion, and shared wonder — one bubble at a time."
       ],
       "sideImage": "assets/uploads/1781181313460-bubble-buddies.png",
-      "sideImageAlt": "Bubble Buddies illustration",
+      "sideImageAlt": "Bubble Buddies — cosmic preschool adventure",
       "storyTitle": "Story Engine",
       "storyTitleLine1": "Story",
       "storyTitleLine2": "Engine",
@@ -381,12 +381,19 @@
         {
           "heading": "Origin",
           "paragraphs": [
-            "A cosmic preschool adventure about popping isolation bubbles and learning to understand other worlds."
+            "Born from the idea that empathy can look like play, Bubble Buddies began as a visual metaphor: isolation as a bubble, understanding as the pop that lets light through."
+          ]
+        },
+        {
+          "heading": "Development",
+          "paragraphs": [
+            "Character design, bubble physics, and preschool-friendly conflict loops were shaped into a tone that balances cosmic scale with intimate, funny sibling energy."
           ]
         }
       ],
       "gallery": [
-        "assets/uploads/1781181313460-bubble-buddies.png"
+        "assets/uploads/1781181405076-bubble-buddies.png",
+        "assets/uploads/1781181421659-bubble-buddies.png"
       ],
       "homeBadge": "",
       "homeDescription": ""
