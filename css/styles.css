@@ -3237,7 +3237,7 @@ main {
   margin: 0;
   padding-left: 1.5rem;
   border-left: 2px solid var(--accent-deep);
-  max-width: 42rem;
+  max-width: 623px;
   color: var(--text-muted);
   font-family: var(--font-body);
   font-size: 1.125rem;
