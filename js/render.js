@@ -1255,7 +1255,7 @@
     if (!image?.src) {
       return `<div class="${className} about-bg about-bg--empty" aria-hidden="true"></div>`;
     }
-    const pos = image.position || "center top";
+    const pos = image.position || "center bottom";
     const src = String(image.src).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
     return `<div class="about-bg ${className}" style="background-image:url('${src}');background-position:${esc(pos)};" role="img" aria-label="${esc(image.alt || "")}"></div>`;
   }

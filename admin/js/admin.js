@@ -910,12 +910,12 @@
         ${field("Paragraflar", "about.hero._paragraphs", heroParas, "textarea")}
         ${imageField("Hero arka plan görseli (sağ)", "about.hero.image.src", hero.image?.src)}
         ${field("Görsel alt metni", "about.hero.image.alt", hero.image?.alt)}
-        ${field("Görsel konumu", "about.hero.image.position", hero.image?.position || "center top", "text", "CSS background-position — örn: center top, center center")}
+        ${field("Görsel konumu", "about.hero.image.position", hero.image?.position || "center bottom", "text", "CSS background-position — örn: center bottom, center top")}
       </div>
       <div class="panel"><h3>Hikâye bölümü (sol görsel + 01/02/03)</h3>
         ${imageField("Hikâye arka plan görseli (sol)", "about.story.image.src", story.image?.src)}
         ${field("Görsel alt metni", "about.story.image.alt", story.image?.alt)}
-        ${field("Görsel konumu", "about.story.image.position", story.image?.position || "center top", "text", "CSS background-position — örn: center top, center center")}
+        ${field("Görsel konumu", "about.story.image.position", story.image?.position || "center bottom", "text", "CSS background-position — örn: center bottom, center top")}
         ${storyBlocks}
         <button type="button" class="btn btn-secondary btn-sm" id="add-story-block">+ Blok ekle</button>
       </div>

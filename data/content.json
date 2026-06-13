@@ -229,14 +229,14 @@
       "image": {
         "src": "assets/about/portrait-hero.png",
         "alt": "Mümine Serap portrait",
-        "position": "center top"
+        "position": "center bottom"
       }
     },
     "story": {
       "image": {
         "src": "assets/about/portrait-story.png",
         "alt": "Mümine Serap",
-        "position": "center top"
+        "position": "center bottom"
       },
       "blocks": [
         {
