@@ -1031,7 +1031,7 @@
             <header class="project-inside__story-head">
               <h2 class="project-inside__story-title" id="story-engine-title">${esc(p.storyTitle || "Story Engine")}</h2>
               <span class="project-inside__story-rule" aria-hidden="true"></span>
-              ${storyIntro ? `<p class="project-inside__story-intro">${formatText(storyIntro)}</p>` : ""}
+              ${storyIntro ? `<p class="project-inside__story-intro">${formatParagraph(storyIntro)}</p>` : ""}
             </header>
             ${articles ? `<div class="project-inside__articles">${articles}</div>` : ""}
           </section>

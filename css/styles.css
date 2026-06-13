@@ -2172,11 +2172,22 @@ h3 {
   left: 0;
   top: 0;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
   width: 452px;
   min-height: 931px;
   padding: 48px;
   box-sizing: border-box;
   isolation: isolate;
+}
+
+.project-inside__brief--left .project-inside__mission-label,
+.project-inside__brief--left .project-inside__mission-quote,
+.project-inside__brief--left .project-inside__mission-copy {
+  width: 356px;
+  max-width: 100%;
 }
 
 .project-inside__brief-stage {
@@ -2471,9 +2482,11 @@ h3 {
 
 .project-inside__closing {
   width: 100%;
+  height: 719px;
   min-height: 719px;
   padding: 0 64px 0 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .project-inside__closing-image {
