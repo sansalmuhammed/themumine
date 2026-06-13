@@ -908,12 +908,14 @@
         ${field("İsim satırı 1", "about.hero.nameLine1", hero.nameLine1)}
         ${field("İsim satırı 2 (kırmızı)", "about.hero.nameLine2", hero.nameLine2)}
         ${field("Paragraflar", "about.hero._paragraphs", heroParas, "textarea")}
-        ${imageField("Sağ portre", "about.hero.image.src", hero.image?.src)}
-        ${field("Portre alt metni", "about.hero.image.alt", hero.image?.alt)}
+        ${imageField("Hero arka plan görseli (sağ)", "about.hero.image.src", hero.image?.src)}
+        ${field("Görsel alt metni", "about.hero.image.alt", hero.image?.alt)}
+        ${field("Görsel konumu", "about.hero.image.position", hero.image?.position || "center top", "text", "CSS background-position — örn: center top, center center")}
       </div>
       <div class="panel"><h3>Hikâye bölümü (sol görsel + 01/02/03)</h3>
-        ${imageField("Sol portre", "about.story.image.src", story.image?.src)}
-        ${field("Sol portre alt", "about.story.image.alt", story.image?.alt)}
+        ${imageField("Hikâye arka plan görseli (sol)", "about.story.image.src", story.image?.src)}
+        ${field("Görsel alt metni", "about.story.image.alt", story.image?.alt)}
+        ${field("Görsel konumu", "about.story.image.position", story.image?.position || "center top", "text", "CSS background-position — örn: center top, center center")}
         ${storyBlocks}
         <button type="button" class="btn btn-secondary btn-sm" id="add-story-block">+ Blok ekle</button>
       </div>

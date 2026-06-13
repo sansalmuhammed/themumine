@@ -1250,6 +1250,15 @@
     return renderArticleLegacy(a);
   }
 
+  function renderAboutImage(image, className) {
+    if (!image?.src) {
+      return `<div class="${className} about-bg about-bg--empty" aria-hidden="true"></div>`;
+    }
+    const pos = image.position || "center top";
+    const src = String(image.src).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+    return `<div class="about-bg ${className}" style="background-image:url('${src}');background-position:${esc(pos)};" role="img" aria-label="${esc(image.alt || "")}"></div>`;
+  }
+
   function renderAbout(ab) {
     const hero = ab.hero || {};
     const story = ab.story || {};
@@ -1288,17 +1297,13 @@
             </h1>
             <div class="about-hero__bio">${heroBioInner}</div>
           </div>
-          <div class="about-hero__media">
-            <img src="${esc(hero.image?.src)}" alt="${esc(hero.image?.alt || "")}" width="560">
-          </div>
+          ${renderAboutImage(hero.image, "about-hero__media")}
         </div>
       </section>
 
       <section class="about-story">
         <div class="container about-story__grid">
-          <div class="about-story__media">
-            <img src="${esc(story.image?.src)}" alt="${esc(story.image?.alt || "")}" width="480">
-          </div>
+          ${renderAboutImage(story.image, "about-story__media")}
           <div class="about-story__content">${storyBlocks}</div>
         </div>
       </section>

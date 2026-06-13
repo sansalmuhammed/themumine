@@ -1544,7 +1544,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1.23rem;
-  max-width: 736px;
 }
 
 .blog-hero .split-heading--page .split-heading__line {
@@ -3255,16 +3254,20 @@ main {
 
 .about-hero__media {
   min-width: 0;
+  min-height: clamp(18rem, 42vw, 35rem);
 }
 
-.about-hero__media img {
+.about-bg {
   display: block;
   width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center top;
+  background-repeat: no-repeat;
+  background-size: contain;
   filter: grayscale(100%);
+}
+
+.about-bg--empty {
+  min-height: 0;
+  background-image: none !important;
 }
 
 /* Story section */
@@ -3291,15 +3294,7 @@ main {
 
 .about-story__media {
   min-width: 0;
-}
-
-.about-story__media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  filter: grayscale(100%);
+  min-height: clamp(16rem, 38vw, 30rem);
 }
 
 .about-story__content {

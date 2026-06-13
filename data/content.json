@@ -228,13 +228,15 @@
       "bio": "A 21st-century explorer and maker of meanings, Mümine Serap Kızılırmak\n is a player of time and a weaver of stories.\n\nFrom animation to stage musicals, she builds worlds that move \nand question. Drawing from existence, culture, and human \nexperience, she uses storytelling to bridge worlds and shared \nmemory. Her greatest desire: to leave a beautiful trace through \nstories that inspire wonder and shape the future.\n\nEvery project is built on a system of meaning—metaphors \nas structure, symbols as argument. By carrying their essence\n into the present, she creates a shared ground where people\n from all backgrounds can recognize themselves \nand leave with something new.",
       "image": {
         "src": "assets/about/portrait-hero.png",
-        "alt": "Mümine Serap portrait"
+        "alt": "Mümine Serap portrait",
+        "position": "center top"
       }
     },
     "story": {
       "image": {
         "src": "assets/about/portrait-story.png",
-        "alt": "Mümine Serap"
+        "alt": "Mümine Serap",
+        "position": "center top"
       },
       "blocks": [
         {
