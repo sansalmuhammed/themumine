@@ -1767,7 +1767,8 @@ main {
 }
 
 .about-hero {
-  padding: calc(var(--home-section-pad) + 3.5rem) 0 var(--home-section-pad);
+  box-sizing: border-box;
+  padding: 56px 64px 0;
   min-height: 820px;
   display: flex;
   align-items: center;
@@ -3195,23 +3196,25 @@ main {
   color: var(--accent);
 }
 
-/* About — Figma ABOUT ME */
+/* About — Figma ABOUT ME (1280px) */
 
-.about-hero__grid {
-  display: grid;
-  gap: 2.5rem;
-  align-items: start;
+.about-hero .container.about-hero__grid {
+  position: relative;
+  display: block;
+  min-height: 740px;
 }
 
-@media (min-width: 900px) {
-  .about-hero__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
+.about-hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 43px;
+  width: 100%;
+  max-width: 672px;
 }
 
 .about-hero__title {
-  margin: 0 0 2.6875rem;
+  margin: 0;
   font-family: var(--font-heading);
   font-weight: var(--fw-bold);
   line-height: 1;
@@ -3219,33 +3222,42 @@ main {
   text-transform: uppercase;
 }
 
-.about-hero__name {
+.about-hero__name,
+.about-hero__surname {
   display: block;
+  font-family: var(--font-heading);
   font-size: var(--text-about-name);
+  font-weight: var(--fw-bold);
   line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.about-hero__name {
   color: var(--text);
 }
 
 .about-hero__surname {
-  display: block;
-  font-size: var(--text-about-name);
-  line-height: 1;
   color: var(--accent-deep);
 }
 
 .about-hero__bio {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 672px;
   margin: 0;
-  padding-left: 1.5rem;
+  padding-left: 26px;
   border-left: 2px solid var(--accent-deep);
-  max-width: 623px;
-  color: var(--text-muted);
+  color: #e4beb8;
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-size: 18px;
+  font-weight: var(--fw-regular);
+  line-height: 29px;
 }
 
 .about-hero__bio p {
-  margin: 0 0 1.25rem;
+  max-width: 623px;
+  margin: 0 0 29px;
 }
 
 .about-hero__bio p:last-child {
@@ -3254,12 +3266,14 @@ main {
 
 .about-hero__media {
   min-width: 0;
+  width: 100%;
   min-height: clamp(18rem, 42vw, 35rem);
 }
 
 .about-bg {
   display: block;
   width: 100%;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: contain;
   filter: grayscale(100%);
@@ -3270,10 +3284,32 @@ main {
   background-image: none !important;
 }
 
-/* Story section */
+@media (min-width: 900px) {
+  .about-hero__media {
+    position: absolute;
+    left: 510px;
+    top: -28px;
+    width: 678px;
+    height: 740px;
+    min-height: 740px;
+    max-width: calc(100% - 510px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .about-hero__name,
+  .about-hero__surname {
+    font-size: 72px;
+    line-height: 72px;
+    letter-spacing: -2.88px;
+  }
+}
+
+/* Manifesto / Story section */
 
 .about-story {
-  padding: 8rem 0;
+  box-sizing: border-box;
+  padding: 128px 64px;
   border-top: 1px solid #e5e2e1;
   border-bottom: 1px solid #e5e2e1;
   background: #000;
@@ -3287,45 +3323,60 @@ main {
 
 @media (min-width: 900px) {
   .about-story__grid {
-    grid-template-columns: minmax(280px, 38%) 1fr;
-    gap: 4rem;
+    grid-template-columns: 392px 1fr;
+    gap: 0;
   }
 }
 
 .about-story__media {
   min-width: 0;
-  min-height: clamp(16rem, 38vw, 30rem);
+  width: 416px;
+  max-width: 100%;
+  height: 870px;
+  min-height: clamp(20rem, 50vw, 870px);
+  margin: -26px 0 0 -26px;
 }
 
 .about-story__content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
   border-left: 1px solid #e5e2e1;
-  padding-left: 2.6875rem;
+  padding-left: 42px;
 }
 
 .about-story-block {
-  padding: 0 0 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #e5e2e1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  max-width: 717px;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
-.about-story-block:first-child {
-  padding-top: 0;
+.about-story-block + .about-story-block {
+  padding-top: 23px;
+  border-top: 1px solid #e5e2e1;
 }
 
-.about-story-block:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
+.about-story-block:nth-child(3) {
+  padding-top: 22px;
 }
 
 .about-story-label {
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-family: var(--font-heading);
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: var(--fw-semibold);
-  letter-spacing: 0.1em;
+  line-height: 14px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
-  color: var(--accent-deep);
+  color: #9e0000;
 }
 
 .about-story-num,
@@ -3334,42 +3385,50 @@ main {
 }
 
 .about-story-heading {
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 32px;
   font-weight: var(--fw-semibold);
-  line-height: 1.375;
+  line-height: 44px;
   color: var(--text);
 }
 
 .about-story-text {
   margin: 0;
-  padding-top: 0.44rem;
-  color: var(--text-muted);
+  padding-top: 7.095px;
+  max-width: 576px;
+  color: #e4beb8;
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
-  max-width: 36rem;
+  font-size: 16px;
+  font-weight: var(--fw-regular);
+  line-height: 26px;
 }
 
 /* Skill set */
 
 .about-skills {
-  padding: 8rem 0;
+  box-sizing: border-box;
+  padding: 128px 64px;
+  background: #000;
 }
 
 .about-skills__heading {
-  margin: 0 0 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0;
+  margin: 0 0 48px;
   font-family: var(--font-heading);
-  font-size: 3rem;
+  font-size: 48px;
   font-weight: var(--fw-bold);
-  letter-spacing: -0.02em;
+  line-height: 58px;
+  letter-spacing: -0.96px;
   text-transform: uppercase;
-  line-height: 1.2;
+  color: var(--text);
 }
 
 .about-skills__heading > span {
-  display: block;
+  display: inline;
 }
 
 .about-skills__heading-accent {
@@ -3378,69 +3437,129 @@ main {
 
 .about-skills__grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 24px;
 }
 
 @media (min-width: 900px) {
   .about-skills__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 .about-skill-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6.9px;
+  min-height: 363.7px;
+  padding: 48px;
   border: 1px solid #e5e2e1;
   background: #0e0e0e;
-  padding: 3.0625rem;
-  min-height: 22.75rem;
+}
+
+.about-skill-card:nth-child(2) {
+  padding-bottom: 32px;
+  min-height: 364px;
 }
 
 .about-skill-card__num {
   display: block;
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 16px;
+  font-weight: var(--fw-regular);
+  line-height: 24px;
   color: #e5e2e1;
   opacity: 0.5;
-  line-height: 1.5;
-  margin-bottom: 0.25rem;
+  margin: 0;
 }
 
 .about-skill-card__title {
-  margin: 0 0 1rem;
-  padding-top: 0.99rem;
+  margin: 0;
+  padding-top: 15.895px;
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 32px;
   font-weight: var(--fw-semibold);
+  line-height: 42px;
   letter-spacing: 0;
   text-transform: uppercase;
-  line-height: 1.3;
   color: var(--text);
+}
+
+.about-skill-card:nth-child(2) .about-skill-card__title {
+  font-size: 30px;
 }
 
 .about-skill-card__body {
   margin: 0;
-  color: var(--text-muted);
+  color: #e4beb8;
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 16px;
+  font-weight: var(--fw-regular);
+  line-height: 26px;
 }
 
 .about-skill-card__list {
   list-style: none;
   margin: 0;
   padding: 0;
+  color: #e4beb8;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: var(--fw-regular);
+  line-height: 26px;
 }
 
 .about-skill-card__list li {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  line-height: 1.55;
-  padding: 0.2rem 0;
+  padding: 0;
 }
 
 .about-skill-card__list li::before {
-  content: "– ";
-  color: var(--text-muted);
+  content: none;
+}
+
+@media (max-width: 899px) {
+  .about-hero {
+    padding: 3.5rem var(--site-gutter) 0;
+    min-height: auto;
+  }
+
+  .about-hero .container.about-hero__grid {
+    min-height: 0;
+  }
+
+  .about-hero__text {
+    gap: 2rem;
+  }
+
+  .about-story {
+    padding: clamp(4rem, 10vw, 128px) var(--site-gutter);
+  }
+
+  .about-story__media {
+    width: 100%;
+    height: clamp(20rem, 60vw, 870px);
+    margin: 0;
+  }
+
+  .about-story__content {
+    padding-left: 1.5rem;
+  }
+
+  .about-skills {
+    padding: clamp(4rem, 10vw, 128px) var(--site-gutter);
+  }
+
+  .about-skills__heading {
+    margin-bottom: 2.5rem;
+    font-size: clamp(2rem, 8vw, 48px);
+    line-height: 1.2;
+  }
+
+  .about-story-heading {
+    font-size: clamp(1.5rem, 5vw, 32px);
+    line-height: 1.375;
+  }
 }
 
 /* Footer — Figma */
