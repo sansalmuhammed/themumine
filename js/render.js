@@ -335,9 +335,11 @@
       )
       .join("");
     const visual = exp.image
-      ? `<div class="experience-visual" aria-hidden="true">
-          <img src="${esc(exp.image)}" alt="${esc(exp.imageAlt || "")}" width="560" height="800">
-        </div>`
+      ? (() => {
+          const src = String(exp.image).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+          const alt = esc(exp.imageAlt || "Cherry blossom branch");
+          return `<div class="experience-visual" style="background-image:url('${src}')" role="img" aria-label="${alt}"></div>`;
+        })()
       : "";
 
     return `

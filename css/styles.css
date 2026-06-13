@@ -940,37 +940,34 @@ h3 {
 }
 
 .experience-visual {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  display: block;
+  width: 616px;
+  max-width: 100%;
+  min-height: clamp(16rem, 40vw, 28rem);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 616px auto;
+  transform: scaleX(-1);
+  transform-origin: right bottom;
   pointer-events: none;
 }
 
 @media (min-width: 900px) {
   .experience-visual {
     position: absolute;
-    right: -2%;
+    right: 0;
     bottom: -8%;
-    width: min(52%, 520px);
-    height: auto;
-    justify-content: flex-end;
+    width: 616px;
+    max-width: 616px;
+    min-height: 32rem;
   }
-}
-
-.experience-visual img {
-  display: block;
-  width: 100%;
-  max-width: 520px;
-  height: auto;
-  object-fit: contain;
-  object-position: right bottom;
 }
 
 @media (max-width: 899px) {
   .experience-visual {
-    margin-top: 1rem;
-    max-width: 320px;
-    margin-inline: auto;
+    width: min(100%, 616px);
+    margin: 1rem 0 0 auto;
+    background-size: min(616px, 100%) auto;
   }
 }
 
@@ -3371,11 +3368,11 @@ h3 {
   }
 }
 
-/* Manifesto / Story section */
+/* Manifesto / Story section — Figma */
 
 .about-story {
   box-sizing: border-box;
-  padding: 128px 64px;
+  padding: 128px 64px 0;
   border-top: 1px solid #e5e2e1;
   border-bottom: 1px solid #e5e2e1;
   background: #000;
@@ -3394,13 +3391,15 @@ h3 {
 .about-story__media {
   position: relative;
   width: 100%;
-  height: clamp(20rem, 60vw, 870px);
-  min-height: clamp(20rem, 60vw, 870px);
+  max-width: 416px;
+  height: clamp(20rem, 55vw, 870px);
+  min-height: clamp(20rem, 55vw, 870px);
   margin: 0 0 2rem;
   z-index: 1;
 }
 
 .about-story__media.about-bg {
+  background-repeat: no-repeat;
   background-position: center bottom;
   background-size: contain;
 }
@@ -3421,25 +3420,33 @@ h3 {
 
 @media (min-width: 900px) {
   .about-story .container.about-story__grid {
-    grid-template-columns: 392px minmax(0, 1fr);
-    min-height: 714px;
+    /* 870px görsel − 26px üst taşma = alt çizgi hizası */
+    grid-template-columns: 392px 717px;
+    min-height: 844px;
   }
 
   .about-story__media {
     position: absolute;
     left: -26px;
-    top: -26px;
+    bottom: 0;
+    top: auto;
     width: 416px;
     height: 870px;
     min-height: 870px;
     margin: 0;
   }
 
+  .about-story__media.about-bg {
+    background-size: 416px 870px;
+    background-position: center bottom;
+  }
+
   .about-story__content {
     grid-column: 2;
     width: 717px;
     max-width: 717px;
-    min-height: 714px;
+    min-height: 844px;
+    height: 100%;
   }
 }
 
@@ -3456,6 +3463,7 @@ h3 {
 }
 
 .about-story-block + .about-story-block {
+  box-sizing: border-box;
   padding-top: 23px;
   border-top: 1px solid #e5e2e1;
 }
@@ -3468,7 +3476,7 @@ h3 {
   margin: 0;
   font-family: var(--font-heading);
   font-size: 14px;
-  font-weight: var(--fw-semibold);
+  font-weight: 600;
   line-height: 14px;
   letter-spacing: 1.4px;
   text-transform: uppercase;
@@ -3484,9 +3492,9 @@ h3 {
   margin: 0;
   font-family: var(--font-heading);
   font-size: 32px;
-  font-weight: var(--fw-semibold);
+  font-weight: 600;
   line-height: 44px;
-  color: var(--text);
+  color: #ffffff;
 }
 
 .about-story-text {
@@ -3496,7 +3504,7 @@ h3 {
   color: #e4beb8;
   font-family: var(--font-body);
   font-size: 16px;
-  font-weight: var(--fw-regular);
+  font-weight: 400;
   line-height: 26px;
 }
 
