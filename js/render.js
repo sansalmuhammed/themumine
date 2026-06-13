@@ -88,10 +88,11 @@
       accentOn === 2
         ? "split-heading__line split-heading__line--accent"
         : "split-heading__line split-heading__line--light";
+    const inlineClass = opts.inline ? " split-heading--inline" : "";
     const line2Html = lines.line2
       ? `<span class="${line2Class}">${esc(lines.line2)}</span>`
       : "";
-    return `<${tag} class="${baseClass}">
+    return `<${tag} class="${baseClass}${inlineClass}">
       <span class="${line1Class}">${esc(lines.line1)}</span>
       ${line2Html}
     </${tag}>`;
@@ -577,7 +578,7 @@
     return `
       <section class="home-section home-section--creative" id="projects">
         <div class="container">
-          ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2" })}
+          ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2", inline: true })}
           ${body}
         </div>
       </section>`;
@@ -601,7 +602,7 @@
       <section class="home-section home-section--witness">
         <div class="container">
           <div class="witness-head">
-            ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2" })}
+            ${renderSplitHeading(witLines, { className: "split-heading split-heading--section", accentOn: "line2", inline: true })}
             ${witIntro}
           </div>
           <div class="witness-desk-grid blog-grid">${cards}</div>
@@ -1226,9 +1227,17 @@
       <article class="article-inside">
         <div class="article-inside__intro">
           <header class="article-inside__head">
-            <h1 class="article-inside__title">${esc(displayTitle)}</h1>
-            ${subtitle ? `<p class="article-inside__subtitle">${formatText(subtitle)}</p>` : ""}
-            <span class="article-inside__divider" aria-hidden="true"></span>
+            <div class="article-inside__title-wrap">
+              <h1 class="article-inside__title">${esc(displayTitle)}</h1>
+            </div>
+            ${
+              subtitle
+                ? `<div class="article-inside__subtitle-wrap">
+              <p class="article-inside__subtitle">${formatText(subtitle)}</p>
+              <span class="article-inside__divider" aria-hidden="true"></span>
+            </div>`
+                : ""
+            }
           </header>
           <div class="article-inside__content">${sections}</div>
         </div>
