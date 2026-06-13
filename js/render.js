@@ -1029,7 +1029,7 @@
 
           <section class="project-inside__story" aria-labelledby="story-engine-title">
             <header class="project-inside__story-head">
-              <h2 class="project-inside__story-title" id="story-engine-title">STORY ENGINE</h2>
+              <h2 class="project-inside__story-title" id="story-engine-title">${esc(p.storyTitle || "Story Engine")}</h2>
               <span class="project-inside__story-rule" aria-hidden="true"></span>
               ${storyIntro ? `<p class="project-inside__story-intro">${formatText(storyIntro)}</p>` : ""}
             </header>
@@ -1280,7 +1280,7 @@
         (b) => `
         <article class="about-story-block">
           <p class="about-story-label"><span class="about-story-num">${esc(b.num)}</span> / <span class="about-story-tag">${esc(b.label)}</span></p>
-          <h3 class="about-story-heading">${formatText(b.heading || b.quote || "")}</h3>
+          <h3 class="about-story-heading">${formatParagraph(b.heading || b.quote || "")}</h3>
           <p class="about-story-text">${formatParagraph(b.text)}</p>
         </article>`
       )

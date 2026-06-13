@@ -2125,6 +2125,11 @@ h3 {
   box-sizing: border-box;
 }
 
+.project-inside__brief--left {
+  overflow: hidden;
+  border-bottom: 1px solid #fff;
+}
+
 .project-inside__brief-stage {
   position: relative;
   width: 100%;
@@ -2202,9 +2207,12 @@ h3 {
 }
 
 .project-inside__story {
+  position: relative;
+  z-index: 1;
   width: 100%;
   padding: 86px 64px 0 0;
   box-sizing: border-box;
+  background: #000;
 }
 
 .project-inside__story-head {
@@ -2226,7 +2234,7 @@ h3 {
   font-size: 72px;
   line-height: 72px;
   letter-spacing: -2.88px;
-  text-transform: uppercase;
+  text-transform: none;
   color: #e6e1e1;
 }
 
@@ -2276,6 +2284,7 @@ h3 {
   font-weight: 400;
   font-size: 36px;
   line-height: 45px;
+  text-transform: none;
   color: #e6e1e1;
 }
 
@@ -3495,6 +3504,8 @@ h3 {
   font-weight: 600;
   line-height: 44px;
   color: #ffffff;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .about-story-text {
