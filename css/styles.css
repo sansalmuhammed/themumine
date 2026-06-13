@@ -2008,7 +2008,7 @@ h3 {
 }
 
 .project-inside h1,
-.project-inside h2,
+.project-inside h2:not(.project-inside__story-title),
 .project-inside h3 {
   text-transform: none;
   letter-spacing: normal;
@@ -2302,7 +2302,7 @@ h3 {
   box-sizing: border-box;
 }
 
-.project-inside__story-title {
+h2.project-inside__story-title {
   margin: 0;
   width: 100%;
   max-width: 1106px;
@@ -2313,7 +2313,7 @@ h3 {
   font-size: 72px;
   line-height: 72px;
   letter-spacing: -2.88px;
-  text-transform: uppercase;
+  text-transform: none;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -2628,10 +2628,11 @@ h3 {
     padding-left: clamp(1.5rem, 8vw, 110px);
   }
 
-  .project-inside__story-title {
+  .project-inside__story-head h2.project-inside__story-title {
     font-family: "Space Grotesk", var(--font-heading), sans-serif;
     font-size: clamp(2.25rem, 8vw, 72px);
     line-height: 1;
+    letter-spacing: -0.04em;
     min-height: 0;
   }
 

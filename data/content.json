@@ -409,12 +409,10 @@
         "text": "MORE PROJECT MATERIALS",
         "href": "#materials"
       },
-      "closingImage": "assets/project/bubble-hero.png",
+      "closingImage": "assets/project/bubble-closing.png",
       "sideImage": "assets/uploads/1781181313460-bubble-buddies.png",
       "sideImageAlt": "Bubble Buddies — cosmic preschool adventure",
       "storyTitle": "STORY ENGINE",
-      "storyTitleLine1": "Story",
-      "storyTitleLine2": "Engine",
       "paragraphs": [],
       "storySections": [],
       "gallery": [],

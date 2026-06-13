@@ -974,13 +974,7 @@
     })();
     const projectDate = p.projectDate || "";
     const storyIntro = p.storyEngineIntro || "";
-    const storyTitleLines = splitTitleLines(
-      {
-        titleLine1: p.storyTitleLine1 || "Story",
-        titleLine2: p.storyTitleLine2 || p.storyTitle?.replace(/^Story\s*/i, "") || "Engine",
-      },
-      p.storyTitle || "Story Engine"
-    );
+    const storyTitleLines = splitTitleLines({ title: p.storyTitle }, p.storyTitle || "Story Engine");
     const storyTitleHtml = storyTitleLines.line2
       ? `<span class="project-inside__story-title-light">${esc(storyTitleLines.line1)}</span><span class="project-inside__story-title-accent"> ${esc(storyTitleLines.line2)}</span>`
       : `<span class="project-inside__story-title-light">${esc(storyTitleLines.line1)}</span>`;
