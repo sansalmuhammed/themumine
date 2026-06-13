@@ -974,6 +974,16 @@
     })();
     const projectDate = p.projectDate || "";
     const storyIntro = p.storyEngineIntro || "";
+    const storyTitleLines = splitTitleLines(
+      {
+        titleLine1: p.storyTitleLine1 || "Story",
+        titleLine2: p.storyTitleLine2 || p.storyTitle?.replace(/^Story\s*/i, "") || "Engine",
+      },
+      p.storyTitle || "Story Engine"
+    );
+    const storyTitleHtml = storyTitleLines.line2
+      ? `<span class="project-inside__story-title-light">${esc(storyTitleLines.line1)}</span><span class="project-inside__story-title-accent"> ${esc(storyTitleLines.line2)}</span>`
+      : `<span class="project-inside__story-title-light">${esc(storyTitleLines.line1)}</span>`;
     const articles = (p.storyArticles || [])
       .map(
         (a) => `
@@ -1029,7 +1039,7 @@
 
           <section class="project-inside__story" aria-labelledby="story-engine-title">
             <header class="project-inside__story-head">
-              <h2 class="project-inside__story-title" id="story-engine-title">${esc(p.storyTitle || "Story Engine")}</h2>
+              <h2 class="project-inside__story-title" id="story-engine-title">${storyTitleHtml}</h2>
               <span class="project-inside__story-rule" aria-hidden="true"></span>
               ${storyIntro ? `<p class="project-inside__story-intro">${formatParagraph(storyIntro)}</p>` : ""}
             </header>

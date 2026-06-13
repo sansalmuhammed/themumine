@@ -2313,7 +2313,14 @@ h3 {
   line-height: 72px;
   letter-spacing: -2.88px;
   text-transform: none;
+}
+
+.project-inside__story-title-light {
   color: #e6e1e1;
+}
+
+.project-inside__story-title-accent {
+  color: #9e0000;
 }
 
 .project-inside__story-rule {
