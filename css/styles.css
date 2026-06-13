@@ -1012,10 +1012,16 @@ h3 {
 
 .contact-info__title {
   margin: 0 0 1.5rem;
+  white-space: nowrap;
 }
 
 .contact-info__title .split-heading__line {
+  display: inline;
   line-height: 1.25;
+}
+
+.contact-info__title .split-heading__line--accent {
+  margin-left: 0.2em;
 }
 
 .contact-info__rule {
