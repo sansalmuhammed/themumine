@@ -378,12 +378,13 @@
               { line1: c.titleLine1 || "Get in", line2: c.titleLine2 || "touch" },
               { className: "split-heading split-heading--section contact-info__title", accentOn: "line2" }
             )}
-            <hr class="contact-info__rule" aria-hidden="true">
-            <p class="contact-info__region">${esc(c.regionLabel)}</p>
-            <div class="contact-info__address">
-              <p class="contact-info__city">${esc(c.locationTitle)}</p>
-              ${addressLines}
-              ${mail}
+            <div class="contact-info__details">
+              <p class="contact-info__region">${esc(c.regionLabel)}</p>
+              <div class="contact-info__address">
+                <p class="contact-info__city">${esc(c.locationTitle)}</p>
+                ${addressLines}
+                ${mail}
+              </div>
             </div>
             <nav class="contact-social" aria-label="Social links">${social}</nav>
           </div>
