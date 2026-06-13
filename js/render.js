@@ -14,6 +14,12 @@
     return esc(s).replace(/\n/g, "<br>");
   }
 
+  /** Paragraph copy: collapse CMS/Figma line breaks into normal wrapping. */
+  function formatParagraph(s) {
+    if (s == null) return "";
+    return esc(String(s).replace(/\s*\n+\s*/g, " ").trim());
+  }
+
   /** Extract YouTube video ID from watch, youtu.be, embed, or shorts URLs. */
   function parseYoutubeId(url) {
     if (url == null) return "";
@@ -1275,7 +1281,7 @@
         <article class="about-story-block">
           <p class="about-story-label"><span class="about-story-num">${esc(b.num)}</span> / <span class="about-story-tag">${esc(b.label)}</span></p>
           <h3 class="about-story-heading">${formatText(b.heading || b.quote || "")}</h3>
-          <p class="about-story-text">${formatText(b.text)}</p>
+          <p class="about-story-text">${formatParagraph(b.text)}</p>
         </article>`
       )
       .join("");
