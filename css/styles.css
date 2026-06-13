@@ -2306,13 +2306,25 @@ h3 {
   margin: 0;
   width: 100%;
   max-width: 1106px;
-  font-family: var(--font-heading);
+  min-height: 72px;
+  font-family: "Space Grotesk", var(--font-heading), sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 72px;
   line-height: 72px;
   letter-spacing: -2.88px;
-  text-transform: none;
+  text-transform: uppercase;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: stretch;
+}
+
+.project-inside__story-title-light,
+.project-inside__story-title-accent {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
 }
 
 .project-inside__story-title-light {
@@ -2617,8 +2629,10 @@ h3 {
   }
 
   .project-inside__story-title {
+    font-family: "Space Grotesk", var(--font-heading), sans-serif;
     font-size: clamp(2.25rem, 8vw, 72px);
     line-height: 1;
+    min-height: 0;
   }
 
   .project-inside__brief-panel--right {
