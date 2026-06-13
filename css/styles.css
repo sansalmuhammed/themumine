@@ -2000,9 +2000,19 @@ h3 {
   max-width: 1280px;
   margin: 0 auto;
   background: #000;
+  color: #fff;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 46px;
+}
+
+.project-inside h1,
+.project-inside h2,
+.project-inside h3 {
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: normal;
 }
 
 .project-inside__hero {
@@ -2011,6 +2021,7 @@ h3 {
   min-height: 786px;
   padding: 66px 64px 0 0;
   border-bottom: 2.64px solid #fff;
+  background: #000;
   flex: none;
 }
 
@@ -2078,20 +2089,24 @@ h3 {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  background: #000;
 }
 
 .project-inside__title-block {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 0;
   padding: 20px 112px 0;
   width: 100%;
   box-sizing: border-box;
+  background: #000;
 }
 
 .project-inside__date {
-  margin: 0;
+  margin: 0 0 24px;
   font-family: var(--font-heading);
+  font-style: normal;
   font-weight: 700;
   font-size: 27px;
   line-height: 20px;
@@ -2104,10 +2119,12 @@ h3 {
   margin: 0;
   max-width: 1067px;
   font-family: var(--font-heading);
+  font-style: normal;
   font-weight: 700;
   font-size: 96px;
   line-height: 96px;
   letter-spacing: -4.8px;
+  text-transform: none;
   color: #fff;
 }
 
@@ -2123,6 +2140,7 @@ h3 {
   width: 100%;
   padding: 256px 64px;
   box-sizing: border-box;
+  background: #000;
 }
 
 /* Left brief — Figma Frame 29 anchor (452×1048) + full-bleed media row */
@@ -2152,9 +2170,10 @@ h3 {
   padding: 77px 0;
   box-sizing: border-box;
   overflow: hidden;
-  background: #fff;
+  background: #000;
   border-bottom: 1px solid #fff;
   z-index: 0;
+  isolation: isolate;
 }
 
 .project-inside__brief--left .project-inside__brief-media img {
@@ -2165,6 +2184,7 @@ h3 {
   flex: none;
   object-fit: cover;
   object-position: center top;
+  mix-blend-mode: normal;
 }
 
 .project-inside__brief--left .project-inside__brief-panel {
@@ -2181,6 +2201,7 @@ h3 {
   padding: 48px;
   box-sizing: border-box;
   isolation: isolate;
+  background: transparent;
 }
 
 .project-inside__brief--left .project-inside__mission-label,
@@ -2197,7 +2218,7 @@ h3 {
 
 .project-inside__brief-media {
   overflow: hidden;
-  background: #fff;
+  background: #000;
 }
 
 .project-inside__brief-media img {
@@ -2225,6 +2246,7 @@ h3 {
   margin: 0;
   width: 100%;
   font-family: var(--font-heading);
+  font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
@@ -2237,9 +2259,11 @@ h3 {
   margin: 0;
   width: 100%;
   font-family: var(--font-heading);
+  font-style: normal;
   font-weight: 300;
   font-size: 48px;
   line-height: 48px;
+  letter-spacing: 0;
   color: #fff;
 }
 
@@ -2253,9 +2277,11 @@ h3 {
 .project-inside__mission-copy p {
   margin: 0;
   font-family: var(--font-body);
+  font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 29px;
+  letter-spacing: 0;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -2263,6 +2289,7 @@ h3 {
   width: 100%;
   padding: 86px 64px 0 0;
   box-sizing: border-box;
+  background: #000;
 }
 
 .project-inside__story-head {
@@ -2280,6 +2307,7 @@ h3 {
   width: 100%;
   max-width: 1106px;
   font-family: var(--font-heading);
+  font-style: normal;
   font-weight: 700;
   font-size: 72px;
   line-height: 72px;
@@ -2301,9 +2329,11 @@ h3 {
   padding-top: 8px;
   max-width: 1066px;
   font-family: var(--font-body);
+  font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 29px;
+  letter-spacing: 0;
   color: #a1a1a1;
 }
 
@@ -2331,9 +2361,11 @@ h3 {
   margin: 0;
   width: 100%;
   font-family: var(--font-heading);
+  font-style: normal;
   font-weight: 400;
   font-size: 36px;
   line-height: 45px;
+  letter-spacing: 0;
   text-transform: none;
   color: #e6e1e1;
 }
@@ -2346,14 +2378,17 @@ h3 {
 .project-inside__article-body p {
   margin: 0;
   font-family: var(--font-body);
+  font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
+  letter-spacing: 0;
   color: #a1a1a1;
 }
 
 .project-inside__brief--right {
   min-height: 1444px;
+  background: #000;
 }
 
 .project-inside__brief--right .project-inside__brief-stage {
@@ -2378,10 +2413,11 @@ h3 {
   padding: 77px 0;
   box-sizing: border-box;
   overflow: hidden;
-  background: #fff;
+  background: #000;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
   z-index: 0;
+  isolation: isolate;
 }
 
 .project-inside__brief--right .project-inside__brief-media img {
@@ -2392,6 +2428,7 @@ h3 {
   flex: none;
   object-fit: cover;
   object-position: center top;
+  mix-blend-mode: normal;
 }
 
 .project-inside__brief-stage--split {
@@ -2414,6 +2451,7 @@ h3 {
   max-width: none;
   padding: 48px 48px 48px 749px;
   box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.42);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
@@ -2460,6 +2498,7 @@ h3 {
 
 .project-inside__materials-btn span:first-child {
   font-family: var(--font-heading);
+  font-style: normal;
   font-weight: 600;
   font-size: 11.5014px;
   line-height: 12px;
@@ -2487,6 +2526,7 @@ h3 {
   padding: 0 64px 0 0;
   box-sizing: border-box;
   overflow: hidden;
+  background: #000;
 }
 
 .project-inside__closing-image {
@@ -2609,6 +2649,10 @@ h3 {
     aspect-ratio: 1280 / 724;
     margin-top: 0;
   }
+}
+
+body[data-page="project"] #page-root {
+  background: #000;
 }
 
 /* Project detail — legacy layout */
