@@ -98,12 +98,8 @@ h3 {
 /* ——— Header (Figma / marka çubuğu) ——— */
 
 .site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 1000;
+  position: relative;
+  z-index: 100;
   background: rgba(0, 0, 0, 0.9);
   border-bottom: 1px solid var(--border-strong);
   backdrop-filter: blur(2px);
@@ -273,7 +269,8 @@ h3 {
 
 .site-nav {
   position: fixed;
-  inset: var(--nav-height) 0 0 0;
+  inset: 0;
+  padding-top: var(--nav-height);
   background: var(--bg);
   padding: 2rem 1.25rem;
   display: flex;
@@ -326,9 +323,6 @@ h3 {
   }
 }
 
-main {
-  padding-top: var(--nav-height);
-}
 
 /* ——— Hero ——— */
 
@@ -363,7 +357,7 @@ main {
 .hero-content {
   position: relative;
   z-index: 1;
-  padding: calc(var(--nav-height) + 4rem) 0 5rem;
+  padding: 4rem 0 5rem;
   width: min(100% - calc(var(--site-gutter) * 2), 1024px);
   margin-inline: auto;
 }
