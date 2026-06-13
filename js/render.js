@@ -847,7 +847,9 @@
         .map((slug) => catalog.find((p) => p.slug === slug))
         .filter(Boolean);
     }
-    const lead = w.lead ? `<p class="works-hero__lead hero-lead">${formatText(w.lead)}</p>` : "";
+    const lead = w.lead
+      ? `<div class="works-page__lead-wrap"><p class="works-page__lead">${formatText(w.lead)}</p></div>`
+      : "";
     const ctaText = w.cardLinkText || "Review the project";
     const cards = list.map((p) => projectCard(p, ctaText)).join("");
     const worksInitial = parseInt(w.initialVisible || "4", 10);
@@ -861,14 +863,17 @@
           </div>`
         : "";
     return `
-      <section class="works-hero">
-        <div class="container">
-          ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page", accentOn: "line2" })}
-          ${lead}
-        </div>
-      </section>
-      <section class="works-archive">
-        <div class="container">
+      <section class="works-page">
+        <div class="container works-page__inner">
+          <header class="works-page__head">
+            ${renderSplitHeading(lines, {
+              tag: "h1",
+              className: "split-heading split-heading--page split-heading--works",
+              accentOn: "line2",
+              inline: true,
+            })}
+            ${lead}
+          </header>
           <div class="works-grid">${cards}</div>
           ${loadMore}
         </div>
