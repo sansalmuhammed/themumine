@@ -353,7 +353,7 @@
       <section class="experience-section">
         <div class="container experience-section__inner">
           <div class="experience-content">
-            ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2" })}
+            ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2", inline: true })}
             <ol class="experience-timeline">${items}</ol>
           </div>
           ${visual}
