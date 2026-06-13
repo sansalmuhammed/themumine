@@ -204,7 +204,8 @@
       "one-fire",
       "layers-of-witness"
     ],
-    "initialVisible": "4"
+    "initialVisible": "4",
+    "showLoadMore": true
   },
   "thinking": {
     "titleLine1": "The Witness",
@@ -230,7 +231,8 @@
         "src": "assets/about/portrait-hero.png",
         "alt": "Mümine Serap portrait",
         "position": "center bottom"
-      }
+      },
+      "paragraphs": []
     },
     "story": {
       "image": {
@@ -269,17 +271,20 @@
         {
           "num": "01",
           "title": "STORYTELLING & WRITING",
-          "body": "Storytelling & Writing : Animated Tv Series - Game Narrative - Musical Lyrics - Screenplays in different \ngenre especially in Fantasy & Comedy"
+          "body": "Storytelling & Writing : Animated Tv Series - Game Narrative - Musical Lyrics - Screenplays in different \ngenre especially in Fantasy & Comedy",
+          "items": []
         },
         {
           "num": "02",
           "title": "VISUAL & CREATIVE DEVELOPMENT",
-          "body": "Concept Design - 3D Character Animation- Story Illustration"
+          "body": "Concept Design - 3D Character Animation- Story Illustration",
+          "items": []
         },
         {
           "num": "03",
           "title": "PROJECT DEVELOPMENT",
-          "body": "Project Management - Product Ideation - Workshop Design & Facilitation- Interactive \nEducational Tools"
+          "body": "Project Management - Product Ideation - Workshop Design & Facilitation- Interactive \nEducational Tools",
+          "items": []
         }
       ]
     }
@@ -328,7 +333,21 @@
       ],
       "gallery": [
         "assets/creative/crema-cosmo-hero.png"
-      ]
+      ],
+      "displayTitle": "",
+      "projectDate": "",
+      "closingImage": "",
+      "mission": {
+        "label": "",
+        "quote": "",
+        "image": "",
+        "paragraphs": []
+      },
+      "storyEngineIntro": "",
+      "materialsCta": {
+        "text": "",
+        "href": ""
+      }
     },
     {
       "slug": "bubble-buddies",
@@ -370,12 +389,9 @@
         {
           "heading": "BUBBLEBUDIES - STORY",
           "paragraphs": [
-            "During a school science camp in Puerto Rico, young dreamer Candice shares her strange theory with her classmates: the universe might be made of invisible bubbles. The other kids laugh at her imagination, so Candice wanders into the forest with her best friend John. ",
-            "",
-            "There they discover an old Arecibo radio telescope, half hidden among the trees. Curious, John begins to experiment with the controls while Candice excitedly explains her idea about \"bubble worlds.\" When John accidentally activates the telescope, the machine suddenly reveals a new visual spectrum — and for the first time, they see the truth: ",
-            "",
-            "Earth is trapped inside a giant cosmic bubble. ",
-            "",
+            "During a school science camp in Puerto Rico, young dreamer Candice shares her strange theory with her classmates: the universe might be made of invisible bubbles. The other kids laugh at her imagination, so Candice wanders into the forest with her best friend John.",
+            "There they discover an old Arecibo radio telescope, half hidden among the trees. Curious, John begins to experiment with the controls while Candice excitedly explains her idea about \"bubble worlds.\" When John accidentally activates the telescope, the machine suddenly reveals a new visual spectrum — and for the first time, they see the truth:",
+            "Earth is trapped inside a giant cosmic bubble.",
             "As the telescope's energy destabilizes the barrier, the bubble suddenly pops, sending a shockwave across the galaxy. The disturbance immediately alerts two forces: the controlling Bubble Masters, who keep planets trapped inside bubbles, and the adventurous BubbleBuds, explorers dedicated to freeing worlds from isolation.",
             "When the BubbleBudies arrive on Earth, they discover that Candice's curiosity and John's invention have revealed something extraordinary. Realizing the two friends may hold the key to understanding and freeing other worlds, they invite them aboard their starship, the Puffernaut.",
             "Together, they begin a journey across the universe, traveling from planet to planet — popping bubbles, solving mysteries, and helping civilizations see beyond their own worlds."
@@ -393,10 +409,10 @@
         "text": "MORE PROJECT MATERIALS",
         "href": "#materials"
       },
-      "closingImage": "assets/project/bubble-closing.png",
+      "closingImage": "assets/project/bubble-hero.png",
       "sideImage": "assets/uploads/1781181313460-bubble-buddies.png",
       "sideImageAlt": "Bubble Buddies — cosmic preschool adventure",
-      "storyTitle": "Story Engine",
+      "storyTitle": "STORY ENGINE",
       "storyTitleLine1": "Story",
       "storyTitleLine2": "Engine",
       "paragraphs": [],
@@ -434,7 +450,21 @@
         "assets/uploads/1781181374796-crema-cosmo.png"
       ],
       "homeBadge": "",
-      "homeDescription": ""
+      "homeDescription": "",
+      "displayTitle": "",
+      "projectDate": "",
+      "closingImage": "",
+      "mission": {
+        "label": "",
+        "quote": "",
+        "image": "",
+        "paragraphs": []
+      },
+      "storyEngineIntro": "",
+      "materialsCta": {
+        "text": "",
+        "href": ""
+      }
     }
   ],
   "articles": [
@@ -488,7 +518,8 @@
           "paragraphs": [
             "High status: The hero must begin elevated. There must be something to lose. Hamartia: The flaw. An excess, a blindness. The very quality that makes the hero great is the one that will ultimately destroy them. Hubris: The moment the hero crosses a boundary they should not cross. Often at the precise moment they believe they have won. Peripeteia: The reversal of fortune. Sudden. Irreversible. Anagnorisis:Recognition. The hero finally sees what was true all along. But this knowledge arrives either too late or at terrible cost. Catharsis: Not the hero's release. The audience's. The purging of pity and fear.",
             "This architecture has stood for over two thousand years. And when applied to both Medea and Cleopatra, every beam falls into place. And yet the same structure leads them to two completely different ends. To understand why, we need to look behind the structure at the universe each story stands inside."
-          ]
+          ],
+          "emphasis": ""
         },
         {
           "type": "image",
@@ -532,7 +563,8 @@
           "quote": "WHAT IS A QISSA?",
           "paragraphs": [
             "But before arriving here, I want to open something up: a qissa is not mythology. It is not the story of a tragic hero either. Qissa — from the Arabic root meaning \"to track, to follow\" — is a narrative that was truly lived, that has a soul, that carries a lesson inside it. In the Quran, qissas are not works of imagination; they are historical and spiritual at the same time. When the Quran says \"We relate to you the best of stories,\" it is not offering a story. Offering a reality. And this reality carries its own cosmology."
-          ]
+          ],
+          "emphasis": ""
         },
         {
           "type": "image",
@@ -593,7 +625,13 @@
           "type": "end",
           "text": "End of the story…"
         }
-      ]
+      ],
+      "displayTitle": "",
+      "subtitle": "",
+      "closingSection": {
+        "title": "",
+        "paragraphs": []
+      }
     },
     {
       "slug": "on-memory",
@@ -629,7 +667,15 @@
           "type": "end",
           "text": "End of the story…"
         }
-      ]
+      ],
+      "cardTitleLine1": "",
+      "cardTitleLine2": "",
+      "displayTitle": "",
+      "subtitle": "",
+      "closingSection": {
+        "title": "",
+        "paragraphs": []
+      }
     },
     {
       "slug": "maps-we-carry",
@@ -661,7 +707,15 @@
           "type": "end",
           "text": "End of the story…"
         }
-      ]
+      ],
+      "cardTitleLine1": "",
+      "cardTitleLine2": "",
+      "displayTitle": "",
+      "subtitle": "",
+      "closingSection": {
+        "title": "",
+        "paragraphs": []
+      }
     }
   ]
 }
