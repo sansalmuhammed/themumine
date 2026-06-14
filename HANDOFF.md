@@ -42,7 +42,17 @@ Admin’deki `notifyEmail` alanı yalnızca hatırlatmadır; Netlify otomatik ok
 4. Alıcı: `mumine.serap@themumine.com` (veya müşterinin istediği adres)
 5. Test gönderimi yapın → **Submissions** altında görünmeli
 
-### 4. İçerik son düzenlemeler (müşteri / siz)
+### 4. Repo temizliği (teslim öncesi — önemli)
+
+`_fig_extract/` ve `.fig-extract/` klasörleri Figma geliştirme artıklarıdır (~100MB+). `.gitignore`'a eklendi; repoda hâlâ izleniyorlarsa bir kez kaldırın:
+
+```bash
+git rm -r --cached _fig_extract .fig-extract
+git commit -m "Remove Figma extract artifacts from repo"
+git push
+```
+
+### 5. İçerik son düzenlemeler (müşteri / siz)
 
 - [ ] **Sosyal medya linkleri** — Admin → Ana Sayfa → iletişim bölümünde LinkedIn, Instagram, YouTube, Substance URL’lerini doldurun (boş bırakılırsa sitede görünmez)
 - [ ] **Header logosu** — Admin → Site & Tema → `logoImage` (şu an `assets/logo-footer.png`; istenirse tam wordmark yükleyin)
@@ -50,7 +60,7 @@ Admin’deki `notifyEmail` alanı yalnızca hatırlatmadır; Netlify otomatik ok
 - [ ] **Footer telif** — `© 2026 THE MUMINE` (admin’den değiştirilebilir)
 - [ ] Unsplash görselleri istenirse kendi görselleriyle değiştirin (admin → Yükle)
 
-### 5. Özel alan adı (isteğe bağlı)
+### 6. Özel alan adı (isteğe bağlı)
 
 Netlify → **Domain management** → `themumine.com` vb. DNS yönlendirmesi.
 

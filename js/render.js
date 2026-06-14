@@ -1443,6 +1443,7 @@
     const grid = section?.querySelector(".blog-grid, .works-grid");
     if (!grid) return;
     const cardSelector = grid.classList.contains("works-grid") ? ".work-card" : ".blog-card";
+    const hiddenClass = grid.classList.contains("works-grid") ? "work-card--hidden" : "archive-card--hidden";
     const initial = parseInt(btn.dataset.initial || "4", 10);
     const cards = [...grid.querySelectorAll(cardSelector)];
     if (cards.length <= initial) {
@@ -1450,10 +1451,10 @@
       return;
     }
     cards.forEach((card, i) => {
-      if (i >= initial) card.classList.add("archive-card--hidden");
+      if (i >= initial) card.classList.add(hiddenClass);
     });
     btn.addEventListener("click", () => {
-      cards.forEach((card) => card.classList.remove("archive-card--hidden"));
+      cards.forEach((card) => card.classList.remove(hiddenClass));
       btn.parentElement?.remove();
     });
   }

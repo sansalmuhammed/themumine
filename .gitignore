@@ -3,3 +3,6 @@ node_modules/
 .netlify/
 figma-thumb.*
 figma-preview.jpg
+_fig_extract/
+.fig-extract/
+*.fig

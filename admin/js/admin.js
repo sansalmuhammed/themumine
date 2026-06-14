@@ -745,6 +745,7 @@
           "Her satır bir proje. Aynı slug tekrarlanabilir. Mevcut: " + projectSlugs
         )}
         ${field("Load more butonunu göster", "works.showLoadMore", w.showLoadMore !== false, "checkbox")}
+        ${field("İlk görünen kart sayısı", "works.initialVisible", w.initialVisible ?? 4, "text", "Fazlası Load more ile açılır")}
       </div>
       <p class="hint">Kart görselleri, etiketler ve özet metinler «Projeler» bölümünden düzenlenir.</p>`;
   }
@@ -768,6 +769,7 @@
           "Her satır bir makale slug. Mevcut: " + articleSlugs
         )}
         ${field("Load more butonunu göster", "blog.showLoadMore", b.showLoadMore !== false, "checkbox")}
+        ${field("İlk görünen kart sayısı", "blog.initialVisible", b.initialVisible ?? 4, "text", "Fazlası Load more ile açılır")}
       </div>
       <p class="hint">Kart görselleri, etiketler ve özet metinler «Makaleler» bölümünden düzenlenir.</p>`;
   }
@@ -777,7 +779,8 @@
     const articleSlugs = (content.articles || []).map((a) => a.slug).join(", ");
     const cardSlugs = t._cardSlugs ?? linesToText(t.cardSlugs);
     return `
-      <div class="panel"><h3>The Witness Desk (ana sayfa bölümü)</h3>
+      <div class="panel"><h3>Witness Desk arşivi (yedeği — canlı sitede kullanılmıyor)</h3>
+        <p class="hint">Ana sayfa Witness Desk → «Ana Sayfa» paneli. Blog arşivi → «Blog» paneli. thinking.html blog.html'e yönlendirilir.</p>
         ${field("Başlık satır 1 (beyaz)", "thinking.titleLine1", t.titleLine1)}
         ${field("Başlık satır 2 (kırmızı)", "thinking.titleLine2", t.titleLine2)}
         ${field("Alt metin", "thinking.lead", t.lead, "textarea")}
@@ -853,6 +856,8 @@
               field("Kart başlığı", `articles.${i}.cardTitle`, a.cardTitle) +
               field("Kart başlık satır 1", `articles.${i}.cardTitleLine1`, a.cardTitleLine1, "text", "Witness Desk iki satırlı başlık") +
               field("Kart başlık satır 2", `articles.${i}.cardTitleLine2`, a.cardTitleLine2, "text", "Kartta alt satır") +
+              field("Witness Desk kart başlığı", `articles.${i}.witnessTitle`, a.witnessTitle, "text", "Ana sayfa Witness Desk kartı") +
+              field("Witness Desk kart özeti", `articles.${i}.witnessExcerpt`, a.witnessExcerpt, "textarea", "Ana sayfa Witness Desk kartı") +
               field("Kart özet (gri alt metin)", `articles.${i}.cardExcerpt`, a.cardExcerpt, "textarea") +
               field("Kart meta (opsiyonel)", `articles.${i}.meta`, a.meta) +
               field("Sayfa başlığı (tarayıcı)", `articles.${i}.title`, a.title) +
@@ -873,7 +878,7 @@
     const hero = ab.hero || {};
     const story = ab.story || {};
     const skills = ab.skills || {};
-    const heroParas = (hero._paragraphs ?? (hero.paragraphs || []).join("\n\n"));
+    const heroBio = hero.bio ?? hero._paragraphs ?? (hero.paragraphs || []).join("\n\n");
 
     const storyBlocks = (story.blocks || [])
       .map((b, i) =>
@@ -882,6 +887,7 @@
           i,
           field("Numara", `about.story.blocks.${i}.num`, b.num) +
             field("Etiket (ORIGINS…)", `about.story.blocks.${i}.label`, b.label) +
+            field("Başlık", `about.story.blocks.${i}.heading`, b.heading, "text", "Boşsa alıntı kullanılır") +
             field("Alıntı", `about.story.blocks.${i}.quote`, b.quote, "textarea") +
             field("Metin", `about.story.blocks.${i}.text`, b.text, "textarea"),
           "story-" + i
@@ -897,6 +903,7 @@
           i,
           field("Numara", `about.skills.cards.${i}.num`, c.num) +
             field("Başlık", `about.skills.cards.${i}.title`, c.title) +
+            field("Metin (tek paragraf)", `about.skills.cards.${i}.body`, c.body, "textarea", "Doluysa maddeler yerine gösterilir") +
             field("Maddeler (her satır bir madde)", `about.skills.cards.${i}._items`, items, "textarea"),
           "skill-" + i
         );
@@ -907,7 +914,7 @@
       <div class="panel"><h3>Hero (MUMINE SERAP / KIZILIRMAK)</h3>
         ${field("İsim satırı 1", "about.hero.nameLine1", hero.nameLine1)}
         ${field("İsim satırı 2 (kırmızı)", "about.hero.nameLine2", hero.nameLine2)}
-        ${field("Paragraflar", "about.hero._paragraphs", heroParas, "textarea")}
+        ${field("Biyografi metni", "about.hero.bio", heroBio, "textarea")}
         ${imageField("Hero arka plan görseli (sağ)", "about.hero.image.src", hero.image?.src)}
         ${field("Görsel alt metni", "about.hero.image.alt", hero.image?.alt)}
         ${field("Görsel konumu", "about.hero.image.position", hero.image?.position || "center bottom", "text", "CSS background-position — örn: center bottom, center top")}
@@ -1000,10 +1007,8 @@
       });
     });
     if (content.about?.hero?._paragraphs != null) {
-      content.about.hero.paragraphs = content.about.hero._paragraphs
-        .split(/\n\n+/)
-        .map((s) => s.trim())
-        .filter(Boolean);
+      content.about.hero.bio = content.about.hero._paragraphs.trim();
+      delete content.about.hero.paragraphs;
       delete content.about.hero._paragraphs;
     }
     (content.about?.skills?.cards || []).forEach((col) => {
@@ -1353,8 +1358,9 @@
         if (s.paragraphs) s._p = s.paragraphs.join("\n\n");
       });
     });
-    if (content.about?.hero?.paragraphs) {
-      content.about.hero._paragraphs = content.about.hero.paragraphs.join("\n\n");
+    if (content.about?.hero?.bio != null) {
+      content.about.hero.bio = String(content.about.hero.bio).trim();
+      delete content.about.hero.paragraphs;
     }
     (content.about?.skills?.cards || []).forEach((c) => {
       if (c.items) c._items = c.items.join("\n");
