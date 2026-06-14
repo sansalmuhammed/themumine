@@ -186,10 +186,11 @@
       "crema-cosmo",
       "bubble-buddies",
       "void-manifesto",
-      "bubble-buddies"
+      "void-manifesto"
     ],
     "showLoadMore": true,
-    "initialVisible": "4"
+    "initialVisible": "4",
+    "gridMinCards": 4
   },
   "blog": {
     "titleLine1": "What I'm",
@@ -296,6 +297,7 @@
       "homeBadge": "Latest Project",
       "homeDescription": "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical.",
       "cardTitle": "Crema Cosmo",
+      "showOnWorks": true,
       "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
       "cardTags": [
         "Fantasy",
@@ -356,6 +358,7 @@
       "displayTitle": "PROJECT: BUBBLE BUDIES",
       "projectDate": "01/JAN/2026",
       "cardTitle": "Bubble Budies",
+      "showOnWorks": true,
       "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped \nworlds. By breaking barriers, they help civilizations resolve...",
       "cardTags": [
         "Adventure",
@@ -423,6 +426,7 @@
       "titleLine1": "Project:",
       "titleLine2": "Void Manifesto",
       "cardTitle": "Void Manifesto",
+      "showOnWorks": true,
       "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they \nmust dodge grumpy guards and unite through silly songs and weird coffee noises...",
       "cardTags": [
         "Fantasy",

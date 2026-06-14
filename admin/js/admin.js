@@ -726,10 +726,26 @@
       </div>`;
   }
 
+  function syncWorksProjectSlugs() {
+    const works = content.works || (content.works = {});
+    const visible = (content.projects || []).filter((p) => p.showOnWorks !== false);
+    let slugs = visible.map((p) => String(p.slug || "").trim()).filter(Boolean);
+    const minCards = parseInt(works.gridMinCards || works.initialVisible || 4, 10);
+    if (minCards > 0 && slugs.length > 0 && slugs.length < minCards) {
+      const last = slugs[slugs.length - 1];
+      while (slugs.length < minCards) slugs.push(last);
+    }
+    works.projectSlugs = slugs;
+  }
+
   function renderWorks() {
     const w = content.works || {};
-    const projectSlugs = (content.projects || []).map((p) => p.slug).join(", ");
-    const gridSlugs = w._projectSlugs ?? linesToText(w.projectSlugs);
+    const gridPreview = (content.projects || [])
+      .map((p, i) => {
+        const on = p.showOnWorks !== false ? "✓" : "✗";
+        return `${on} ${i + 1}. ${p.slug || "?"} → ${p.cardTitle || p.title || p.slug || "Başlıksız"}`;
+      })
+      .join("\n");
     return `
       <div class="panel"><h3>Selected Works sayfası</h3>
         ${field("Başlık satır 1 (beyaz)", "works.titleLine1", w.titleLine1)}
@@ -737,17 +753,13 @@
         ${field("Alt metin (kırmızı çizgili)", "works.lead", w.lead, "textarea")}
         ${field("Kart link metni", "works.cardLinkText", w.cardLinkText, "text", "Örn: Review the project")}
         ${field("Load more metni", "works.loadMoreText", w.loadMoreText)}
-        ${field(
-          "Grid sırası (proje slug listesi)",
-          "works._projectSlugs",
-          gridSlugs,
-          "textarea",
-          "Her satır bir proje. Aynı slug tekrarlanabilir. Mevcut: " + projectSlugs
-        )}
+        ${field("Grid minimum kart sayısı", "works.gridMinCards", w.gridMinCards ?? 4, "text", "3 projede 4 kart için son proje tekrarlanır")}
         ${field("Load more butonunu göster", "works.showLoadMore", w.showLoadMore !== false, "checkbox")}
         ${field("İlk görünen kart sayısı", "works.initialVisible", w.initialVisible ?? 4, "text", "Fazlası Load more ile açılır")}
+        <p class="hint"><strong>Works grid sırası «Projeler» bölümünden otomatik gelir.</strong> ✓ = Works'te görünür. Sıra = proje listesi sırası.</p>
+        <pre class="hint">${esc(gridPreview || "Henüz proje yok")}</pre>
       </div>
-      <p class="hint">Kart görselleri, etiketler ve özet metinler «Projeler» bölümünden düzenlenir.</p>`;
+      <p class="hint">Kart başlığı, görsel, etiket ve özet → «Projeler» → Kart &amp; listeler</p>`;
   }
 
   function renderBlog() {
@@ -810,7 +822,8 @@
           adminGroup(
             "Kart & listeler",
             field("Slug (URL)", `projects.${i}.slug`, p.slug, "text", "project.html?slug=...") +
-              field("Kart başlığı", `projects.${i}.cardTitle`, p.cardTitle) +
+              field("Kart başlığı", `projects.${i}.cardTitle`, p.cardTitle, "text", "Works sayfasında görünen başlık") +
+              field("Works sayfasında göster", `projects.${i}.showOnWorks`, p.showOnWorks !== false, "checkbox") +
               field(
                 "Kart etiketleri (Works sayfası)",
                 `projects.${i}._cardTags`,
@@ -973,9 +986,9 @@
     }
     const works = content.works;
     if (works?._projectSlugs != null) {
-      works.projectSlugs = parseLinesText(works._projectSlugs);
       delete works._projectSlugs;
     }
+    syncWorksProjectSlugs();
     const blog = content.blog;
     if (blog?._cardSlugs != null) {
       blog.cardSlugs = parseLinesText(blog._cardSlugs);
@@ -1102,6 +1115,7 @@
       content.projects.push({
         slug: "yeni-proje-" + Date.now(),
         cardTitle: "Yeni Proje",
+        showOnWorks: true,
         cardExcerpt: "",
         cardTags: [],
         meta: "",
@@ -1331,9 +1345,7 @@
     if (content.home?.witness?.cardSlugs) {
       content.home.witness._cardSlugs = linesToText(content.home.witness.cardSlugs);
     }
-    if (content.works?.projectSlugs) {
-      content.works._projectSlugs = linesToText(content.works.projectSlugs);
-    }
+    syncWorksProjectSlugs();
     if (content.blog?.cardSlugs) {
       content.blog._cardSlugs = linesToText(content.blog.cardSlugs);
     }

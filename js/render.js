@@ -654,7 +654,7 @@
         </a>
         <div class="work-card__body">
           ${tags}
-          <h2 class="work-card__title"><a href="${href}">${esc(p.cardTitle)}</a></h2>
+          <h2 class="work-card__title"><a href="${href}">${esc(p.cardTitle || p.title || p.slug)}</a></h2>
           ${desc ? `<p class="work-card__desc">${formatText(desc)}</p>` : ""}
           <a class="work-card__cta" href="${href}">
             <span>${esc(cta).toUpperCase()}</span>
@@ -838,15 +838,21 @@
       </section>`;
   }
 
+  function resolveWorksProjects(w, projects) {
+    const catalog = projects || [];
+    const visible = catalog.filter((p) => p.showOnWorks !== false);
+    let slugs = visible.map((p) => p.slug).filter(Boolean);
+    const minCards = parseInt(w?.gridMinCards || w?.initialVisible || "4", 10);
+    if (minCards > 0 && slugs.length > 0 && slugs.length < minCards) {
+      const last = slugs[slugs.length - 1];
+      while (slugs.length < minCards) slugs.push(last);
+    }
+    return slugs.map((slug) => catalog.find((p) => p.slug === slug)).filter(Boolean);
+  }
+
   function renderWorks(w, projects) {
     const lines = splitTitleLines(w, "Selected Works");
-    const catalog = projects || [];
-    let list = catalog;
-    if (Array.isArray(w.projectSlugs) && w.projectSlugs.length) {
-      list = w.projectSlugs
-        .map((slug) => catalog.find((p) => p.slug === slug))
-        .filter(Boolean);
-    }
+    const list = resolveWorksProjects(w, projects);
     const lead = w.lead
       ? `<div class="works-page__lead-wrap"><p class="works-page__lead">${formatText(w.lead)}</p></div>`
       : "";
