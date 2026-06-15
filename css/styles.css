@@ -977,23 +977,23 @@ h3 {
   max-width: 100%;
   min-height: clamp(16rem, 40vw, 28rem);
   background-repeat: no-repeat;
-  background-position: left bottom;
+  background-position: right bottom;
   background-size: 616px auto;
   transform: scaleX(-1);
-  transform-origin: left bottom;
+  transform-origin: right bottom;
   pointer-events: none;
 }
 
 @media (min-width: 900px) {
   .experience-visual {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: start;
-    align-self: end;
+    position: absolute;
+    right: 0;
+    bottom: 0;
     width: 616px;
     max-width: 616px;
     height: 836px;
     min-height: 836px;
+    z-index: 1;
   }
 }
 
@@ -1022,7 +1022,8 @@ h3 {
     width: min(100%, 616px);
     height: auto;
     min-height: 16rem;
-    margin: 1rem 0 0;
+    margin: 1rem 0 0 auto;
+    background-position: right bottom;
     background-size: min(616px, 100%) auto;
   }
 }
@@ -2243,7 +2244,7 @@ h3 {
 }
 
 .project-inside__page-title-accent {
-  color: #9e0000;
+  color: var(--accent-deep);
 }
 
 .project-inside__brief {

@@ -318,6 +318,9 @@
       adminGroup(
         "Detay sayfası (PROJECT INSIDE)",
         field("Görünen başlık", `projects.${i}.displayTitle`, p.displayTitle, "text", "Örn: PROJECT: BUBBLE BUDDIES") +
+          field("Başlık satır 1 (beyaz)", `projects.${i}.titleLine1`, p.titleLine1, "text", "Örn: PROJECT:") +
+          field("Başlık satır 2", `projects.${i}.titleLine2`, p.titleLine2, "text", "Örn: BUBBLE BUDDIES") +
+          field("Kırmızı kelime", `projects.${i}.titleAccent`, p.titleAccent, "text", "Örn: BUDDIES — satır 2 içinde kırmızı") +
           field("Tarih", `projects.${i}.projectDate`, p.projectDate, "text", "Örn: 01/JAN/2026") +
           imageField("Hero görseli / video kapağı", `projects.${i}.heroImage`, p.heroImage) +
           field(

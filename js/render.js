@@ -954,6 +954,39 @@
       </section>`;
   }
 
+  function projectInsideTitleAccentHtml(lineRaw, accentWord) {
+    const upper = String(lineRaw || "").trim().toUpperCase();
+    if (!upper) return "";
+    const accent = String(accentWord || upper.split(/\s+/).pop() || "")
+      .trim()
+      .toUpperCase();
+    if (!accent || !upper.includes(accent)) return esc(upper);
+    const idx = upper.lastIndexOf(accent);
+    return `${esc(upper.slice(0, idx))}<span class="project-inside__page-title-accent">${esc(upper.slice(idx))}</span>`;
+  }
+
+  function renderProjectInsideTitle(p) {
+    const accentWord = p.titleAccent ? String(p.titleAccent).trim() : "";
+
+    if (p.titleLine1 && p.titleLine2) {
+      const line1 = esc(String(p.titleLine1).toUpperCase());
+      const line2 = projectInsideTitleAccentHtml(p.titleLine2, accentWord);
+      return `<span class="project-inside__page-title-line">${line1}</span><span class="project-inside__page-title-line">${line2}</span>`;
+    }
+
+    const full = String(p.displayTitle || p.title || "").trim().toUpperCase();
+    if (!full) return "";
+
+    const colonIdx = full.indexOf(":");
+    if (colonIdx >= 0) {
+      const line1 = esc(full.slice(0, colonIdx + 1));
+      const line2 = projectInsideTitleAccentHtml(full.slice(colonIdx + 1).trim(), accentWord);
+      return `<span class="project-inside__page-title-line">${line1}</span><span class="project-inside__page-title-line">${line2}</span>`;
+    }
+
+    return `<span class="project-inside__page-title-line">${projectInsideTitleAccentHtml(full, accentWord)}</span>`;
+  }
+
   function renderProjectMissionPanel(mission) {
     const paras = (mission.paragraphs || [])
       .map((x) => `<p>${formatText(x)}</p>`)
@@ -968,22 +1001,7 @@
     const mission = p.mission || {};
     const missionImage = mission.image || p.sideImage || p.heroImage;
     const play = renderProjectPlayButton(p, "project-inside__play");
-    const titleHtml = (() => {
-      if (p.titleLine1 && p.titleLine2) {
-        const l1 = esc(String(p.titleLine1).toUpperCase());
-        const l2raw = String(p.titleLine2).toUpperCase();
-        const accentWord = p.titleAccent ? String(p.titleAccent).toUpperCase() : "";
-        if (accentWord && l2raw.includes(accentWord)) {
-          const idx = l2raw.lastIndexOf(accentWord);
-          const prefix = esc(l2raw.slice(0, idx));
-          const accent = esc(l2raw.slice(idx));
-          return `<span class="project-inside__page-title-line">${l1}</span><span class="project-inside__page-title-line">${prefix}<span class="project-inside__page-title-accent">${accent}</span></span>`;
-        }
-        return `<span class="project-inside__page-title-line">${l1}</span><span class="project-inside__page-title-line">${esc(l2raw)}</span>`;
-      }
-      const displayTitle = p.displayTitle || (p.title || "").toUpperCase();
-      return esc(displayTitle);
-    })();
+    const titleHtml = renderProjectInsideTitle(p);
     const projectDate = p.projectDate || "";
     const storyIntro = p.storyEngineIntro || "";
     const storyTitleLines = splitTitleLines({ title: p.storyTitle }, p.storyTitle || "Story Engine");
