@@ -398,7 +398,6 @@
             <nav class="contact-social" aria-label="Social links">${social}</nav>
           </div>
           <div class="contact-form-col">
-            <h3 class="contact-form__heading">${esc(c.formHeading)}</h3>
             <form
               class="contact-form"
               name="${esc(formName)}"
@@ -414,20 +413,23 @@
               <p class="contact-form__hp" hidden>
                 <label>Don't fill this out: <input name="bot-field"></label>
               </p>
-              <div class="contact-form__box">
-                <div class="contact-form__row contact-form__row--split">
-                  <input type="text" name="firstName" placeholder="${escAttr(ph.firstName || "First name")}" required autocomplete="given-name">
-                  <input type="text" name="lastName" placeholder="${escAttr(ph.lastName || "Last name")}" required autocomplete="family-name">
-                </div>
-                <div class="contact-form__row">
-                  <input type="email" name="email" placeholder="${escAttr(ph.email || "Email address")}" required autocomplete="email">
-                </div>
-                <div class="contact-form__row">
-                  <input type="text" name="organization" placeholder="${escAttr(ph.organization || "Organization (optional)")}" autocomplete="organization">
-                </div>
-                <div class="contact-form__message">
-                  <label for="contact-message">${esc(c.messageLabel || "Your objective")}</label>
-                  <textarea id="contact-message" name="message" required></textarea>
+              <div class="contact-form__panel">
+                <h3 class="contact-form__heading">${esc(c.formHeading)}</h3>
+                <div class="contact-form__box">
+                  <div class="contact-form__row contact-form__row--split">
+                    <input type="text" name="firstName" placeholder="${escAttr(ph.firstName || "First name")}" required autocomplete="given-name">
+                    <input type="text" name="lastName" placeholder="${escAttr(ph.lastName || "Last name")}" required autocomplete="family-name">
+                  </div>
+                  <div class="contact-form__row">
+                    <input type="email" name="email" placeholder="${escAttr(ph.email || "Email address")}" required autocomplete="email">
+                  </div>
+                  <div class="contact-form__row">
+                    <input type="text" name="organization" placeholder="${escAttr(ph.organization || "Organization (optional)")}" autocomplete="organization">
+                  </div>
+                  <div class="contact-form__message">
+                    <label for="contact-message">${esc(c.messageLabel || "Your objective")}</label>
+                    <textarea id="contact-message" name="message" required></textarea>
+                  </div>
                 </div>
               </div>
               <div class="contact-form__actions">
@@ -642,13 +644,15 @@
     return `<ul class="work-card__tags" aria-label="Tags">${items}</ul>`;
   }
 
-  function projectCard(p, ctaText) {
+  function projectCard(p, ctaText, options) {
+    const opts = options || {};
     const desc = p.cardExcerpt || (p.paragraphs && p.paragraphs[0]) || "";
     const href = `project.html?slug=${encodeURIComponent(p.slug)}`;
     const tags = renderWorkCardTags(p.cardTags || p.tags);
     const cta = ctaText || "Review the project";
+    const hiddenClass = opts.hidden ? " work-card--hidden" : "";
     return `
-      <article class="work-card">
+      <article class="work-card${hiddenClass}">
         <a class="work-card__media" href="${href}">
           <img class="work-card__image" src="${esc(p.cardImage)}" alt="" width="550" height="413" loading="lazy">
         </a>
@@ -857,8 +861,10 @@
       ? `<div class="works-page__lead-wrap"><p class="works-page__lead">${formatText(w.lead)}</p></div>`
       : "";
     const ctaText = w.cardLinkText || "Review the project";
-    const cards = list.map((p) => projectCard(p, ctaText)).join("");
-    const worksInitial = parseInt(w.initialVisible || "4", 10);
+    const worksInitial = Math.max(1, parseInt(w.initialVisible, 10) || 4);
+    const cards = list
+      .map((p, i) => projectCard(p, ctaText, { hidden: i >= worksInitial }))
+      .join("");
     const loadMore =
       w.showLoadMore !== false && list.length > worksInitial
         ? `<div class="works-load-more">
@@ -880,7 +886,7 @@
             })}
             ${lead}
           </header>
-          <div class="works-grid">${cards}</div>
+          <div class="works-grid" data-initial-visible="${worksInitial}">${cards}</div>
           ${loadMore}
         </div>
       </section>`;
@@ -1461,25 +1467,31 @@
   }
 
   function initArchiveLoadMore() {
-    const btn = document.querySelector("[data-load-more]");
-    if (!btn) return;
-    const section = btn.closest("section");
-    const grid = section?.querySelector(".blog-grid, .works-grid");
-    if (!grid) return;
-    const cardSelector = grid.classList.contains("works-grid") ? ".work-card" : ".blog-card";
-    const hiddenClass = grid.classList.contains("works-grid") ? "work-card--hidden" : "archive-card--hidden";
-    const initial = parseInt(btn.dataset.initial || "4", 10);
-    const cards = [...grid.querySelectorAll(cardSelector)];
-    if (cards.length <= initial) {
-      btn.parentElement?.remove();
-      return;
-    }
-    cards.forEach((card, i) => {
-      if (i >= initial) card.classList.add(hiddenClass);
-    });
-    btn.addEventListener("click", () => {
-      cards.forEach((card) => card.classList.remove(hiddenClass));
-      btn.parentElement?.remove();
+    document.querySelectorAll(".works-grid, .blog-grid").forEach((grid) => {
+      const isWorks = grid.classList.contains("works-grid");
+      const cardSelector = isWorks ? ".work-card" : ".blog-card";
+      const hiddenClass = isWorks ? "work-card--hidden" : "archive-card--hidden";
+      const section = grid.closest("section");
+      const btn = section?.querySelector("[data-load-more]");
+      const initial = Math.max(
+        1,
+        parseInt(btn?.dataset.initial || grid.dataset.initialVisible || "4", 10) || 4
+      );
+      const cards = [...grid.querySelectorAll(cardSelector)];
+
+      cards.forEach((card, i) => {
+        if (i >= initial) card.classList.add(hiddenClass);
+      });
+
+      if (!btn || cards.length <= initial) {
+        btn?.parentElement?.remove();
+        return;
+      }
+
+      btn.addEventListener("click", () => {
+        cards.forEach((card) => card.classList.remove(hiddenClass));
+        btn.parentElement?.remove();
+      });
     });
   }
 

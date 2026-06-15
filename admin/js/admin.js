@@ -756,9 +756,9 @@
         ${field("Alt metin (kırmızı çizgili)", "works.lead", w.lead, "textarea")}
         ${field("Kart link metni", "works.cardLinkText", w.cardLinkText, "text", "Örn: Review the project")}
         ${field("Load more metni", "works.loadMoreText", w.loadMoreText)}
-        ${field("Grid minimum kart sayısı", "works.gridMinCards", w.gridMinCards ?? 4, "text", "3 projede 4 kart için son proje tekrarlanır")}
+        ${field("Grid minimum kart sayısı", "works.gridMinCards", w.gridMinCards ?? 4, "text", "Az proje varsa grid bu sayıya tamamlanır (son proje tekrarlanır)")}
         ${field("Load more butonunu göster", "works.showLoadMore", w.showLoadMore !== false, "checkbox")}
-        ${field("İlk görünen kart sayısı", "works.initialVisible", w.initialVisible ?? 4, "text", "Fazlası Load more ile açılır")}
+        ${field("İlk görünen kart sayısı", "works.initialVisible", w.initialVisible ?? 4, "text", "Bu sayıdan fazla proje gizlenir; Load more ile açılır")}
         <p class="hint"><strong>Works grid sırası «Projeler» bölümünden otomatik gelir.</strong> ✓ = Works'te görünür. Sıra = proje listesi sırası.</p>
         <pre class="hint">${esc(gridPreview || "Henüz proje yok")}</pre>
       </div>
