@@ -184,9 +184,10 @@
     "loadMoreText": "Load more archive",
     "projectSlugs": [
       "crema-cosmo",
-      "bubble-buddies",
+      "bubble-budies",
       "void-manifesto",
-      "void-manifesto"
+      "crema-cosmo1",
+      "yeni-proje-1781553694801"
     ],
     "showLoadMore": true,
     "initialVisible": "4",
@@ -348,7 +349,8 @@
       "materialsCta": {
         "text": "",
         "href": ""
-      }
+      },
+      "titleAccent": ""
     },
     {
       "slug": "bubble-budies",
@@ -465,7 +467,8 @@
       "materialsCta": {
         "text": "",
         "href": ""
-      }
+      },
+      "titleAccent": ""
     },
     {
       "slug": "crema-cosmo1",
@@ -502,7 +505,48 @@
       "sideImageAlt": "",
       "storyTitle": "Story Engine",
       "storySections": [],
-      "gallery": []
+      "gallery": [],
+      "showOnWorks": true,
+      "titleAccent": ""
+    },
+    {
+      "slug": "yeni-proje-1781553694801",
+      "cardTitle": "Yeni Proje222",
+      "showOnWorks": true,
+      "cardExcerpt": "",
+      "cardTags": [],
+      "meta": "",
+      "cardImage": "",
+      "heroImage": "",
+      "homeBadge": "",
+      "homeDescription": "",
+      "videoUrl": "",
+      "showPlayButton": true,
+      "displayTitle": "PROJECT: YENİ PROJE",
+      "projectDate": "",
+      "titleLine1": "Project:",
+      "titleLine2": "Yeni Proje",
+      "title": "Yeni Proje",
+      "mission": {
+        "label": "THE MISSION",
+        "quote": "",
+        "image": "",
+        "paragraphs": []
+      },
+      "storyEngineIntro": "",
+      "storyArticles": [],
+      "materialsCta": {
+        "text": "More project materials",
+        "href": "#materials"
+      },
+      "closingImage": "",
+      "paragraphs": [],
+      "sideImage": "",
+      "sideImageAlt": "",
+      "storyTitle": "Story Engine",
+      "storySections": [],
+      "gallery": [],
+      "titleAccent": ""
     }
   ],
   "articles": [
