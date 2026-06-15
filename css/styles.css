@@ -968,7 +968,7 @@ h3 {
 
 .experience-item__details {
   margin: 0;
-  max-width: 576px;
+  max-width: 676px;
   color: #e4beb8;
   font-family: var(--font-body);
   font-size: 16px;
@@ -979,15 +979,15 @@ h3 {
 
 @media (min-width: 900px) {
   .experience-item:nth-child(1) .experience-item__details {
-    max-width: 374px;
+    max-width: 674px;
   }
 
   .experience-item:nth-child(2) .experience-item__details {
-    max-width: 458px;
+    max-width: 658px;
   }
 
   .experience-item:nth-child(3) .experience-item__details {
-    max-width: 296px;
+    max-width: 696px;
   }
 }
 
