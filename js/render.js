@@ -20,7 +20,16 @@
     return esc(String(s).replace(/\s*\n+\s*/g, " ").trim());
   }
 
-  /** Extract YouTube video ID from watch, youtu.be, embed, or shorts URLs. */
+  /** Experience step copy: keep Figma line breaks, trim each line. */
+  function formatExperienceDetails(s) {
+    if (s == null) return "";
+    return String(s)
+      .split(/\n/)
+      .map((line) => esc(line.trim()))
+      .filter(Boolean)
+      .join("<br>");
+  }
+
   function parseYoutubeId(url) {
     if (url == null) return "";
     const s = String(url).trim();
@@ -336,7 +345,7 @@
           <span class="experience-item__num">${esc(e.num)}</span>
           <div class="experience-item__body">
             <h3 class="experience-item__title">${esc(e.title)}</h3>
-            <p class="experience-item__details">${formatParagraph(experienceItemDetails(e))}</p>
+            <p class="experience-item__details">${formatExperienceDetails(experienceItemDetails(e))}</p>
           </div>
         </li>`
       )
@@ -701,14 +710,16 @@
     return `<ul class="blog-card__tags" aria-label="Tags">${items}</ul>`;
   }
 
-  function articleArchiveCard(a, ctaText) {
+  function articleArchiveCard(a, ctaText, options) {
+    const opts = options || {};
     const excerpt = articleCardExcerpt(a);
     const href = `article.html?slug=${encodeURIComponent(a.slug)}`;
     const tags = renderArchiveCardTags(a.tags);
     const title = a.cardTitle || a.title || "";
     const cta = ctaText || "Review the blog";
+    const hiddenClass = opts.hidden ? " archive-card--hidden" : "";
     return `
-      <article class="blog-card blog-card--archive">
+      <article class="blog-card blog-card--archive${hiddenClass}">
         <a class="blog-card__media" href="${href}">
           <img class="blog-card__image" src="${esc(a.cardImage)}" alt="" width="550" height="413" loading="lazy">
         </a>
@@ -789,10 +800,8 @@
     const catalog = allArticles || articles || [];
     const ctaText = b.cardLinkText || "Review the blog";
 
-    if (!tagSlug && Array.isArray(b.cardSlugs) && b.cardSlugs.length) {
-      list = b.cardSlugs
-        .map((slug) => catalog.find((a) => a.slug === slug))
-        .filter(Boolean);
+    if (!tagSlug) {
+      list = catalog.slice();
     }
 
     let heroHtml = "";
@@ -824,12 +833,14 @@
         </section>`;
     }
 
+    const blogInitial = Math.max(1, parseInt(b.initialVisible || "4", 10));
     const cards = list.length
-      ? list.map((a) => articleArchiveCard(a, ctaText)).join("")
+      ? list
+          .map((a, i) => articleArchiveCard(a, ctaText, { hidden: !tagSlug && i >= blogInitial }))
+          .join("")
       : `<p class="blog-grid__empty">No posts with this tag yet.</p>`;
-    const blogInitial = parseInt(b.initialVisible || "4", 10);
     const loadMore =
-      !tagSlug && b.showLoadMore !== false && list.length > blogInitial
+      !tagSlug && b.showLoadMore !== false
         ? `<div class="blog-load-more">
             <button type="button" class="blog-load-more__btn" data-load-more data-initial="${blogInitial}">
               ${esc(b.loadMoreText || "Load more archive").toUpperCase()}
@@ -842,7 +853,7 @@
       ${heroHtml}
       <section class="blog-archive">
         <div class="container">
-          <div class="blog-grid blog-grid--archive">${cards}</div>
+          <div class="blog-grid blog-grid--archive" data-initial-visible="${blogInitial}">${cards}</div>
           ${loadMore}
         </div>
       </section>`;
@@ -872,7 +883,7 @@
       .map((p, i) => projectCard(p, ctaText, { hidden: i >= worksInitial }))
       .join("");
     const loadMore =
-      w.showLoadMore !== false && list.length > worksInitial
+      w.showLoadMore !== false
         ? `<div class="works-load-more">
             <button type="button" class="works-load-more__btn" data-load-more data-initial="${worksInitial}">
               ${esc(w.loadMoreText || "Load more archive").toUpperCase()}
@@ -1473,30 +1484,39 @@
   }
 
   function initArchiveLoadMore() {
-    document.querySelectorAll(".works-grid, .blog-grid").forEach((grid) => {
+    document.querySelectorAll(".works-grid, .blog-grid--archive").forEach((grid) => {
       const isWorks = grid.classList.contains("works-grid");
       const cardSelector = isWorks ? ".work-card" : ".blog-card";
       const hiddenClass = isWorks ? "work-card--hidden" : "archive-card--hidden";
-      const section = grid.closest("section");
+      const section = grid.closest("section") || grid.closest(".works-page") || grid.parentElement;
       const btn = section?.querySelector("[data-load-more]");
-      const initial = Math.max(
+      if (!btn) return;
+
+      const batch = Math.max(
         1,
-        parseInt(btn?.dataset.initial || grid.dataset.initialVisible || "4", 10) || 4
+        parseInt(btn.dataset.initial || grid.dataset.initialVisible || "4", 10) || 4
       );
       const cards = [...grid.querySelectorAll(cardSelector)];
 
       cards.forEach((card, i) => {
-        if (i >= initial) card.classList.add(hiddenClass);
+        if (i >= batch) card.classList.add(hiddenClass);
+        else card.classList.remove(hiddenClass);
       });
 
-      if (!btn || cards.length <= initial) {
-        btn?.parentElement?.remove();
-        return;
+      function updateButton() {
+        const hasMore = cards.some((card) => card.classList.contains(hiddenClass));
+        btn.disabled = !hasMore;
+        btn.setAttribute("aria-disabled", hasMore ? "false" : "true");
+        btn.classList.toggle("is-disabled", !hasMore);
       }
 
+      updateButton();
+
       btn.addEventListener("click", () => {
-        cards.forEach((card) => card.classList.remove(hiddenClass));
-        btn.parentElement?.remove();
+        if (btn.disabled) return;
+        const hidden = cards.filter((card) => card.classList.contains(hiddenClass));
+        hidden.slice(0, batch).forEach((card) => card.classList.remove(hiddenClass));
+        updateButton();
       });
     });
   }

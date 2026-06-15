@@ -941,6 +941,9 @@ h3 {
 .experience-item__body {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .experience-item__title {
@@ -963,6 +966,20 @@ h3 {
   font-weight: 400;
   line-height: 26px;
   letter-spacing: 0;
+}
+
+@media (min-width: 900px) {
+  .experience-item:nth-child(1) .experience-item__details {
+    max-width: 374px;
+  }
+
+  .experience-item:nth-child(2) .experience-item__details {
+    max-width: 458px;
+  }
+
+  .experience-item:nth-child(3) .experience-item__details {
+    max-width: 296px;
+  }
 }
 
 .experience-visual {
@@ -1843,6 +1860,19 @@ h3 {
   color: var(--text);
 }
 
+.blog-load-more__btn:disabled,
+.blog-load-more__btn.is-disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.blog-load-more__btn:disabled:hover,
+.blog-load-more__btn.is-disabled:hover {
+  background: transparent;
+  color: var(--accent-deep);
+}
+
 .blog-load-more__icon {
   font-size: 0.85rem;
   line-height: 1;
@@ -1851,6 +1881,11 @@ h3 {
 
 .blog-load-more__btn:hover .blog-load-more__icon {
   color: var(--text);
+}
+
+.blog-grid--archive > .blog-card.archive-card--hidden,
+.blog-grid--archive > .blog-card.blog-card--hidden {
+  display: none;
 }
 
 /* Works — Figma Selected Works (1280px / PROJECT) */
@@ -2050,6 +2085,10 @@ h3 {
   line-height: 1;
 }
 
+.works-grid > .work-card.work-card--hidden {
+  display: none;
+}
+
 .works-load-more {
   display: flex;
   justify-content: center;
@@ -2079,6 +2118,24 @@ h3 {
 .works-load-more__btn:hover {
   background: #9e0000;
   color: #fff;
+}
+
+.works-load-more__btn:disabled,
+.works-load-more__btn.is-disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.works-load-more__btn:disabled:hover,
+.works-load-more__btn.is-disabled:hover {
+  background: transparent;
+  color: #9e0000;
+}
+
+.works-load-more__btn:disabled:hover .works-load-more__icon,
+.works-load-more__btn.is-disabled:hover .works-load-more__icon {
+  color: #9e0000;
 }
 
 .works-load-more__icon {
