@@ -336,7 +336,7 @@
           <span class="experience-item__num">${esc(e.num)}</span>
           <div class="experience-item__body">
             <h3 class="experience-item__title">${esc(e.title)}</h3>
-            <p class="experience-item__details">${formatText(experienceItemDetails(e))}</p>
+            <p class="experience-item__details">${formatParagraph(experienceItemDetails(e))}</p>
           </div>
         </li>`
       )
@@ -352,9 +352,11 @@
     return `
       <section class="experience-section">
         <div class="container experience-section__inner">
-          <div class="experience-content">
+          <div class="experience-process">
             ${renderSplitHeading(lines, { className: "split-heading split-heading--section", accentOn: "line2", inline: true })}
-            <ol class="experience-timeline">${items}</ol>
+            <div class="experience-process__body">
+              <ol class="experience-timeline">${items}</ol>
+            </div>
           </div>
           ${visual}
         </div>
@@ -385,7 +387,11 @@
           <div class="contact-info">
             ${renderSplitHeading(
               { line1: c.titleLine1 || "Get in", line2: c.titleLine2 || "touch" },
-              { className: "split-heading split-heading--section contact-info__title", accentOn: "line2" }
+              {
+                className: "split-heading split-heading--section contact-info__title",
+                accentOn: "line2",
+                inline: true,
+              }
             )}
             <div class="contact-info__details">
               <p class="contact-info__region">${esc(c.regionLabel)}</p>
