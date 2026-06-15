@@ -191,7 +191,7 @@
     ],
     "showLoadMore": true,
     "initialVisible": "4",
-    "gridMinCards": 4
+    "gridMinCards": "4"
   },
   "blog": {
     "titleLine1": "What I'm",
@@ -668,7 +668,8 @@
           "Three women. Three universes. Three different ends. But that fire — the force that wants without limit, gives everything, refuses to step back — was the same in all three. Love and Desire… Everything falls into place: the force of desire that sets a person in motion is nothing other than the fallen reflection of the first divine love into this world. The Greek universe saw it as danger and exiled it. The Roman-Baroque universe crowned it as proof of authenticity. The Islamic universe read it as a starting point — and placed it at the door of transformation. Same fire. Different hands."
         ]
       },
-      "blocks": []
+      "blocks": [],
+      "witnessTitle": ""
     },
     {
       "slug": "layers-of-witness",
@@ -713,7 +714,8 @@
       "closingSection": {
         "title": "",
         "paragraphs": []
-      }
+      },
+      "witnessExcerpt": ""
     },
     {
       "slug": "on-memory",
@@ -757,7 +759,9 @@
       "closingSection": {
         "title": "",
         "paragraphs": []
-      }
+      },
+      "witnessTitle": "",
+      "witnessExcerpt": ""
     },
     {
       "slug": "maps-we-carry",
@@ -797,7 +801,40 @@
       "closingSection": {
         "title": "",
         "paragraphs": []
-      }
+      },
+      "witnessTitle": "",
+      "witnessExcerpt": ""
+    },
+    {
+      "slug": "yeni-yazi-1781554640237",
+      "cardTitle": "Yeni Yazı",
+      "cardExcerpt": "",
+      "meta": "",
+      "cardImage": "",
+      "displayTitle": "YENİ YAZI",
+      "subtitle": "",
+      "title": "Yeni Yazı",
+      "tags": [],
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "insideSections": [
+        {
+          "type": "prose",
+          "paragraphs": [],
+          "emphasis": ""
+        }
+      ],
+      "closingSection": {
+        "title": "END OF THE DAY…",
+        "paragraphs": []
+      },
+      "blocks": [],
+      "cardTitleLine1": "",
+      "cardTitleLine2": "",
+      "witnessTitle": "",
+      "witnessExcerpt": ""
     }
   ]
 }
