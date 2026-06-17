@@ -827,7 +827,7 @@
       heroHtml = `
         <section class="blog-hero">
           <div class="container">
-            ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page", accentOn: "line2" })}
+            ${renderSplitHeading(lines, { tag: "h1", className: "split-heading split-heading--page", accentOn: "line2", inline: true })}
             ${lead}
           </div>
         </section>`;
