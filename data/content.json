@@ -187,7 +187,8 @@
       "bubble-budies",
       "void-manifesto",
       "crema-cosmo1",
-      "yeni-proje-1781553694801"
+      "yeni-proje-1781553694801",
+      "diyauddin-deneme-proje"
     ],
     "showLoadMore": true,
     "initialVisible": "4",
@@ -547,6 +548,49 @@
       "storySections": [],
       "gallery": [],
       "titleAccent": ""
+    },
+    {
+      "slug": "diyauddin-deneme-proje",
+      "cardTitle": "deneme-proje-ekleme",
+      "showOnWorks": true,
+      "cardExcerpt": "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet ",
+      "cardTags": [
+        "uçan eşşekler",
+        "uçamayan eşşekler",
+        "uçuyomuş gibi yapanlar"
+      ],
+      "meta": "lorem ipsum dolor sit amet ",
+      "cardImage": "assets/uploads/1781700703994-shutterstock_2733369511.jpg",
+      "heroImage": "assets/uploads/1781700788881-Image_fx76.png",
+      "homeBadge": "eşekler hakkında makale",
+      "homeDescription": "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet ",
+      "videoUrl": "https://www.youtube.com/watch?v=2vD-B9mvi8E",
+      "showPlayButton": true,
+      "displayTitle": "lorem ipsum dolor sit amet ",
+      "projectDate": "203824",
+      "titleLine1": "Project:",
+      "titleLine2": "Yeni Proje",
+      "title": "Yeni Proje",
+      "mission": {
+        "label": "ETİKET",
+        "quote": "https://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8E",
+        "image": "",
+        "paragraphs": []
+      },
+      "storyEngineIntro": "",
+      "storyArticles": [],
+      "materialsCta": {
+        "text": "More project materials",
+        "href": "#materials"
+      },
+      "closingImage": "assets/uploads/1781700835676-Image_fx71.png",
+      "paragraphs": [],
+      "sideImage": "",
+      "sideImageAlt": "",
+      "storyTitle": "Story Engine",
+      "storySections": [],
+      "gallery": [],
+      "titleAccent": "İPSUM"
     }
   ],
   "articles": [
