@@ -858,15 +858,6 @@ h3 {
   min-height: clamp(520px, 68vw, 728px);
 }
 
-@media (min-width: 1280px) {
-  .experience-section .container.experience-section__inner {
-    width: 1216px;
-    max-width: 1216px;
-    margin-left: 64px;
-    margin-right: auto;
-  }
-}
-
 .experience-process {
   position: relative;
   z-index: 2;
