@@ -3,6 +3,15 @@
   let content = {};
   let section = "site";
   let openCards = new Set();
+  const richEditors = new Map();
+
+  const QUILL_TOOLBAR = [
+    [{ header: [2, 3, false] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["blockquote", "link"],
+    ["clean"],
+  ];
 
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => [...(ctx || document).querySelectorAll(sel)];
@@ -72,6 +81,9 @@
   }
 
   function field(label, path, value, type = "text", hint = "") {
+    if (type === "richtext") {
+      return richTextField(label, path, value, hint, { mode: "html" });
+    }
     const id = "f-" + path.replace(/[^a-z0-9]/gi, "-");
     if (type === "textarea") {
       return `<div class="field"><label for="${id}">${label}</label><textarea id="${id}" data-path="${path}">${esc(value)}</textarea>${hint ? `<p class="hint">${hint}</p>` : ""}</div>`;
@@ -193,6 +205,7 @@
 
   function bindFields(root) {
     root.querySelectorAll("[data-path]").forEach((el) => {
+      if (el.classList.contains("rich-text-source")) return;
       const ev = el.type === "checkbox" || el.tagName === "SELECT" ? "change" : "input";
       el.addEventListener(ev, () => {
         let val = el.type === "checkbox" ? el.checked : el.value;
@@ -275,30 +288,133 @@
     return `<div class="admin-group"><h3 class="admin-group__title">${esc(title)}</h3>${bodyHtml}</div>`;
   }
 
+  function isHtmlContent(s) {
+    return /<[a-z][\s\S]*>/i.test(String(s || ""));
+  }
+
+  function paragraphsToHtml(paragraphs) {
+    if (!paragraphs?.length) return "";
+    return paragraphs
+      .map((p) => {
+        const s = String(p || "").trim();
+        if (!s) return "";
+        if (isHtmlContent(s)) return s;
+        return `<p>${esc(s).replace(/\n/g, "<br>")}</p>`;
+      })
+      .filter(Boolean)
+      .join("");
+  }
+
+  function htmlToParagraphs(html) {
+    const trimmed = String(html || "").trim();
+    if (!trimmed) return [];
+    if (!isHtmlContent(trimmed)) {
+      return trimmed
+        .split(/\n\n+/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+    }
+    const doc = new DOMParser().parseFromString(trimmed, "text/html");
+    const blocks = [];
+    doc.body.childNodes.forEach((node) => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+      const tag = node.tagName.toLowerCase();
+      if (tag === "p" && !node.textContent.trim() && !node.innerHTML.replace(/<br\s*\/?>/gi, "").trim()) return;
+      if (["p", "h1", "h2", "h3", "h4", "blockquote", "ul", "ol"].includes(tag)) {
+        blocks.push(node.outerHTML);
+      }
+    });
+    if (!blocks.length) {
+      const text = doc.body.textContent.trim();
+      if (text) blocks.push(`<p>${esc(text)}</p>`);
+    }
+    return blocks;
+  }
+
+  function plainToEditorHtml(value) {
+    const s = String(value ?? "").trim();
+    if (!s) return "";
+    if (isHtmlContent(s)) return s;
+    return `<p>${esc(s).replace(/\n/g, "<br>")}</p>`;
+  }
+
+  function richTextField(label, path, value, hint = "", options = {}) {
+    const mode = options.mode || "html";
+    const id = "rte-" + path.replace(/[^a-z0-9]/gi, "-");
+    const initial =
+      mode === "paragraphs" ? paragraphsToHtml(Array.isArray(value) ? value : []) : plainToEditorHtml(value);
+    return `<div class="field rich-text-field" data-rich-text data-rich-mode="${mode}">
+      <label for="${id}">${label}</label>
+      <div class="rich-text-editor" id="${id}"></div>
+      <textarea class="rich-text-source" id="${id}-src" data-path="${path}" hidden>${initial}</textarea>
+      ${hint ? `<p class="hint">${hint}</p>` : ""}
+    </div>`;
+  }
+
+  function syncRichTextFromDom() {
+    richEditors.forEach((quill, path) => {
+      const empty = quill.getText().trim() === "";
+      const html = empty ? "" : quill.root.innerHTML;
+      deepSet(content, path, html);
+      const wrap = quill.root.closest("[data-rich-text]");
+      const source = wrap?.querySelector(".rich-text-source");
+      if (source) source.value = html;
+    });
+  }
+
+  function initRichTextEditors(root) {
+    if (!window.Quill) return;
+    root.querySelectorAll("[data-rich-text]").forEach((wrap) => {
+      const editorEl = wrap.querySelector(".rich-text-editor");
+      const source = wrap.querySelector(".rich-text-source");
+      const path = source?.dataset.path;
+      if (!editorEl || !path || richEditors.has(path)) return;
+
+      const quill = new Quill(editorEl, {
+        theme: "snow",
+        modules: { toolbar: QUILL_TOOLBAR },
+      });
+
+      const initial = source.value || "";
+      if (initial) {
+        quill.clipboard.dangerouslyPasteHTML(initial);
+      }
+
+      quill.on("text-change", () => {
+        const empty = quill.getText().trim() === "";
+        const html = empty ? "" : quill.root.innerHTML;
+        source.value = html;
+        deepSet(content, path, html);
+      });
+
+      richEditors.set(path, quill);
+    });
+  }
+
   function paragraphsField(label, path, paragraphs, hint) {
-    return field(
+    return richTextField(
       label,
       path,
-      (paragraphs || []).join("\n\n"),
-      "textarea",
-      hint || "Paragraflar arasında boş satır bırakın"
+      paragraphs,
+      hint || "Kalın, italik, listeler ve bağlantılar. Paragraflar için Enter kullanın.",
+      { mode: "paragraphs" }
     );
   }
 
   function syncParagraphsField(obj, key, tempKey) {
-    if (obj[tempKey] != null) {
-      obj[key] = String(obj[tempKey])
-        .split(/\n\n+/)
-        .map((s) => s.trim())
-        .filter(Boolean);
-      delete obj[tempKey];
+    if (obj[tempKey] == null) return;
+    const raw = String(obj[tempKey]);
+    delete obj[tempKey];
+    if (!raw.trim()) {
+      obj[key] = [];
+      return;
     }
+    obj[key] = isHtmlContent(raw) ? htmlToParagraphs(raw) : raw.split(/\n\n+/).map((s) => s.trim()).filter(Boolean);
   }
 
   function renderProjectInsideFields(p, i) {
     const mission = p.mission || {};
     const cta = p.materialsCta || {};
-    const missionParas = mission._paragraphs ?? (mission.paragraphs || []).join("\n\n");
 
     let storyArticlesHtml = (p.storyArticles || [])
       .map(
@@ -335,11 +451,11 @@
           adminGroup(
             "THE MISSION",
             field("Etiket", `projects.${i}.mission.label`, mission.label, "text", "Örn: THE MISSION") +
-              field("Alıntı", `projects.${i}.mission.quote`, mission.quote, "textarea") +
+              field("Alıntı", `projects.${i}.mission.quote`, mission.quote, "richtext") +
               imageField("Mission görseli", `projects.${i}.mission.image`, mission.image) +
-              field("Mission paragrafları", `projects.${i}.mission._paragraphs`, missionParas, "textarea")
+              paragraphsField("Mission paragrafları", `projects.${i}.mission._paragraphs`, mission.paragraphs)
           ) +
-          field("Story Engine giriş", `projects.${i}.storyEngineIntro`, p.storyEngineIntro, "textarea") +
+          field("Story Engine giriş", `projects.${i}.storyEngineIntro`, p.storyEngineIntro, "richtext") +
           storyArticlesHtml +
           `<button type="button" class="btn btn-secondary btn-sm" data-add-story-article="${i}">+ Story makalesi</button>` +
           adminGroup(
@@ -401,7 +517,7 @@
           "İtalik vurgu (ortalanmış, opsiyonel)",
           `${base}.emphasis`,
           s.emphasis,
-          "textarea",
+          "richtext",
           "Örn: Same theory. Same bones…"
         );
     } else if (sectionType === "marker") {
@@ -425,7 +541,7 @@
           "İtalik vurgu (ortalanmış, opsiyonel)",
           `${base}.emphasis`,
           s.emphasis,
-          "textarea"
+          "richtext"
         );
     } else if (sectionType === "image") {
       inner =
@@ -455,7 +571,6 @@
 
   function renderArticleInsideFields(a, i) {
     const closing = a.closingSection || {};
-    const closingParas = closing._paragraphs ?? (closing.paragraphs || []).join("\n\n");
     const sections = a.insideSections || [];
     const insideHtml = sections.length
       ? sections.map((s, si) => renderArticleInsideSectionFields(a, i, s, si)).join("")
@@ -489,11 +604,10 @@
           adminGroup(
             "Kapanış (END OF THE DAY…)",
             field("Kapanış başlığı", `articles.${i}.closingSection.title`, closing.title, "text", "Örn: END OF THE DAY…") +
-              field(
+              paragraphsField(
                 "Kapanış paragrafları",
                 `articles.${i}.closingSection._paragraphs`,
-                closingParas,
-                "textarea",
+                closing.paragraphs,
                 "Sayfanın sonundaki kapanış metni"
               )
           )
@@ -507,7 +621,7 @@
               ${types.map((t) => `<option value="${t}"${b.type === t ? " selected" : ""}>${t}</option>`).join("")}
             </select></div>`;
             let inner = "";
-            if (b.type === "paragraph" || b.type === "end") inner = field("Metin", `articles.${i}.blocks.${bi}.text`, b.text, "textarea");
+            if (b.type === "paragraph" || b.type === "end") inner = field("Metin", `articles.${i}.blocks.${bi}.text`, b.text, "richtext");
             if (b.type === "heading") inner = field("Başlık", `articles.${i}.blocks.${bi}.text`, b.text);
             if (b.type === "list") inner = field("Maddeler (her satır bir madde)", `articles.${i}.blocks.${bi}._items`, (b.items || []).join("\n"), "textarea");
             if (b.type === "image") inner = imageField("Görsel", `articles.${i}.blocks.${bi}.src`, b.src) + field("Alt", `articles.${i}.blocks.${bi}.alt`, b.alt);
@@ -753,7 +867,7 @@
       <div class="panel"><h3>Selected Works sayfası</h3>
         ${field("Başlık satır 1 (beyaz)", "works.titleLine1", w.titleLine1)}
         ${field("Başlık satır 2 (kırmızı)", "works.titleLine2", w.titleLine2)}
-        ${field("Alt metin (kırmızı çizgili)", "works.lead", w.lead, "textarea")}
+        ${field("Alt metin (kırmızı çizgili)", "works.lead", w.lead, "richtext")}
         ${field("Kart link metni", "works.cardLinkText", w.cardLinkText, "text", "Örn: Review the project")}
         ${field("Load more metni", "works.loadMoreText", w.loadMoreText)}
         ${field("Grid minimum kart sayısı", "works.gridMinCards", w.gridMinCards ?? 4, "text", "Az proje varsa grid bu sayıya tamamlanır (son proje tekrarlanır)")}
@@ -773,7 +887,7 @@
       <div class="panel"><h3>Blog sayfası (What I'm Thinking)</h3>
         ${field("Başlık satır 1 (beyaz)", "blog.titleLine1", b.titleLine1)}
         ${field("Başlık satır 2 (kırmızı)", "blog.titleLine2", b.titleLine2)}
-        ${field("Alt metin (kırmızı çizgili)", "blog.lead", b.lead, "textarea")}
+        ${field("Alt metin (kırmızı çizgili)", "blog.lead", b.lead, "richtext")}
         ${field("Kart link metni", "blog.cardLinkText", b.cardLinkText, "text", "Örn: Review the blog")}
         ${field("Load more metni", "blog.loadMoreText", b.loadMoreText)}
         ${field(
@@ -834,11 +948,11 @@
                 "textarea",
                 "Her satır bir etiket. Örn: Fantasy"
               ) +
-              field("Kart özet (Works sayfası)", `projects.${i}.cardExcerpt`, p.cardExcerpt, "textarea") +
+              field("Kart özet (Works sayfası)", `projects.${i}.cardExcerpt`, p.cardExcerpt, "richtext") +
               field("Kart meta (opsiyonel)", `projects.${i}.meta`, p.meta) +
               imageField("Kart görseli", `projects.${i}.cardImage`, p.cardImage) +
               field("Ana sayfa rozeti", `projects.${i}.homeBadge`, p.homeBadge, "text", "Örn: Latest Project") +
-              field("Ana sayfa kısa açıklama", `projects.${i}.homeDescription`, p.homeDescription, "textarea") +
+              field("Ana sayfa kısa açıklama", `projects.${i}.homeDescription`, p.homeDescription, "richtext") +
               field("Sayfa başlığı (tarayıcı)", `projects.${i}.title`, p.title)
           ) +
             renderProjectInsideFields(p, i) +
@@ -873,8 +987,8 @@
               field("Kart başlık satır 1", `articles.${i}.cardTitleLine1`, a.cardTitleLine1, "text", "Witness Desk iki satırlı başlık") +
               field("Kart başlık satır 2", `articles.${i}.cardTitleLine2`, a.cardTitleLine2, "text", "Kartta alt satır") +
               field("Witness Desk kart başlığı", `articles.${i}.witnessTitle`, a.witnessTitle, "text", "Ana sayfa Witness Desk kartı") +
-              field("Witness Desk kart özeti", `articles.${i}.witnessExcerpt`, a.witnessExcerpt, "textarea", "Ana sayfa Witness Desk kartı") +
-              field("Kart özet (gri alt metin)", `articles.${i}.cardExcerpt`, a.cardExcerpt, "textarea") +
+              field("Witness Desk kart özeti", `articles.${i}.witnessExcerpt`, a.witnessExcerpt, "richtext", "Ana sayfa Witness Desk kartı") +
+              field("Kart özet (gri alt metin)", `articles.${i}.cardExcerpt`, a.cardExcerpt, "richtext") +
               field("Kart meta (opsiyonel)", `articles.${i}.meta`, a.meta) +
               field("Sayfa başlığı (tarayıcı)", `articles.${i}.title`, a.title) +
               field("SEO başlık (opsiyonel)", `articles.${i}.seo.title`, seo.title) +
@@ -1055,7 +1169,9 @@
   }
 
   function collectFromDom() {
+    syncRichTextFromDom();
     $$("[data-path]", $("#admin-content")).forEach((el) => {
+      if (el.classList.contains("rich-text-source")) return;
       let val = el.type === "checkbox" ? el.checked : el.value;
       deepSet(content, el.dataset.path, val);
     });
@@ -1063,6 +1179,7 @@
   }
 
   function render() {
+    richEditors.clear();
     const root = $("#admin-content");
     $("#section-title").textContent = titles[section] || section;
 
@@ -1078,6 +1195,7 @@
 
     root.innerHTML = html;
     bindFields(root);
+    initRichTextEditors(root);
     bindLogoFields(root);
     bindCards(root);
     bindActions(root);
@@ -1367,10 +1485,14 @@
     }
     (content.projects || []).forEach((p) => {
       if (p.cardTags) p._cardTags = linesToText(p.cardTags);
-      if (p.paragraphs) p._paragraphs = p.paragraphs.join("\n\n");
+      if (p.paragraphs) p._paragraphs = paragraphsToHtml(p.paragraphs);
       if (p.gallery) p._gallery = p.gallery.join("\n");
+      if (p.mission?.paragraphs) p.mission._paragraphs = paragraphsToHtml(p.mission.paragraphs);
+      (p.storyArticles || []).forEach((s) => {
+        if (s.paragraphs) s._p = paragraphsToHtml(s.paragraphs);
+      });
       (p.storySections || []).forEach((s) => {
-        if (s.paragraphs) s._p = s.paragraphs.join("\n\n");
+        if (s.paragraphs) s._p = paragraphsToHtml(s.paragraphs);
       });
     });
     if (content.about?.hero?.bio != null) {
@@ -1382,6 +1504,12 @@
     });
     (content.articles || []).forEach((a) => {
       if (a.tags) a._tags = tagsToText(a.tags);
+      (a.insideSections || []).forEach((s) => {
+        if (s.paragraphs) s._paragraphs = paragraphsToHtml(s.paragraphs);
+      });
+      if (a.closingSection?.paragraphs) {
+        a.closingSection._paragraphs = paragraphsToHtml(a.closingSection.paragraphs);
+      }
       (a.blocks || []).forEach((b) => {
         if (b.items) b._items = b.items.join("\n");
       });

@@ -399,6 +399,70 @@ a { color: var(--admin-accent); }
   margin-top: 0.25rem;
 }
 
+/* Rich text (Quill) */
+.rich-text-field {
+  margin-bottom: 1.25rem;
+}
+
+.rich-text-field > label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.rich-text-editor {
+  background: #111114;
+  border: 1px solid var(--admin-border);
+  border-radius: 0 0 var(--admin-radius) var(--admin-radius);
+  min-height: 140px;
+}
+
+.rich-text-field .ql-toolbar.ql-snow {
+  border: 1px solid var(--admin-border);
+  border-bottom: none;
+  border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+  background: #232328;
+  font-family: inherit;
+}
+
+.rich-text-field .ql-container.ql-snow {
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.rich-text-field .ql-editor {
+  min-height: 120px;
+  color: var(--admin-text);
+  line-height: 1.6;
+}
+
+.rich-text-field .ql-editor.ql-blank::before {
+  color: var(--admin-muted);
+  font-style: normal;
+}
+
+.rich-text-field .ql-snow .ql-stroke {
+  stroke: #d4d4d8;
+}
+
+.rich-text-field .ql-snow .ql-fill {
+  fill: #d4d4d8;
+}
+
+.rich-text-field .ql-snow .ql-picker {
+  color: #d4d4d8;
+}
+
+.rich-text-field .ql-snow .ql-picker-options {
+  background: #232328;
+  border-color: var(--admin-border);
+}
+
+.rich-text-field .ql-snow a {
+  color: var(--admin-accent);
+}
+
 @media (max-width: 768px) {
   .admin-app.is-active { flex-direction: column; }
   .admin-sidebar {

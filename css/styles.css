@@ -1888,6 +1888,22 @@ h3 {
   display: none;
 }
 
+.work-card__desc p:last-child,
+.blog-card__excerpt p:last-child,
+.article-inside__prose-copy > *:last-child,
+.project-inside__mission-copy > *:last-child,
+.project-inside__article-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.work-card__desc p,
+.blog-card__excerpt p,
+.article-inside__prose-copy p,
+.project-inside__mission-copy p,
+.project-inside__article-body p {
+  margin: 0 0 1em;
+}
+
 /* Works — Figma Selected Works (1280px / PROJECT) */
 
 .works-page {

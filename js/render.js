@@ -20,6 +20,32 @@
     return esc(String(s).replace(/\s*\n+\s*/g, " ").trim());
   }
 
+  function isHtmlContent(s) {
+    return /<[a-z][\s\S]*>/i.test(String(s || ""));
+  }
+
+  /** Admin rich text: output stored HTML or escape plain text. */
+  function formatRichContent(s) {
+    if (s == null || s === "") return "";
+    const str = String(s);
+    if (isHtmlContent(str)) return str;
+    return esc(str).replace(/\n/g, "<br>");
+  }
+
+  /** Block-level rich text (paragraph arrays, article blocks). */
+  function formatRichBlock(s) {
+    if (!s) return "";
+    const str = String(s);
+    if (isHtmlContent(str)) return str;
+    return `<p>${formatText(str)}</p>`;
+  }
+
+  /** Card excerpts: inline HTML or plain text. */
+  function formatRichExcerpt(s) {
+    if (!s) return "";
+    return isHtmlContent(s) ? formatRichContent(s) : formatText(s);
+  }
+
   /** Experience step copy: keep Figma line breaks, trim each line. */
   function formatExperienceDetails(s) {
     if (s == null) return "";
@@ -551,7 +577,7 @@
         </div>
         <div class="creative-project-card__body">
           <h3 class="creative-project-card__title">${esc(title)}</h3>
-          ${desc ? `<p class="creative-project-card__text">${formatText(desc)}</p>` : ""}
+          ${desc ? `<div class="creative-project-card__text">${formatRichExcerpt(desc)}</div>` : ""}
           <a href="project.html?slug=${esc(slug)}" class="link-arrow">${esc(linkText)}</a>
         </div>
       </article>`;
@@ -674,7 +700,7 @@
         <div class="work-card__body">
           ${tags}
           <h2 class="work-card__title"><a href="${href}">${esc(p.cardTitle || p.title || p.slug)}</a></h2>
-          ${desc ? `<p class="work-card__desc">${formatText(desc)}</p>` : ""}
+          ${desc ? `<div class="work-card__desc">${formatRichExcerpt(desc)}</div>` : ""}
           <a class="work-card__cta" href="${href}">
             <span>${esc(cta).toUpperCase()}</span>
             <span class="work-card__cta-icon" aria-hidden="true">→</span>
@@ -726,7 +752,7 @@
         <div class="blog-card__body">
           ${tags}
           <h2 class="blog-card__title"><a href="${href}">${esc(title)}</a></h2>
-          ${excerpt ? `<p class="blog-card__excerpt">${formatText(excerpt)}</p>` : ""}
+          ${excerpt ? `<div class="blog-card__excerpt">${formatRichExcerpt(excerpt)}</div>` : ""}
           <a class="blog-card__cta" href="${href}">
             <span>${esc(cta).toUpperCase()}</span>
             <span class="blog-card__cta-icon" aria-hidden="true">→</span>
@@ -780,7 +806,7 @@
         <div class="blog-card__body">
           ${tags}
           ${renderArticleCardTitle(a, href, opts)}
-          ${excerpt ? `<p class="blog-card__excerpt">${formatText(excerpt)}</p>` : ""}
+          ${excerpt ? `<div class="blog-card__excerpt">${formatRichExcerpt(excerpt)}</div>` : ""}
           ${ctaHtml}
         </div>
       </article>`;
@@ -823,7 +849,7 @@
         </section>`;
     } else {
       const lines = blogTitleLines(b);
-      const lead = b.lead ? `<p class="blog-hero__lead hero-lead">${formatText(b.lead)}</p>` : "";
+      const lead = b.lead ? `<div class="blog-hero__lead hero-lead">${formatRichContent(b.lead)}</div>` : "";
       heroHtml = `
         <section class="blog-hero">
           <div class="container">
@@ -875,7 +901,7 @@
     const lines = splitTitleLines(w, "Selected Works");
     const list = resolveWorksProjects(w, projects);
     const lead = w.lead
-      ? `<div class="works-page__lead-wrap"><p class="works-page__lead">${formatText(w.lead)}</p></div>`
+      ? `<div class="works-page__lead-wrap"><div class="works-page__lead">${formatRichContent(w.lead)}</div></div>`
       : "";
     const ctaText = w.cardLinkText || "Review the project";
     const worksInitial = Math.max(1, parseInt(w.initialVisible, 10) || 4);
@@ -1011,12 +1037,10 @@
   }
 
   function renderProjectMissionPanel(mission) {
-    const paras = (mission.paragraphs || [])
-      .map((x) => `<p>${formatText(x)}</p>`)
-      .join("");
+    const paras = (mission.paragraphs || []).map((x) => formatRichBlock(x)).join("");
     return `
       <p class="project-inside__mission-label">${esc(mission.label || "THE MISSION")}</p>
-      <p class="project-inside__mission-quote">${formatText(mission.quote || "")}</p>
+      <div class="project-inside__mission-quote">${formatRichContent(mission.quote || "")}</div>
       <div class="project-inside__mission-copy">${paras}</div>`;
   }
 
@@ -1037,7 +1061,7 @@
         <article class="project-inside__article">
           <h3 class="project-inside__article-title">${esc(a.heading)}</h3>
           <div class="project-inside__article-body">
-            ${(a.paragraphs || []).map((x) => (x ? `<p>${formatText(x)}</p>` : "")).join("")}
+            ${(a.paragraphs || []).map((x) => (x ? formatRichBlock(x) : "")).join("")}
           </div>
         </article>`
       )
@@ -1088,7 +1112,7 @@
             <header class="project-inside__story-head">
               <h2 class="project-inside__story-title" id="story-engine-title">${storyTitleHtml}</h2>
               <span class="project-inside__story-rule" aria-hidden="true"></span>
-              ${storyIntro ? `<p class="project-inside__story-intro">${formatParagraph(storyIntro)}</p>` : ""}
+              ${storyIntro ? `<div class="project-inside__story-intro">${formatRichContent(storyIntro)}</div>` : ""}
             </header>
             ${articles ? `<div class="project-inside__articles">${articles}</div>` : ""}
           </section>
@@ -1126,13 +1150,13 @@
   }
 
   function renderProjectLegacy(p) {
-    const paras = (p.paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("");
+    const paras = (p.paragraphs || []).map((x) => formatRichBlock(x)).join("");
     const story = (p.storySections || [])
       .map(
         (s) =>
           `<article class="story-block__item">
             <h3 class="story-block__heading">${esc(s.heading)}</h3>
-            ${(s.paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("")}
+            ${(s.paragraphs || []).map((x) => formatRichBlock(x)).join("")}
           </article>`
       )
       .join("");
@@ -1208,7 +1232,7 @@
   function renderArticleBlock(b) {
     switch (b.type) {
       case "paragraph":
-        return `<p>${esc(b.text)}</p>`;
+        return formatRichBlock(b.text);
       case "heading":
         return `<h2>${esc(b.text)}</h2>`;
       case "list":
@@ -1222,15 +1246,15 @@
             <span class="article-end__line article-end__line--accent">${esc(b.line2 || b.text || "")}</span>
           </p>`;
         }
-        return `<p class="article-end">${esc(b.text)}</p>`;
+        return `<div class="article-end">${formatRichContent(b.text)}</div>`;
       default:
         return "";
     }
   }
 
   function renderArticleInsideProse(paragraphs, emphasis) {
-    const paras = (paragraphs || []).map((x) => `<p>${formatText(x)}</p>`).join("");
-    const emph = emphasis ? `<p class="article-inside__emphasis">${formatText(emphasis)}</p>` : "";
+    const paras = (paragraphs || []).map((x) => formatRichBlock(x)).join("");
+    const emph = emphasis ? `<div class="article-inside__emphasis">${formatRichContent(emphasis)}</div>` : "";
     return `<div class="article-inside__prose-copy">${paras}${emph}</div>`;
   }
 
