@@ -905,45 +905,14 @@
       "witnessExcerpt": ""
     },
     {
-      "slug": "yeni-yazi-1781554640237",
-      "cardTitle": "Yeni Yazı",
-      "cardExcerpt": "",
-      "meta": "",
-      "cardImage": "",
-      "displayTitle": "YENİ YAZI",
-      "subtitle": "",
-      "title": "Yeni Yazı",
-      "tags": [],
-      "seo": {
-        "title": "",
-        "description": ""
-      },
-      "insideSections": [
-        {
-          "type": "prose",
-          "paragraphs": [],
-          "emphasis": ""
-        }
-      ],
-      "closingSection": {
-        "title": "END OF THE DAY…",
-        "paragraphs": []
-      },
-      "blocks": [],
-      "cardTitleLine1": "",
-      "cardTitleLine2": "",
-      "witnessTitle": "",
-      "witnessExcerpt": ""
-    },
-    {
       "slug": "How to Crate Comedic Character",
-      "cardTitle": "Yeni Yazı",
-      "cardExcerpt": "",
+      "cardTitle": "How to Crate Comedic Character",
+      "cardExcerpt": "<p>Start writing your sitcom script&nbsp;</p><p>Unlike an hour-long drama series, which contains a teaser and four or five acts, a sitcom generally follows a <a href=\"https://www.backstage.com/magazine/article/three-act-structure-explained-75681/\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\">three-act structure</a>—though some shows only use two acts.</p><p>Here’s a typical sitcom structure:</p><ul><li><a href=\"https://www.backstage.com/magazine/article/how-to-write-cold-open-75481/\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\">Cold open</a>: A quick scene before the opening credits. This can be connected to the main story of the episode or be a funny non sequitur. The point is to grab the audience’s attention immediately.</li><li>Act 1: Introduce our characters and establish the situation they will face. Subplots (your B and C storylines) will also be set up in Act 1.&nbsp;</li><li>Act 2: Your characters try to solve the problem that arose in Act 1, or they set about trying to obtain their want and obstacles get in their way. Either way, they’re unable to achieve victory just yet.</li><li>Act 3: Resolution. Your characters overcome their obstacles and the status quo returns. (More on that later.</li><li>TAG: Similar to a cold open, this is a final scene to give your audience one last laugh. Not all shows employ a tag.</li></ul>",
       "meta": "",
       "cardImage": "",
       "displayTitle": "How to Crate Comedic Character",
       "subtitle": "",
-      "title": "Yeni Yazı",
+      "title": "Script Lenght",
       "tags": [],
       "seo": {
         "title": "",
@@ -964,13 +933,17 @@
         }
       ],
       "closingSection": {
-        "title": "END OF THE DAY…",
-        "paragraphs": []
+        "title": "Advises ",
+        "paragraphs": [
+          "<p>Scripts vary in length, but keep in mind that the vast majority of sitcom episodes are a half-hour long—that’s really 22 minutes, if it’s a network show with commercials. With that in mind, aim for 22–30 pages. “When you only have 22 minutes or a half-hour, your time is so incredibly limited,” says Cryan. “It's really good, for me at least, to know exactly where I'm going, because you run out of space for your story very quickly. Really knowing what story points you’re hitting in each scene was very helpful before I started to write.”&nbsp;</p>",
+          "<p>Again, making sitcom structure second nature goes a long way. “I need the commercial breaks,” <a href=\"https://www.backstage.com/magazine/article/quinta-brunson-abbott-elementary-interview-photos-75349/\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\">Brunson says</a>, “because 22 minutes is very different from 30 minutes. People don’t think that, but it is. Those eight extra minutes can almost undo the good that 22 minutes does.”</p>",
+          "<p>Even if your goal is to write for a commercial-free streaming network like Netflix, it helps to understand classic sitcom structure. “Having in mind where your act break would be is incredibly helpful, in terms of the flow of the script and the story,” says Cryan. “It’s an incredibly useful guidepost.”</p>"
+        ]
       },
       "blocks": [],
-      "witnessExcerpt": "<p>A solid sitcom premise is something that can generate multiple storylines over 100-plus episodes. The truth is, studio executives considering new shows think of one thing: How can this show make money? The answer is longevity.&nbsp;</p><p>Look at some of the common sitcom character tropes to help you with a starting point. Then, flesh them out in your own style to make them unique, current, and memorable. Here are some common sitcom tropes for characters, plots, and settings.</p><p>Character Tropes</p><p><br></p><p><br></p><ul><li>“New Person in Town”: One way to bring the audience into your world is making one of your main characters a new member of a previously established group. Examples: Diane (“Cheers”), Jess (“New Girl”), Robin (“How I Met Your Mother”<em>)</em></li><li>Bumbling Dad: Though well-meaning and a hard worker (often employed in a blue-collar job), the Bumbling Dad isn’t the brightest bulb in the family. Not hip to social norms, he often puts his foot in his mouth and learns some kind of lesson by the end of the episode. Examples: Homer Simpson (“The Simpsons”<em>)</em>, Tim Taylor (“Home Improvement”)</li><li>Obnoxious In-Laws: Usually recurring characters, they pop in every so often to annoy the protagonist(s). They are often disapproving of the main characters’ relationship. Examples: Maggie’s father (“Growing Pains”), Ray’s parents (“Everybody Loves Raymond”)</li><li>Drop-In Character: This is often a neighbor or a distant relative who lives in town and serves as comic relief. Mostly intended to be an occasional nuisance to our protagonists, they sometimes steal the show and get elevated to primary character status. Examples: Steve Urkel (“Family Matters”), Cousin Cody (“Step by Step”)</li></ul>",
+      "witnessExcerpt": "<p>A solid sitcom premise is something that can generate multiple storylines over 100-plus episodes. The truth is, studio executives considering new shows think of one thing: How can this show make money? The answer is longevity.&nbsp;</p><p>Look at some of the common sitcom character tropes to help you with a starting point. Then, flesh them out in your own style to make them unique, current, and memorable. Here are some common sitcom tropes for characters, plots, and settings.</p><p>Character Tropes</p><p><br></p><ul><li>“New Person in Town”: One way to bring the audience into your world is making one of your main characters a new member of a previously established group. Examples: Diane (“Cheers”), Jess (“New Girl”), Robin (“How I Met Your Mother”<em>)</em></li><li>Bumbling Dad: Though well-meaning and a hard worker (often employed in a blue-collar job), the Bumbling Dad isn’t the brightest bulb in the family. Not hip to social norms, he often puts his foot in his mouth and learns some kind of lesson by the end of the episode. Examples: Homer Simpson (“The Simpsons”<em>)</em>, Tim Taylor (“Home Improvement”)</li><li>Obnoxious In-Laws: Usually recurring characters, they pop in every so often to annoy the protagonist(s). They are often disapproving of the main characters’ relationship. Examples: Maggie’s father (“Growing Pains”), Ray’s parents (“Everybody Loves Raymond”)</li><li>Drop-In Character: This is often a neighbor or a distant relative who lives in town and serves as comic relief. Mostly intended to be an occasional nuisance to our protagonists, they sometimes steal the show and get elevated to primary character status. Examples: Steve Urkel (“Family Matters”), Cousin Cody (“Step by Step”)</li></ul>",
       "cardTitleLine1": "",
-      "cardTitleLine2": "",
+      "cardTitleLine2": "Based on Greek History",
       "witnessTitle": ""
     }
   ]
