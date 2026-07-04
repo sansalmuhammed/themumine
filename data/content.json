@@ -199,7 +199,7 @@
     "titleLine1": "What I'm",
     "titleLine2": "Thinking",
     "title": "What I'm Thinking",
-    "lead": "An evolving collection of thoughts, stories, and the things that inspire me.",
+    "lead": "<p>An evolving collection of thoughts, stories, and the things that inspire me.</p>",
     "cardLinkText": "Review the blog",
     "loadMoreText": "Load more archive",
     "cardSlugs": [
@@ -934,6 +934,44 @@
       "cardTitleLine2": "",
       "witnessTitle": "",
       "witnessExcerpt": ""
+    },
+    {
+      "slug": "How to Crate Comedic Character",
+      "cardTitle": "Yeni Yazı",
+      "cardExcerpt": "",
+      "meta": "",
+      "cardImage": "",
+      "displayTitle": "How to Crate Comedic Character",
+      "subtitle": "",
+      "title": "Yeni Yazı",
+      "tags": [],
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "insideSections": [
+        {
+          "type": "prose",
+          "paragraphs": [
+            "<p>Character Tropes</p>",
+            "<ul><li>“New Person in Town”: One way to bring the audience into your world is making one of your main characters a new member of a previously established group. Examples: Diane (“Cheers”), Jess (“New Girl”), Robin (“How I Met Your Mother”<em>)</em></li><li>Bumbling Dad: Though well-meaning and a hard worker (often employed in a blue-collar job), the Bumbling Dad isn’t the brightest bulb in the family. Not hip to social norms, he often puts his foot in his mouth and learns some kind of lesson by the end of the episode. Examples: Homer Simpson (“The Simpsons”<em>)</em>, Tim Taylor (“Home Improvement”)</li><li>Obnoxious In-Laws: Usually recurring characters, they pop in every so often to annoy the protagonist(s). They are often disapproving of the main characters’ relationship. Examples: Maggie’s father (“Growing Pains”), Ray’s parents (“Everybody Loves Raymond”)</li><li>Drop-In Character: This is often a neighbor or a distant relative who lives in town and serves as comic relief. Mostly intended to be an occasional nuisance to our protagonists, they sometimes steal the show and get elevated to primary character status. Examples: Steve Urkel (“Family Matters”), Cousin Cody (“Step by Step”)</li></ul>",
+            "<p>Plot Tropes</p>",
+            "<ul><li>Will They/Won’t They: This is a classic storyline for two major leads. They begin the series either as antagonists or friends who are afraid to change their relationship, but they can’t help but admit that they’re in love and end up together. Examples: Sam and Diane (“Cheers”), Jim and Pam (“The Office”), Janine and Gregory (“Abbott Elementary”)</li><li>Escalating War: A minor offense between two characters blows up, shaking the foundation of the central group. Usually, a game of one-upmanship ensues with hilarious results. Examples: the “Friends” episode “<a href=\"https://www.youtube.com/watch?v=F93Mims-h-A\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\">The One in Vegas</a>,” the “Community” episode “<a href=\"https://www.youtube.com/watch?v=MMpdpgcoRH0\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\">Cooperative Calligraphy</a>”&nbsp;</li><li>Two Dates: A character ends up booking multiple dates on the same evening. Instead of rescheduling, they try to pull a fast one and go on both at the same time. Examples: the “Cheers” episode “Cliffie’s Big Score,” the “Family Ties” episode “Double Date”&nbsp;&nbsp;</li></ul>",
+            "<p>Common Sitcom Settings</p>",
+            "<ul><li>Bar or Restaurant: Every good friend group needs a place to hang out that isn’t home. Examples: Central Perk (“Friends”<em>)</em>, Monk’s Café (“Seinfeld”).</li><li>“Affordable” Apartment: Many sitcoms take place in big cities like New York City or Chicago. Some of the main characters live together and can somehow afford a large apartment that would be wildly expensive in real life, despite having relatively low-paying jobs. Or, in Kramer’s case, no <em>real</em> job. Examples: “Seinfeld,” “Friends,” “Community”&nbsp;</li></ul>"
+          ],
+          "emphasis": "<p>But remember: Your plot still needs to have conflict, and your characters need to have a want and obstacles getting in their way. The differences in comedy are that the stakes are lower and characters develop more slowly than in drama. You’ll want characters to change over time, but not too much.</p><p><br></p>"
+        }
+      ],
+      "closingSection": {
+        "title": "END OF THE DAY…",
+        "paragraphs": []
+      },
+      "blocks": [],
+      "witnessExcerpt": "<p>A solid sitcom premise is something that can generate multiple storylines over 100-plus episodes. The truth is, studio executives considering new shows think of one thing: How can this show make money? The answer is longevity.&nbsp;</p><p>Look at some of the common sitcom character tropes to help you with a starting point. Then, flesh them out in your own style to make them unique, current, and memorable. Here are some common sitcom tropes for characters, plots, and settings.</p><p>Character Tropes</p><p><br></p><ul><li>“New Person in Town”: One way to bring the audience into your world is making one of your main characters a new member of a previously established group. Examples: Diane (“Cheers”), Jess (“New Girl”), Robin (“How I Met Your Mother”<em>)</em></li><li>Bumbling Dad: Though well-meaning and a hard worker (often employed in a blue-collar job), the Bumbling Dad isn’t the brightest bulb in the family. Not hip to social norms, he often puts his foot in his mouth and learns some kind of lesson by the end of the episode. Examples: Homer Simpson (“The Simpsons”<em>)</em>, Tim Taylor (“Home Improvement”)</li><li>Obnoxious In-Laws: Usually recurring characters, they pop in every so often to annoy the protagonist(s). They are often disapproving of the main characters’ relationship. Examples: Maggie’s father (“Growing Pains”), Ray’s parents (“Everybody Loves Raymond”)</li><li>Drop-In Character: This is often a neighbor or a distant relative who lives in town and serves as comic relief. Mostly intended to be an occasional nuisance to our protagonists, they sometimes steal the show and get elevated to primary character status. Examples: Steve Urkel (“Family Matters”), Cousin Cody (“Step by Step”)</li></ul><p><br></p>",
+      "cardTitleLine1": "",
+      "cardTitleLine2": "",
+      "witnessTitle": ""
     }
   ]
 }
