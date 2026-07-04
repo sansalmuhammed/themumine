@@ -297,10 +297,10 @@
       "titleLine1": "Project:",
       "titleLine2": "Crema Cosmo",
       "homeBadge": "Latest Project",
-      "homeDescription": "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical.",
+      "homeDescription": "<p>Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical.</p>",
       "cardTitle": "Crema Cosmo",
       "showOnWorks": true,
-      "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...",
+      "cardExcerpt": "<p>Two bickering siblings get sucked into Grandma's coffee cup. To save her, they must dodge grumpy guards and unite through silly songs and weird coffee noises...</p>",
       "cardTags": [
         "Fantasy",
         "Musical"
@@ -312,8 +312,8 @@
       "showPlayButton": true,
       "title": "Project: Crema Cosmo",
       "paragraphs": [
-        "Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical where silly songs and weird coffee noises might be the only way home.",
-        "Visual swirl, milk-mustache motifs, and cup-guard designs shape a world built on conflict, discovery, and family."
+        "<p>Two bickering siblings get slurped into Grandma's coffee cup — a fantasy family musical where silly songs and weird coffee noises might be the only way home.</p>",
+        "<p>Visual swirl, milk-mustache motifs, and cup-guard designs shape a world built on conflict, discovery, and family.</p>"
       ],
       "sideImage": "assets/uploads/1781181215737-crema-cosmo.png",
       "sideImageAlt": "Crema Cosmo illustration",
@@ -324,13 +324,13 @@
         {
           "heading": "Origin",
           "paragraphs": [
-            "A fantasy family musical born from the image of siblings swallowed by Grandma's coffee cup — conflict turned into song."
+            "<p>A fantasy family musical born from the image of siblings swallowed by Grandma's coffee cup — conflict turned into song.</p>"
           ]
         },
         {
           "heading": "Development",
           "paragraphs": [
-            "Visual swirl language, cup-guard character design, and a musical soundscape built around coffee-noise comedy."
+            "<p>Visual swirl language, cup-guard character design, and a musical soundscape built around coffee-noise comedy.</p>"
           ]
         }
       ],
@@ -362,7 +362,7 @@
       "projectDate": "01/JAN/2026",
       "cardTitle": "Bubble Budies",
       "showOnWorks": true,
-      "cardExcerpt": "The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped \nworlds. By breaking barriers, they help civilizations resolve...",
+      "cardExcerpt": "<p>The Bubblebudies pop cosmic isolation bubbles to bring understanding to trapped </p><p>worlds. By breaking barriers, they help civilizations resolve...</p>",
       "cardTags": [
         "Adventure",
         "Preschool Educational (Ages 4-6)"
@@ -376,37 +376,37 @@
       "title": "Project: Bubble Budies",
       "mission": {
         "label": "THE MISSION",
-        "quote": "A cosmic bridge—a series that breathes understanding.",
+        "quote": "<p>A cosmic bridge—a series that breathes understanding.</p>",
         "image": "assets/project/mission-scene.png",
         "paragraphs": [
-          "We built the foundation of BubbleBudies on a philosophical imperative to connect isolated worlds and dissolve the barriers of misunderstanding. By integrating the \"Stimulus-Question-Dialogue-Reflection\" cycle into every galactic adventure, we remove the cognitive friction that prevents empathy and growth.",
-          "Through the lens of multiple perspectives and open-ended inquiry, we transformed a classic fantasy journey into a dynamic space where curiosity thrives. This is an environment where children learn that every voice is a valid piece of a much larger, beautifully connected universe."
+          "<p>We built the foundation of BubbleBudies on a philosophical imperative to connect isolated worlds and dissolve the barriers of misunderstanding. By integrating the \"Stimulus-Question-Dialogue-Reflection\" cycle into every galactic adventure, we remove the cognitive friction that prevents empathy and growth.</p>",
+          "<p>Through the lens of multiple perspectives and open-ended inquiry, we transformed a classic fantasy journey into a dynamic space where curiosity thrives. This is an environment where children learn that every voice is a valid piece of a much larger, beautifully connected universe.</p>"
         ]
       },
-      "storyEngineIntro": "A new bubble appears: it represents a misunderstood emotion/jucie question then, the crew search its meaning, the bubble pops, harmony returns but nobady knows whats the \nanswer.",
+      "storyEngineIntro": "<p>A new bubble appears: it represents a misunderstood emotion/jucie question then, the crew search its meaning, the bubble pops, harmony returns but nobady knows whats the </p><p>answer.</p>",
       "storyArticles": [
         {
           "heading": "LOGLINE",
           "paragraphs": [
-            "Bubble Buddies travel across the universe to pop bubbles and bring understanding to worlds trapped inside them. When we listen and try to understand, everything starts to make sense."
+            "<p>Bubble Buddies travel across the universe to pop bubbles and bring understanding to worlds trapped inside them. When we listen and try to understand, everything starts to make sense.</p>"
           ]
         },
         {
           "heading": "BUBBLEBUDIES - STORY",
           "paragraphs": [
-            "During a school science camp in Puerto Rico, young dreamer Candice shares her strange theory with her classmates: the universe might be made of invisible bubbles. The other kids laugh at her imagination, so Candice wanders into the forest with her best friend John.",
-            "There they discover an old Arecibo radio telescope, half hidden among the trees. Curious, John begins to experiment with the controls while Candice excitedly explains her idea about \"bubble worlds.\" When John accidentally activates the telescope, the machine suddenly reveals a new visual spectrum — and for the first time, they see the truth:",
-            "Earth is trapped inside a giant cosmic bubble.",
-            "As the telescope's energy destabilizes the barrier, the bubble suddenly pops, sending a shockwave across the galaxy. The disturbance immediately alerts two forces: the controlling Bubble Masters, who keep planets trapped inside bubbles, and the adventurous BubbleBuds, explorers dedicated to freeing worlds from isolation.",
-            "When the BubbleBudies arrive on Earth, they discover that Candice's curiosity and John's invention have revealed something extraordinary. Realizing the two friends may hold the key to understanding and freeing other worlds, they invite them aboard their starship, the Puffernaut.",
-            "Together, they begin a journey across the universe, traveling from planet to planet — popping bubbles, solving mysteries, and helping civilizations see beyond their own worlds."
+            "<p>During a school science camp in Puerto Rico, young dreamer Candice shares her strange theory with her classmates: the universe might be made of invisible bubbles. The other kids laugh at her imagination, so Candice wanders into the forest with her best friend John.</p>",
+            "<p>There they discover an old Arecibo radio telescope, half hidden among the trees. Curious, John begins to experiment with the controls while Candice excitedly explains her idea about \"bubble worlds.\" When John accidentally activates the telescope, the machine suddenly reveals a new visual spectrum — and for the first time, they see the truth:</p>",
+            "<p>Earth is trapped inside a giant cosmic bubble.</p>",
+            "<p>As the telescope's energy destabilizes the barrier, the bubble suddenly pops, sending a shockwave across the galaxy. The disturbance immediately alerts two forces: the controlling Bubble Masters, who keep planets trapped inside bubbles, and the adventurous BubbleBuds, explorers dedicated to freeing worlds from isolation.</p>",
+            "<p>When the BubbleBudies arrive on Earth, they discover that Candice's curiosity and John's invention have revealed something extraordinary. Realizing the two friends may hold the key to understanding and freeing other worlds, they invite them aboard their starship, the Puffernaut.</p>",
+            "<p>Together, they begin a journey across the universe, traveling from planet to planet — popping bubbles, solving mysteries, and helping civilizations see beyond their own worlds.</p>"
           ]
         },
         {
           "heading": "Stimulus-Question- Dialogue-Reflection Cycle",
           "paragraphs": [
-            "Every episode follows the core P4C cycle: a stimulus sparks a question, ideas are shared, and reflection is left open-ended.",
-            "Each character models a different way of thinking, showing children that there are many valid perspectives.Children think through movement as the show uses physical play and action to explore philosophical ideas.Stories resolve physically, but philosophical questions remain unanswered to encourage child-led thinking."
+            "<p>Every episode follows the core P4C cycle: a stimulus sparks a question, ideas are shared, and reflection is left open-ended.</p>",
+            "<p>Each character models a different way of thinking, showing children that there are many valid perspectives.Children think through movement as the show uses physical play and action to explore philosophical ideas.Stories resolve physically, but philosophical questions remain unanswered to encourage child-led thinking.</p>"
           ]
         }
       ],
@@ -430,7 +430,7 @@
       "titleLine2": "Void Manifesto",
       "cardTitle": "Void Manifesto",
       "showOnWorks": true,
-      "cardExcerpt": "Two bickering siblings get sucked into Grandma's coffee cup. To save her, they \nmust dodge grumpy guards and unite through silly songs and weird coffee noises...",
+      "cardExcerpt": "<p>Two bickering siblings get sucked into Grandma's coffee cup. To save her, they </p><p>must dodge grumpy guards and unite through silly songs and weird coffee noises...</p>",
       "cardTags": [
         "Fantasy",
         "Musical"
@@ -442,7 +442,7 @@
       "showPlayButton": true,
       "title": "Project: Void Manifesto",
       "paragraphs": [
-        "A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens."
+        "<p>A sister project in the Crema Cosmo universe — mythic void, manifesto, and the same sibling journey reframed through a darker lens.</p>"
       ],
       "sideImage": "assets/uploads/1781181374796-crema-cosmo.png",
       "sideImageAlt": "Void Manifesto illustration",
@@ -553,7 +553,7 @@
       "slug": "diyauddin-deneme-proje",
       "cardTitle": "deneme-proje-ekleme",
       "showOnWorks": true,
-      "cardExcerpt": "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet ",
+      "cardExcerpt": "<p>lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>",
       "cardTags": [
         "uçan eşşekler",
         "uçamayan eşşekler",
@@ -563,7 +563,7 @@
       "cardImage": "assets/uploads/1781700703994-shutterstock_2733369511.jpg",
       "heroImage": "assets/uploads/1781700788881-Image_fx76.png",
       "homeBadge": "eşekler hakkında makale",
-      "homeDescription": "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet ",
+      "homeDescription": "<p>lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>",
       "videoUrl": "https://www.youtube.com/watch?v=2vD-B9mvi8E",
       "showPlayButton": true,
       "displayTitle": "lorem ipsum dolor sit amet ",
@@ -573,7 +573,7 @@
       "title": "Yeni Proje",
       "mission": {
         "label": "ETİKET",
-        "quote": "https://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8E",
+        "quote": "<p>https://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8Ehttps://www.youtube.com/watch?v=2vD-B9mvi8E</p>",
         "image": "",
         "paragraphs": []
       },
@@ -603,8 +603,8 @@
       "cardTitle": "One Fire in Different Cosmologies",
       "cardTitleLine1": "One Fire in Different",
       "cardTitleLine2": "Cosmologies",
-      "cardExcerpt": "The Cosmologies of Medea & Cleopatra, and Lady Zulaykha (pbuh)",
-      "witnessExcerpt": "Every era produces characters that carry the full weight of their civilization's beliefs about what a human being is, what they owe the world, and what happens when they fall short.  Medea and Cleopatra, are two going to analyze them.",
+      "cardExcerpt": "<p>The Cosmologies of Medea &amp; Cleopatra, and Lady Zulaykha (pbuh)</p>",
+      "witnessExcerpt": "<p>Every era produces characters that carry the full weight of their civilization's beliefs about what a human being is, what they owe the world, and what happens when they fall short. Medea and Cleopatra, are two going to analyze them.</p>",
       "meta": "Essay · May 2026",
       "cardImage": "assets/uploads/1781100326859-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
       "title": "One Fire in Different Cosmologies",
@@ -630,9 +630,9 @@
         {
           "type": "prose",
           "paragraphs": [
-            "Two works I read and watched one after another, two women I took great pleasure in meeting. One from Greece, one from Rome. Medea and Cleopatra were, for me, two different answers to one question. I came out of the reading group for Euripides' Medea first, the play still echoing somewhere in my mind, and then the next day I sat in a dark hall and watched a mezzo-soprano playing Julius Caesar while Cleopatra dismantled him from the inside. One came from ancient Greece. One from Baroque opera's Rome. Centuries apart, different stages, different languages. But when I placed them side by side in my mind, something clicked into place. Both women walked every step of Aristotle's tragic hero structure, step by step, with an almost uncomfortable precision. High status. A fatal flaw. A reversal of fortune. A moment of recognition. The full architecture was there, in both of them, exactly where it should be. And yet their endings could not be more different. Medea fled on a dragon chariot, her children dead, her name permanently fused with the word monster. Cleopatra was crowned Queen of Egypt, Caesar beside her, the Nile celebrating."
+            "<p>Two works I read and watched one after another, two women I took great pleasure in meeting. One from Greece, one from Rome. Medea and Cleopatra were, for me, two different answers to one question. I came out of the reading group for Euripides' Medea first, the play still echoing somewhere in my mind, and then the next day I sat in a dark hall and watched a mezzo-soprano playing Julius Caesar while Cleopatra dismantled him from the inside. One came from ancient Greece. One from Baroque opera's Rome. Centuries apart, different stages, different languages. But when I placed them side by side in my mind, something clicked into place. Both women walked every step of Aristotle's tragic hero structure, step by step, with an almost uncomfortable precision. High status. A fatal flaw. A reversal of fortune. A moment of recognition. The full architecture was there, in both of them, exactly where it should be. And yet their endings could not be more different. Medea fled on a dragon chariot, her children dead, her name permanently fused with the word monster. Cleopatra was crowned Queen of Egypt, Caesar beside her, the Nile celebrating.</p>"
           ],
-          "emphasis": "Same theory. Same bones. Completely different conclusions. Why? The answer had to do with the universe each of them inhabited. They were reflecting a worldview, a cosmology. Aristotle's framework was not just mapping the anatomy of a fall — it was mapping the cosmology behind it. The civilization that produced the story decided what the fall meant, and therefore where it ended."
+          "emphasis": "<p>Same theory. Same bones. Completely different conclusions. Why? The answer had to do with the universe each of them inhabited. They were reflecting a worldview, a cosmology. Aristotle's framework was not just mapping the anatomy of a fall — it was mapping the cosmology behind it. The civilization that produced the story decided what the fall meant, and therefore where it ended.</p>"
         },
         {
           "type": "marker",
@@ -642,8 +642,8 @@
           "type": "quote-section",
           "quote": "TRAGIC CHARACTER STRUCTURE",
           "paragraphs": [
-            "High status: The hero must begin elevated. There must be something to lose. Hamartia: The flaw. An excess, a blindness. The very quality that makes the hero great is the one that will ultimately destroy them. Hubris: The moment the hero crosses a boundary they should not cross. Often at the precise moment they believe they have won. Peripeteia: The reversal of fortune. Sudden. Irreversible. Anagnorisis:Recognition. The hero finally sees what was true all along. But this knowledge arrives either too late or at terrible cost. Catharsis: Not the hero's release. The audience's. The purging of pity and fear.",
-            "This architecture has stood for over two thousand years. And when applied to both Medea and Cleopatra, every beam falls into place. And yet the same structure leads them to two completely different ends. To understand why, we need to look behind the structure at the universe each story stands inside."
+            "<p>High status: The hero must begin elevated. There must be something to lose. Hamartia: The flaw. An excess, a blindness. The very quality that makes the hero great is the one that will ultimately destroy them. Hubris: The moment the hero crosses a boundary they should not cross. Often at the precise moment they believe they have won. Peripeteia: The reversal of fortune. Sudden. Irreversible. Anagnorisis:Recognition. The hero finally sees what was true all along. But this knowledge arrives either too late or at terrible cost. Catharsis: Not the hero's release. The audience's. The purging of pity and fear.</p>",
+            "<p>This architecture has stood for over two thousand years. And when applied to both Medea and Cleopatra, every beam falls into place. And yet the same structure leads them to two completely different ends. To understand why, we need to look behind the structure at the universe each story stands inside.</p>"
           ],
           "emphasis": ""
         },
@@ -656,9 +656,9 @@
           "type": "quote-section",
           "quote": "HOW DID THE GREEK UNIVERSE HANDLE MEDEA?",
           "paragraphs": [
-            "The Greek universe was built on balance. Every being had a place in this order — gods, humans, nature. And every being had a measure: metron. Metron was not merely a rule. It was an existential boundary. \"Know thyself\" — gnothi seauton — was inscribed on the wall of the temple at Delphi, and it was not a philosophical suggestion. It was a warning: know what you are, and stay within that boundary. To cross that boundary was to disturb cosmic balance. And the universe would correct it. The Greeks called this corrective force Nemesis. Nemesis was not a moral judgment — it was cosmic mathematics. What rose too high was brought low. What swelled too much was extinguished. It had nothing to do with whether a person was good or bad. It concerned only whether they had exceeded their limits. This was what the universe asked of people: to know their place. Excess could not survive in this universe. Greek tragedy exists precisely for this reason — not to tell the story of a person who crossed their limits, but to show the inevitable consequence of that crossing. And Medea was the purest answer this universe could produce. Medea was a princess of Colchis and granddaughter of the sun god Helios — the one who actually made Jason a hero was her knowledge and power (high status). She loved without limit: her family, her brother, her homeland — all given up for Jason (hamartia). When Jason remarried, Greek law offered her nothing — she was a foreigner, a woman, a sorceress. So she stepped entirely outside the law: she poisoned the new bride, she killed her own children (hubris). The moment Jason remarried was the moment everything inverted (peripeteia) — and Euripides gave her the most agonizing internal monologue in all of Greek tragedy: \"I know exactly what I am doing and I cannot stop\" (anagnorisis). It is impossible to leave her story with a clean feeling — this catharsis is not the release of grief, but the release of realizing how thin the line between devotion and destruction actually is (catharsis)."
+            "<p>The Greek universe was built on balance. Every being had a place in this order — gods, humans, nature. And every being had a measure: metron. Metron was not merely a rule. It was an existential boundary. \"Know thyself\" — gnothi seauton — was inscribed on the wall of the temple at Delphi, and it was not a philosophical suggestion. It was a warning: know what you are, and stay within that boundary. To cross that boundary was to disturb cosmic balance. And the universe would correct it. The Greeks called this corrective force Nemesis. Nemesis was not a moral judgment — it was cosmic mathematics. What rose too high was brought low. What swelled too much was extinguished. It had nothing to do with whether a person was good or bad. It concerned only whether they had exceeded their limits. This was what the universe asked of people: to know their place. Excess could not survive in this universe. Greek tragedy exists precisely for this reason — not to tell the story of a person who crossed their limits, but to show the inevitable consequence of that crossing. And Medea was the purest answer this universe could produce. Medea was a princess of Colchis and granddaughter of the sun god Helios — the one who actually made Jason a hero was her knowledge and power (high status). She loved without limit: her family, her brother, her homeland — all given up for Jason (hamartia). When Jason remarried, Greek law offered her nothing — she was a foreigner, a woman, a sorceress. So she stepped entirely outside the law: she poisoned the new bride, she killed her own children (hubris). The moment Jason remarried was the moment everything inverted (peripeteia) — and Euripides gave her the most agonizing internal monologue in all of Greek tragedy: \"I know exactly what I am doing and I cannot stop\" (anagnorisis). It is impossible to leave her story with a clean feeling — this catharsis is not the release of grief, but the release of realizing how thin the line between devotion and destruction actually is (catharsis).</p>"
           ],
-          "emphasis": "Medea did not die. She fled on a dragon chariot, continued her life — but in exile. The Greek universe could not destroy her — because she was already beyond every boundary. Divine lineage, human body. Foreign identity, power inside a Greek city. Mother, child-killer. Love, annihilation. This universe could not contain any of those things simultaneously. So, it did the only thing it could: it cast her out. And in the Greek moral imagination, this was a fate worse than death. Aristotle himself had written: \"A man who lives outside the polis is either a beast or a god.\" Medea was hurled into that outside — neither beast nor god, both at once, forever. Her name fused with monstrosity, stateless, without belonging, carrying everything she destroyed as she continued on. Nemesis did not punish her. It removed her from the system."
+          "emphasis": "<p>Medea did not die. She fled on a dragon chariot, continued her life — but in exile. The Greek universe could not destroy her — because she was already beyond every boundary. Divine lineage, human body. Foreign identity, power inside a Greek city. Mother, child-killer. Love, annihilation. This universe could not contain any of those things simultaneously. So, it did the only thing it could: it cast her out. And in the Greek moral imagination, this was a fate worse than death. Aristotle himself had written: \"A man who lives outside the polis is either a beast or a god.\" Medea was hurled into that outside — neither beast nor god, both at once, forever. Her name fused with monstrosity, stateless, without belonging, carrying everything she destroyed as she continued on. Nemesis did not punish her. It removed her from the system.</p>"
         },
         {
           "type": "image",
@@ -669,16 +669,16 @@
           "type": "quote-section",
           "quote": "HOW DID THE ROMAN-BAROQUE UNIVERSE CROWN CLEOPATRA?",
           "paragraphs": [
-            "The Roman universe asked a different question: What was the outcome? Virtus — the disciplined excellence of will in action — was the fundamental value of this universe. In Greece, the boundary could not be crossed; in Rome, the boundary was a target. And when Handel wrote this opera (in 1724), on the threshold of the Enlightenment, the individual and individual will were moving to the center. Feeling was no longer weakness — it was proof of authenticity. Cleopatra had risen through her intelligence and political instinct — her power came not from where she was born but from how sharply she read the world (high status). Her plan was flawless: she entered Caesar's camp disguised as a handmaiden called \"Lidia\" and began dismantling him from the inside — not through crude seduction but through wit and conversation (hamartia). Then in the second act, at the precise moment the strategy was working, an assassination attempt was made against Caesar — and Cleopatra did not make the logical move but the real one: she warned him, revealed her identity, and let her most powerful asset escape from her own hands (hubris). Caesar fled into the harbour and word came of his death — Cleopatra was taken prisoner, the architect of events was now trapped inside them (peripeteia). Handel gave her the most devastating aria in the Baroque repertoire, in that dark cell: \"I will weep for my fate.\" And what she recognized was not a strategic miscalculation — she saw who was underneath Lidia, what lay beneath the plan (anagnorisis). Leaving her story, Medea's disturbance is gone — in its place something warmer and more complicated: the release of watching someone choose not calculation but herself (catharsis)."
+            "<p>The Roman universe asked a different question: What was the outcome? Virtus — the disciplined excellence of will in action — was the fundamental value of this universe. In Greece, the boundary could not be crossed; in Rome, the boundary was a target. And when Handel wrote this opera (in 1724), on the threshold of the Enlightenment, the individual and individual will were moving to the center. Feeling was no longer weakness — it was proof of authenticity. Cleopatra had risen through her intelligence and political instinct — her power came not from where she was born but from how sharply she read the world (high status). Her plan was flawless: she entered Caesar's camp disguised as a handmaiden called \"Lidia\" and began dismantling him from the inside — not through crude seduction but through wit and conversation (hamartia). Then in the second act, at the precise moment the strategy was working, an assassination attempt was made against Caesar — and Cleopatra did not make the logical move but the real one: she warned him, revealed her identity, and let her most powerful asset escape from her own hands (hubris). Caesar fled into the harbour and word came of his death — Cleopatra was taken prisoner, the architect of events was now trapped inside them (peripeteia). Handel gave her the most devastating aria in the Baroque repertoire, in that dark cell: \"I will weep for my fate.\" And what she recognized was not a strategic miscalculation — she saw who was underneath Lidia, what lay beneath the plan (anagnorisis). Leaving her story, Medea's disturbance is gone — in its place something warmer and more complicated: the release of watching someone choose not calculation but herself (catharsis).</p>"
           ],
-          "emphasis": "Cleopatra in her cell, her plan collapsed, her identity exposed, her strategy in pieces — and at that precise moment, the thing that mattered most to the Roman-Baroque universe occurred: the real Cleopatra beneath Lidia appeared. Caesar was alive. He returned. He defeated Ptolemy. Cleopatra ascended to her throne. Her hamartia was not corrected — it was vindicated. Feeling defeated strategy but saved the right person. For the Roman-Baroque universe, that was enough. The only measure was the outcome — and the outcome was a crown."
+          "emphasis": "<p>Cleopatra in her cell, her plan collapsed, her identity exposed, her strategy in pieces — and at that precise moment, the thing that mattered most to the Roman-Baroque universe occurred: the real Cleopatra beneath Lidia appeared. Caesar was alive. He returned. He defeated Ptolemy. Cleopatra ascended to her throne. Her hamartia was not corrected — it was vindicated. Feeling defeated strategy but saved the right person. For the Roman-Baroque universe, that was enough. The only measure was the outcome — and the outcome was a crown.</p>"
         },
         {
           "type": "prose",
           "paragraphs": [
-            "Two women. Two different universes. But in both, the same thing: a boundless feeling, and a map of where that feeling can take a person. Medea's destruction and Cleopatra's transformation did not feel foreign to me — because the logic of that passion, the logic of that point of \"I gave everything and I will not step back,\" is very human. Disturbingly familiar."
+            "<p>Two women. Two different universes. But in both, the same thing: a boundless feeling, and a map of where that feeling can take a person. Medea's destruction and Cleopatra's transformation did not feel foreign to me — because the logic of that passion, the logic of that point of \"I gave everything and I will not step back,\" is very human. Disturbingly familiar.</p>"
           ],
-          "emphasis": "While I was thinking about these characters, another woman appeared in a corner of my mind. Zulaykha, from the qissa of the Prophet Joseph (PBUH)."
+          "emphasis": "<p>While I was thinking about these characters, another woman appeared in a corner of my mind. Zulaykha, from the qissa of the Prophet Joseph (PBUH).</p>"
         },
         {
           "type": "marker",
@@ -688,7 +688,7 @@
           "type": "quote-section",
           "quote": "WHAT IS A QISSA?",
           "paragraphs": [
-            "But before arriving here, I want to open something up: a qissa is not mythology. It is not the story of a tragic hero either. Qissa — from the Arabic root meaning \"to track, to follow\" — is a narrative that was truly lived, that has a soul, that carries a lesson inside it. In the Quran, qissas are not works of imagination; they are historical and spiritual at the same time. When the Quran says \"We relate to you the best of stories,\" it is not offering a story. Offering a reality. And this reality carries its own cosmology."
+            "<p>But before arriving here, I want to open something up: a qissa is not mythology. It is not the story of a tragic hero either. Qissa — from the Arabic root meaning \"to track, to follow\" — is a narrative that was truly lived, that has a soul, that carries a lesson inside it. In the Quran, qissas are not works of imagination; they are historical and spiritual at the same time. When the Quran says \"We relate to you the best of stories,\" it is not offering a story. Offering a reality. And this reality carries its own cosmology.</p>"
           ],
           "emphasis": ""
         },
@@ -701,15 +701,15 @@
           "type": "quote-section",
           "quote": "ISLAMIC COSMOLOGY AND LADY ZULAYKHA (pbuh)",
           "paragraphs": [
-            "In Lady Zulaykha too, we see love. But this love resembles neither Medea's consuming flame nor Cleopatra's calculated passion that transforms into something real. Zulaykha's love is a different thing — a long, silent, stubborn captivation. She was still a young woman when she first saw Prophet Yusuf (pbuh). And from that moment on, every decision of her life, every move she made, flowed in that single direction. She wanted him. She lost. She lost her reputation. For years her name was spoken as \"that woman.\" Yusuf went to prison, Zulaykha was brought low. From the outside, this too looks like a story of ruin. But in Islamic cosmology, a fall is not the end — it is the starting point."
+            "<p>In Lady Zulaykha too, we see love. But this love resembles neither Medea's consuming flame nor Cleopatra's calculated passion that transforms into something real. Zulaykha's love is a different thing — a long, silent, stubborn captivation. She was still a young woman when she first saw Prophet Yusuf (pbuh). And from that moment on, every decision of her life, every move she made, flowed in that single direction. She wanted him. She lost. She lost her reputation. For years her name was spoken as \"that woman.\" Yusuf went to prison, Zulaykha was brought low. From the outside, this too looks like a story of ruin. But in Islamic cosmology, a fall is not the end — it is the starting point.</p>"
           ],
-          "emphasis": "Lady Zulaykha's love consumed her, yes. But as it consumed her, what lay beneath that love became visible: a soul directed toward a human face, searching without knowing it for divine beauty. The Sufi tradition has read it this way for centuries — Yusuf was the earthly reflection of divine beauty, and Zulaykha was, without realizing it, searching for Allah (god). Repentance came. Transformation came. And at the end of the qissa she was united with Yusuf — but she was no longer that first Zulaykha. Love had transformed her. The Islamic universe did not exile her, nor did it simply crown her. It recreated her."
+          "emphasis": "<p>Lady Zulaykha's love consumed her, yes. But as it consumed her, what lay beneath that love became visible: a soul directed toward a human face, searching without knowing it for divine beauty. The Sufi tradition has read it this way for centuries — Yusuf was the earthly reflection of divine beauty, and Zulaykha was, without realizing it, searching for Allah (god). Repentance came. Transformation came. And at the end of the qissa she was united with Yusuf — but she was no longer that first Zulaykha. Love had transformed her. The Islamic universe did not exile her, nor did it simply crown her. It recreated her.</p>"
         }
       ],
       "closingSection": {
         "title": "END OF THE DAY…",
         "paragraphs": [
-          "Three women. Three universes. Three different ends. But that fire — the force that wants without limit, gives everything, refuses to step back — was the same in all three. Love and Desire… Everything falls into place: the force of desire that sets a person in motion is nothing other than the fallen reflection of the first divine love into this world. The Greek universe saw it as danger and exiled it. The Roman-Baroque universe crowned it as proof of authenticity. The Islamic universe read it as a starting point — and placed it at the door of transformation. Same fire. Different hands."
+          "<p>Three women. Three universes. Three different ends. But that fire — the force that wants without limit, gives everything, refuses to step back — was the same in all three. Love and Desire… Everything falls into place: the force of desire that sets a person in motion is nothing other than the fallen reflection of the first divine love into this world. The Greek universe saw it as danger and exiled it. The Roman-Baroque universe crowned it as proof of authenticity. The Islamic universe read it as a starting point — and placed it at the door of transformation. Same fire. Different hands.</p>"
         ]
       },
       "blocks": [],
@@ -721,7 +721,7 @@
       "witnessTitle": "Storytelling By Using Kinesthetic Empathy",
       "cardTitleLine1": "",
       "cardTitleLine2": "",
-      "cardExcerpt": "A Review of Shen Yun Performing Arts",
+      "cardExcerpt": "<p>A Review of Shen Yun Performing Arts</p>",
       "meta": "Notes · 2026",
       "cardImage": "assets/uploads/1781100532462-eeec6899b621588d031ff9ed03f3950cf98c5d58.png",
       "title": "Layers of Witness",
@@ -746,11 +746,11 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "A review of Shen Yun Performing Arts — movement, myth, and the body as witness."
+          "text": "<p>A review of Shen Yun Performing Arts — movement, myth, and the body as witness.</p>"
         },
         {
           "type": "end",
-          "text": "End of the story…"
+          "text": "<p>End of the story…</p>"
         }
       ],
       "displayTitle": "",
@@ -764,7 +764,7 @@
     {
       "slug": "on-memory",
       "cardTitle": "On Memory and Return",
-      "cardExcerpt": "Reflections on return journeys, recurring motifs, and the weight of unspoken sentences.",
+      "cardExcerpt": "<p>Reflections on return journeys, recurring motifs, and the weight of unspoken sentences.</p>",
       "meta": "Reflection",
       "cardImage": "assets/uploads/1781100547575-14ad7b9bcd82f40c0b045f3dd2f5e3202f80f6f7.png",
       "title": "On Memory and Return",
@@ -789,11 +789,11 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Reflections on return journeys, recurring motifs, and the weight of unspoken sentences."
+          "text": "<p>Reflections on return journeys, recurring motifs, and the weight of unspoken sentences.</p>"
         },
         {
           "type": "end",
-          "text": "End of the story…"
+          "text": "<p>End of the story…</p>"
         }
       ],
       "cardTitleLine1": "",
@@ -810,7 +810,7 @@
     {
       "slug": "maps-we-carry",
       "cardTitle": "Maps We Carry",
-      "cardExcerpt": "Travel writing on the maps we inherit — borders, cities, and silent witnesses.",
+      "cardExcerpt": "<p>Travel writing on the maps we inherit — borders, cities, and silent witnesses.</p>",
       "meta": "Travel · Writing",
       "cardImage": "assets/uploads/1781100556515-eeec6899b621588d031ff9ed03f3950cf98c5d58.png",
       "title": "Maps We Carry",
@@ -828,16 +828,7 @@
         "description": "Travel writing on the maps we inherit — borders, cities, and silent witnesses.",
         "title": "Maps We Carry — The Mumine"
       },
-      "blocks": [
-        {
-          "type": "paragraph",
-          "text": "Travel writing on the maps we inherit — borders, cities, and silent witnesses."
-        },
-        {
-          "type": "end",
-          "text": "End of the story…"
-        }
-      ],
+      "blocks": [],
       "cardTitleLine1": "",
       "cardTitleLine2": "",
       "displayTitle": "",
@@ -851,6 +842,36 @@
     },
     {
       "slug": "yeni-yazi-1781554640237",
+      "cardTitle": "How to Create a Comedic Character",
+      "cardExcerpt": "<p>But remember: Your plot still needs to have conflict, and your characters need to have a want and obstacles getting in their way. The differences in comedy are that the stakes are lower and characters develop more slowly than in drama. You’ll want characters to change over time, but not too much.</p><p><br></p><p>Scripts vary in length, but keep in mind that the vast majority of sitcom episodes are a half-hour long—that’s really 22 minutes, if it’s a network show with commercials. With that in mind, aim for 22–30 pages. “When you only have 22 minutes or a half-hour, your time is so incredibly limited,” says Cryan. “It's really good, for me at least, to know exactly where I'm going, because you run out of space for your story very quickly. Really knowing what story points you’re hitting in each scene was very helpful before I started to write.”&nbsp;</p><p><br></p><h2><em><u>Again, making sitcom structure second nature goes a long way. “I need the commercial breaks,” </u></em><a href=\"https://www.backstage.com/magazine/article/quinta-brunson-abbott-elementary-interview-photos-75349/\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\"><em><u>Brunson says</u></em></a><em><u>, “because 22 minutes is very different from 30 minutes. People don’t think that, but it is. Those eight extra minutes can almost undo the good that 22 minutes does.”</u></em></h2><p>Even if your goal is to write for a commercial-free streaming network like Netflix, it helps to understand classic sitcom structure. “Having in mind where your act break would be is incredibly helpful, in terms of the flow of the script and the story,” says Cryan. “It’s an incredibly useful guidepost.”</p><p>Once your first draft is done, give it to some friends for notes. Then, do a rewrite. Then, do another. Rework the characters a little. Punch up your jokes. There’s an old adage that says “writing is rewriting.” Trust us, it’ll be worth it once you have a solid sitcom script</p>",
+      "meta": "",
+      "cardImage": "",
+      "displayTitle": "Sitcoms",
+      "subtitle": "",
+      "title": "Yeni Yazı",
+      "tags": [],
+      "seo": {
+        "title": "",
+        "description": ""
+      },
+      "insideSections": [],
+      "closingSection": {
+        "title": "END OF THE DAY…",
+        "paragraphs": [
+          "<p>But for sitcoms, specifically, the answer is right in the name—the laughs have to come from the situations. “I do approach it from a story structure perspective first, and then trust the jokes and the funny characters will come through if the story is really, really solid,” says Stamatelaky. “In professional writers' rooms, that's usually the approach: having a really strong foundation of a story first and then finding the funny in that.”&nbsp;</p>",
+          "<p>Cryan agrees. “I can always go back in subsequent drafts and, if the story is working, add more jokes,” he says.&nbsp;</p>",
+          "<p>Writing a sitcom joke is different from just writing a joke, where “you’re coming up with the funny idea first,” says Stamatelaky. “In sitcom writing, you see what the story is calling for and then have the characters react to that.”&nbsp;</p>",
+          "<p>“So the joke is less [like], Oh, that’s a funny line that they said, and often it's more something that they're reacting to within the scene. The best sitcoms always do that, where the story drives the jokes that happen from scene to scene, versus characters just arbitrarily joking their way through this story.”&nbsp;</p>"
+        ]
+      },
+      "blocks": [],
+      "cardTitleLine1": "Based on Greek Structure",
+      "cardTitleLine2": "",
+      "witnessTitle": "",
+      "witnessExcerpt": "<p><strong>A solid sitcom premise is something that can generate multiple storylines over 100-plus episodes. The truth is, studio executives considering new shows think of one thing: How can this show make money? The answer is longevity.&nbsp;</strong></p><p>Look at some of the common sitcom character tropes to help you with a starting point. Then, flesh them out in your own style to make them unique, current, and memorable. Here are some common sitcom tropes for characters, plots, and settings.</p><p>Character Tropes</p><p><br></p><p><br></p><ul><li>“New Person in Town”: One way to bring the audience into your world is making one of your main characters a new member of a previously established group. Examples: Diane (“Cheers”), Jess (“New Girl”), Robin (“How I Met Your Mother”<em>)</em></li></ul><blockquote>Bumbling Dad: Though well-meaning and a hard worker (often employed in a blue-collar job), the Bumbling Dad isn’t the brightest bulb in the family. Not hip to social norms, he often puts his foot in his mouth and learns some kind of lesson by the end of the episode. Examples: Homer Simpson (“The Simpsons”<em>)</em>, Tim Taylor (“Home Improvement”)</blockquote><ul><li>Obnoxious In-Laws: Usually recurring characters, they pop in every so often to annoy the protagonist(s). They are often disapproving of the main characters’ relationship. Examples: Maggie’s father (“Growing Pains”), Ray’s parents (“Everybody Loves Raymond”)</li><li>Drop-In Character: This is often a neighbor or a distant relative who lives in town and serves as comic relief. Mostly intended to be an occasional nuisance to our protagonists, they sometimes steal the show and get elevated to primary character status. Examples: Steve Urkel (“Family Matters”), Cousin Cody (“Step by Step”)</li></ul><p>Plot Tropes</p><p><br></p><p><br></p><ul><li>Will They/Won’t They: This is a classic storyline for two major leads. They begin the series either as antagonists or friends who are afraid to change their relationship, but they can’t help but admit that they’re in love and end up together. Examples: Sam and Diane (“Cheers”), Jim and Pam (“The Office”), Janine and Gregory (“Abbott Elementary”)</li><li>Escalating War: A minor offense between two characters blows up, shaking the foundation of the central group. Usually, a game of one-upmanship ensues with hilarious results. Examples: the “Friends” episode “<a href=\"https://www.youtube.com/watch?v=F93Mims-h-A\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\">The One in Vegas</a>,” the “Community” episode “<a href=\"https://www.youtube.com/watch?v=MMpdpgcoRH0\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgb(17, 85, 204);\">Cooperative Calligraphy</a>”&nbsp;</li><li>Two Dates: A character ends up booking multiple dates on the same evening. Instead of rescheduling, they try to pull a fast one and go on both at the same time. Examples: the “Cheers” episode “Cliffie’s Big Score,” the “Family Ties” episode “Double Date”&nbsp;&nbsp;</li></ul><p>Common Sitcom Settings</p><p><br></p><p><br></p><ul><li>Bar or Restaurant: Every good friend group needs a place to hang out that isn’t home. Examples: Central Perk (“Friends”<em>)</em>, Monk’s Café (“Seinfeld”).</li><li>“Affordable” Apartment: Many sitcoms take place in big cities like New York City or Chicago. Some of the main characters live together and can somehow afford a large apartment that would be wildly expensive in real life, despite having relatively low-paying jobs. Or, in Kramer’s case, no <em>real</em> job. Examples: “Seinfeld,” “Friends,” “Community”&nbsp;</li></ul>"
+    },
+    {
+      "slug": "yeni-yazi-1783176480223",
       "cardTitle": "Yeni Yazı",
       "cardExcerpt": "",
       "meta": "",
@@ -863,22 +884,16 @@
         "title": "",
         "description": ""
       },
-      "insideSections": [
-        {
-          "type": "prose",
-          "paragraphs": [],
-          "emphasis": ""
-        }
-      ],
+      "insideSections": [],
       "closingSection": {
         "title": "END OF THE DAY…",
         "paragraphs": []
       },
       "blocks": [],
+      "witnessExcerpt": "",
       "cardTitleLine1": "",
       "cardTitleLine2": "",
-      "witnessTitle": "",
-      "witnessExcerpt": ""
+      "witnessTitle": ""
     }
   ]
 }
